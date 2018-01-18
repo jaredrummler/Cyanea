@@ -1,9 +1,34 @@
-*.iml
+### Gradle
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+build
+
+### IntelliJ IDEA
+.idea
+**.iml
+
+### Local configuration file (sdk path, etc)
+local.properties
+
+### Android
+*.jks
+*.dex
+
+### Android Studio
+captures/
+
+### Java
+*.class
+
+### Windows
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+
+### OSX
 .DS_Store
-/build
-/captures
-.externalNativeBuild
+
+### Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
