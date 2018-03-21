@@ -146,11 +146,11 @@ class CyaneaLayoutInflater : LayoutInflater {
     }
 
     val method = Reflection.getMethod(LayoutInflater::class.java, "setPrivateFactory", Factory2::class.java)
-    if (method != null) {
+    method?.let {
       val factory2 = context as? LayoutInflater.Factory2 ?: return
       val factory = PrivateWrapperFactory2(this, factory2)
       try {
-        method.invoke(this, factory)
+        it.invoke(this, factory)
       } catch (ignored: Exception) {
       }
     }
