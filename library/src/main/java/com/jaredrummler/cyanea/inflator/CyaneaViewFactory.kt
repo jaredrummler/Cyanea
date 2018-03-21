@@ -14,7 +14,7 @@ class CyaneaViewFactory(val cyanea: Cyanea, vararg processors: CyaneaViewProcess
     Collections.addAll(this.processors, *processors)
   }
 
-  protected fun onViewCreated(view: View, attrs: AttributeSet): View {
+  internal fun onViewCreated(view: View, attrs: AttributeSet): View {
     for (processor in processors) {
       try {
         if (processor.shouldProcessView(view)) {
