@@ -106,7 +106,7 @@ class CyaneaLayoutInflater : LayoutInflater {
    *     Attr for this view which we can steal fontPath from too.
    * @return view or the View we inflate in here.
    */
-  private fun createCustomView(parent: View, view: View?, name: String, context: Context, attrs: AttributeSet): View? {
+  private fun createCustomView(parent: View?, view: View?, name: String, context: Context, attrs: AttributeSet): View? {
     // I by no means advise anyone to do this normally, but Google has locked down access to the createView() method,
     // so we never get a callback with attributes at the end of the createViewFromTag chain (which would solve all
     // this unnecessary rubbish). We at the very least try to optimise this as much as possible. We only call for
@@ -174,7 +174,7 @@ class CyaneaLayoutInflater : LayoutInflater {
       internal val factory: LayoutInflater.Factory2)
     : LayoutInflater.Factory2 {
 
-    override fun onCreateView(parent: View, name: String, context: Context, attrs: AttributeSet): View? {
+    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
       return inflater.processView(factory.onCreateView(parent, name, context, attrs), attrs)
     }
 
@@ -188,7 +188,7 @@ class CyaneaLayoutInflater : LayoutInflater {
       inflater: CyaneaLayoutInflater, factory: LayoutInflater.Factory2)
     : WrapperFactory2(inflater, factory) {
 
-    override fun onCreateView(parent: View, name: String, context: Context, attrs: AttributeSet): View? {
+    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
       val view = factory.onCreateView(parent, name, context, attrs)
       return inflater.processView(inflater.createCustomView(parent, view, name, context, attrs), attrs)
     }
