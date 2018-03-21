@@ -75,8 +75,8 @@ class CyaneaLayoutInflater : LayoutInflater {
   }
 
   /**
-   * Method to dispatch our view and attributes to the [CyaneaViewFactory]. Called immediately after
-   * {@link #onCreateView(String, AttributeSet)} or {@link #onCreateView(View, String, AttributeSet)}
+   * Method to dispatch our view and attributes to the [CyaneaViewFactory].
+   * Called immediately after [onCreateView][CyaneaLayoutInflater.onCreateView]
    *
    * @param view
    *     The view being inflated
