@@ -5,8 +5,11 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.support.annotation.ColorInt
+import android.support.annotation.Keep
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
+
+  private var baseTheme: BaseTheme
 
   @ColorInt var primary: Int
   @ColorInt var primaryLight: Int
@@ -25,6 +28,8 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   @ColorInt var backgroundLightDarker: Int
 
   init {
+    baseTheme = getBaseTheme(prefs, res)
+
     primary = prefs.getInt(PREF_PRIMARY,
         res.getColor(R.color.color_primary_reference))
     primaryDark = prefs.getInt(PREF_PRIMARY_DARK,
@@ -55,6 +60,8 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   }
 
   companion object {
+    private val PREF_BASE_THEME = "base_theme"
+
     private val PREF_PRIMARY = "primary"
     private val PREF_PRIMARY_DARK = "primary_dark"
     private val PREF_PRIMARY_LIGHT = "primary_light"
@@ -80,6 +87,23 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       this.res = res
     }
 
+    private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
+      val themeName = prefs.getString(PREF_BASE_THEME, null)
+      return when {
+        BaseTheme.LIGHT.name == themeName -> BaseTheme.LIGHT
+        BaseTheme.DARK.name == themeName -> BaseTheme.DARK
+        else -> {
+          if (res.getBoolean(R.bool.is_default_theme_light)) BaseTheme.LIGHT else BaseTheme.DARK
+        }
+      }
+    }
+
+  }
+
+  @Keep
+  enum class BaseTheme {
+    LIGHT,
+    DARK
   }
 
 }
