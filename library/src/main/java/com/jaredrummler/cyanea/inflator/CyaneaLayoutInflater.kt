@@ -57,21 +57,13 @@ class CyaneaLayoutInflater : LayoutInflater {
 
   @Throws(ClassNotFoundException::class)
   override fun onCreateView(name: String, attrs: AttributeSet): View? {
-    var view: View? = null
     for (prefix in CLASS_PREFIX_LIST) {
       try {
-        view = createView(name, prefix, attrs)
-        if (view != null) {
-          break
-        }
+        createView(name, prefix, attrs)?.let { return processView(it, attrs) }
       } catch (ignored: ClassNotFoundException) {
       }
     }
-    if (view == null) {
-      // In this case we want to let the base class take a crack at it.
-      view = super.onCreateView(name, attrs)
-    }
-    return processView(view, attrs)
+    super.onCreateView(name, attrs)?.let { return processView(it, attrs) } ?: return null
   }
 
   /**
