@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 
 class CyaneaResources(private val cyanea: Cyanea, original: Resources) : Resources(
-    original.getAssets(), original.getDisplayMetrics(), original.getConfiguration()
+    original.assets, original.displayMetrics, original.configuration
 ) {
 
   // TODO: tint drawables on API 23+
