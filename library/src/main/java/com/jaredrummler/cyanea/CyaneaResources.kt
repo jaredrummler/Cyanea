@@ -43,6 +43,7 @@ class CyaneaResources(private val cyanea: Cyanea, original: Resources) : Resourc
     return this.getColor(id, null)
   }
 
+  @SuppressLint("PrivateResource")
   override fun getColor(id: Int, theme: Theme?): Int {
 
     when (id) {
