@@ -2,6 +2,7 @@ package com.jaredrummler.cyanea
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.support.annotation.ColorInt
@@ -11,7 +12,7 @@ import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
-  private var baseTheme: BaseTheme
+  internal var baseTheme: BaseTheme
 
   @ColorInt var primary: Int
   @ColorInt var primaryLight: Int
@@ -106,6 +107,20 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       this.app = app
       this.res = res
     }
+
+    private object Holder {
+      val INSTANCE: Cyanea
+        get() {
+          try {
+            val preferences = app.getSharedPreferences("CYANEA", Context.MODE_PRIVATE)
+            return Cyanea(preferences)
+          } catch (e: UninitializedPropertyAccessException) {
+            throw IllegalStateException("init must be called first")
+          }
+        }
+    }
+
+    val instance: Cyanea by lazy { Holder.INSTANCE }
 
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
       val themeName = prefs.getString(PREF_BASE_THEME, null)
