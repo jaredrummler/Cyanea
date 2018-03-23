@@ -6,6 +6,8 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.support.annotation.ColorInt
 import android.support.annotation.Keep
+import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
+import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
@@ -19,13 +21,31 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   @ColorInt var accentLight: Int
   @ColorInt var accentDark: Int
 
-  @ColorInt var backgroundDark: Int
-  @ColorInt var backgroundDarkDarker: Int
-  @ColorInt var backgroundDarkLighter: Int
+  @ColorInt internal var backgroundDark: Int
+  @ColorInt internal var backgroundDarkDarker: Int
+  @ColorInt internal var backgroundDarkLighter: Int
 
-  @ColorInt var backgroundLight: Int
-  @ColorInt var backgroundLightLighter: Int
-  @ColorInt var backgroundLightDarker: Int
+  @ColorInt internal var backgroundLight: Int
+  @ColorInt internal var backgroundLightLighter: Int
+  @ColorInt internal var backgroundLightDarker: Int
+
+  val backgroundColor: Int
+    get() = when (baseTheme) {
+      LIGHT -> backgroundLight
+      DARK -> backgroundDark
+    }
+
+  val backgroundColorLight: Int
+    get() = when (baseTheme) {
+      LIGHT -> backgroundLightLighter
+      DARK -> backgroundDarkLighter
+    }
+
+  val backgroundColorDark: Int
+    get() = when (baseTheme) {
+      LIGHT -> backgroundLightDarker
+      DARK -> backgroundDarkDarker
+    }
 
   init {
     baseTheme = getBaseTheme(prefs, res)
@@ -90,10 +110,10 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
       val themeName = prefs.getString(PREF_BASE_THEME, null)
       return when {
-        BaseTheme.LIGHT.name == themeName -> BaseTheme.LIGHT
-        BaseTheme.DARK.name == themeName -> BaseTheme.DARK
+        LIGHT.name == themeName -> LIGHT
+        DARK.name == themeName -> DARK
         else -> {
-          if (res.getBoolean(R.bool.is_default_theme_light)) BaseTheme.LIGHT else BaseTheme.DARK
+          if (res.getBoolean(R.bool.is_default_theme_light)) LIGHT else DARK
         }
       }
     }
