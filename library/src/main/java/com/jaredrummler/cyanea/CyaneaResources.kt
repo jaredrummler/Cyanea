@@ -1,13 +1,43 @@
 package com.jaredrummler.cyanea
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Build
 
 class CyaneaResources(private val cyanea: Cyanea, original: Resources) : Resources(
     original.getAssets(), original.getDisplayMetrics(), original.getConfiguration()
 ) {
 
-  // TODO: color drawables and tint drawables on API 23+
+  // TODO: tint drawables on API 23+
+
+  override fun getDrawable(id: Int): Drawable {
+    return this.getDrawable(id, null)
+  }
+
+  @SuppressLint("PrivateResource")
+  override fun getDrawable(id: Int, theme: Theme?): Drawable {
+
+    when (id) {
+      R.color.background_material_dark, R.drawable.color_background_dark
+      -> return ColorDrawable(cyanea.backgroundDark)
+      R.color.background_material_dark_darker, R.drawable.color_background_dark_darker
+      -> return ColorDrawable(cyanea.backgroundDarkDarker)
+      R.color.background_material_dark_lighter, R.drawable.color_background_dark_lighter
+      -> return ColorDrawable(cyanea.backgroundDarkLighter)
+      R.color.background_material_light, R.drawable.color_background_light
+      -> return ColorDrawable(cyanea.backgroundLight)
+      R.color.background_material_light_darker, R.drawable.color_background_light_darker
+      -> return ColorDrawable(cyanea.backgroundLightDarker)
+      R.color.background_material_light_lighter, R.drawable.color_background_light_lighter
+      -> return ColorDrawable(cyanea.backgroundLightLighter)
+    }
+
+    return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+      super.getDrawable(id) else super.getDrawable(id, theme)
+  }
+
 
   override fun getColor(id: Int): Int {
     return this.getColor(id, null)
@@ -35,7 +65,8 @@ class CyaneaResources(private val cyanea: Cyanea, original: Resources) : Resourc
       R.color.background_material_light_lighter -> return cyanea.backgroundLightLighter
     }
 
-    return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) super.getColor(id) else super.getColor(id, theme)
+    return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+      super.getColor(id) else super.getColor(id, theme)
   }
 
   // TODO: theme color state list
