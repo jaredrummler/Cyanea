@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.support.annotation.ColorInt
 import android.support.annotation.Keep
+import android.util.Log
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 
@@ -122,6 +123,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     @JvmStatic
     val instance: Cyanea by lazy { Holder.INSTANCE }
+
+    var loggingEnabled: Boolean = false
+
+    fun log(tag: String, msg: String, ex: Throwable? = null) {
+      if (loggingEnabled) {
+        Log.d(tag, msg, ex)
+      }
+    }
 
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
       val themeName = prefs.getString(PREF_BASE_THEME, null)
