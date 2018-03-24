@@ -6,7 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 
-class CyaneaResources(private val cyanea: Cyanea, original: Resources) : Resources(
+class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance) : Resources(
     original.assets, original.displayMetrics, original.configuration
 ) {
 

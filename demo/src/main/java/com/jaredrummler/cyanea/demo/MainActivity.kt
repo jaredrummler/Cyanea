@@ -1,12 +1,14 @@
 package com.jaredrummler.cyanea.demo
 
 import android.content.Context
-import android.graphics.Color
+import android.content.res.Resources
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
+import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.inflator.CyaneaContextWrapper
 import com.jaredrummler.cyanea.inflator.decor.Decorator
 import com.jaredrummler.cyanea.inflator.decor.FontDecorator
@@ -23,10 +25,14 @@ class MainActivity : AppCompatActivity() {
         decorators = arrayOf(MyDecorator(), FontDecorator())))
   }
 
+  override fun getResources(): Resources {
+    return CyaneaResources(super.getResources())
+  }
+
   class MyDecorator : Decorator {
     override fun apply(view: View, attrs: AttributeSet) {
       if (view is TextView) {
-        view.setTextColor(Color.parseColor("#0099cc"))
+        view.setTextColor(ContextCompat.getColor(view.context, R.color.color_primary))
       }
     }
 

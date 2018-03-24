@@ -32,7 +32,7 @@ class CyaneaResourcesTest {
 
   @Test
   fun should_return_color_drawables_for_background_colors() {
-    val resources = CyaneaResources(cyanea, res)
+    val resources = CyaneaResources(res)
 
     val drawableIds = arrayOf(
         R.drawable.color_background_dark,
@@ -51,7 +51,7 @@ class CyaneaResourcesTest {
 
   @Test
   fun cyanea_resources_should_return_cyanea_primary_color() {
-    val resources = CyaneaResources(cyanea, res)
+    val resources = CyaneaResources(res)
 
     run {
       cyanea.primary = 0xFF0099CC.toInt()
@@ -68,7 +68,7 @@ class CyaneaResourcesTest {
 
   @Test
   fun cyanea_resources_should_return_cyanea_accent_color() {
-    val resources = CyaneaResources(cyanea, res)
+    val resources = CyaneaResources(res)
 
     run {
       cyanea.accent = 0xFF0099CC.toInt()
