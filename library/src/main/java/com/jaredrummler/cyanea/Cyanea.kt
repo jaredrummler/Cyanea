@@ -115,7 +115,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
             val preferences = app.getSharedPreferences("CYANEA", Context.MODE_PRIVATE)
             return Cyanea(preferences)
           } catch (e: UninitializedPropertyAccessException) {
-            throw IllegalStateException("init must be called first")
+            throw IllegalStateException("Cyanea.init must be called before referencing the singleton instance")
           }
         }
     }
