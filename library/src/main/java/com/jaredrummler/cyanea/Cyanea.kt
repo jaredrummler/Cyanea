@@ -120,6 +120,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         }
     }
 
+    @JvmStatic
     val instance: Cyanea by lazy { Holder.INSTANCE }
 
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
