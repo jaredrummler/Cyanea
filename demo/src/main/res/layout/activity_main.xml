@@ -8,13 +8,17 @@
     >
 
   <TextView
+      android:id="@+id/text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="Hello World!"
+      android:textSize="50sp"
+      app:cyaneaFont="fonts/Lobster-Regular.ttf"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="MissingPrefix"
       />
 
 </android.support.constraint.ConstraintLayout>

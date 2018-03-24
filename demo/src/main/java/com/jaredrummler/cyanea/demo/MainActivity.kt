@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.TextView
 import com.jaredrummler.cyanea.inflator.CyaneaContextWrapper
 import com.jaredrummler.cyanea.inflator.decor.Decorator
+import com.jaredrummler.cyanea.inflator.decor.FontDecorator
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
   override fun attachBaseContext(newBase: Context) {
     super.attachBaseContext(CyaneaContextWrapper(newBase,
-        decorators = arrayOf(MyDecorator())))
+        decorators = arrayOf(MyDecorator(), FontDecorator())))
   }
 
   class MyDecorator : Decorator {
