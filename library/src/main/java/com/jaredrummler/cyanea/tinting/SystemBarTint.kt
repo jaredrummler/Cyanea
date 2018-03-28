@@ -1,0 +1,384 @@
+package com.jaredrummler.cyanea.tinting
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.TransitionDrawable
+import android.os.Build
+import android.os.Handler
+import android.support.annotation.ColorInt
+import android.support.v7.app.ActionBar
+import android.support.v7.app.AppCompatActivity
+import android.util.DisplayMetrics
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.View
+import android.view.ViewConfiguration
+import android.view.ViewGroup
+import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+import android.widget.FrameLayout
+import android.widget.FrameLayout.LayoutParams
+import com.jaredrummler.cyanea.utils.Reflection
+import java.lang.ref.WeakReference
+
+/**
+ * Tint the action bar, status bar, and/or the navigation bar.
+ *
+ * Usage:
+ *
+ * ```
+ * val tint = SystemBarTint(activity)
+ * tint.setActionBarColor(ContextCompat.getColor(activity, R.color.action_bar_color))
+ * tint.setStatusBarColor(ContextCompat.getColor(activity, R.color.status_bar_color))
+ * tint.setNavigationBarColor(ContextCompat.getColor(activity, R.color.navigation_bar_color))
+ * ```
+ */
+@SuppressLint("ResourceType", "InlinedApi")
+class SystemBarTint(activity: Activity) {
+
+  private val activityRef: WeakReference<Activity>
+  private var isStatusBarAvailable: Boolean = false
+  private var isNavBarAvailable: Boolean = false
+  private var oldActionBarBackground: Drawable? = null
+  private var statusBarTintView: View? = null
+  private var navBarTintView: View? = null
+  private var actionBar: Any? = null
+  val sysBarConfig: SysBarConfig
+
+  private val drawableCallback = object : Drawable.Callback {
+
+    override fun invalidateDrawable(who: Drawable) {
+      actionBar?.let {
+        if (it is android.app.ActionBar) {
+          it.setBackgroundDrawable(who)
+        } else if (it is ActionBar) {
+          it.setBackgroundDrawable(who)
+        }
+      }
+    }
+
+    override fun scheduleDrawable(who: Drawable, what: Runnable, `when`: Long) {
+      Handler().postAtTime(what, `when`)
+    }
+
+    override fun unscheduleDrawable(who: Drawable, what: Runnable) {
+      Handler().removeCallbacks(what)
+    }
+
+  }
+
+  init {
+    val win = activity.window
+    val decorViewGroup = win.decorView as ViewGroup
+    activityRef = WeakReference(activity)
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      // check theme attrs
+      val attrs = intArrayOf(android.R.attr.windowTranslucentStatus, android.R.attr.windowTranslucentNavigation)
+      val a = activity.obtainStyledAttributes(attrs)
+      try {
+        isStatusBarAvailable = a.getBoolean(0, false)
+        isNavBarAvailable = a.getBoolean(1, false)
+      } finally {
+        a.recycle()
+      }
+
+      // check window flags
+      val winParams = win.attributes
+      if (winParams.flags and FLAG_TRANSLUCENT_STATUS != 0) {
+        isStatusBarAvailable = true
+      }
+      if (winParams.flags and FLAG_TRANSLUCENT_NAVIGATION != 0) {
+        isNavBarAvailable = true
+      }
+    }
+
+    sysBarConfig = SysBarConfig(activity, isStatusBarAvailable, isNavBarAvailable)
+
+    // device might not have virtual navigation keys
+    if (!sysBarConfig.hasNavigationBar) {
+      isNavBarAvailable = false
+    }
+
+    // TODO: Add AppCompatDelegate
+    actionBar = activity.actionBar ?: if (activity is AppCompatActivity) {
+      activity.supportActionBar
+    } else null
+
+    if (isStatusBarAvailable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+      setupStatusBarView(activity, decorViewGroup)
+    }
+    if (isNavBarAvailable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+      setupNavBarView(activity, decorViewGroup)
+    }
+  }
+
+  /**
+   * Set the given color on the status bar.
+   *
+   * @param color The color value to be applies
+   */
+  fun setStatusBarColor(@ColorInt color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      val activity = activityRef.get() ?: return
+      activity.window.statusBarColor = color
+      return
+    }
+    if (isStatusBarAvailable && statusBarTintView != null) {
+      statusBarTintView?.let {
+        if (it.visibility == View.GONE) it.visibility = View.VISIBLE
+        it.setBackgroundColor(color)
+      }
+    }
+  }
+
+  /**
+   * Set the given color on the navigation bar.
+   *
+   * @param color
+   * the color to be applied.
+   */
+  fun setNavigationBarColor(@ColorInt color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      val activity = activityRef.get() ?: return
+      activity.window.navigationBarColor = color
+      return
+    }
+    if (isNavBarAvailable && navBarTintView != null) {
+      navBarTintView?.let {
+        if (it.visibility == View.GONE) it.visibility = View.VISIBLE
+      }
+    }
+  }
+
+  /**
+   * Set the given color on the ActionBar/Toolbar.
+   *
+   * @param color The color value to be applied.
+   */
+  fun setActionBarColor(@ColorInt color: Int) {
+    actionBar?.let {
+      val colorDrawable = ColorDrawable(color)
+
+      oldActionBarBackground?.let { oldBackground ->
+        val td = TransitionDrawable(arrayOf<Drawable>(oldBackground, colorDrawable))
+        // workaround for broken ActionBarContainer drawable handling on pre-API 17 builds
+        // https://github.com/android/platform_frameworks_base/commit/a7cc06d82e45918c37429a59b14545c6a57db4e4
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+          td.callback = drawableCallback
+        } else {
+          if (it is android.app.ActionBar) {
+            it.setBackgroundDrawable(td)
+          } else if (it is ActionBar) {
+            it.setBackgroundDrawable(td)
+          }
+        }
+        td.startTransition(200)
+      } ?: run {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+          val td = TransitionDrawable(arrayOf<Drawable>(colorDrawable, colorDrawable))
+          td.callback = drawableCallback
+          td.startTransition(200)
+        } else {
+          if (it is android.app.ActionBar) {
+            it.setBackgroundDrawable(colorDrawable)
+          } else if (it is ActionBar) {
+            it.setBackgroundDrawable(colorDrawable)
+          }
+        }
+      }
+
+      oldActionBarBackground = colorDrawable
+
+      // http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
+      if (it is android.app.ActionBar) {
+        val isDisplayingTitle = it.displayOptions and android.app.ActionBar.DISPLAY_SHOW_TITLE != 0
+        it.setDisplayShowTitleEnabled(!isDisplayingTitle)
+        it.setDisplayShowTitleEnabled(isDisplayingTitle)
+      } else if (it is ActionBar) {
+        val isDisplayingTitle = it.displayOptions and android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE != 0
+        it.setDisplayShowTitleEnabled(!isDisplayingTitle)
+        it.setDisplayShowTitleEnabled(isDisplayingTitle)
+      }
+    }
+  }
+
+  private fun setupStatusBarView(context: Context, decorViewGroup: ViewGroup) {
+    statusBarTintView = View(context)
+    val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, sysBarConfig.statusBarHeight)
+    params.gravity = Gravity.TOP
+    if (isNavBarAvailable && !sysBarConfig.isNavigationAtBottom) {
+      params.rightMargin = sysBarConfig.navigationBarWidth
+    }
+    statusBarTintView?.let {
+      it.setLayoutParams(params)
+      it.setBackgroundColor(DEFAULT_TINT_COLOR)
+      it.setVisibility(View.GONE)
+      decorViewGroup.addView(it)
+    }
+  }
+
+  private fun setupNavBarView(context: Context, decorViewGroup: ViewGroup) {
+    navBarTintView = View(context)
+    val params: LayoutParams
+    if (sysBarConfig.isNavigationAtBottom) {
+      params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, sysBarConfig.navigationBarHeight)
+      params.gravity = Gravity.BOTTOM
+    } else {
+      params = LayoutParams(sysBarConfig.navigationBarWidth, FrameLayout.LayoutParams.MATCH_PARENT)
+      params.gravity = Gravity.START
+    }
+    navBarTintView?.let {
+      it.setLayoutParams(params)
+      it.setBackgroundColor(DEFAULT_TINT_COLOR)
+      it.setVisibility(View.GONE)
+      decorViewGroup.addView(it)
+    }
+  }
+
+  companion object {
+    /** The default system bar tint color value. 60% opacity, black  */
+    private val DEFAULT_TINT_COLOR = 0x99000000.toInt()
+  }
+
+  /**
+   * Describes system bar sizing and other characteristics for the current device configuration.
+   */
+  class SysBarConfig(activity: Activity,
+      private val translucentStatusBar: Boolean,
+      private val translucentNavBar: Boolean) {
+
+    private val smallestWidthDp: Float
+    private val inPortrait: Boolean
+
+    /** The height of the status bar (in pixels). */
+    val statusBarHeight: Int
+    /** The height of the action bar (in pixels). */
+    val actionBarHeight: Int
+    /** The height of the system navigation bar. */
+    val navigationBarHeight: Int
+    /** The width of the system navigation bar when it is placed vertically on the screen. */
+    val navigationBarWidth: Int
+    /** True if this device uses soft key navigation, False otherwise. */
+    val hasNavigationBar: Boolean
+    /** True if navigation should appear at the bottom of the screen, False otherwise. */
+    val isNavigationAtBottom: Boolean
+      get() = smallestWidthDp >= 600 || inPortrait
+
+    init {
+      val res = activity.resources
+      inPortrait = res.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+      smallestWidthDp = getSmallestWidthDp(activity)
+      statusBarHeight = getInternalDimensionSize(res, STATUS_BAR_HEIGHT_RES_NAME)
+      actionBarHeight = getActionBarHeight(activity)
+      navigationBarHeight = getNavigationBarHeight(activity)
+      navigationBarWidth = getNavigationBarWidth(activity)
+      hasNavigationBar = navigationBarHeight > 0
+    }
+
+    private fun getSmallestWidthDp(activity: Activity): Float {
+      val metrics = DisplayMetrics()
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        // Display#getRealMetrics was hidden until API jb-mr0 but available since ics-mr0
+        activity.windowManager.defaultDisplay.getRealMetrics(metrics)
+      } else {
+        // This is not correct, but we don't really care pre-kitkat
+        activity.windowManager.defaultDisplay.getMetrics(metrics)
+      }
+      val widthDp = metrics.widthPixels / metrics.density
+      val heightDp = metrics.heightPixels / metrics.density
+      return Math.min(widthDp, heightDp)
+    }
+
+    private fun getInternalDimensionSize(res: Resources, key: String): Int {
+      var result = 0
+      val resourceId = res.getIdentifier(key, "dimen", "android")
+      if (resourceId > 0) {
+        result = res.getDimensionPixelSize(resourceId)
+      }
+      return result
+    }
+
+    private fun getActionBarHeight(context: Context): Int {
+      var result = 0
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        val tv = TypedValue()
+        context.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)
+        result = TypedValue.complexToDimensionPixelSize(tv.data, context.resources.displayMetrics)
+      }
+      return result
+    }
+
+    private fun getNavigationBarHeight(context: Context): Int {
+      val res = context.resources
+      val result = 0
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (hasNavBar(context)) {
+          val key: String
+          if (inPortrait) {
+            key = NAV_BAR_HEIGHT_RES_NAME
+          } else {
+            key = NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME
+          }
+          return getInternalDimensionSize(res, key)
+        }
+      }
+      return result
+    }
+
+    private fun getNavigationBarWidth(context: Context): Int {
+      val res = context.resources
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (hasNavBar(context)) {
+          return getInternalDimensionSize(res, NAV_BAR_WIDTH_RES_NAME)
+        }
+      }
+      return 0
+    }
+
+    private fun hasNavBar(context: Context): Boolean {
+      val res = context.resources
+      val resourceId = res.getIdentifier(SHOW_NAV_BAR_RES_NAME, "bool", "android")
+      if (resourceId != 0) {
+        var hasNav = res.getBoolean(resourceId)
+        // check override flag
+        when (NAV_BAR_OVERRIDE) {
+          "1" -> hasNav = false
+          "0" -> hasNav = true
+        }
+        return hasNav
+      }
+      return !ViewConfiguration.get(context).hasPermanentMenuKey()
+    }
+
+    @SuppressLint("PrivateApi")
+    companion object {
+      private val STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height"
+      private val NAV_BAR_HEIGHT_RES_NAME = "navigation_bar_height"
+      private val NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME = "navigation_bar_height_landscape"
+      private val NAV_BAR_WIDTH_RES_NAME = "navigation_bar_width"
+      private val SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar"
+
+      private val NAV_BAR_OVERRIDE: String
+
+      init {
+        var value: String? = null
+        try {
+          val SystemProperties = Class.forName("android.os.SystemProperties")
+          value = Reflection.invoke<String?>(SystemProperties, "get",
+              arrayOf(String::class.java, String::class.java), "qemu.hw.mainkeys", "")
+        } catch (ignored: Exception) {
+        }
+        NAV_BAR_OVERRIDE = value ?: ""
+      }
+    }
+
+  }
+
+
+}
