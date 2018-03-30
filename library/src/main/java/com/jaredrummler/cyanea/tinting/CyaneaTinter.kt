@@ -66,7 +66,7 @@ class CyaneaTinter(original: Resources, resources: CyaneaResources) {
   fun tint(colorStateList: ColorStateList?): ColorStateList? {
     return colorStateList?.let { colorStateList ->
       try {
-        Reflection.invoke<IntArray?>(colorStateList, "getColors", emptyArray())?.let { colors ->
+        Reflection.invoke<IntArray?>(colorStateList, "getColors")?.let { colors ->
           var changed = false
           for (i in colors.indices) {
             this.colors[colors[i]]?.let { color ->
@@ -77,7 +77,7 @@ class CyaneaTinter(original: Resources, resources: CyaneaResources) {
             }
           }
           if (changed && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Reflection.invoke<Any?>(colorStateList, "onColorsChanged", emptyArray())
+            Reflection.invoke<Any?>(colorStateList, "onColorsChanged")
           }
         }
       } catch (e: Exception) {

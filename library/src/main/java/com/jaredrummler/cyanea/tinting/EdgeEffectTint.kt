@@ -118,7 +118,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
      */
     private fun setEdgeGlowColor(scrollView: NestedScrollView, @ColorInt color: Int) {
       try {
-        Reflection.invoke<Any?>(scrollView, "ensureGlows", types = emptyArray())
+        Reflection.invoke<Any?>(scrollView, "ensureGlows")
         for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
           val edgeEffectCompat = Reflection.getFieldValue<EdgeEffectCompat?>(scrollView, name)
           val edgeEffect = Reflection.getFieldValue<EdgeEffect>(edgeEffectCompat, "mEdgeEffect")
@@ -191,8 +191,8 @@ class EdgeEffectTint(private val view: ViewGroup) {
      */
     private fun setEdgeGlowColor(webView: WebView, color: Int) {
       try {
-        val provider = Reflection.invoke<Any?>(webView, "getWebViewProvider", types = emptyArray())
-        val delegate = Reflection.invoke<Any?>(provider, "getViewDelegate", types = emptyArray())
+        val provider = Reflection.invoke<Any?>(webView, "getWebViewProvider")
+        val delegate = Reflection.invoke<Any?>(provider, "getViewDelegate")
         val mAwContents = Reflection.getFieldValue<Any?>(delegate, "mAwContents")
         val mOverScrollGlow = Reflection.getFieldValue<Any?>(mAwContents, "mOverScrollGlow")
         for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom", "mEdgeGlowLeft", "mEdgeGlowRight")) {

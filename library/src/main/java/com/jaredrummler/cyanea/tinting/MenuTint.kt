@@ -223,7 +223,7 @@ class MenuTint(
       if (item is MenuItemImpl) {
         return item.isActionButton
       }
-      return Reflection.invoke(item, "isActionButton", emptyArray()) ?: false
+      return Reflection.invoke(item, "isActionButton") ?: false
     }
 
     /**

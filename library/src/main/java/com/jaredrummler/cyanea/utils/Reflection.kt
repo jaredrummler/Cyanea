@@ -35,7 +35,7 @@ class Reflection private constructor() {
      * @return the result of dynamically invoking this method.
      */
     @JvmStatic
-    fun <T> invoke(obj: Any?, name: String, types: Array<Class<*>>, vararg args: Any): T? {
+    fun <T> invoke(obj: Any?, name: String, types: Array<Class<*>> = emptyArray(), vararg args: Any): T? {
       try {
         val method = getMethod(obj, name, *types)
         method?.let {
