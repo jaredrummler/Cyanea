@@ -9,7 +9,10 @@ class MainApp : CyaneaApp() {
   override fun onCreate() {
     super.onCreate()
     Cyanea.loggingEnabled = true
-    Cyanea.instance.primary = Color.MAGENTA
+    Cyanea.instance.edit()
+        .primary(Color.GREEN)
+        .apply()
+
   }
 
 }
