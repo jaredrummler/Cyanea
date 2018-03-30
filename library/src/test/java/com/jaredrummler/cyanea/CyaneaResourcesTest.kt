@@ -28,6 +28,8 @@ class CyaneaResourcesTest {
     Mockito.`when`(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()))
         .thenReturn(Mockito.mock(SharedPreferences::class.java))
     cyanea = Cyanea.instance
+    Mockito.`when`(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()).edit())
+        .thenReturn(Mockito.mock(SharedPreferences.Editor::class.java))
   }
 
   @Test
@@ -54,13 +56,13 @@ class CyaneaResourcesTest {
     val resources = CyaneaResources(res)
 
     run {
-      cyanea.primary = 0xFF0099CC.toInt()
+      cyanea.edit().primary(0xFF0099CC.toInt()).apply()
       val color = resources.getColor(R.color.color_primary)
       assertEquals(cyanea.primary, color)
     }
 
     run {
-      cyanea.primary = 0xFF99CC00.toInt()
+      cyanea.edit().primary(0xFF99CC00.toInt()).apply()
       val color = resources.getColor(R.color.color_primary)
       assertEquals(cyanea.primary, color)
     }
@@ -71,13 +73,13 @@ class CyaneaResourcesTest {
     val resources = CyaneaResources(res)
 
     run {
-      cyanea.accent = 0xFF0099CC.toInt()
+      cyanea.edit().accent(0xFF0099CC.toInt()).apply()
       val color = resources.getColor(R.color.color_accent)
       assertEquals(cyanea.accent, color)
     }
 
     run {
-      cyanea.accent = 0xFF99CC00.toInt()
+      cyanea.edit().accent(0xFF99CC00.toInt()).apply()
       val color = resources.getColor(R.color.color_accent)
       assertEquals(cyanea.accent, color)
     }
