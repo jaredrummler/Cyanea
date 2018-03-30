@@ -153,9 +153,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
       val themeName = prefs.getString(PREF_BASE_THEME, null)
-      return when {
-        LIGHT.name == themeName -> LIGHT
-        DARK.name == themeName -> DARK
+      return when (themeName) {
+        LIGHT.name -> LIGHT
+        DARK.name -> DARK
         else -> {
           if (res.getBoolean(R.bool.is_default_theme_light)) LIGHT else DARK
         }
