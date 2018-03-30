@@ -24,12 +24,12 @@ class CyaneaResourcesTest {
   @Before
   fun setup() {
     MockitoAnnotations.initMocks(this)
-    Cyanea.init(app, res)
     Mockito.`when`(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()))
         .thenReturn(Mockito.mock(SharedPreferences::class.java))
-    cyanea = Cyanea.instance
     Mockito.`when`(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()).edit())
         .thenReturn(Mockito.mock(SharedPreferences.Editor::class.java))
+    Cyanea.init(app, res)
+    cyanea = Cyanea.instance
   }
 
   @Test

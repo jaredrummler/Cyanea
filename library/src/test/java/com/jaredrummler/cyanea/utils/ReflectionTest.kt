@@ -51,6 +51,10 @@ class ReflectionTest {
     val types = arrayOf<Class<*>>(CharSequence::class.java, CharSequence::class.java)
     val result = Reflection.invoke<String>(obj, "replace", types, "foo", "bar")
     assertEquals("bar", result)
+
+    val string = "baz"
+    val length = Reflection.invoke<Int>(string, "length")
+    assertEquals(string.length, length)
   }
 
 }
