@@ -1,4 +1,4 @@
-package com.jaredrummler.cyanea.tinting
+package com.jaredrummler.cyanea.utils
 
 import android.graphics.Color
 import android.support.annotation.ColorInt
