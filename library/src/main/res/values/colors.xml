@@ -39,4 +39,9 @@
   <color name="background_material_light_darker">#FFC0C0C0</color>
   <color name="background_material_light_lighter">#FFF8F8F8</color>
 
+  <!-- Menu colors -->
+  <color name="menu_icon_color">#FFFFFFFF</color>
+  <color name="sub_menu_icon_color_dark">#B3FFFFFF</color>
+  <color name="sub_menu_icon_color_light">#8A000000</color>
+
 </resources>
