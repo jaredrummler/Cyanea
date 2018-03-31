@@ -14,8 +14,6 @@ import com.jaredrummler.cyanea.tinting.CyaneaTinter
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
-  internal var baseTheme: BaseTheme
-
   @ColorInt var primary: Int
     private set
   @ColorInt var primaryLight: Int
@@ -65,6 +63,10 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private set
   var shouldTintNavBar: Boolean
     private set
+
+  internal var baseTheme: BaseTheme
+  val isDark: Boolean get() = baseTheme == DARK
+  val isLight: Boolean get() = baseTheme == LIGHT
 
   var timestamp: Long
     private set
