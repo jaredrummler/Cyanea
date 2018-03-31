@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.RequiresApi
-import com.jaredrummler.cyanea.tinting.CyaneaTinter
 import com.jaredrummler.cyanea.tinting.CyaneaTinter.CyaneaTintException
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
@@ -15,8 +14,8 @@ import java.util.concurrent.ConcurrentHashMap
 class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance)
   : Resources(original.assets, original.displayMetrics, original.configuration) {
 
-  private val tinter: CyaneaTinter by lazy {
-    CyaneaTinter(original, this)
+  init {
+    cyanea.tinter.setup(original, this)
   }
 
   /* Track resource ids so we don't attempt to modify the Drawable or ColorStateList more than once */
@@ -37,7 +36,7 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
       super.getDrawable(id, theme).let {
         if (!resids.contains(id)) {
           try {
-            tinter.tint(it)
+            cyanea.tinter.tint(it)
           } catch (e: CyaneaTintException) {
             Cyanea.log(TAG, "Error tinting drawable", e)
           }
@@ -111,7 +110,7 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
     val colorStateList = super.getColorStateList(id, theme)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (!resids.contains(id)) {
-        tinter.tint(colorStateList)
+        cyanea.tinter.tint(colorStateList)
         resids.add(id)
       }
     }

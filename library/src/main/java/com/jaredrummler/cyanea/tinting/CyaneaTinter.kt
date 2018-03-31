@@ -20,20 +20,10 @@ import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
 
 /**
  * Apply color scheme to [drawables][Drawable] and [colors][ColorStateList]
- *
- * @param original The original resources. i.e. not the [CyaneaResources]
- * @param resources The [CyaneaResources] used to tint [drawables][Drawable] and [colors][ColorStateList]
  */
-class CyaneaTinter(original: Resources, resources: CyaneaResources) {
+class CyaneaTinter private constructor() {
 
   private val colors = HashMap<Int, Int>()
-
-  init {
-    COLOR_IDS.forEachIndexed { _, id ->
-      @Suppress("DEPRECATION", "ReplacePutWithAssignment")
-      colors.put(original.getColor(id), resources.getColor(id))
-    }
-  }
 
   /**
    * Tints the [Drawable.ConstantState] to match the colors from the [resources][CyaneaResources]
@@ -84,6 +74,19 @@ class CyaneaTinter(original: Resources, resources: CyaneaResources) {
         Cyanea.log(TAG, "Error tinting ColorStateList", e)
       }
       colorStateList
+    }
+  }
+
+  /**
+   * Setup the colors for tinting drawables and color state lists on API 23+
+   *
+   * @param original The original resources. i.e. not the [CyaneaResources]
+   * @param resources The [CyaneaResources] used to tint [drawables][Drawable] and [colors][ColorStateList]
+   */
+  fun setup(original: Resources, resources: CyaneaResources) {
+    COLOR_IDS.forEachIndexed { _, id ->
+      @Suppress("DEPRECATION", "ReplacePutWithAssignment")
+      colors.put(original.getColor(id), resources.getColor(id))
     }
   }
 
@@ -198,6 +201,12 @@ class CyaneaTinter(original: Resources, resources: CyaneaResources) {
         R.color.color_primary_light_reference,
         R.color.color_primary_reference,
         R.color.color_background_dark)
+
+    private object Holder {
+      internal val INSTANCE = CyaneaTinter()
+    }
+
+    val instance: CyaneaTinter by lazy { Holder.INSTANCE }
 
   }
 

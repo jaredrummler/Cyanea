@@ -10,6 +10,7 @@ import android.support.annotation.Keep
 import android.util.Log
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
+import com.jaredrummler.cyanea.tinting.CyaneaTinter
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
@@ -71,6 +72,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   val isThemeModified: Boolean
     get() = timestamp == NONE_TIMESTAMP
 
+  val tinter = CyaneaTinter.instance
 
   init {
     baseTheme = getBaseTheme(prefs, res)
