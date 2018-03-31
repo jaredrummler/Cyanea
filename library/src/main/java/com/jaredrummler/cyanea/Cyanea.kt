@@ -37,6 +37,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   @ColorInt internal var backgroundLightLighter: Int
   @ColorInt internal var backgroundLightDarker: Int
 
+  var shouldTintStatusBar: Boolean
+    private set
+  var shouldTintNavBar: Boolean
+    private set
+
   var timestamp: Long
     private set
 
@@ -92,6 +97,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     backgroundDarkLighter = prefs.getInt(PREF_BACKGROUND_DARK_LIGHTER,
         res.getColor(R.color.color_background_dark_lighter))
 
+    shouldTintStatusBar = prefs.getBoolean(PREF_SHOULD_TINT_STATUS_BAR,
+        res.getBoolean(R.bool.should_tint_status_bar))
+    shouldTintNavBar = prefs.getBoolean(PREF_SHOULD_TINT_NAV_BAR,
+        res.getBoolean(R.bool.should_tint_nav_bar))
+
     timestamp = prefs.getLong(PREF_TIMESTAMP, NONE_TIMESTAMP)
   }
 
@@ -115,6 +125,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private val PREF_BACKGROUND_DARK = "background_dark"
     private val PREF_BACKGROUND_DARK_DARKER = "background_dark_darker"
     private val PREF_BACKGROUND_DARK_LIGHTER = "background_dark_lighter"
+
+    private val PREF_SHOULD_TINT_STATUS_BAR = "should_tint_status_bar"
+    private val PREF_SHOULD_TINT_NAV_BAR = "should_tint_nav_bar"
 
     private val PREF_TIMESTAMP = "timestamp"
     private val NONE_TIMESTAMP = 0L
@@ -237,6 +250,18 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     fun backgroundDarkLighter(@ColorInt color: Int): Editor {
       cyanea.backgroundDarkLighter = color
       editor.putInt(PREF_BACKGROUND_DARK_LIGHTER, color)
+      return this
+    }
+
+    fun shouldTintStatusBar(choice: Boolean): Editor {
+      cyanea.shouldTintStatusBar = choice
+      editor.putBoolean(PREF_SHOULD_TINT_STATUS_BAR, choice)
+      return this
+    }
+
+    fun shouldTintNavBar(choice: Boolean): Editor {
+      cyanea.shouldTintNavBar = choice
+      editor.putBoolean(PREF_SHOULD_TINT_NAV_BAR, choice)
       return this
     }
 
