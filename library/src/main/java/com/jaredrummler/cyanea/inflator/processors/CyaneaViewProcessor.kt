@@ -25,7 +25,7 @@ abstract class CyaneaViewProcessor<T : View> {
    * The view to check
    * @return [true] if this view should be processed.
    */
-  fun shouldProcessView(view: View): Boolean {
+  open fun shouldProcessView(view: View): Boolean {
     return getType().isInstance(view)
   }
 
