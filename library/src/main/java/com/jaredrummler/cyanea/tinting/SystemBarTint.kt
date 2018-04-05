@@ -23,6 +23,7 @@ import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import android.widget.FrameLayout
 import android.widget.FrameLayout.LayoutParams
+import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
 import com.jaredrummler.cyanea.utils.Reflection
 import java.lang.ref.WeakReference
 
@@ -105,9 +106,10 @@ class SystemBarTint(activity: Activity) {
       isNavBarAvailable = false
     }
 
-    // TODO: Add AppCompatDelegate
     actionBar = activity.actionBar ?: if (activity is AppCompatActivity) {
       activity.supportActionBar
+    } else if (activity is BaseAppCompatDelegate) {
+      activity.getDelegate().supportActionBar
     } else null
 
     if (isStatusBarAvailable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
