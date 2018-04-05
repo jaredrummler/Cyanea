@@ -44,4 +44,8 @@
   <color name="sub_menu_icon_color_dark">#B3FFFFFF</color>
   <color name="sub_menu_icon_color_light">#8A000000</color>
 
+  <!-- Background selector colors -->
+  <eat-comment/>
+  <color name="color_disabled_selected_reference">#FF757575</color>
+
 </resources>
