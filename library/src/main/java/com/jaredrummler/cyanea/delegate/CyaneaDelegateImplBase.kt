@@ -133,7 +133,7 @@ open class CyaneaDelegateImplBase(
     return decorators.toTypedArray()
   }
 
-  protected fun getProcessorsForTheming(): List<CyaneaViewProcessor<*>> {
+  protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<*>> {
     return arrayListOf(
         ListMenuItemViewProcessor(),
         AlertDialogProcessor(),
