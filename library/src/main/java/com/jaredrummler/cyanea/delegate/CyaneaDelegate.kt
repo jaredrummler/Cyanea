@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.annotation.StyleRes
 import android.view.Menu
+import android.view.View
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.decor.Decorator
@@ -80,7 +81,7 @@ abstract class CyaneaDelegate {
 
   protected abstract fun getViewFactory(): CyaneaViewFactory
 
-  protected abstract fun getViewProcessors(): Array<CyaneaViewProcessor<*>>
+  protected abstract fun getViewProcessors(): Array<CyaneaViewProcessor<View>>
 
   protected abstract fun getDecorators(): Array<Decorator>
 

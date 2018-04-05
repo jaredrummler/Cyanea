@@ -309,6 +309,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   }
 
+  interface ThemeModifiedListener {
+
+    fun onThemeModified()
+  }
+
   @Keep
   enum class BaseTheme {
     LIGHT,
