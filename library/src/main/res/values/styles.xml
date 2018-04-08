@@ -37,4 +37,13 @@
     <item name="overlapAnchor">true</item>
   </style>
 
+  <!-- ============= -->
+  <!-- Widget Themes -->
+  <!-- ============= -->
+  <eat-comment />
+
+  <style name="ColoredButton" parent="@style/Widget.AppCompat.Button">
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+
 </resources>
