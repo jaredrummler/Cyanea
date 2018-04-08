@@ -46,4 +46,25 @@
     <item name="android:textColor">@android:color/white</item>
   </style>
 
+  <!-- ============= -->
+  <!-- Dialog Themes -->
+  <!-- ============= -->
+  <eat-comment />
+
+  <style name="AlertDialog.Theme.Dark" parent="Theme.AppCompat.Dialog.Alert">
+    <item name="colorAccent">@color/color_accent</item>
+    <item name="colorPrimary">@color/color_primary</item>
+  </style>
+
+  <style name="AlertDialog.Theme.Light" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="colorAccent">@color/color_accent</item>
+    <item name="colorPrimary">@color/color_primary</item>
+  </style>
+
+  <!-- https://code.google.com/p/android/issues/detail?id=220699 -->
+  <eat-comment />
+  <style name="AlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <item name="android:textColor">@color/color_accent</item>
+  </style>
+
 </resources>
