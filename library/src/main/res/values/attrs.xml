@@ -18,8 +18,12 @@
 
 <resources>
 
+  <attr format="reference|color" name="backgroundColor"/>
+  <attr format="reference|color" name="backgroundColorLight"/>
+  <attr format="reference|color" name="backgroundColorDark"/>
+
   <declare-styleable name="FontDecorator">
-    <attr name="cyaneaFont" format="string"/>
+    <attr format="string" name="cyaneaFont"/>
   </declare-styleable>
 
 </resources>
