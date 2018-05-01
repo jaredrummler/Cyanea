@@ -48,4 +48,8 @@
   <eat-comment/>
   <color name="color_disabled_selected_reference">#FF757575</color>
 
+  <!-- Translucent window background theme color -->
+  <eat-comment/>
+  <color name="translucent_background_color">#99323232</color>
+
 </resources>

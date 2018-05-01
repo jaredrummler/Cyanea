@@ -16,9 +16,14 @@
   ~
   -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"  tools:ignore="NewApi">
 
-  <style name="Cyanea.Dark" parent="@style/Theme.AppCompat" tools:ignore="NewApi">
+  <style name="Cyanea.Dark" parent="@style/Theme.AppCompat">
+    <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="actionModeBackground">@color/color_primary</item>
+    <item name="actionOverflowMenuStyle">@style/PopupMenu.Dark</item>
+    <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
     <item name="android:itemBackground">@drawable/bg_button_primary</item>
     <item name="android:listPopupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="android:popupMenuStyle">@style/PopupMenu.Dark</item>
@@ -26,25 +31,235 @@
     <item name="android:popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="android:windowBackground">@drawable/color_background_dark</item>
     <item name="android:windowContentOverlay">@null</item>
-    <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
-    <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    <item name="colorPrimary">@color/color_primary</item>
-    <item name="colorPrimaryDark">@color/color_primary_dark</item>
-    <item name="colorAccent">@color/color_accent</item>
-    <item name="actionModeBackground">@color/color_primary</item>
-    <item name="actionOverflowMenuStyle">@style/PopupMenu.Dark</item>
-    <item name="buttonStyle">@style/ColoredButton</item>
     <item name="backgroundColor">@color/color_background_dark</item>
     <item name="backgroundColorDark">@color/color_background_dark_darker</item>
     <item name="backgroundColorLight">@color/color_background_dark_lighter</item>
     <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
+    <item name="buttonStyle">@style/ColoredButton</item>
+    <item name="colorAccent">@color/color_accent</item>
     <item name="colorBackgroundFloating">?backgroundColorLight</item>
     <item name="colorButtonNormal">@color/color_accent</item>
+    <item name="colorPrimary">@color/color_primary</item>
+    <item name="colorPrimaryDark">@color/color_primary_dark</item>
     <item name="listPopupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="popupMenuStyle">@style/PopupMenu.Dark</item>
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
     <item name="popupWindowStyle">@style/PopupMenu.Dark</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.LightActionBar" parent="@style/Theme.AppCompat">
+    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="actionModeBackground">@color/color_primary</item>
+    <item name="actionOverflowMenuStyle">@style/PopupMenu.Dark</item>
+    <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
+    <item name="android:itemBackground">@drawable/bg_button_primary</item>
+    <item name="android:listPopupWindowStyle">@style/PopupMenu.Dark</item>
+    <item name="android:popupMenuStyle">@style/PopupMenu.Dark</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="android:popupWindowStyle">@style/PopupMenu.Dark</item>
+    <item name="android:windowBackground">@drawable/color_background_dark</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="backgroundColor">@color/color_background_dark</item>
+    <item name="backgroundColorDark">@color/color_background_dark_darker</item>
+    <item name="backgroundColorLight">@color/color_background_dark_lighter</item>
+    <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
+    <item name="buttonStyle">@style/ColoredButton</item>
+    <item name="colorAccent">@color/color_accent</item>
+    <item name="colorBackgroundFloating">?backgroundColorLight</item>
+    <item name="colorButtonNormal">@color/color_accent</item>
+    <item name="colorPrimary">@color/color_primary</item>
+    <item name="colorPrimaryDark">@color/color_primary_dark</item>
+    <item name="listPopupWindowStyle">@style/PopupMenu.Dark</item>
+    <item name="popupMenuStyle">@style/PopupMenu.Dark</item>
+    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="popupWindowStyle">@style/PopupMenu.Dark</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Light" parent="@style/Theme.AppCompat.Light">
+    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+    <item name="actionModeBackground">@color/color_primary</item>
+    <item name="actionOverflowMenuStyle">@style/PopupMenu.Light</item>
+    <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
+    <item name="android:itemBackground">@drawable/bg_button_primary</item>
+    <item name="android:listPopupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="android:popupMenuStyle">@style/PopupMenu.Light</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="android:popupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="android:windowBackground">@drawable/color_background_light</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="backgroundColor">@color/color_background_light</item>
+    <item name="backgroundColorDark">@color/color_background_light_darker</item>
+    <item name="backgroundColorLight">@color/color_background_light_lighter</item>
+    <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
+    <item name="buttonStyle">@style/ColoredButton</item>
+    <item name="colorAccent">@color/color_accent</item>
+    <item name="colorBackgroundFloating">?backgroundColorLight</item>
+    <item name="colorButtonNormal">@color/color_accent</item>
+    <item name="colorPrimary">@color/color_primary</item>
+    <item name="colorPrimaryDark">@color/color_primary_dark</item>
+    <item name="listPopupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="popupMenuStyle">@style/PopupMenu.Light</item>
+    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="popupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Light.DarkActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="actionModeBackground">@color/color_primary</item>
+    <item name="actionOverflowMenuStyle">@style/PopupMenu.Light</item>
+    <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
+    <item name="android:itemBackground">@drawable/bg_button_primary</item>
+    <item name="android:listPopupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="android:popupMenuStyle">@style/PopupMenu.Light</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="android:popupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="android:windowBackground">@drawable/color_background_light</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="backgroundColor">@color/color_background_light</item>
+    <item name="backgroundColorDark">@color/color_background_light_darker</item>
+    <item name="backgroundColorLight">@color/color_background_light_lighter</item>
+    <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
+    <item name="buttonStyle">@style/ColoredButton</item>
+    <item name="colorAccent">@color/color_accent</item>
+    <item name="colorBackgroundFloating">?backgroundColorLight</item>
+    <item name="colorButtonNormal">@color/color_accent</item>
+    <item name="colorPrimary">@color/color_primary</item>
+    <item name="colorPrimaryDark">@color/color_primary_dark</item>
+    <item name="listPopupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="popupMenuStyle">@style/PopupMenu.Light</item>
+    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="popupWindowStyle">@style/PopupMenu.Light</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.LightActionBar.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Cyanea.Light.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Cyanea.Light.DarkActionBar.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Cyanea.Light.NoActionBar.Translucent">
+    <item name="android:windowBackground">@color/translucent_background_color</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+  </style>
+
+  <style name="Cyanea.Light.DarkActionBar.NoActionBar.Translucent">
+    <item name="android:windowBackground">@color/translucent_background_color</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.NoActionBar.Translucent">
+    <item name="android:windowBackground">@color/translucent_background_color</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.LightActionBar.NoActionBar.Translucent">
+    <item name="android:windowBackground">@color/translucent_background_color</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+  </style>
+
+  <style name="Cyanea.Light.NoActionBar.MaterialDialog">
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="android:windowBackground">@color/translucent_background_color</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:windowAllowEnterTransitionOverlap">true</item>
+    <item name="android:windowAllowReturnTransitionOverlap">true</item>
+    <item name="android:windowSharedElementsUseOverlay">false</item>
+  </style>
+
+  <style name="Cyanea.Dark.NoActionBar.MaterialDialog">
+    <item name="android:windowAnimationStyle">@null</item>
+    <item name="android:windowBackground">@color/translucent_background_color</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:windowAllowEnterTransitionOverlap">true</item>
+    <item name="android:windowAllowReturnTransitionOverlap">true</item>
+    <item name="android:windowSharedElementsUseOverlay">false</item>
+  </style>
+
+  <style name="Cyanea.Dark.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.LightActionBar.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Light.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Light.DarkActionBar.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.NoActionBar.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Dark.LightActionBar.NoActionBar.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Light.NoActionBar.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="windowActionModeOverlay">true</item>
+  </style>
+
+  <style name="Cyanea.Light.DarkActionBar.NoActionBar.Overlay">
+    <item name="android:windowActionBarOverlay">true</item>
     <item name="windowActionModeOverlay">true</item>
   </style>
 
