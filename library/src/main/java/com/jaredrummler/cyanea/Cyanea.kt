@@ -11,6 +11,7 @@ import android.util.Log
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 import com.jaredrummler.cyanea.tinting.CyaneaTinter
+import com.jaredrummler.cyanea.utils.ColorUtils
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
@@ -71,10 +72,15 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   var timestamp: Long
     private set
 
-  val isThemeModified: Boolean
-    get() = timestamp == NONE_TIMESTAMP
+  val isThemeModified: Boolean get() = timestamp == NONE_TIMESTAMP
+
+  val isActionBarDark: Boolean get() = ColorUtils.isDarkColor(primary, 0.75)
+
+  val isActionBarLight: Boolean get() = !isActionBarDark
 
   val tinter = CyaneaTinter.instance
+
+  val themes = CyaneaThemes(this)
 
   init {
     baseTheme = getBaseTheme(prefs, res)
