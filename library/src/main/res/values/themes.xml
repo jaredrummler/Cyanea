@@ -244,21 +244,25 @@
   </style>
 
   <style name="Cyanea.Dark.NoActionBar.Overlay">
+    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowActionBarOverlay">true</item>
     <item name="windowActionModeOverlay">true</item>
   </style>
 
   <style name="Cyanea.Dark.LightActionBar.NoActionBar.Overlay">
+    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowActionBarOverlay">true</item>
     <item name="windowActionModeOverlay">true</item>
   </style>
 
   <style name="Cyanea.Light.NoActionBar.Overlay">
+    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowActionBarOverlay">true</item>
     <item name="windowActionModeOverlay">true</item>
   </style>
 
   <style name="Cyanea.Light.DarkActionBar.NoActionBar.Overlay">
+    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowActionBarOverlay">true</item>
     <item name="windowActionModeOverlay">true</item>
   </style>
