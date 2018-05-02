@@ -2,6 +2,7 @@ package com.jaredrummler.cyanea.delegate
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.annotation.StyleRes
 import android.view.Menu
@@ -95,8 +96,17 @@ abstract class CyaneaDelegate {
      * @param themeResId The theme resource id
      * @return The delegate
      */
+    @JvmStatic
     fun create(activity: Activity, cyanea: Cyanea, @StyleRes themeResId: Int): CyaneaDelegate {
-      TODO("Create delegate")
+      return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        CyaneaDelegateImplV23(activity, cyanea, themeResId)
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        CyaneaDelegateImplV21(activity, cyanea, themeResId)
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        CyaneaDelegateImplV19(activity, cyanea, themeResId)
+      } else {
+        CyaneaDelegateImplBase(activity, cyanea, themeResId)
+      }
     }
 
   }
