@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2016 Jared Rummler
+  ~ Copyright (C) 2016 Jared Rummler <jared.rummler@gmail.com>
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,14 +16,19 @@
   ~
   -->
 
-<resources>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+      android:bottom="16dp"
+      android:left="12dp"
+      android:right="12dp"
+      android:top="6dp">
+    <shape android:shape="rectangle">
+      <solid android:color="@color/color_background_dark_lighter"/>
 
-  <attr format="reference|color" name="backgroundColor"/>
-  <attr format="reference|color" name="backgroundColorLight"/>
-  <attr format="reference|color" name="backgroundColorDark"/>
-
-  <declare-styleable name="FontDecorator">
-    <attr format="string" name="cyaneaFont"/>
-  </declare-styleable>
-
-</resources>
+      <corners android:radius="2dp"/>
+    </shape>
+  </item>
+  <item>
+    <nine-patch android:src="@drawable/bg_popup"/>
+  </item>
+</layer-list>
