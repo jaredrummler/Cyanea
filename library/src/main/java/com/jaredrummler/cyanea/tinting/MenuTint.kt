@@ -74,7 +74,7 @@ class MenuTint(
     }
 
     val size = menu.size()
-    for (i in 0..size) {
+    for (i in 0 until size) {
       val item = menu.getItem(i)
       colorMenuItem(item, menuIconColor, menuIconAlpha)
       colorSubMenus(item, subIconColor, subIconAlpha)
@@ -90,7 +90,7 @@ class MenuTint(
       actionBar = findActionBar(context)
       actionBar?.let { actionBar ->
         actionBar.post({
-          for (i in 0..menu.size()) {
+          for (i in 0 until menu.size()) {
             val menuItem = menu.getItem(i)
             if (isInOverflow(menuItem)) {
               colorMenuItem(menuItem, subIconColor, subIconAlpha)
@@ -114,7 +114,7 @@ class MenuTint(
 
   private fun reapply() {
     val size = menu.size()
-    for (i in 0..size) {
+    for (i in 0 until size) {
       val item = menu.getItem(i)
       if (isActionButton(item)) {
         colorMenuItem(item, menuIconColor, menuIconAlpha)
@@ -122,7 +122,7 @@ class MenuTint(
     }
 
     actionBar?.post({
-      for (i in 0..size) {
+      for (i in 0 until size) {
         val item = menu.getItem(i)
         if (isInOverflow(item)) {
           colorMenuItem(item, subIconColor, subIconAlpha)
@@ -203,7 +203,7 @@ class MenuTint(
       if (item.hasSubMenu()) {
         item.subMenu?.let {
           val size = it.size()
-          for (i in 0..size) {
+          for (i in 0 until size) {
             val menuItem = it.getItem(i)
             colorMenuItem(menuItem, color, alpha)
             colorSubMenus(menuItem, color, alpha)

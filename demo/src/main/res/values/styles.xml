@@ -1,6 +1,6 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Cyanea.Dark" />
+  <style name="AppTheme" parent="Cyanea.Light.DarkActionBar" />
 
 </resources>
