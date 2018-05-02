@@ -1,4 +1,4 @@
-package com.jaredrummler.cyanea.activity
+package com.jaredrummler.cyanea.app
 
 import android.support.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea

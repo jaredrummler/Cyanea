@@ -1,7 +1,7 @@
 package com.jaredrummler.cyanea.demo
 
 import android.os.Bundle
-import com.jaredrummler.cyanea.activity.CyaneaAppCompatActivity
+import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
 
 class MainActivity : CyaneaAppCompatActivity() {
 

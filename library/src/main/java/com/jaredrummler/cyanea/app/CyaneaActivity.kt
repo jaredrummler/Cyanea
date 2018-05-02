@@ -1,16 +1,16 @@
-package com.jaredrummler.cyanea.activity
+package com.jaredrummler.cyanea.app
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.annotation.StyleRes
-import android.support.v4.app.FragmentActivity
 import android.view.Menu
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 
-abstract class CyaneaFragmentActivity : FragmentActivity(), BaseCyaneaActivity {
+abstract class CyaneaActivity : Activity(), BaseCyaneaActivity {
 
   private val delegate: CyaneaDelegate by lazy {
     CyaneaDelegate.create(this, getCyanea(), getThemeResId())

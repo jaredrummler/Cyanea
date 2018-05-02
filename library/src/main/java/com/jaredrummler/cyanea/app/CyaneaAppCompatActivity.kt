@@ -1,4 +1,4 @@
-package com.jaredrummler.cyanea.activity
+package com.jaredrummler.cyanea.app
 
 import android.content.Context
 import android.content.res.Resources
