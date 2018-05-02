@@ -115,6 +115,7 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light_DarkActionBar_Overlay],
    * [R.style.Cyanea_Light_Overlay]
    */
+  @StyleRes
   fun getOverlayTheme(): Int {
     return when (cyanea.baseTheme) {
       Cyanea.BaseTheme.DARK ->
