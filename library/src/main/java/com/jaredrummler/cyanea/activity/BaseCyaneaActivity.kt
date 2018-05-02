@@ -9,11 +9,33 @@ import com.jaredrummler.cyanea.delegate.CyaneaDelegate
  */
 interface BaseCyaneaActivity {
 
+  /**
+   * Get the theme resource id
+   *
+   * @return A cyanea theme
+   *
+   * @see [CyaneaThemes.getActionBarTheme]
+   * @see [CyaneaThemes.getNoActionBarOverlayTheme]
+   * @see [CyaneaThemes.getOverlayTheme]
+   * @see [CyaneaThemes.getNoActionBarOverlayTheme]
+   */
   @StyleRes
   fun getThemeResId(): Int
 
+  /**
+   * Get the [Cyanea] instance used for styling.
+   *
+   * @return The cyanea instance.
+   * @see [Cyanea.instance]
+   */
   fun getCyanea(): Cyanea
 
+  /**
+   * Get the [delegate][CyaneaDelegate] to apply custom themes and decor.
+   *
+   * @return The delegate.
+   * @see [CyaneaDelegate.create]
+   */
   fun getCyaneaDelegate(): CyaneaDelegate
 
 }
