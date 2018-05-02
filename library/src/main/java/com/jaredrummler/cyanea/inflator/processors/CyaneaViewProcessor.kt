@@ -13,7 +13,7 @@ abstract class CyaneaViewProcessor<T : View> {
    * The newly created view.
    * @param attrs
    * The view's [attributes][AttributeSet]
-   * @param radiant
+   * @param cyanea
    * The [cyanea][Cyanea] instance used for styling views.
    */
   abstract fun process(view: T, attrs: AttributeSet?, cyanea: Cyanea)
