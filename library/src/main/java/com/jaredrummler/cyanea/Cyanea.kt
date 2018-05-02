@@ -72,7 +72,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   var timestamp: Long
     private set
 
-  val isThemeModified: Boolean get() = timestamp == NONE_TIMESTAMP
+  val isThemeModified: Boolean get() = timestamp != NONE_TIMESTAMP
 
   val isActionBarDark: Boolean get() = ColorUtils.isDarkColor(primary, 0.75)
 
