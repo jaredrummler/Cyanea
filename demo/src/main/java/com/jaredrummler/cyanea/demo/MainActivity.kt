@@ -11,7 +11,7 @@ class MainActivity : CyaneaAppCompatActivity() {
   }
 
   override fun getThemeResId(): Int {
-    return getCyanea().themes.getActionBarTheme()
+    return getCyanea().themes.actionBarTheme
   }
 
 }

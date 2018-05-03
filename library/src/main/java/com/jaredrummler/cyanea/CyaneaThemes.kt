@@ -15,21 +15,22 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light],
    * [R.style.Cyanea_Light_DarkActionBar]
    */
-  @StyleRes
-  fun getActionBarTheme(): Int {
-    return when (cyanea.baseTheme) {
-      DARK ->
-        if (cyanea.isActionBarLight)
-          R.style.Cyanea_Dark_LightActionBar
-        else
-          R.style.Cyanea_Dark
-      LIGHT ->
-        if (cyanea.isActionBarDark)
-          R.style.Cyanea_Light_DarkActionBar
-        else
-          R.style.Cyanea_Light
+  @get:StyleRes
+  val actionBarTheme: Int
+    get() {
+      return when (cyanea.baseTheme) {
+        DARK ->
+          if (cyanea.isActionBarLight)
+            R.style.Cyanea_Dark_LightActionBar
+          else
+            R.style.Cyanea_Dark
+        LIGHT ->
+          if (cyanea.isActionBarDark)
+            R.style.Cyanea_Light_DarkActionBar
+          else
+            R.style.Cyanea_Light
+      }
     }
-  }
 
   /**
    * Get a NoActionBar theme
@@ -40,21 +41,22 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light_NoActionBar],
    * [R.style.Cyanea_Dark_LightActionBar]
    */
-  @StyleRes
-  fun getNoActionBarTheme(): Int {
-    return when (cyanea.baseTheme) {
-      DARK ->
-        if (cyanea.isActionBarLight)
-          R.style.Cyanea_Dark_LightActionBar_NoActionBar
-        else
-          R.style.Cyanea_Dark_NoActionBar
-      LIGHT ->
-        if (cyanea.isActionBarDark)
-          R.style.Cyanea_Light_DarkActionBar_NoActionBar
-        else
-          R.style.Cyanea_Light_NoActionBar
+  @get:StyleRes
+  val noActionBarTheme: Int
+    get() {
+      return when (cyanea.baseTheme) {
+        DARK ->
+          if (cyanea.isActionBarLight)
+            R.style.Cyanea_Dark_LightActionBar_NoActionBar
+          else
+            R.style.Cyanea_Dark_NoActionBar
+        LIGHT ->
+          if (cyanea.isActionBarDark)
+            R.style.Cyanea_Light_DarkActionBar_NoActionBar
+          else
+            R.style.Cyanea_Light_NoActionBar
+      }
     }
-  }
 
   /**
    * Get a NoActionBar_Overlay theme
@@ -65,21 +67,22 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light_NoActionBar_Overlay],
    * [R.style.Cyanea_Dark_LightActionBar]
    */
-  @StyleRes
-  fun getNoActionBarOverlayTheme(): Int {
-    return when (cyanea.baseTheme) {
-      DARK ->
-        if (cyanea.isActionBarLight)
-          R.style.Cyanea_Dark_LightActionBar_NoActionBar_Overlay
-        else
-          R.style.Cyanea_Dark_NoActionBar_Overlay
-      LIGHT ->
-        if (cyanea.isActionBarDark)
-          R.style.Cyanea_Light_DarkActionBar_NoActionBar_Overlay
-        else
-          R.style.Cyanea_Light_NoActionBar_Overlay
+  @get:StyleRes
+  val noActionBarOverlayTheme: Int
+    get() {
+      return when (cyanea.baseTheme) {
+        DARK ->
+          if (cyanea.isActionBarLight)
+            R.style.Cyanea_Dark_LightActionBar_NoActionBar_Overlay
+          else
+            R.style.Cyanea_Dark_NoActionBar_Overlay
+        LIGHT ->
+          if (cyanea.isActionBarDark)
+            R.style.Cyanea_Light_DarkActionBar_NoActionBar_Overlay
+          else
+            R.style.Cyanea_Light_NoActionBar_Overlay
+      }
     }
-  }
 
   /**
    * Get an translucent theme
@@ -90,21 +93,22 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light_DarkActionBar_NoActionBar_Translucent],
    * [R.style.Cyanea_Light_NoActionBar_Translucent]
    */
-  @StyleRes
-  fun getNoActionBarTranslucentTheme(): Int {
-    return when (cyanea.baseTheme) {
-      DARK ->
-        if (cyanea.isActionBarLight)
-          R.style.Cyanea_Dark_LightActionBar_NoActionBar_Translucent
-        else
-          R.style.Cyanea_Dark_NoActionBar_Translucent
-      LIGHT ->
-        if (cyanea.isActionBarDark)
-          R.style.Cyanea_Light_DarkActionBar_NoActionBar_Translucent
-        else
-          R.style.Cyanea_Light_NoActionBar_Translucent
+  @get:StyleRes
+  val noActionBarTranslucentTheme: Int
+    get() {
+      return when (cyanea.baseTheme) {
+        DARK ->
+          if (cyanea.isActionBarLight)
+            R.style.Cyanea_Dark_LightActionBar_NoActionBar_Translucent
+          else
+            R.style.Cyanea_Dark_NoActionBar_Translucent
+        LIGHT ->
+          if (cyanea.isActionBarDark)
+            R.style.Cyanea_Light_DarkActionBar_NoActionBar_Translucent
+          else
+            R.style.Cyanea_Light_NoActionBar_Translucent
+      }
     }
-  }
 
   /**
    * Get an overlay theme
@@ -115,20 +119,21 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light_DarkActionBar_Overlay],
    * [R.style.Cyanea_Light_Overlay]
    */
-  @StyleRes
-  fun getOverlayTheme(): Int {
-    return when (cyanea.baseTheme) {
-      Cyanea.BaseTheme.DARK ->
-        if (cyanea.isActionBarLight)
-          R.style.Cyanea_Dark_LightActionBar_Overlay
-        else
-          R.style.Cyanea_Dark_Overlay
-      Cyanea.BaseTheme.LIGHT ->
-        if (cyanea.isActionBarDark)
-          R.style.Cyanea_Light_DarkActionBar_Overlay
-        else
-          R.style.Cyanea_Light_Overlay
+  @get:StyleRes
+  val getOverlayTheme: Int
+    get() {
+      return when (cyanea.baseTheme) {
+        Cyanea.BaseTheme.DARK ->
+          if (cyanea.isActionBarLight)
+            R.style.Cyanea_Dark_LightActionBar_Overlay
+          else
+            R.style.Cyanea_Dark_Overlay
+        Cyanea.BaseTheme.LIGHT ->
+          if (cyanea.isActionBarDark)
+            R.style.Cyanea_Light_DarkActionBar_Overlay
+          else
+            R.style.Cyanea_Light_Overlay
+      }
     }
-  }
 
 }
