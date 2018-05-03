@@ -129,32 +129,32 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   fun edit(): Editor = Editor(this)
 
   companion object {
-    private val PREF_BASE_THEME = "base_theme"
+    private const val PREF_BASE_THEME = "base_theme"
 
-    private val PREF_PRIMARY = "primary"
-    private val PREF_PRIMARY_DARK = "primary_dark"
-    private val PREF_PRIMARY_LIGHT = "primary_light"
+    private const val PREF_PRIMARY = "primary"
+    private const val PREF_PRIMARY_DARK = "primary_dark"
+    private const val PREF_PRIMARY_LIGHT = "primary_light"
 
-    private val PREF_ACCENT = "accent"
-    private val PREF_ACCENT_DARK = "accent_dark"
-    private val PREF_ACCENT_LIGHT = "accent_light"
+    private const val PREF_ACCENT = "accent"
+    private const val PREF_ACCENT_DARK = "accent_dark"
+    private const val PREF_ACCENT_LIGHT = "accent_light"
 
-    private val PREF_BACKGROUND_LIGHT = "background_light"
-    private val PREF_BACKGROUND_LIGHT_DARKER = "background_light_darker"
-    private val PREF_BACKGROUND_LIGHT_LIGHTER = "background_light_lighter"
+    private const val PREF_BACKGROUND_LIGHT = "background_light"
+    private const val PREF_BACKGROUND_LIGHT_DARKER = "background_light_darker"
+    private const val PREF_BACKGROUND_LIGHT_LIGHTER = "background_light_lighter"
 
-    private val PREF_BACKGROUND_DARK = "background_dark"
-    private val PREF_BACKGROUND_DARK_DARKER = "background_dark_darker"
-    private val PREF_BACKGROUND_DARK_LIGHTER = "background_dark_lighter"
+    private const val PREF_BACKGROUND_DARK = "background_dark"
+    private const val PREF_BACKGROUND_DARK_DARKER = "background_dark_darker"
+    private const val PREF_BACKGROUND_DARK_LIGHTER = "background_dark_lighter"
 
-    private val PREF_MENU_ICON_COLOR = "menu_icon_color"
-    private val PREF_SUB_MENU_ICON_COLOR = "sub_menu_icon_color"
+    private const val PREF_MENU_ICON_COLOR = "menu_icon_color"
+    private const val PREF_SUB_MENU_ICON_COLOR = "sub_menu_icon_color"
 
-    private val PREF_SHOULD_TINT_STATUS_BAR = "should_tint_status_bar"
-    private val PREF_SHOULD_TINT_NAV_BAR = "should_tint_nav_bar"
+    private const val PREF_SHOULD_TINT_STATUS_BAR = "should_tint_status_bar"
+    private const val PREF_SHOULD_TINT_NAV_BAR = "should_tint_nav_bar"
 
-    private val PREF_TIMESTAMP = "timestamp"
-    private val NONE_TIMESTAMP = 0L
+    private const val PREF_TIMESTAMP = "timestamp"
+    private const val NONE_TIMESTAMP = 0L
 
     @SuppressLint("StaticFieldLeak") // application context is safe
     lateinit var app: Application
