@@ -69,7 +69,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   val isDark: Boolean get() = baseTheme == DARK
   val isLight: Boolean get() = baseTheme == LIGHT
 
-  var timestamp: Long
+  private var timestamp: Long
     private set
 
   val isThemeModified: Boolean get() = timestamp != NONE_TIMESTAMP
