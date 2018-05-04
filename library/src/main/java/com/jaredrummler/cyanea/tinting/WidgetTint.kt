@@ -22,7 +22,7 @@ class WidgetTint {
 
   companion object {
 
-    private val TAG = "WidgetTint"
+    private const val TAG = "WidgetTint"
 
     /**
      * Uses reflection to set the color on the fast scroll thumb in a ListView or GridView.
