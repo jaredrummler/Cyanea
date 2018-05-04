@@ -13,7 +13,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
@@ -26,11 +25,11 @@ abstract class CyaneaPreferenceActivity : PreferenceActivity(),
   }
 
   private val delegate: CyaneaDelegate by lazy {
-    CyaneaDelegate.create(this, getCyanea(), getThemeResId())
+    CyaneaDelegate.create(this, cyanea, getThemeResId())
   }
 
   private val resources: CyaneaResources by lazy {
-    CyaneaResources(super.getResources(), getCyanea())
+    CyaneaResources(super.getResources(), cyanea)
   }
 
   override fun attachBaseContext(newBase: Context) {
@@ -117,8 +116,6 @@ abstract class CyaneaPreferenceActivity : PreferenceActivity(),
   override fun getResources(): Resources = resources
 
   override fun getDelegate(): AppCompatDelegate = appCompatDelegate
-
-  override fun getCyanea(): Cyanea = Cyanea.instance
 
   override fun getCyaneaDelegate(): CyaneaDelegate = delegate
 

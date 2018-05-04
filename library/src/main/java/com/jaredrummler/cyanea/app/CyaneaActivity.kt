@@ -6,18 +6,17 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.support.annotation.StyleRes
 import android.view.Menu
-import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 
 abstract class CyaneaActivity : Activity(), BaseCyaneaActivity {
 
   private val delegate: CyaneaDelegate by lazy {
-    CyaneaDelegate.create(this, getCyanea(), getThemeResId())
+    CyaneaDelegate.create(this, cyanea, getThemeResId())
   }
 
   private val resources: CyaneaResources by lazy {
-    CyaneaResources(super.getResources(), getCyanea())
+    CyaneaResources(super.getResources(), cyanea)
   }
 
   override fun attachBaseContext(newBase: Context) {
@@ -50,8 +49,6 @@ abstract class CyaneaActivity : Activity(), BaseCyaneaActivity {
   }
 
   override fun getResources(): Resources = resources
-
-  override fun getCyanea(): Cyanea = Cyanea.instance
 
   override fun getCyaneaDelegate(): CyaneaDelegate = delegate
 

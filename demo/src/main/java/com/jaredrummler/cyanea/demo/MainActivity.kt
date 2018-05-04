@@ -10,8 +10,6 @@ class MainActivity : CyaneaAppCompatActivity() {
     setContentView(R.layout.activity_main)
   }
 
-  override fun getThemeResId(): Int {
-    return getCyanea().themes.actionBarTheme
-  }
+  override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
 
 }
