@@ -60,7 +60,7 @@ class WidgetTint private constructor() {
               Reflection.getField(editor, "mCursorDrawable")?.let { fCursorDrawable ->
                 val cursorDrawableRes = fCursorDrawableRes.getInt(textView)
                 ContextCompat.getDrawable(textView.context, cursorDrawableRes)?.let { drawable ->
-                  drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                  drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
                   val drawables = arrayOf(drawable, drawable)
                   fCursorDrawable.set(editor, drawables)
                 }
