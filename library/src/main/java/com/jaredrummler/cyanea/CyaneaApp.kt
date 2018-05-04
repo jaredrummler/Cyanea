@@ -5,29 +5,22 @@ import android.content.res.Resources
 
 open class CyaneaApp : Application() {
 
-  private lateinit var res: CyaneaResources
-  private var initialzed: Boolean = false
+  private val resources: CyaneaResources by lazy {
+    CyaneaResources(super.getResources(), cyanea)
+  }
+
+  /**
+   * The [cyanea][Cyanea] instance used to create the application's resources
+   */
+  open val cyanea: Cyanea by lazy { Cyanea.instance }
 
   override fun onCreate() {
     super.onCreate()
     Cyanea.init(this, super.getResources())
-    initialzed = true
   }
 
   override fun getResources(): Resources {
-    if (!initialzed) {
-      // Don't give a ContentProvider our custom resources
-      return super.getResources()
-    }
-    if (!::res.isInitialized) {
-      res = CyaneaResources(super.getResources(), getCyanea())
-    }
-    return res
+    return if (Cyanea.isInitialized()) resources else super.getResources()
   }
-
-  /**
-   * @return The [cyanea][Cyanea] instance used to create the application's resources
-   */
-  protected open fun getCyanea(): Cyanea = Cyanea.instance
 
 }

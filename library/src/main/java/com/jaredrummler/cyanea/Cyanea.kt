@@ -69,7 +69,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   val isDark: Boolean get() = baseTheme == DARK
   val isLight: Boolean get() = baseTheme == LIGHT
 
-  private var timestamp: Long
+  internal var timestamp: Long
     private set
 
   val isThemeModified: Boolean get() = timestamp != NONE_TIMESTAMP
@@ -160,10 +160,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     lateinit var app: Application
     lateinit var res: Resources
 
+    @JvmStatic
     fun init(app: Application, res: Resources) {
       this.app = app
       this.res = res
     }
+
+    @JvmStatic
+    fun isInitialized(): Boolean = ::app.isInitialized && ::res.isInitialized
 
     private object Holder {
       val INSTANCE: Cyanea

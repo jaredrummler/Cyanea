@@ -10,7 +10,7 @@ class MainApp : CyaneaApp() {
   override fun onCreate() {
     super.onCreate()
     Cyanea.loggingEnabled = true
-    Cyanea.instance.edit()
+    cyanea.edit()
         .primary(Color.CYAN)
         .primaryDark(ColorUtils.darker(Color.CYAN, 0.75f))
         .accent(Color.RED)
