@@ -117,8 +117,6 @@ abstract class CyaneaPreferenceActivity : PreferenceActivity(),
 
   override fun getDelegate(): AppCompatDelegate = appCompatDelegate
 
-  override fun getCyaneaDelegate(): CyaneaDelegate = delegate
-
   @StyleRes abstract override fun getThemeResId(): Int
 
 }

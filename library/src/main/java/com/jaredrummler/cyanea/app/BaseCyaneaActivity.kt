@@ -10,10 +10,7 @@ import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 interface BaseCyaneaActivity {
 
   /**
-   * Get the [Cyanea] instance used for styling.
-   *
-   * @return The cyanea instance.
-   * @see [Cyanea.instance]
+   * The [Cyanea] instance used for styling.
    */
   val cyanea: Cyanea get() = Cyanea.instance
 
@@ -27,15 +24,6 @@ interface BaseCyaneaActivity {
    * @see [CyaneaThemes.getOverlayTheme]
    * @see [CyaneaThemes.getNoActionBarOverlayTheme]
    */
-  @StyleRes
-  fun getThemeResId(): Int
-
-  /**
-   * Get the [delegate][CyaneaDelegate] to apply custom themes and decor.
-   *
-   * @return The delegate.
-   * @see [CyaneaDelegate.create]
-   */
-  fun getCyaneaDelegate(): CyaneaDelegate
+  @StyleRes fun getThemeResId(): Int
 
 }

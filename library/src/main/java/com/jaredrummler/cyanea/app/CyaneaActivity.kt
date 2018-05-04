@@ -50,8 +50,6 @@ abstract class CyaneaActivity : Activity(), BaseCyaneaActivity {
 
   override fun getResources(): Resources = resources
 
-  override fun getCyaneaDelegate(): CyaneaDelegate = delegate
-
   @StyleRes abstract override fun getThemeResId(): Int
 
 }
