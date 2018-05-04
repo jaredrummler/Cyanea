@@ -118,7 +118,7 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   }
 
   companion object {
-    private val TAG = "CyaneaResources"
+    private const val TAG = "CyaneaResources"
   }
 
 }

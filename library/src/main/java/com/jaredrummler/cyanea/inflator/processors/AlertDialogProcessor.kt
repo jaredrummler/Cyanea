@@ -19,7 +19,7 @@ class AlertDialogProcessor : CyaneaViewProcessor<View>() {
   }
 
   companion object {
-    private val CLASS_NAME = "com.android.internal.widget.AlertDialogLayout"
+    private const val CLASS_NAME = "com.android.internal.widget.AlertDialogLayout"
   }
 
 }
