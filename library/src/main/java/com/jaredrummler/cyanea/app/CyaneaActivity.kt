@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.support.annotation.StyleRes
 import android.view.Menu
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
@@ -49,7 +48,5 @@ abstract class CyaneaActivity : Activity(), BaseCyaneaActivity {
   }
 
   override fun getResources(): Resources = resources
-
-  @StyleRes abstract override fun getThemeResId(): Int
 
 }

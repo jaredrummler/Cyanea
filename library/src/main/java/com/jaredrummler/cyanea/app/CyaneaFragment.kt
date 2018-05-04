@@ -9,9 +9,7 @@ import com.jaredrummler.cyanea.tinting.MenuTint
 open class CyaneaFragment : Fragment() {
 
   /**
-   * Get the [cyanea][Cyanea] instance used by the activity that is associated with this fragment.
-   *
-   * @return The cyanea instance associated with this fragment
+   * The [Cyanea] instance used for styling.
    */
   open val cyanea: Cyanea get() = (activity as? BaseCyaneaActivity)?.cyanea ?: Cyanea.instance
 
@@ -20,13 +18,12 @@ open class CyaneaFragment : Fragment() {
     super.onCreateOptionsMenu(menu, inflater)
   }
 
-  open protected fun applyMenuTint(menu: Menu) {
+  protected open fun applyMenuTint(menu: Menu) {
     MenuTint(menu,
         menuIconColor = cyanea.menuIconColor,
         subIconColor = cyanea.subMenuIconColor,
         forceIcons = true)
         .apply(activity!!)
   }
-
 
 }

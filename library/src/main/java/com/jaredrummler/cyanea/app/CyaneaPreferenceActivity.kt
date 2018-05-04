@@ -6,7 +6,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import android.support.annotation.LayoutRes
-import android.support.annotation.StyleRes
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatDelegate
 import android.view.Menu
@@ -116,7 +115,5 @@ abstract class CyaneaPreferenceActivity : PreferenceActivity(),
   override fun getResources(): Resources = resources
 
   override fun getDelegate(): AppCompatDelegate = appCompatDelegate
-
-  @StyleRes abstract override fun getThemeResId(): Int
 
 }
