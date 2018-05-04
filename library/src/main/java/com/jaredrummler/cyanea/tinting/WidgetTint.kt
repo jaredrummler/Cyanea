@@ -14,7 +14,7 @@ import com.jaredrummler.cyanea.utils.Reflection
 /**
  * Contains helper functions to tint aspects of various widgets
  */
-class WidgetTint {
+class WidgetTint private constructor() {
 
   init {
     throw AssertionError("no instances")
