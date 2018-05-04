@@ -19,7 +19,7 @@ open class CyaneaFragment : Fragment() {
         menuIconColor = cyanea.menuIconColor,
         subIconColor = cyanea.subMenuIconColor,
         forceIcons = true)
-        .apply(activity)
+        .apply(activity!!)
   }
 
   /**
