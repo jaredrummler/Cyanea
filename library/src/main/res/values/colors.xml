@@ -39,6 +39,10 @@
   <color name="background_material_light_darker">#FFC0C0C0</color>
   <color name="background_material_light_lighter">#FFF8F8F8</color>
 
+  <!-- Navigation bar color -->
+  <eat-comment/>
+  <color name="color_navigation_bar_reference">@color/color_primary_reference</color>
+
   <!-- Menu colors -->
   <eat-comment/>
   <color name="menu_icon_color">#FFFFFFFF</color>

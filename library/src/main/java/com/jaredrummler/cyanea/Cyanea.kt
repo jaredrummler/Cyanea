@@ -65,6 +65,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   var shouldTintNavBar: Boolean
     private set
 
+  @ColorInt var navigationBar: Int
+    private set
+
   internal var baseTheme: BaseTheme
   val isDark: Boolean get() = baseTheme == DARK
   val isLight: Boolean get() = baseTheme == LIGHT
@@ -118,6 +121,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     subMenuIconColor = prefs.getInt(PREF_SUB_MENU_ICON_COLOR,
         res.getColor(if (baseTheme == LIGHT) R.color.sub_menu_icon_color_light else R.color.sub_menu_icon_color_dark))
 
+    navigationBar = prefs.getInt(PREF_NAVIGATION_BAR,
+        res.getColor(R.color.color_navigation_bar_reference))
+
     shouldTintStatusBar = prefs.getBoolean(PREF_SHOULD_TINT_STATUS_BAR,
         res.getBoolean(R.bool.should_tint_status_bar))
     shouldTintNavBar = prefs.getBoolean(PREF_SHOULD_TINT_NAV_BAR,
@@ -149,6 +155,8 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     private const val PREF_MENU_ICON_COLOR = "menu_icon_color"
     private const val PREF_SUB_MENU_ICON_COLOR = "sub_menu_icon_color"
+
+    private const val PREF_NAVIGATION_BAR = "navigation_bar_color"
 
     private const val PREF_SHOULD_TINT_STATUS_BAR = "should_tint_status_bar"
     private const val PREF_SHOULD_TINT_NAV_BAR = "should_tint_nav_bar"
@@ -290,6 +298,12 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     fun subMenuIconColor(@ColorInt color: Int): Editor {
       cyanea.subMenuIconColor = color
       editor.putInt(PREF_SUB_MENU_ICON_COLOR, color)
+      return this
+    }
+
+    fun navigationBar(@ColorInt color: Int): Editor {
+      cyanea.navigationBar = color
+      editor.putInt(PREF_NAVIGATION_BAR, color)
       return this
     }
 

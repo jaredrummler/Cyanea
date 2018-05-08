@@ -14,6 +14,8 @@ class MainApp : CyaneaApp() {
         .primary(Color.CYAN)
         .primaryDark(ColorUtils.darker(Color.CYAN, 0.75f))
         .accent(Color.RED)
+        .shouldTintNavBar(true)
+        .navigationBar(Color.GREEN)
         .apply()
   }
 

@@ -45,7 +45,7 @@ internal open class CyaneaDelegateImplBase(
         tinter.setStatusBarColor(cyanea.primaryDark)
       }
       if (cyanea.shouldTintNavBar) {
-        tinter.setNavigationBarColor(cyanea.primary)
+        tinter.setNavigationBarColor(cyanea.navigationBar)
       }
     }
   }
