@@ -78,7 +78,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   val isActionBarLight: Boolean get() = !isActionBarDark
 
-  val tinter = CyaneaTinter.instance
+  internal val tinter = CyaneaTinter.instance
 
   val themes = CyaneaThemes(this)
 
