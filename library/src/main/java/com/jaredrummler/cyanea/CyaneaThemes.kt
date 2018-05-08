@@ -120,7 +120,7 @@ class CyaneaThemes(private val cyanea: Cyanea) {
    * [R.style.Cyanea_Light_Overlay]
    */
   @get:StyleRes
-  val getOverlayTheme: Int
+  val overlayTheme: Int
     get() {
       return when (cyanea.baseTheme) {
         Cyanea.BaseTheme.DARK ->
