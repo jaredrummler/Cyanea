@@ -6,6 +6,9 @@ import android.view.MenuInflater
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.tinting.MenuTint
 
+/**
+ * Base class for fragments[Fragment] that use [Cyanea] for dynamic themes.
+ */
 open class CyaneaFragment : Fragment() {
 
   /**

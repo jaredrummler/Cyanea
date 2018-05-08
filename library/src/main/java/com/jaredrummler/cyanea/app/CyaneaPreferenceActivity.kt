@@ -16,6 +16,11 @@ import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 
+/**
+ * Base class for a [PreferenceActivity] that uses [Cyanea] for dynamic themes.
+ *
+ * You must implement [BaseCyaneaActivity.getThemeResId] and return a valid cyanea theme.
+ */
 abstract class CyaneaPreferenceActivity : PreferenceActivity(),
     BaseAppCompatDelegate, BaseCyaneaActivity {
 

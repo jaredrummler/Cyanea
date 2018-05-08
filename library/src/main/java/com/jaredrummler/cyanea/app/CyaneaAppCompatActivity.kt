@@ -8,6 +8,11 @@ import android.view.Menu
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 
+/**
+ * Base class for an [AppCompatActivity] that uses [Cyanea] for dynamic themes.
+ *
+ * You must implement [BaseCyaneaActivity.getThemeResId] and return a valid cyanea theme.
+ */
 abstract class CyaneaAppCompatActivity : AppCompatActivity(), BaseCyaneaActivity {
 
   private val delegate: CyaneaDelegate by lazy {
