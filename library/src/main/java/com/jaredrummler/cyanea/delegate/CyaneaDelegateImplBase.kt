@@ -21,7 +21,7 @@ import com.jaredrummler.cyanea.tinting.EdgeEffectTint
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.tinting.SystemBarTint
 
-open class CyaneaDelegateImplBase(
+internal open class CyaneaDelegateImplBase(
     private val activity: Activity,
     private val cyanea: Cyanea,
     @StyleRes private val themeResId: Int)

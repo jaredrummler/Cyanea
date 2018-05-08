@@ -20,7 +20,7 @@ import com.jaredrummler.cyanea.inflator.processors.ViewGroupProcessor
 
 @RequiresApi(Build.VERSION_CODES.M)
 @TargetApi(Build.VERSION_CODES.M)
-open class CyaneaDelegateImplV23(
+internal open class CyaneaDelegateImplV23(
     private val activity: Activity,
     private val cyanea: Cyanea,
     themeResId: Int)

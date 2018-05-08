@@ -12,7 +12,7 @@ import com.jaredrummler.cyanea.Cyanea
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-open class CyaneaDelegateImplV21(
+internal open class CyaneaDelegateImplV21(
     private val activity: Activity,
     private val cyanea: Cyanea,
     themeResId: Int)

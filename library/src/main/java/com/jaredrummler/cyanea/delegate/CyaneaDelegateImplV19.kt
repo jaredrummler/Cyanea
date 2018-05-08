@@ -14,7 +14,7 @@ import com.jaredrummler.cyanea.Cyanea
 
 @RequiresApi(Build.VERSION_CODES.KITKAT)
 @TargetApi(Build.VERSION_CODES.KITKAT)
-open class CyaneaDelegateImplV19(
+internal open class CyaneaDelegateImplV19(
     private val activity: Activity,
     private val cyanea: Cyanea,
     themeResId: Int)
