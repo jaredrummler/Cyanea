@@ -31,7 +31,7 @@ class CyaneaTinter private constructor() {
    * @param drawable The [drawable][Drawable] to modify.
    */
   @Throws(CyaneaTintException::class)
-  fun tint(drawable: Drawable) {
+  fun tint(drawable: Drawable?) {
     if (drawable is GradientDrawable) {
       tint(drawable)
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && drawable is RippleDrawable) {
