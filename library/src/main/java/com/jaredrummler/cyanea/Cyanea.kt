@@ -175,7 +175,16 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     }
 
     @JvmStatic
-    fun isInitialized(): Boolean = ::app.isInitialized && ::res.isInitialized
+    fun isInitialized(): Boolean {
+      try {
+        app
+        res
+        return true
+      } catch (e: UninitializedPropertyAccessException) {
+        log("Cyanea", "Cyanea not initialized yet", e)
+        return false
+      }
+    }
 
     private object Holder {
       val INSTANCE: Cyanea
