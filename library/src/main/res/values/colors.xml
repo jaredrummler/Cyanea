@@ -45,9 +45,10 @@
 
   <!-- Menu colors -->
   <eat-comment/>
-  <color name="menu_icon_color">#FFFFFFFF</color>
-  <color name="sub_menu_icon_color_dark">#B3FFFFFF</color>
-  <color name="sub_menu_icon_color_light">#8A000000</color>
+  <color name="menu_icon_color_light">#FFFFFFFF</color>
+  <color name="menu_icon_color_dark">#DE000000</color>
+  <color name="sub_menu_icon_color_light">#B3FFFFFF</color>
+  <color name="sub_menu_icon_color_dark">#8A000000</color>
 
   <!-- Material colors -->
   <eat-comment/>
