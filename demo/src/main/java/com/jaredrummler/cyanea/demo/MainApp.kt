@@ -1,9 +1,7 @@
 package com.jaredrummler.cyanea.demo
 
-import android.graphics.Color
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaApp
-import com.jaredrummler.cyanea.utils.ColorUtils
 
 class MainApp : CyaneaApp() {
 
@@ -11,11 +9,10 @@ class MainApp : CyaneaApp() {
     super.onCreate()
     Cyanea.loggingEnabled = true
     cyanea.edit()
-        .primary(Color.CYAN)
-        .primaryDark(ColorUtils.darker(Color.CYAN, 0.75f))
-        .accent(Color.RED)
+        .primary(0xFF3F51B5.toInt())
+        .accent(0xFFFF5722.toInt())
+        .background(0xFFEEEEEE.toInt())
         .shouldTintNavBar(true)
-        .navigationBar(Color.GREEN)
         .apply()
   }
 

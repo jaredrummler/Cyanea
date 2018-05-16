@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
+import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.Keep
 import android.util.Log
@@ -164,6 +165,15 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private const val PREF_TIMESTAMP = "timestamp"
     private const val NONE_TIMESTAMP = 0L
 
+    private const val DEFAULT_DARKER_FACTOR = 0.85f
+    private const val DEFAULT_LIGHTER_FACTOR = 0.15f
+    private const val LIGHT_ACTIONBAR_LUMINANCE_FACTOR = 0.75
+
+    private const val MENU_ITEM_ICON_COLOR_LIGHT = 0xFFFFFFFF.toInt()
+    private const val MENU_ITEM_ICON_COLOR_DARK = 0xDE000000.toInt()
+    private const val SUBMENU_ITEM_ICON_COLOR_LIGHT = 0xB3FFFFFF.toInt()
+    private const val SUBMENU_ITEM_ICON_COLOR_DARK = 0x8A000000.toInt()
+
     @SuppressLint("StaticFieldLeak") // application context is safe
     lateinit var app: Application
     lateinit var res: Resources
@@ -226,9 +236,17 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     private val editor = cyanea.prefs.edit()
 
-    fun primary(@ColorInt color: Int): Editor {
+    @JvmOverloads
+    fun primary(@ColorInt color: Int, cohesize: Boolean = true): Editor {
       cyanea.primary = color
       editor.putInt(PREF_PRIMARY, color)
+      if (cohesize) {
+        val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
+        primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
+        primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
+        menuIconColor(if (isDarkColor) MENU_ITEM_ICON_COLOR_LIGHT else MENU_ITEM_ICON_COLOR_DARK)
+        navigationBar(if (isDarkColor) color else Color.BLACK)
+      }
       return this
     }
 
@@ -244,9 +262,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
-    fun accent(@ColorInt color: Int): Editor {
+    @JvmOverloads
+    fun accent(@ColorInt color: Int, cohesize: Boolean = true): Editor {
       cyanea.accent = color
       editor.putInt(PREF_ACCENT, color)
+      if (cohesize) {
+        accentDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
+        accentLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
+      }
       return this
     }
 
@@ -259,6 +282,26 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     fun accentLight(@ColorInt color: Int): Editor {
       cyanea.accentLight = color
       editor.putInt(PREF_ACCENT_LIGHT, color)
+      return this
+    }
+
+    fun background(@ColorInt color: Int): Editor {
+      val lighter = ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR)
+      val darker = ColorUtils.darker(color, DEFAULT_DARKER_FACTOR)
+      val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
+      if (isDarkColor) {
+        baseTheme(DARK)
+        backgroundDark(color)
+        backgroundDarkDarker(darker)
+        backgroundDarkLighter(lighter)
+        subMenuIconColor(SUBMENU_ITEM_ICON_COLOR_LIGHT)
+      } else {
+        baseTheme(LIGHT)
+        backgroundLight(color)
+        backgroundLightDarker(darker)
+        backgroundLightLighter(lighter)
+        subMenuIconColor(SUBMENU_ITEM_ICON_COLOR_DARK)
+      }
       return this
     }
 
