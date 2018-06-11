@@ -118,9 +118,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         res.getColor(R.color.color_background_dark_lighter))
 
     menuIconColor = prefs.getInt(PREF_MENU_ICON_COLOR,
-        res.getColor(R.color.menu_icon_color))
+        res.getColor(if (baseTheme == LIGHT) R.color.menu_icon_color_dark else R.color.menu_icon_color_light))
     subMenuIconColor = prefs.getInt(PREF_SUB_MENU_ICON_COLOR,
-        res.getColor(if (baseTheme == LIGHT) R.color.sub_menu_icon_color_light else R.color.sub_menu_icon_color_dark))
+        res.getColor(if (baseTheme == LIGHT) R.color.sub_menu_icon_color_dark else R.color.sub_menu_icon_color_light))
 
     navigationBar = prefs.getInt(PREF_NAVIGATION_BAR,
         res.getColor(R.color.color_navigation_bar_reference))
@@ -168,11 +168,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private const val DEFAULT_DARKER_FACTOR = 0.85f
     private const val DEFAULT_LIGHTER_FACTOR = 0.15f
     private const val LIGHT_ACTIONBAR_LUMINANCE_FACTOR = 0.75
-
-    private const val MENU_ITEM_ICON_COLOR_LIGHT = 0xFFFFFFFF.toInt()
-    private const val MENU_ITEM_ICON_COLOR_DARK = 0xDE000000.toInt()
-    private const val SUBMENU_ITEM_ICON_COLOR_LIGHT = 0xB3FFFFFF.toInt()
-    private const val SUBMENU_ITEM_ICON_COLOR_DARK = 0x8A000000.toInt()
 
     @SuppressLint("StaticFieldLeak") // application context is safe
     lateinit var app: Application
@@ -236,17 +231,15 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     private val editor = cyanea.prefs.edit()
 
-    @JvmOverloads
-    fun primary(@ColorInt color: Int, cohesize: Boolean = true): Editor {
+    fun primary(@ColorInt color: Int): Editor {
       cyanea.primary = color
       editor.putInt(PREF_PRIMARY, color)
-      if (cohesize) {
-        val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
-        primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
-        primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
-        menuIconColor(if (isDarkColor) MENU_ITEM_ICON_COLOR_LIGHT else MENU_ITEM_ICON_COLOR_DARK)
-        navigationBar(if (isDarkColor) color else Color.BLACK)
-      }
+      val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
+      val menuIconColorRes = if (isDarkColor) R.color.menu_icon_color_light else R.color.menu_icon_color_dark
+      primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
+      primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
+      menuIconColor(res.getColor(menuIconColorRes))
+      navigationBar(if (isDarkColor) color else Color.BLACK)
       return this
     }
 
@@ -262,14 +255,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
-    @JvmOverloads
-    fun accent(@ColorInt color: Int, cohesize: Boolean = true): Editor {
+    fun accent(@ColorInt color: Int): Editor {
       cyanea.accent = color
       editor.putInt(PREF_ACCENT, color)
-      if (cohesize) {
-        accentDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
-        accentLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
-      }
+      accentDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
+      accentLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
       return this
     }
 
@@ -294,13 +284,13 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         backgroundDark(color)
         backgroundDarkDarker(darker)
         backgroundDarkLighter(lighter)
-        subMenuIconColor(SUBMENU_ITEM_ICON_COLOR_LIGHT)
+        subMenuIconColor(res.getColor(R.color.sub_menu_icon_color_light))
       } else {
         baseTheme(LIGHT)
         backgroundLight(color)
         backgroundLightDarker(darker)
         backgroundLightLighter(lighter)
-        subMenuIconColor(SUBMENU_ITEM_ICON_COLOR_DARK)
+        subMenuIconColor(res.getColor(R.color.sub_menu_icon_color_dark))
       }
       return this
     }
