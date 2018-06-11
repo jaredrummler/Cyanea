@@ -26,13 +26,11 @@
   <style name="PopupMenu.Dark" parent="@style/Widget.AppCompat.PopupMenu">
     <item name="android:popupBackground">@drawable/bg_popup_dark</item>
     <item name="android:overlapAnchor" tools:ignore="NewApi">true</item>
-    <item name="android:dropDownHorizontalOffset">6dp</item>
     <item name="overlapAnchor">true</item>
   </style>
 
   <style name="PopupMenu.Light" parent="@style/Widget.AppCompat.Light.PopupMenu">
     <item name="android:popupBackground">@drawable/bg_popup_light</item>
-    <item name="android:dropDownHorizontalOffset">6dp</item>
     <item name="android:overlapAnchor" tools:ignore="NewApi">true</item>
     <item name="overlapAnchor">true</item>
   </style>
