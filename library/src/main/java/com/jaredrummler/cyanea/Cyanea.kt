@@ -231,18 +231,15 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     private val editor = cyanea.prefs.edit()
 
-    @JvmOverloads
-    fun primary(@ColorInt color: Int, cohesize: Boolean = true): Editor {
+    fun primary(@ColorInt color: Int): Editor {
       cyanea.primary = color
       editor.putInt(PREF_PRIMARY, color)
-      if (cohesize) {
-        val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
-        val menuIconColorRes = if (isDarkColor) R.color.menu_icon_color_light else R.color.menu_icon_color_dark
-        primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
-        primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
-        menuIconColor(res.getColor(menuIconColorRes))
-        navigationBar(if (isDarkColor) color else Color.BLACK)
-      }
+      val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
+      val menuIconColorRes = if (isDarkColor) R.color.menu_icon_color_light else R.color.menu_icon_color_dark
+      primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
+      primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
+      menuIconColor(res.getColor(menuIconColorRes))
+      navigationBar(if (isDarkColor) color else Color.BLACK)
       return this
     }
 
@@ -258,14 +255,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
-    @JvmOverloads
-    fun accent(@ColorInt color: Int, cohesize: Boolean = true): Editor {
+    fun accent(@ColorInt color: Int): Editor {
       cyanea.accent = color
       editor.putInt(PREF_ACCENT, color)
-      if (cohesize) {
-        accentDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
-        accentLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
-      }
+      accentDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
+      accentLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
       return this
     }
 
