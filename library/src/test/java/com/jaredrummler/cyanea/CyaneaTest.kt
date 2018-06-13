@@ -24,7 +24,7 @@ class CyaneaTest {
     MockitoAnnotations.initMocks(this)
   }
 
-  @Test(expected = IllegalStateException::class)
+  @Test(expected = Exception::class)
   fun should_throw_exception_if_singleton_is_accessed_before_init() {
     Cyanea.instance
   }

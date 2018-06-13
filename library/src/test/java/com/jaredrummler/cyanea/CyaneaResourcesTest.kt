@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
+import android.support.annotation.ColorInt
+import com.jaredrummler.cyanea.utils.Reflection
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThat
@@ -54,34 +56,22 @@ class CyaneaResourcesTest {
   @Test
   fun cyanea_resources_should_return_cyanea_primary_color() {
     val resources = CyaneaResources(res)
-
-    run {
-      cyanea.edit().primary(0xFF0099CC.toInt()).apply()
-      val color = resources.getColor(R.color.color_primary)
-      assertEquals(cyanea.primary, color)
-    }
-
-    run {
-      cyanea.edit().primary(0xFF99CC00.toInt()).apply()
-      val color = resources.getColor(R.color.color_primary)
-      assertEquals(cyanea.primary, color)
-    }
+    setCyaneaColor(0xFF0099CC.toInt(), "primary")
+    val color = resources.getColor(R.color.color_primary)
+    assertEquals(cyanea.primary, color)
   }
 
   @Test
   fun cyanea_resources_should_return_cyanea_accent_color() {
     val resources = CyaneaResources(res)
+    setCyaneaColor(0xFF0099CC.toInt(), "accent")
+    val color = resources.getColor(R.color.color_accent)
+    assertEquals(cyanea.accent, color)
+  }
 
-    run {
-      cyanea.edit().accent(0xFF0099CC.toInt()).apply()
-      val color = resources.getColor(R.color.color_accent)
-      assertEquals(cyanea.accent, color)
-    }
-
-    run {
-      cyanea.edit().accent(0xFF99CC00.toInt()).apply()
-      val color = resources.getColor(R.color.color_accent)
-      assertEquals(cyanea.accent, color)
+  private fun setCyaneaColor(@ColorInt color: Int, name: String) {
+    Reflection.getField(cyanea, name)?.let { field ->
+      Reflection.setFieldValue(field, cyanea, color)
     }
   }
 
