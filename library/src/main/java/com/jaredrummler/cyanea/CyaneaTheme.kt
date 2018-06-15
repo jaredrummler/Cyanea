@@ -20,14 +20,34 @@ data class CyaneaTheme internal constructor(
     @ColorInt val accentDark: Int,
     @ColorInt val accentLight: Int,
     @ColorInt val background: Int,
-    @ColorInt val backgroundDarker: Int,
-    @ColorInt val backgroundLighter: Int,
+    @ColorInt val backgroundDark: Int,
+    @ColorInt val backgroundLight: Int,
     @ColorInt val menuIconColor: Int,
     @ColorInt val subMenuIconColor: Int,
     @ColorInt val navigationBarColor: Int,
     val shouldTintStatusBar: Boolean,
     val shouldTintNavBar: Boolean
 ) {
+
+  fun apply(cyanea: Cyanea) {
+    cyanea.edit()
+        .baseTheme(baseTheme)
+        .primary(primary)
+        .primaryDark(primaryDark)
+        .primaryLight(primaryLight)
+        .accent(accent)
+        .accentDark(accentDark)
+        .accentLight(accentLight)
+        .background(background)
+        .backgroundDark(backgroundDark)
+        .backgroundLight(backgroundLight)
+        .menuIconColor(menuIconColor)
+        .subMenuIconColor(subMenuIconColor)
+        .navigationBar(navigationBarColor)
+        .shouldTintStatusBar(shouldTintStatusBar)
+        .shouldTintNavBar(shouldTintNavBar)
+        .apply()
+  }
 
   companion object {
 
