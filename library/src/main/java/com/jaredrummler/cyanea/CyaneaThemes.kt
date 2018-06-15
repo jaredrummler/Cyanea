@@ -4,7 +4,7 @@ import android.support.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 
-class CyaneaThemes(private val cyanea: Cyanea) {
+class CyaneaThemes internal constructor(private val cyanea: Cyanea) {
 
   /**
    * Get a ActionBar theme.

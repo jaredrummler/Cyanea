@@ -21,8 +21,9 @@ class ColorUtils private constructor() {
      * @return darker version of specified color.
      */
     @JvmStatic
+    @JvmOverloads
     @ColorInt
-    fun darker(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) factor: Float): Int {
+    fun darker(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) factor: Float = 0.85f): Int {
       return Color.argb(Color.alpha(color), Math.max((Color.red(color) * factor).toInt(), 0),
           Math.max((Color.green(color) * factor).toInt(), 0),
           Math.max((Color.blue(color) * factor).toInt(), 0))
@@ -36,8 +37,9 @@ class ColorUtils private constructor() {
      * @return lighter version of the specified color.
      */
     @JvmStatic
+    @JvmOverloads
     @ColorInt
-    fun lighter(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) factor: Float): Int {
+    fun lighter(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) factor: Float = 0.15f): Int {
       val alpha = Color.alpha(color)
       val red = ((Color.red(color) * (1 - factor) / 255 + factor) * 255).toInt()
       val green = ((Color.green(color) * (1 - factor) / 255 + factor) * 255).toInt()
@@ -105,6 +107,7 @@ class ColorUtils private constructor() {
     }
 
     @JvmStatic
+    @JvmOverloads
     fun toHex(@ColorInt color: Int, alpha: Boolean = true): String {
       return if (alpha) {
         String.format("%08X", (color))
