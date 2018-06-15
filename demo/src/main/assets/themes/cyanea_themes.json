@@ -1,6 +1,6 @@
 [
   {
-    "name": "Cyanea",
+    "theme_name": "Cyanea",
     "base_theme": "LIGHT",
     "primary": "#FFEE3868",
     "primary_dark": "#FFCA2F58",
@@ -13,7 +13,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Bilberry",
+    "theme_name": "Bilberry",
     "base_theme": "DARK",
     "primary": "#FF4A1B43",
     "primary_dark": "#FF3E1638",
@@ -26,7 +26,7 @@
     "background_light": "#FF352B33"
   },
   {
-    "name": "Ashen",
+    "theme_name": "Ashen",
     "base_theme": "DARK",
     "primary": "#FFFC474A",
     "primary_dark": "#FFD63C3E",
@@ -39,7 +39,7 @@
     "background_light": "#FF383B3B"
   },
   {
-    "name": "Brave",
+    "theme_name": "Brave",
     "base_theme": "DARK",
     "primary": "#FF3E9AB4",
     "primary_dark": "#FF348299",
@@ -52,7 +52,7 @@
     "background_light": "#FF3E3E44"
   },
   {
-    "name": "Sepia",
+    "theme_name": "Sepia",
     "base_theme": "LIGHT",
     "primary": "#FF6D4C41",
     "primary_dark": "#FF5C4037",
@@ -65,7 +65,7 @@
     "background_light": "#FFF3F9EC"
   },
   {
-    "name": "Sublime",
+    "theme_name": "Sublime",
     "base_theme": "DARK",
     "primary": "#FFFF007F",
     "primary_dark": "#FFD8006B",
@@ -78,7 +78,7 @@
     "background_light": "#FF474843"
   },
   {
-    "name": "Oblivion",
+    "theme_name": "Oblivion",
     "base_theme": "DARK",
     "primary": "#FFD25252",
     "primary_dark": "#FFB24545",
@@ -91,7 +91,7 @@
     "background_light": "#FF3F3F3F"
   },
   {
-    "name": "Obsidian",
+    "theme_name": "Obsidian",
     "base_theme": "DARK",
     "primary": "#FF678CB1",
     "primary_dark": "#FF577796",
@@ -104,7 +104,7 @@
     "background_light": "#FF494F52"
   },
   {
-    "name": "Zenburn",
+    "theme_name": "Zenburn",
     "base_theme": "DARK",
     "primary": "#FF3F3F6A",
     "primary_dark": "#FF35355A",
@@ -117,7 +117,7 @@
     "background_light": "#FF5C5C5C"
   },
   {
-    "name": "RecognEyes",
+    "theme_name": "RecognEyes",
     "base_theme": "DARK",
     "primary": "#FF00D0D0",
     "primary_dark": "#FF00B0B0",
@@ -130,7 +130,7 @@
     "background_light": "#FF333341"
   },
   {
-    "name": "Monokai",
+    "theme_name": "Monokai",
     "base_theme": "DARK",
     "primary": "#FF66CCB3",
     "primary_dark": "#FF56AD98",
@@ -143,7 +143,7 @@
     "background_light": "#FF474843"
   },
   {
-    "name": "Roboticket",
+    "theme_name": "Roboticket",
     "base_theme": "LIGHT",
     "primary": "#FF295F94",
     "primary_dark": "#FF22507D",
@@ -156,7 +156,7 @@
     "background_light": "#FFF6F6F6"
   },
   {
-    "name": "Inkpot",
+    "theme_name": "Inkpot",
     "base_theme": "DARK",
     "primary": "#FF6068B2",
     "primary_dark": "#FF515897",
@@ -169,7 +169,7 @@
     "background_light": "#FF404047"
   },
   {
-    "name": "Vibrant Ink",
+    "theme_name": "Vibrant Ink",
     "base_theme": "DARK",
     "primary": "#FFEC691E",
     "primary_dark": "#FFC85919",
@@ -182,7 +182,7 @@
     "background_light": "#FF3B3B3B"
   },
   {
-    "name": "Cote azur",
+    "theme_name": "Cote azur",
     "base_theme": "LIGHT",
     "primary": "#FF00585F",
     "primary_dark": "#FF004A50",
@@ -195,7 +195,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Waterfall",
+    "theme_name": "Waterfall",
     "base_theme": "DARK",
     "primary": "#FF1D3847",
     "primary_dark": "#FF182F3C",
@@ -208,7 +208,7 @@
     "background_light": "#FF2D363A"
   },
   {
-    "name": "Ocean",
+    "theme_name": "Ocean",
     "base_theme": "DARK",
     "primary": "#FF3B8686",
     "primary_dark": "#FF327171",
@@ -221,7 +221,7 @@
     "background_light": "#FF293D49"
   },
   {
-    "name": "Dawn",
+    "theme_name": "Dawn",
     "base_theme": "DARK",
     "primary": "#FF65353E",
     "primary_dark": "#FF552D34",
@@ -234,7 +234,7 @@
     "background_light": "#FF30262B"
   },
   {
-    "name": "Vintage",
+    "theme_name": "Vintage",
     "base_theme": "LIGHT",
     "primary": "#FF1D2125",
     "primary_dark": "#FF181C1F",
@@ -247,7 +247,7 @@
     "background_light": "#FFF8F8F8"
   },
   {
-    "name": "Rio",
+    "theme_name": "Rio",
     "base_theme": "LIGHT",
     "primary": "#FF0B4239",
     "primary_dark": "#FF093830",
@@ -260,7 +260,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Retro",
+    "theme_name": "Retro",
     "base_theme": "DARK",
     "primary": "#FF123943",
     "primary_dark": "#FF0F3038",
@@ -273,7 +273,7 @@
     "background_light": "#FF3E3931"
   },
   {
-    "name": "Purple rain",
+    "theme_name": "Purple rain",
     "base_theme": "LIGHT",
     "primary": "#FF381432",
     "primary_dark": "#FF2F112A",
@@ -286,7 +286,7 @@
     "background_light": "#FFF8F2FF"
   },
   {
-    "name": "Ocean breeze",
+    "theme_name": "Ocean breeze",
     "base_theme": "LIGHT",
     "primary": "#FF1B5870",
     "primary_dark": "#FF164A5F",
@@ -299,7 +299,7 @@
     "background_light": "#FFEFFAFF"
   },
   {
-    "name": "Tasty",
+    "theme_name": "Tasty",
     "base_theme": "LIGHT",
     "primary": "#FF437356",
     "primary_dark": "#FF386149",
@@ -312,7 +312,7 @@
     "background_light": "#FFFEF8EB"
   },
   {
-    "name": "Desert",
+    "theme_name": "Desert",
     "base_theme": "LIGHT",
     "primary": "#FF5D3C1B",
     "primary_dark": "#FF4F3316",
@@ -325,7 +325,7 @@
     "background_light": "#FFF4F0E8"
   },
   {
-    "name": "Flax",
+    "theme_name": "Flax",
     "base_theme": "DARK",
     "primary": "#FF2B2F48",
     "primary_dark": "#FF24273D",
@@ -338,7 +338,7 @@
     "background_light": "#FF424657"
   },
   {
-    "name": "Cherry pie",
+    "theme_name": "Cherry pie",
     "base_theme": "DARK",
     "primary": "#FF46070B",
     "primary_dark": "#FF3B0509",
@@ -351,7 +351,7 @@
     "background_light": "#FF2B2626"
   },
   {
-    "name": "Olive",
+    "theme_name": "Olive",
     "base_theme": "DARK",
     "primary": "#FF40411E",
     "primary_dark": "#FF363719",
@@ -364,7 +364,7 @@
     "background_light": "#FF3D3E2F"
   },
   {
-    "name": "Forrest",
+    "theme_name": "Forrest",
     "base_theme": "DARK",
     "primary": "#FF2C3801",
     "primary_dark": "#FF252F00",
@@ -377,7 +377,7 @@
     "background_light": "#FF303326"
   },
   {
-    "name": "Watermelon",
+    "theme_name": "Watermelon",
     "base_theme": "LIGHT",
     "primary": "#FF7D8A2E",
     "primary_dark": "#FF6A7527",
@@ -390,7 +390,7 @@
     "background_light": "#FFFFFFFF"
   },
   {
-    "name": "Honey pot",
+    "theme_name": "Honey pot",
     "base_theme": "LIGHT",
     "primary": "#FF105B63",
     "primary_dark": "#FF0D4D54",
@@ -403,7 +403,7 @@
     "background_light": "#FFFFFDED"
   },
   {
-    "name": "Coffee",
+    "theme_name": "Coffee",
     "base_theme": "LIGHT",
     "primary": "#FF562C22",
     "primary_dark": "#FF49251C",
@@ -416,7 +416,7 @@
     "background_light": "#FFF0E3DD"
   },
   {
-    "name": "Peacock",
+    "theme_name": "Peacock",
     "base_theme": "LIGHT",
     "primary": "#FFE42ED7",
     "primary_dark": "#FFC127B6",
@@ -429,7 +429,7 @@
     "background_light": "#FFF6F6F6"
   },
   {
-    "name": "Material light",
+    "theme_name": "Material light",
     "base_theme": "LIGHT",
     "primary": "#FF263238",
     "primary_dark": "#FF202A2F",
@@ -442,7 +442,7 @@
     "background_light": "#FFF4F4F4"
   },
   {
-    "name": "Material dark",
+    "theme_name": "Material dark",
     "base_theme": "DARK",
     "primary": "#FF263238",
     "primary_dark": "#FF202A2F",
@@ -455,7 +455,7 @@
     "background_light": "#FF262626"
   },
   {
-    "name": "Holo light",
+    "theme_name": "Holo light",
     "base_theme": "LIGHT",
     "primary": "#FF222222",
     "primary_dark": "#FF1C1C1C",
@@ -468,7 +468,7 @@
     "background_light": "#FFF4F4F4"
   },
   {
-    "name": "Holo dark",
+    "theme_name": "Holo dark",
     "base_theme": "DARK",
     "primary": "#FF222222",
     "primary_dark": "#FF1C1C1C",
@@ -481,7 +481,7 @@
     "background_light": "#FF262626"
   },
   {
-    "name": "Mint",
+    "theme_name": "Mint",
     "base_theme": "LIGHT",
     "primary": "#FF0AC775",
     "primary_dark": "#FF08A963",
@@ -494,7 +494,7 @@
     "background_light": "#FFFFFFFF"
   },
   {
-    "name": "SigFig",
+    "theme_name": "SigFig",
     "base_theme": "LIGHT",
     "primary": "#FFF7F6F3",
     "primary_dark": "#FF524E4A",
@@ -507,7 +507,7 @@
     "background_light": "#FFF2F0EB"
   },
   {
-    "name": "Facebook",
+    "theme_name": "Facebook",
     "base_theme": "LIGHT",
     "primary": "#FF3B5998",
     "primary_dark": "#FF324B81",
@@ -520,7 +520,7 @@
     "background_light": "#FFF8F8F8"
   },
   {
-    "name": "Instagram",
+    "theme_name": "Instagram",
     "base_theme": "DARK",
     "primary": "#FF517FA4",
     "primary_dark": "#FF446B8B",
@@ -533,7 +533,7 @@
     "background_light": "#FF383A3B"
   },
   {
-    "name": "Twitter",
+    "theme_name": "Twitter",
     "base_theme": "LIGHT",
     "primary": "#FF00ACED",
     "primary_dark": "#FF0084B4",
@@ -546,7 +546,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Periscope",
+    "theme_name": "Periscope",
     "base_theme": "LIGHT",
     "primary": "#FF40A4C4",
     "primary_dark": "#FF368BA6",
@@ -559,7 +559,7 @@
     "background_light": "#FFFFFFFF"
   },
   {
-    "name": "Xbox",
+    "theme_name": "Xbox",
     "base_theme": "DARK",
     "primary": "#FF107C10",
     "primary_dark": "#FF0D690D",
@@ -572,7 +572,7 @@
     "background_light": "#FF575757"
   },
   {
-    "name": "Spotify",
+    "theme_name": "Spotify",
     "base_theme": "DARK",
     "primary": "#FF262626",
     "primary_dark": "#FF202020",
@@ -585,7 +585,7 @@
     "background_light": "#FF262626"
   },
   {
-    "name": "Starbucks",
+    "theme_name": "Starbucks",
     "base_theme": "LIGHT",
     "primary": "#FF00704A",
     "primary_dark": "#FF005F3E",
@@ -598,7 +598,7 @@
     "background_light": "#FFFFFFFF"
   },
   {
-    "name": "Amazon",
+    "theme_name": "Amazon",
     "base_theme": "LIGHT",
     "primary": "#FFFF9900",
     "primary_dark": "#FFD88200",
@@ -611,7 +611,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Bing",
+    "theme_name": "Bing",
     "base_theme": "LIGHT",
     "primary": "#FFFFB900",
     "primary_dark": "#FFD89D00",
@@ -624,7 +624,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Meetup",
+    "theme_name": "Meetup",
     "base_theme": "LIGHT",
     "primary": "#FFED1744",
     "primary_dark": "#FFC91339",
@@ -637,7 +637,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Pocket Casts",
+    "theme_name": "Pocket Casts",
     "base_theme": "LIGHT",
     "primary": "#FFE53935",
     "primary_dark": "#FFC2302D",
@@ -650,7 +650,7 @@
     "background_light": "#FFFAFAFA"
   },
   {
-    "name": "Reddit",
+    "theme_name": "Reddit",
     "base_theme": "DARK",
     "primary": "#FF000000",
     "primary_light": "#FF262626",
@@ -662,7 +662,7 @@
     "background_light": "#FF424242"
   },
   {
-    "name": "SoundCloud",
+    "theme_name": "SoundCloud",
     "base_theme": "LIGHT",
     "primary": "#FFFFFFFF",
     "primary_dark": "#FFD8D8D8",
@@ -675,7 +675,7 @@
     "background_light": "#FFFFFFFF"
   },
   {
-    "name": "CyanogenMod",
+    "theme_name": "CyanogenMod",
     "base_theme": "LIGHT",
     "primary": "#FF33B5E5",
     "primary_dark": "#FF2B99C2",
@@ -688,7 +688,7 @@
     "background_light": "#FFF9F9F9"
   },
   {
-    "name": "Liberty",
+    "theme_name": "Liberty",
     "base_theme": "DARK",
     "primary": "#FFFFD500",
     "primary_dark": "#FFD8B500",
