@@ -74,7 +74,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
         for (name in arrayOf("mEdge", "mGlow")) {
           val drawable = Reflection.getFieldValue<Drawable?>(edgeEffect, name)
           drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-          drawable?.setCallback(null) // free up any references
+          drawable?.callback = null // free up any references
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge effect color", e)
@@ -126,6 +126,23 @@ class EdgeEffectTint(private val view: ViewGroup) {
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge glow color on NestedScrollView", e)
+      }
+    }
+
+    /**
+     * Set the edge-effect color on a [ListView][android.widget.ListView] or [GridView][android.widget.GridView].
+     *
+     * @param listView The view (ListView/GridView) to set the edge color
+     * @param color The color value
+     */
+    private fun setEdgeGlowColor(listView: AbsListView, @ColorInt color: Int) {
+      try {
+        for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
+          Reflection.getFieldValue<EdgeEffect?>(listView, name)?.let { edgeEffect ->
+            setEdgeEffectColor(edgeEffect, color)
+          }
+        }
+      } catch (ignored: Exception) {
       }
     }
 

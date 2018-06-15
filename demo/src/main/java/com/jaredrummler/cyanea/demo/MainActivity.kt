@@ -1,9 +1,13 @@
 package com.jaredrummler.cyanea.demo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
+import com.jaredrummler.cyanea.demo.R.string
+import com.jaredrummler.cyanea.demo.themes.ThemePickerActivity
+
 
 class MainActivity : CyaneaAppCompatActivity() {
 
@@ -13,19 +17,31 @@ class MainActivity : CyaneaAppCompatActivity() {
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menu.add(0, 1, 0, "Menu Item #1")
-        .setIcon(R.drawable.abc_ic_menu_share_mtrl_alpha)
+    menu.add(0, 1, 0, getString(string.share))
+        .setIcon(R.drawable.ic_share_white_24dp)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-    menu.add(0, 2, 0, "Menu Item #2")
-        .setIcon(R.drawable.abc_ic_menu_share_mtrl_alpha)
-        .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
-
-    menu.add(0, 3, 0, "Menu Item #3")
-        .setIcon(R.drawable.abc_ic_menu_share_mtrl_alpha)
+    menu.add(0, 2, 0, getString(string.theme_picker))
+        .setIcon(R.drawable.ic_brush_white_24dp)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
 
     return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      1 -> {
+
+      }
+      2 -> {
+        startActivity(Intent(this, ThemePickerActivity::class.java))
+      }
+      else -> {
+      }
+    }
+
+
+    return super.onOptionsItemSelected(item)
   }
 
   override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
