@@ -1,6 +1,7 @@
 package com.jaredrummler.cyanea.demo
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,11 +18,11 @@ class MainActivity : CyaneaAppCompatActivity() {
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menu.add(0, 1, 0, getString(string.share))
-        .setIcon(R.drawable.ic_share_white_24dp)
+    menu.add(0, MENU_GITHUB, 0, getString(string.github))
+        .setIcon(R.drawable.ic_github_white_24dp)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-    menu.add(0, 2, 0, getString(string.theme_picker))
+    menu.add(0, MENU_THEMES, 0, getString(string.theme_picker))
         .setIcon(R.drawable.ic_brush_white_24dp)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
 
@@ -29,21 +30,26 @@ class MainActivity : CyaneaAppCompatActivity() {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      1 -> {
-
+    return when (item.itemId) {
+      MENU_GITHUB -> {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/Cyanea")))
+        true
       }
-      2 -> {
+      MENU_THEMES -> {
         startActivity(Intent(this, ThemePickerActivity::class.java))
+        true
       }
       else -> {
+        super.onOptionsItemSelected(item)
       }
     }
-
-
-    return super.onOptionsItemSelected(item)
   }
 
   override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
+
+  companion object {
+    private const val MENU_GITHUB = Menu.FIRST
+    private const val MENU_THEMES = Menu.FIRST + 1
+  }
 
 }
