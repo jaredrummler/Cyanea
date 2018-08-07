@@ -156,7 +156,7 @@ class Reflection private constructor() {
       if (obj == null) return null
 
       val key = cacheKey(obj, name)
-      var field: Field? = CACHE.get(key) as? Field
+      var field: Field? = CACHE[key] as? Field
       if (field != null) return field
 
       var klass: Class<*>? = obj as? Class<*> ?: obj.javaClass
@@ -184,7 +184,7 @@ class Reflection private constructor() {
       val key = StringBuilder(klass.name)
       key.append('#')
       key.append(name)
-      if (types.size > 0) {
+      if (types.isNotEmpty()) {
         var separator = ""
         key.append('(')
         types.forEach {
