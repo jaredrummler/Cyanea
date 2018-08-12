@@ -118,7 +118,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         res.getColor(R.color.color_background_dark_lighter))
 
     menuIconColor = prefs.getInt(PREF_MENU_ICON_COLOR,
-        res.getColor(if (baseTheme == LIGHT) R.color.menu_icon_color_dark else R.color.menu_icon_color_light))
+        res.getColor(if (isActionBarLight) R.color.menu_icon_color_dark else R.color.menu_icon_color_light))
     subMenuIconColor = prefs.getInt(PREF_SUB_MENU_ICON_COLOR,
         res.getColor(if (baseTheme == LIGHT) R.color.sub_menu_icon_color_dark else R.color.sub_menu_icon_color_light))
 
