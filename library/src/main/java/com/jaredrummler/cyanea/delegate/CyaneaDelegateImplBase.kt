@@ -73,7 +73,7 @@ internal open class CyaneaDelegateImplBase(
 
   override fun onResume() {
     if (timestamp != cyanea.timestamp) {
-      activity.recreate()
+      recreateActivity()
       if (activity is Cyanea.ThemeModifiedListener) {
         activity.onThemeModified()
       }
@@ -131,6 +131,10 @@ internal open class CyaneaDelegateImplBase(
     }
 
     return decorators.toTypedArray()
+  }
+
+  protected open fun recreateActivity() {
+    activity.recreate()
   }
 
   protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<*>> {
