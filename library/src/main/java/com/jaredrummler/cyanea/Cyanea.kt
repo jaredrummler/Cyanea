@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.jaredrummler.cyanea
 
 import android.annotation.SuppressLint
@@ -7,6 +9,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
 import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
 import android.support.annotation.Keep
 import android.util.Log
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
@@ -235,6 +238,23 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   class Editor internal constructor(private val cyanea: Cyanea) {
 
     private val editor = cyanea.prefs.edit()
+
+    fun primaryResource(@ColorRes resid: Int) = primary(res.getColor(resid))
+    fun primaryDarkResource(@ColorRes resid: Int) = primaryDark(res.getColor(resid))
+    fun primaryLightResource(@ColorRes resid: Int) = primaryLight(res.getColor(resid))
+    fun accentResource(@ColorRes resid: Int): Editor = accent(res.getColor(resid))
+    fun accentDarkResource(@ColorRes resid: Int) = accentDark(res.getColor(resid))
+    fun accentLightResource(@ColorRes resid: Int) = accentLight(res.getColor(resid))
+    fun backgroundResource(@ColorRes resid: Int) = background(res.getColor(resid))
+    fun backgroundLightResource(@ColorRes resid: Int) = backgroundLight(res.getColor(resid))
+    fun backgroundLightDarkerResource(@ColorRes resid: Int) = backgroundLightDarker(res.getColor(resid))
+    fun backgroundLightLighterResource(@ColorRes resid: Int) = backgroundLightLighter(res.getColor(resid))
+    fun backgroundDarkResource(@ColorRes resid: Int) = backgroundDark(res.getColor(resid))
+    fun backgroundDarkDarkerResource(@ColorRes resid: Int) = backgroundDarkDarker(res.getColor(resid))
+    fun backgroundDarkLighterResource(@ColorRes resid: Int) = backgroundDarkLighter(res.getColor(resid))
+    fun menuIconColorResource(@ColorRes resid: Int) = menuIconColor(res.getColor(resid))
+    fun subMenuIconColorResource(@ColorRes resid: Int) = subMenuIconColor(res.getColor(resid))
+    fun navigationBarResource(@ColorRes resid: Int) = navigationBar(res.getColor(resid))
 
     fun primary(@ColorInt color: Int): Editor {
       cyanea.primary = color
