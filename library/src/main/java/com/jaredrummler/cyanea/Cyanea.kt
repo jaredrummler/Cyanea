@@ -59,9 +59,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   @ColorInt internal var backgroundLightLighter: Int
   @ColorInt internal var backgroundLightDarker: Int
 
-  var menuIconColor: Int
+  @ColorInt var menuIconColor: Int
     private set
-  var subMenuIconColor: Int
+  @ColorInt var subMenuIconColor: Int
     private set
 
   var shouldTintStatusBar: Boolean
