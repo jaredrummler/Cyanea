@@ -135,6 +135,12 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   fun edit(): Editor = Editor(this)
 
+  inline fun edit(action: Cyanea.Editor.() -> Unit) {
+    val editor = edit()
+    action(editor)
+    editor.apply()
+  }
+
   companion object {
     private const val PREF_BASE_THEME = "base_theme"
 
