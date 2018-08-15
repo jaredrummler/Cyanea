@@ -203,8 +203,22 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         }
     }
 
+    private val instances by lazy { mutableMapOf<String, Cyanea>() }
+
     @JvmStatic
     val instance: Cyanea by lazy { Holder.INSTANCE }
+
+    @JvmStatic
+    fun getInstance(name: String): Cyanea {
+      instances[name]?.let { cyanea ->
+        return cyanea
+      } ?: run {
+        val preferences = app.getSharedPreferences(name, Context.MODE_PRIVATE)
+        val cyanea = Cyanea(preferences)
+        instances[name] = cyanea
+        return cyanea
+      }
+    }
 
     var loggingEnabled: Boolean = false
 
