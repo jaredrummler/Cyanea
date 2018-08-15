@@ -188,7 +188,7 @@ class CyaneaLayoutInflater : LayoutInflater {
   }
 
   companion object {
-    private val CLASS_PREFIX_LIST = arrayOf("android.widget.", "android.webkit.")
+    private val CLASS_PREFIX_LIST = arrayOf("android.widget.", "android.webkit.", "android.app.")
   }
 
 }
