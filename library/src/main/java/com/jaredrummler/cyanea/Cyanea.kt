@@ -12,8 +12,32 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.Keep
 import android.util.Log
+import com.jaredrummler.cyanea.Constants.LIGHT_ACTIONBAR_LUMINANCE_FACTOR
+import com.jaredrummler.cyanea.Constants.NONE_TIMESTAMP
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
+import com.jaredrummler.cyanea.Defaults.DEFAULT_DARKER_FACTOR
+import com.jaredrummler.cyanea.Defaults.DEFAULT_LIGHTER_FACTOR
+import com.jaredrummler.cyanea.PrefKeys.PREF_ACCENT
+import com.jaredrummler.cyanea.PrefKeys.PREF_ACCENT_DARK
+import com.jaredrummler.cyanea.PrefKeys.PREF_ACCENT_LIGHT
+import com.jaredrummler.cyanea.PrefKeys.PREF_BACKGROUND_DARK
+import com.jaredrummler.cyanea.PrefKeys.PREF_BACKGROUND_DARK_DARKER
+import com.jaredrummler.cyanea.PrefKeys.PREF_BACKGROUND_DARK_LIGHTER
+import com.jaredrummler.cyanea.PrefKeys.PREF_BACKGROUND_LIGHT
+import com.jaredrummler.cyanea.PrefKeys.PREF_BACKGROUND_LIGHT_DARKER
+import com.jaredrummler.cyanea.PrefKeys.PREF_BACKGROUND_LIGHT_LIGHTER
+import com.jaredrummler.cyanea.PrefKeys.PREF_BASE_THEME
+import com.jaredrummler.cyanea.PrefKeys.PREF_FILE_NAME
+import com.jaredrummler.cyanea.PrefKeys.PREF_MENU_ICON_COLOR
+import com.jaredrummler.cyanea.PrefKeys.PREF_NAVIGATION_BAR
+import com.jaredrummler.cyanea.PrefKeys.PREF_PRIMARY
+import com.jaredrummler.cyanea.PrefKeys.PREF_PRIMARY_DARK
+import com.jaredrummler.cyanea.PrefKeys.PREF_PRIMARY_LIGHT
+import com.jaredrummler.cyanea.PrefKeys.PREF_SHOULD_TINT_NAV_BAR
+import com.jaredrummler.cyanea.PrefKeys.PREF_SHOULD_TINT_STATUS_BAR
+import com.jaredrummler.cyanea.PrefKeys.PREF_SUB_MENU_ICON_COLOR
+import com.jaredrummler.cyanea.PrefKeys.PREF_TIMESTAMP
 import com.jaredrummler.cyanea.tinting.CyaneaTinter
 import com.jaredrummler.cyanea.utils.ColorUtils
 
@@ -145,38 +169,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   }
 
   companion object {
-    private const val PREF_BASE_THEME = "base_theme"
-
-    private const val PREF_PRIMARY = "primary"
-    private const val PREF_PRIMARY_DARK = "primary_dark"
-    private const val PREF_PRIMARY_LIGHT = "primary_light"
-
-    private const val PREF_ACCENT = "accent"
-    private const val PREF_ACCENT_DARK = "accent_dark"
-    private const val PREF_ACCENT_LIGHT = "accent_light"
-
-    private const val PREF_BACKGROUND_LIGHT = "background_light"
-    private const val PREF_BACKGROUND_LIGHT_DARKER = "background_light_darker"
-    private const val PREF_BACKGROUND_LIGHT_LIGHTER = "background_light_lighter"
-
-    private const val PREF_BACKGROUND_DARK = "background_dark"
-    private const val PREF_BACKGROUND_DARK_DARKER = "background_dark_darker"
-    private const val PREF_BACKGROUND_DARK_LIGHTER = "background_dark_lighter"
-
-    private const val PREF_MENU_ICON_COLOR = "menu_icon_color"
-    private const val PREF_SUB_MENU_ICON_COLOR = "sub_menu_icon_color"
-
-    private const val PREF_NAVIGATION_BAR = "navigation_bar_color"
-
-    private const val PREF_SHOULD_TINT_STATUS_BAR = "should_tint_status_bar"
-    private const val PREF_SHOULD_TINT_NAV_BAR = "should_tint_nav_bar"
-
-    private const val PREF_TIMESTAMP = "timestamp"
-    private const val NONE_TIMESTAMP = 0L
-
-    private const val DEFAULT_DARKER_FACTOR = 0.85f
-    private const val DEFAULT_LIGHTER_FACTOR = 0.15f
-    private const val LIGHT_ACTIONBAR_LUMINANCE_FACTOR = 0.75
 
     @SuppressLint("StaticFieldLeak") // application context is safe
     lateinit var app: Application
@@ -203,7 +195,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       val INSTANCE: Cyanea
         get() {
           try {
-            val preferences = app.getSharedPreferences("CYANEA", Context.MODE_PRIVATE)
+            val preferences = app.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE)
             return Cyanea(preferences)
           } catch (e: UninitializedPropertyAccessException) {
             throw IllegalStateException("Cyanea.init must be called before referencing the singleton instance")
