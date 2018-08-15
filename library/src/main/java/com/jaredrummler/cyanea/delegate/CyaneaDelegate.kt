@@ -2,12 +2,12 @@ package com.jaredrummler.cyanea.delegate
 
 import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.support.annotation.StyleRes
 import android.view.Menu
 import android.view.View
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.Utils
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.decor.Decorator
 import com.jaredrummler.cyanea.inflator.processors.CyaneaViewProcessor
@@ -98,13 +98,13 @@ abstract class CyaneaDelegate {
      */
     @JvmStatic
     fun create(activity: Activity, cyanea: Cyanea, @StyleRes themeResId: Int): CyaneaDelegate {
-      return if (Build.VERSION.SDK_INT >= 28) {
+      return if (Utils.atLeastPie()) {
         CyaneaDelegateImplV28(activity, cyanea, themeResId)
-      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      } else if (Utils.atLeastMarshmallow()) {
         CyaneaDelegateImplV23(activity, cyanea, themeResId)
-      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      } else if (Utils.atLeastLollipop()) {
         CyaneaDelegateImplV21(activity, cyanea, themeResId)
-      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      } else if (Utils.atLeastKitKat()) {
         CyaneaDelegateImplV19(activity, cyanea, themeResId)
       } else {
         CyaneaDelegateImplBase(activity, cyanea, themeResId)
