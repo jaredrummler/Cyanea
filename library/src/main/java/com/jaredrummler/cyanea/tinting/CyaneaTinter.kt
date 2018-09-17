@@ -15,7 +15,6 @@ import android.os.Build
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.R
-import com.jaredrummler.cyanea.Utils
 import com.jaredrummler.cyanea.utils.Reflection
 import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
 
@@ -160,7 +159,7 @@ class CyaneaTinter private constructor() {
 
   @Throws(CyaneaTintException::class)
   private fun tint(drawable: NinePatchDrawable) {
-    if (Utils.atLeastPie()) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
       // Android API 28 blocks getting the field NinePatchState#mTint =(
       return
     }

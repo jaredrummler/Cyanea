@@ -37,16 +37,8 @@ internal open class CyaneaDelegateImplBase(
     if (themeResId != 0 && cyanea.isThemeModified) {
       activity.setTheme(themeResId)
     }
-
     if (cyanea.isThemeModified) {
-      val tinter = SystemBarTint(activity)
-      tinter.setActionBarColor(cyanea.primary)
-      if (cyanea.shouldTintStatusBar) {
-        tinter.setStatusBarColor(cyanea.primaryDark)
-      }
-      if (cyanea.shouldTintNavBar) {
-        tinter.setNavigationBarColor(cyanea.navigationBar)
-      }
+      tintBars()
     }
   }
 
@@ -135,6 +127,17 @@ internal open class CyaneaDelegateImplBase(
 
   protected open fun recreateActivity() {
     activity.recreate()
+  }
+
+  protected open fun tintBars() {
+    val tinter = SystemBarTint(activity)
+    tinter.setActionBarColor(cyanea.primary)
+    if (cyanea.shouldTintStatusBar) {
+      tinter.setStatusBarColor(cyanea.primaryDark)
+    }
+    if (cyanea.shouldTintNavBar) {
+      tinter.setNavigationBarColor(cyanea.navigationBar)
+    }
   }
 
   protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<*>> {

@@ -1,13 +1,14 @@
 package com.jaredrummler.cyanea.delegate
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.annotation.StyleRes
 import android.view.Menu
 import android.view.View
 import com.jaredrummler.cyanea.Cyanea
-import com.jaredrummler.cyanea.Utils
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.decor.Decorator
 import com.jaredrummler.cyanea.inflator.processors.CyaneaViewProcessor
@@ -96,15 +97,16 @@ abstract class CyaneaDelegate {
      * @param themeResId The theme resource id
      * @return The delegate
      */
+    @SuppressLint("NewApi") // Needed for Android Pie (API 28) for whatever reason ¯\_(ツ)_/¯
     @JvmStatic
     fun create(activity: Activity, cyanea: Cyanea, @StyleRes themeResId: Int): CyaneaDelegate {
-      return if (Utils.atLeastPie()) {
+      return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         CyaneaDelegateImplV28(activity, cyanea, themeResId)
-      } else if (Utils.atLeastMarshmallow()) {
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         CyaneaDelegateImplV23(activity, cyanea, themeResId)
-      } else if (Utils.atLeastLollipop()) {
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         CyaneaDelegateImplV21(activity, cyanea, themeResId)
-      } else if (Utils.atLeastKitKat()) {
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
         CyaneaDelegateImplV19(activity, cyanea, themeResId)
       } else {
         CyaneaDelegateImplBase(activity, cyanea, themeResId)
