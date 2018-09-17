@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.support.annotation.ColorInt
 import com.jaredrummler.cyanea.utils.Reflection
+import com.nhaarman.mockito_kotlin.whenever
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThat
@@ -23,19 +24,17 @@ class CyaneaResourcesTest {
 
   lateinit var cyanea: Cyanea
 
-  @Before
-  fun setup() {
+  @Before fun setUp() {
     MockitoAnnotations.initMocks(this)
-    Mockito.`when`(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()))
+    whenever(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()))
         .thenReturn(Mockito.mock(SharedPreferences::class.java))
-    Mockito.`when`(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()).edit())
+    whenever(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()).edit())
         .thenReturn(Mockito.mock(SharedPreferences.Editor::class.java))
     Cyanea.init(app, res)
     cyanea = Cyanea.instance
   }
 
-  @Test
-  fun should_return_color_drawables_for_background_colors() {
+  @Test fun `should return color drawables for background colors`() {
     val resources = CyaneaResources(res)
 
     val drawableIds = arrayOf(
@@ -53,16 +52,14 @@ class CyaneaResourcesTest {
     }
   }
 
-  @Test
-  fun cyanea_resources_should_return_cyanea_primary_color() {
+  @Test fun `cyanea resources should return cyanea primary color`() {
     val resources = CyaneaResources(res)
     setCyaneaColor(0xFF0099CC.toInt(), "primary")
     val color = resources.getColor(R.color.color_primary)
     assertEquals(cyanea.primary, color)
   }
 
-  @Test
-  fun cyanea_resources_should_return_cyanea_accent_color() {
+  @Test fun `cyanea resources should return cyanea accent color`() {
     val resources = CyaneaResources(res)
     setCyaneaColor(0xFF0099CC.toInt(), "accent")
     val color = resources.getColor(R.color.color_accent)

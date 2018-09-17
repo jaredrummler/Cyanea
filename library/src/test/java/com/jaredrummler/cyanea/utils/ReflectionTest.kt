@@ -5,7 +5,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 import java.lang.CharSequence
-import java.lang.StringBuilder
 import java.lang.reflect.Method
 import kotlin.Int
 import kotlin.NullPointerException
@@ -15,8 +14,7 @@ import kotlin.arrayOf
 
 class ReflectionTest {
 
-  @Test
-  fun should_get_method_via_reflection() {
+  @Test fun `should get method via reflection`() {
     val method: Method? = getMethod(StringBuilder(), "append", Int::class.java)
 
     val expectedName = "append"
@@ -26,8 +24,7 @@ class ReflectionTest {
     assertEquals(expectedReturnType, method?.returnType)
   }
 
-  @Test
-  fun should_get_field_via_reflection() {
+  @Test fun `should get field via reflection`() {
     val field = Reflection.getField(Class.forName("java.lang.Boolean"), "TRUE")
 
     val expectedType = "java.lang.Boolean"
@@ -38,15 +35,13 @@ class ReflectionTest {
     assertEquals(expectedType, field?.type?.name)
   }
 
-  @Test
-  fun should_set_field_via_reflection() {
+  @Test fun `should set field via reflection`() {
     val field = Reflection.getField(Class.forName("java.lang.Boolean"), "TRUE") ?: throw NullPointerException()
     Reflection.setFieldValue(field, null, java.lang.Boolean.FALSE)
     assertEquals(java.lang.Boolean.FALSE, java.lang.Boolean.TRUE)
   }
 
-  @Test
-  fun should_invoke_method_via_reflection() {
+  @Test fun `should invoke method via reflection`() {
     val obj = "foo"
     val types = arrayOf<Class<*>>(CharSequence::class.java, CharSequence::class.java)
     val result = Reflection.invoke<String>(obj, "replace", types, "foo", "bar")

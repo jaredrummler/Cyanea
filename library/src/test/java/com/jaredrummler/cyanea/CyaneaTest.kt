@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import com.jaredrummler.cyanea.Cyanea.BaseTheme
+import com.nhaarman.mockito_kotlin.whenever
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -19,29 +20,18 @@ class CyaneaTest {
   @Mock lateinit var application: Application
   @Mock lateinit var resources: Resources
 
-  @Before
-  fun setup() {
+  @Before fun setUp() {
     MockitoAnnotations.initMocks(this)
-  }
-
-  @Test(expected = Exception::class)
-  fun should_throw_exception_if_singleton_is_accessed_before_init() {
-    Cyanea.instance
-  }
-
-  @Test
-  fun should_return_singleton_instance() {
     Cyanea.init(application, resources)
-    Mockito.`when`(application.getSharedPreferences(anyString(), anyInt()))
+    whenever(application.getSharedPreferences(anyString(), anyInt()))
         .thenReturn(Mockito.mock(SharedPreferences::class.java))
+  }
+
+  @Test fun `should return singleton instance`() {
     assertNotNull(Cyanea.instance)
   }
 
-  @Test
-  fun should_return_dark_background_when_base_theme_is_dark() {
-    Cyanea.init(application, resources)
-    Mockito.`when`(application.getSharedPreferences(anyString(), anyInt()))
-        .thenReturn(Mockito.mock(SharedPreferences::class.java))
+  @Test fun `should return dark background when base theme is dark`() {
     val cyanea = Cyanea.instance
     val expectedColor = 0xFF000000.toInt()
     cyanea.baseTheme = BaseTheme.DARK
@@ -49,11 +39,7 @@ class CyaneaTest {
     assertEquals(expectedColor, cyanea.backgroundColor)
   }
 
-  @Test
-  fun should_return_light_background_when_base_theme_is_light() {
-    Cyanea.init(application, resources)
-    Mockito.`when`(application.getSharedPreferences(anyString(), anyInt()))
-        .thenReturn(Mockito.mock(SharedPreferences::class.java))
+  @Test fun `should return light background when base theme is light`() {
     val cyanea = Cyanea.instance
     val expectedColor = 0xFFFFFFFF.toInt()
     cyanea.baseTheme = BaseTheme.LIGHT
