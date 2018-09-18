@@ -4,18 +4,15 @@ import com.jaredrummler.cyanea.utils.Reflection.Companion.getMethod
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
-import java.lang.CharSequence
-import java.lang.reflect.Method
 import kotlin.Int
 import kotlin.NullPointerException
 import kotlin.String
 import kotlin.arrayOf
 
-
 class ReflectionTest {
 
   @Test fun `should get method via reflection`() {
-    val method: Method? = getMethod(StringBuilder(), "append", Int::class.java)
+    val method = getMethod(StringBuilder(), "append", Int::class.java)
 
     val expectedName = "append"
     val expectedReturnType = StringBuilder::class.java

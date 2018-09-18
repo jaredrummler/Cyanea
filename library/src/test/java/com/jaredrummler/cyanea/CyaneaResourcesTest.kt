@@ -12,24 +12,26 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
+import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
+import org.mockito.Mockito.mock
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class CyaneaResourcesTest {
 
-  @Mock lateinit var app: Application
-  @Mock lateinit var res: Resources
-
-  lateinit var cyanea: Cyanea
+  @Mock private lateinit var app: Application
+  @Mock private lateinit var res: Resources
+  private lateinit var cyanea: Cyanea
 
   @Before fun setUp() {
-    MockitoAnnotations.initMocks(this)
-    whenever(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()))
-        .thenReturn(Mockito.mock(SharedPreferences::class.java))
-    whenever(app.getSharedPreferences(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt()).edit())
-        .thenReturn(Mockito.mock(SharedPreferences.Editor::class.java))
+    whenever(app.getSharedPreferences(anyString(), anyInt()))
+        .thenReturn(mock(SharedPreferences::class.java))
+    whenever(app.getSharedPreferences(anyString(), anyInt()).edit())
+        .thenReturn(mock(SharedPreferences.Editor::class.java))
+
     Cyanea.init(app, res)
     cyanea = Cyanea.instance
   }
@@ -54,15 +56,19 @@ class CyaneaResourcesTest {
 
   @Test fun `cyanea resources should return cyanea primary color`() {
     val resources = CyaneaResources(res)
+
     setCyaneaColor(0xFF0099CC.toInt(), "primary")
     val color = resources.getColor(R.color.color_primary)
+
     assertEquals(cyanea.primary, color)
   }
 
   @Test fun `cyanea resources should return cyanea accent color`() {
     val resources = CyaneaResources(res)
+
     setCyaneaColor(0xFF0099CC.toInt(), "accent")
     val color = resources.getColor(R.color.color_accent)
+
     assertEquals(cyanea.accent, color)
   }
 

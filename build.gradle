@@ -1,5 +1,6 @@
 buildscript {
-  ext.kotlin_version = '1.2.60'
+  ext.kotlinVersion = '1.2.70'
+  ext.supportLibraryVersion = '28.0.0-rc02'
 
   repositories {
     google()
@@ -8,7 +9,7 @@ buildscript {
 
   dependencies {
     classpath 'com.android.tools.build:gradle:3.1.4'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
   }
 }
 
@@ -17,6 +18,15 @@ allprojects {
     google()
     jcenter()
   }
+
+  configurations.all {
+    resolutionStrategy {
+      force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+      force "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+      force "com.android.support:support-annotations:$supportLibraryVersion"
+    }
+  }
+
 }
 
 task clean(type: Delete) {
