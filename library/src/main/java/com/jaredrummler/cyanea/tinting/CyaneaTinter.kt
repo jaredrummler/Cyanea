@@ -54,9 +54,9 @@ class CyaneaTinter private constructor() {
    * @return The modified [ColorStateList]
    */
   fun tint(colorStateList: ColorStateList?): ColorStateList? {
-    return colorStateList?.let { colorStateList ->
+    return colorStateList?.let { csl ->
       try {
-        Reflection.invoke<IntArray?>(colorStateList, "getColors")?.let { colors ->
+        Reflection.invoke<IntArray?>(csl, "getColors")?.let { colors ->
           var changed = false
           for (i in colors.indices) {
             this.colors[colors[i]]?.let { color ->
@@ -67,13 +67,13 @@ class CyaneaTinter private constructor() {
             }
           }
           if (changed && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Reflection.invoke<Any?>(colorStateList, "onColorsChanged")
+            Reflection.invoke<Any?>(csl, "onColorsChanged")
           }
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error tinting ColorStateList", e)
       }
-      colorStateList
+      csl
     }
   }
 
