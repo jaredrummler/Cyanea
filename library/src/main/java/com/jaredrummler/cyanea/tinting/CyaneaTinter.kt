@@ -114,7 +114,7 @@ class CyaneaTinter private constructor() {
         getFieldValue<ColorStateList?>(state, "mColor")?.let { color ->
           tint(color)
           Reflection.getField(state.javaClass.superclass, "mChildren")?.let { fChildren ->
-            (fChildren.get(state) as? Array<Any?>)?.forEach {
+            (fChildren.get(state) as? Array<*>)?.forEach {
               getFieldValue<Drawable?>(it, "mDrawable")?.let { drawable -> tint(drawable) }
             }
           }
