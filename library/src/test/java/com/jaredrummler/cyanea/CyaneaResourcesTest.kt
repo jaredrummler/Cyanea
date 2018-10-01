@@ -29,9 +29,6 @@ class CyaneaResourcesTest {
   @Before fun setUp() {
     whenever(app.getSharedPreferences(anyString(), anyInt()))
         .thenReturn(mock(SharedPreferences::class.java))
-    whenever(app.getSharedPreferences(anyString(), anyInt()).edit())
-        .thenReturn(mock(SharedPreferences.Editor::class.java))
-
     Cyanea.init(app, res)
     cyanea = Cyanea.instance
   }
