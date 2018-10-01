@@ -11,6 +11,7 @@ import com.jaredrummler.cyanea.tinting.CyaneaTinter.CyaneaTintException
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 
+@Suppress("DEPRECATION")
 class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance)
   : Resources(original.assets, original.displayMetrics, original.configuration) {
 

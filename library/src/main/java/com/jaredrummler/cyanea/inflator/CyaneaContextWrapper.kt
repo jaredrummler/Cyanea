@@ -14,7 +14,7 @@ class CyaneaContextWrapper(context: Context,
 
   private var inflator: CyaneaLayoutInflater? = null
 
-  override fun getSystemService(name: String?): Any {
+  override fun getSystemService(name: String): Any {
     if (LAYOUT_INFLATER_SERVICE == name) {
       if (inflator == null) {
         inflator = CyaneaLayoutInflater(this)

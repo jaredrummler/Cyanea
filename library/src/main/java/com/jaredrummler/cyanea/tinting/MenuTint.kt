@@ -165,12 +165,12 @@ class MenuTint(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
           it.imageAlpha = alpha
         } else {
+          @Suppress("DEPRECATION")
           it.setAlpha(alpha)
         }
       }
     }
   }
-
 
   companion object {
 

@@ -46,6 +46,7 @@ class CyaneaResourcesTest {
     )
 
     drawableIds.forEach { resid ->
+      @Suppress("DEPRECATION")
       val drawable = resources.getDrawable(resid)
       assertThat(drawable, instanceOf(ColorDrawable::class.java))
     }
@@ -55,6 +56,7 @@ class CyaneaResourcesTest {
     val resources = CyaneaResources(res)
 
     setCyaneaColor(0xFF0099CC.toInt(), "primary")
+    @Suppress("DEPRECATION")
     val color = resources.getColor(R.color.color_primary)
 
     assertEquals(cyanea.primary, color)
@@ -64,6 +66,7 @@ class CyaneaResourcesTest {
     val resources = CyaneaResources(res)
 
     setCyaneaColor(0xFF0099CC.toInt(), "accent")
+    @Suppress("DEPRECATION")
     val color = resources.getColor(R.color.color_accent)
 
     assertEquals(cyanea.accent, color)

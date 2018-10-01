@@ -155,6 +155,7 @@ data class CyaneaTheme internal constructor(
       val menuIconColor = if (json.has(MENU_ICON_COLOR)) {
         ColorUtils.parseColor(json.getString(MENU_ICON_COLOR))
       } else {
+        @Suppress("DEPRECATION")
         Cyanea.res.getColor(if (ColorUtils.isDarkColor(primary, 0.75))
           R.color.menu_icon_color_light
         else
@@ -164,6 +165,7 @@ data class CyaneaTheme internal constructor(
       val subMenuIconColor = if (json.has(SUB_MENU_ICON_COLOR)) {
         ColorUtils.parseColor(json.getString(SUB_MENU_ICON_COLOR))
       } else {
+        @Suppress("DEPRECATION")
         Cyanea.res.getColor(
             if (baseTheme == LIGHT) R.color.sub_menu_icon_color_dark else R.color.sub_menu_icon_color_light)
       }
