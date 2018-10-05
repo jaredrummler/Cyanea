@@ -86,8 +86,6 @@ class CyaneaLayoutInflater : LayoutInflater {
    * Method to inflate custom layouts that haven't been handled else where. If this fails it will fall back
    * through to the PhoneLayoutInflater method of inflating custom views where we will NOT have a hook into.
    *
-   * @param parent
-   *     parent view
    * @param view
    *     view if it has been inflated by this point, if this is not null this method just returns this value.
    * @param name
@@ -98,29 +96,28 @@ class CyaneaLayoutInflater : LayoutInflater {
    *     Attr for this view which we can steal fontPath from too.
    * @return view or the View we inflate in here.
    */
-  private fun createCustomView(parent: View?, view: View?, name: String, context: Context, attrs: AttributeSet): View? {
+  private fun createCustomView(view: View?, name: String, context: Context, attrs: AttributeSet): View? {
     // I by no means advise anyone to do this normally, but Google has locked down access to the createView() method,
     // so we never get a callback with attributes at the end of the createViewFromTag chain (which would solve all
     // this unnecessary rubbish). We at the very least try to optimise this as much as possible. We only call for
     // customViews (As they are the ones that never go through onCreateView(...)). We also maintain the Field
     // reference and make it accessible which will make a pretty significant difference to performance on Android 4.0+.
-
     if (view == null && name.indexOf('.') > -1) {
-      val field = Reflection.getField(LayoutInflater::class.java, "mConstructorArgs")
-      field?.let {
-        if (!it.isAccessible) it.isAccessible = true
-        val constructionArgs = it.get(this) as? Array<Any> ?: return view
+      Reflection.getField(LayoutInflater::class.java, "mConstructorArgs")?.let { field ->
+        if (!field.isAccessible) field.isAccessible = true
+        @Suppress("UNCHECKED_CAST")
+        val constructionArgs = field.get(this) as? Array<Any> ?: return null
         // The LayoutInflater actually finds out the correct context to use.
         // We just need to set it on the mConstructor for the internal method.
         val lastContext = constructionArgs[0]
         constructionArgs[0] = context
-        it.set(this, constructionArgs)
+        field.set(this, constructionArgs)
         try {
           createView(name, null, attrs)?.let { v -> return v }
         } catch (e: ClassNotFoundException) {
         } finally {
           constructionArgs[0] = lastContext
-          it.set(this, constructionArgs)
+          field.set(this, constructionArgs)
         }
       }
     }
@@ -182,7 +179,7 @@ class CyaneaLayoutInflater : LayoutInflater {
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
       val view = factory.onCreateView(parent, name, context, attrs)
-      return inflater.processView(inflater.createCustomView(parent, view, name, context, attrs), attrs)
+      return inflater.processView(inflater.createCustomView(view, name, context, attrs), attrs)
     }
 
   }
