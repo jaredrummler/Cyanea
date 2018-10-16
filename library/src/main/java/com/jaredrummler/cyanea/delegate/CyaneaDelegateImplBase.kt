@@ -84,28 +84,18 @@ internal open class CyaneaDelegateImplBase(
 
   override fun getViewProcessors(): Array<CyaneaViewProcessor<View>> {
     val processors = mutableListOf<CyaneaViewProcessor<View>>()
-
     // Add processors needed for tinting
     if (cyanea.isThemeModified) {
-      getProcessorsForTheming().forEach {
-        (it as? CyaneaViewProcessor<View>)?.let { processors.add(it) }
-      }
+      processors.addAll(getProcessorsForTheming().filterIsInstance<CyaneaViewProcessor<View>>())
     }
-
-    // Add processors from activity
-    if (activity is ViewProcessorProvider) {
-      activity.getViewProcessors().forEach {
-        (it as? CyaneaViewProcessor<View>)?.let { processors.add(it) }
-      }
-    }
-
     // Add processors from application
-    (activity.application as? ViewProcessorProvider)?.apply {
-      this.getViewProcessors().forEach {
-        (it as? CyaneaViewProcessor<View>)?.let { processors.add(it) }
-      }
+    (activity.application as? ViewProcessorProvider)?.let { provider ->
+      processors.addAll(provider.getViewProcessors().filterIsInstance<CyaneaViewProcessor<View>>())
     }
-
+    // Add processors from activity
+    (activity as? ViewProcessorProvider)?.let { provider ->
+      processors.addAll(provider.getViewProcessors().filterIsInstance<CyaneaViewProcessor<View>>())
+    }
     return processors.toTypedArray()
   }
 
@@ -140,7 +130,7 @@ internal open class CyaneaDelegateImplBase(
     }
   }
 
-  protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<*>> {
+  protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<out View>> {
     return arrayListOf(
         ListMenuItemViewProcessor(),
         AlertDialogProcessor(),

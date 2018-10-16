@@ -1,5 +1,6 @@
 package com.jaredrummler.cyanea.inflator.processors
 
+import android.view.View
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 
 /**
@@ -13,6 +14,6 @@ interface ViewProcessorProvider {
    *
    * @return An array of decorators for the [CyaneaDelegate].
    */
-  fun getViewProcessors(): Array<CyaneaViewProcessor<*>>
+  fun getViewProcessors(): Array<CyaneaViewProcessor<out View>>
 
 }
