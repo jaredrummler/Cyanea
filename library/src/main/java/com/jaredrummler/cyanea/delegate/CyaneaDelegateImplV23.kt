@@ -8,15 +8,15 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
-import com.jaredrummler.cyanea.inflator.processors.AlertDialogProcessor
-import com.jaredrummler.cyanea.inflator.processors.CompoundButtonProcessor
-import com.jaredrummler.cyanea.inflator.processors.CyaneaViewProcessor
-import com.jaredrummler.cyanea.inflator.processors.ImageButtonProcessor
-import com.jaredrummler.cyanea.inflator.processors.ListMenuItemViewProcessor
-import com.jaredrummler.cyanea.inflator.processors.SearchAutoCompleteProcessor
-import com.jaredrummler.cyanea.inflator.processors.SwitchProcessor
-import com.jaredrummler.cyanea.inflator.processors.TextViewProcessor
-import com.jaredrummler.cyanea.inflator.processors.ViewGroupProcessor
+import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
+import com.jaredrummler.cyanea.inflator.CompoundButtonProcessor
+import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
+import com.jaredrummler.cyanea.inflator.ImageButtonProcessor
+import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
+import com.jaredrummler.cyanea.inflator.SearchAutoCompleteProcessor
+import com.jaredrummler.cyanea.inflator.SwitchProcessor
+import com.jaredrummler.cyanea.inflator.TextViewProcessor
+import com.jaredrummler.cyanea.inflator.ViewGroupProcessor
 
 @RequiresApi(Build.VERSION_CODES.M)
 @TargetApi(Build.VERSION_CODES.M)

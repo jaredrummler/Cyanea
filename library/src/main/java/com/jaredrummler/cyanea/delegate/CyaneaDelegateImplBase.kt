@@ -8,15 +8,14 @@ import android.support.annotation.StyleRes
 import android.view.Menu
 import android.view.View
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaContextWrapper
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
+import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
+import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
+import com.jaredrummler.cyanea.inflator.TextViewProcessor
 import com.jaredrummler.cyanea.inflator.decor.DecorProvider
 import com.jaredrummler.cyanea.inflator.decor.Decorator
-import com.jaredrummler.cyanea.inflator.processors.AlertDialogProcessor
-import com.jaredrummler.cyanea.inflator.processors.CyaneaViewProcessor
-import com.jaredrummler.cyanea.inflator.processors.ListMenuItemViewProcessor
-import com.jaredrummler.cyanea.inflator.processors.TextViewProcessor
-import com.jaredrummler.cyanea.inflator.processors.ViewProcessorProvider
 import com.jaredrummler.cyanea.tinting.EdgeEffectTint
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.tinting.SystemBarTint
@@ -89,11 +88,11 @@ internal open class CyaneaDelegateImplBase(
       processors.addAll(getProcessorsForTheming().filterIsInstance<CyaneaViewProcessor<View>>())
     }
     // Add processors from application
-    (activity.application as? ViewProcessorProvider)?.let { provider ->
+    ((activity.application ?: Cyanea.app) as? CyaneaViewProcessor.Provider)?.let { provider ->
       processors.addAll(provider.getViewProcessors().filterIsInstance<CyaneaViewProcessor<View>>())
     }
     // Add processors from activity
-    (activity as? ViewProcessorProvider)?.let { provider ->
+    (activity as? CyaneaViewProcessor.Provider)?.let { provider ->
       processors.addAll(provider.getViewProcessors().filterIsInstance<CyaneaViewProcessor<View>>())
     }
     return processors.toTypedArray()
@@ -108,7 +107,7 @@ internal open class CyaneaDelegateImplBase(
     }
 
     // Add decorators from application
-    (activity.application as? DecorProvider)?.apply {
+    ((activity.application ?: Cyanea.app) as? DecorProvider)?.apply {
       this.getDecorators().forEach { decorators.add(it) }
     }
 

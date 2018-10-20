@@ -3,7 +3,6 @@ package com.jaredrummler.cyanea.inflator
 import android.util.AttributeSet
 import android.view.View
 import com.jaredrummler.cyanea.Cyanea
-import com.jaredrummler.cyanea.inflator.processors.CyaneaViewProcessor
 import java.util.Collections
 
 class CyaneaViewFactory(val cyanea: Cyanea, vararg processors: CyaneaViewProcessor<View>) {
