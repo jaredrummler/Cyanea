@@ -9,7 +9,6 @@ android {
     targetSdkVersion 28
     versionCode 1
     versionName "1.0"
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -26,12 +25,9 @@ android {
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-  implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+  api "androidx.appcompat:appcompat:$androidX"
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
-  testImplementation 'org.mockito:mockito-core:2.22.0' // mockito-inline is not working
-
-  androidTestImplementation 'com.android.support.test:runner:1.0.2'
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+  testImplementation 'org.mockito:mockito-core:2.22.0'
 }

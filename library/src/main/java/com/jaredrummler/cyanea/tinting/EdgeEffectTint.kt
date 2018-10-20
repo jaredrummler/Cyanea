@@ -4,11 +4,6 @@ import android.app.Activity
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.EdgeEffectCompat
-
-import android.support.v4.widget.NestedScrollView
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -16,6 +11,10 @@ import android.widget.AbsListView
 import android.widget.EdgeEffect
 import android.widget.HorizontalScrollView
 import android.widget.ScrollView
+import androidx.annotation.ColorInt
+import androidx.core.widget.EdgeEffectCompat
+import androidx.core.widget.NestedScrollView
+import androidx.viewpager.widget.ViewPager
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.utils.Reflection
 

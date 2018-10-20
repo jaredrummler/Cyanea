@@ -8,11 +8,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v4.content.ContextCompat
-import android.support.v7.view.menu.ListMenuItemView
-import android.support.v7.widget.AlertDialogLayout
-import android.support.v7.widget.SearchView.SearchAutoComplete
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +16,11 @@ import android.widget.CompoundButton
 import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.view.menu.ListMenuItemView
+import androidx.appcompat.widget.AlertDialogLayout
+import androidx.appcompat.widget.SearchView.SearchAutoComplete
+import androidx.core.content.ContextCompat
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate

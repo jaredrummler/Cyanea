@@ -4,12 +4,12 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.v4.widget.DrawerLayout
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+import androidx.annotation.RequiresApi
+import androidx.drawerlayout.widget.DrawerLayout
 import com.jaredrummler.cyanea.Cyanea
 
 @RequiresApi(Build.VERSION_CODES.KITKAT)

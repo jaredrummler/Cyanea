@@ -5,9 +5,9 @@ import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.StyleRes
 import android.view.Menu
 import android.view.View
+import androidx.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor

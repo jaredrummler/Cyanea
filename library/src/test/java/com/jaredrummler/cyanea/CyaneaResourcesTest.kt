@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import com.jaredrummler.cyanea.utils.Reflection
 import com.nhaarman.mockito_kotlin.whenever
 import org.hamcrest.CoreMatchers.instanceOf

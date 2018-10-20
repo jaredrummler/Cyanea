@@ -1,8 +1,8 @@
 package com.jaredrummler.cyanea.app
 
-import android.support.v4.app.Fragment
 import android.view.Menu
 import android.view.MenuInflater
+import androidx.fragment.app.Fragment
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.tinting.MenuTint
 

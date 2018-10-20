@@ -3,9 +3,6 @@ package com.jaredrummler.cyanea.demo.themes
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.support.annotation.IdRes
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +12,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.IdRes
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaredrummler.cyanea.CyaneaTheme
 import com.jaredrummler.cyanea.demo.R
 import com.jaredrummler.cyanea.utils.ColorUtils

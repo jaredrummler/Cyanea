@@ -1,6 +1,6 @@
 buildscript {
   ext.kotlinVersion = '1.2.71'
-  ext.supportLibraryVersion = '28.0.0'
+  ext.androidX = '1.0.0'
 
   repositories {
     google()
@@ -23,7 +23,6 @@ allprojects {
     resolutionStrategy {
       force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
       force "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
-      force "com.android.support:support-annotations:$supportLibraryVersion"
     }
   }
 

@@ -1,6 +1,6 @@
 package com.jaredrummler.cyanea
 
-import android.support.annotation.StyleRes
+import androidx.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 

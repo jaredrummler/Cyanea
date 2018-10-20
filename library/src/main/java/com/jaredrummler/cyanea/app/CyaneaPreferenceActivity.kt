@@ -5,13 +5,13 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.preference.PreferenceActivity
-import android.support.annotation.LayoutRes
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatDelegate
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatDelegate
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate

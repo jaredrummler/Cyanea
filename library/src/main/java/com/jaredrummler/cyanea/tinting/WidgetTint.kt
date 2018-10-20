@@ -3,11 +3,11 @@ package com.jaredrummler.cyanea.tinting
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.v4.content.ContextCompat
 import android.widget.AbsListView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.utils.Reflection
 

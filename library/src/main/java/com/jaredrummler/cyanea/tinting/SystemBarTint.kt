@@ -10,9 +10,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.os.Build
 import android.os.Handler
-import android.support.annotation.ColorInt
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.Gravity
@@ -23,6 +20,9 @@ import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import android.widget.FrameLayout
 import android.widget.FrameLayout.LayoutParams
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
 import com.jaredrummler.cyanea.utils.Reflection
 import java.lang.ref.WeakReference
@@ -203,7 +203,7 @@ class SystemBarTint(activity: Activity) {
         it.setDisplayShowTitleEnabled(!isDisplayingTitle)
         it.setDisplayShowTitleEnabled(isDisplayingTitle)
       } else if (it is ActionBar) {
-        val isDisplayingTitle = it.displayOptions and android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE != 0
+        val isDisplayingTitle = it.displayOptions and ActionBar.DISPLAY_SHOW_TITLE != 0
         it.setDisplayShowTitleEnabled(!isDisplayingTitle)
         it.setDisplayShowTitleEnabled(isDisplayingTitle)
       }

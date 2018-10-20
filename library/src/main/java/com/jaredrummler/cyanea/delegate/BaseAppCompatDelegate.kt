@@ -1,8 +1,8 @@
 package com.jaredrummler.cyanea.delegate
 
-import android.support.v7.app.ActionBar
-import android.support.v7.app.AppCompatDelegate
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 
 /**
  * An interface to be used on an [activity][android.app.Activity] that doesn't inherit from

@@ -8,10 +8,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.Keep
 import android.util.Log
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.Keep
 import com.jaredrummler.cyanea.Constants.LIGHT_ACTIONBAR_LUMINANCE_FACTOR
 import com.jaredrummler.cyanea.Constants.NONE_TIMESTAMP
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK

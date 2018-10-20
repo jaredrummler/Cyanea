@@ -5,7 +5,7 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor

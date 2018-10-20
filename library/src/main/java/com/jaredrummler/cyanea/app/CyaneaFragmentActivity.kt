@@ -3,8 +3,8 @@ package com.jaredrummler.cyanea.app
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.view.Menu
+import androidx.fragment.app.FragmentActivity
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 

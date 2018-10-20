@@ -5,10 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.v7.view.menu.MenuItemImpl
-import android.support.v7.widget.ActionMenuView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +12,10 @@ import android.view.ViewConfiguration
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toolbar
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.appcompat.view.menu.MenuItemImpl
+import androidx.appcompat.widget.ActionMenuView
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.utils.Reflection
 
@@ -140,7 +140,7 @@ class MenuTint(
   }
 
   private fun tintActionBar(actionBar: ViewGroup) {
-    if (actionBar is android.support.v7.widget.Toolbar) {
+    if (actionBar is androidx.appcompat.widget.Toolbar) {
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
@@ -297,7 +297,7 @@ class MenuTint(
       val count = viewGroup.childCount
       while (i < count) {
         val view = viewGroup.getChildAt(i)
-        if (view.javaClass == android.support.v7.widget.Toolbar::class.java
+        if (view.javaClass == androidx.appcompat.widget.Toolbar::class.java
             || view.javaClass.name == "android.widget.Toolbar") {
           toolbar = view as ViewGroup
         } else if (view is ViewGroup) {

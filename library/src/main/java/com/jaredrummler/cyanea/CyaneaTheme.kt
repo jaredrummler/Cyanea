@@ -2,7 +2,7 @@ package com.jaredrummler.cyanea
 
 import android.content.res.AssetManager
 import android.graphics.Color
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 import com.jaredrummler.cyanea.utils.ColorUtils

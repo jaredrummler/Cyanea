@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.annotation.StyleRes
 import android.view.Menu
 import android.view.View
+import androidx.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaContextWrapper

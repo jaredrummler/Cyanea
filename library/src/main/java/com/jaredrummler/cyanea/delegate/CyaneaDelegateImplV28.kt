@@ -3,8 +3,8 @@ package com.jaredrummler.cyanea.delegate
 import android.annotation.TargetApi
 import android.app.Activity
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 
 @RequiresApi(Build.VERSION_CODES.P)

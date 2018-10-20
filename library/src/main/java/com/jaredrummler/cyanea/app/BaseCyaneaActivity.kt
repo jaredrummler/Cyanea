@@ -1,6 +1,6 @@
 package com.jaredrummler.cyanea.app
 
-import android.support.annotation.StyleRes
+import androidx.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 
