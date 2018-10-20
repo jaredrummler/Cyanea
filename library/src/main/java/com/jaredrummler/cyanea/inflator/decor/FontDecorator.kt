@@ -25,15 +25,16 @@ class FontDecorator : AttrsDecorator<TextView>() {
   override fun styleable(): IntArray = R.styleable.FontDecorator
 
   override fun apply(view: TextView, typedArray: TypedArray) {
-    val path = typedArray.getString(R.styleable.FontDecorator_cyaneaFont)
-    path?.let { view.typeface = getFont(view.context.assets, it) }
+    typedArray.getString(R.styleable.FontDecorator_cyaneaFont)?.let { path ->
+      view.typeface = getFont(view.context.assets, path)
+    }
   }
 
   private fun getFont(assets: AssetManager, path: String): Typeface? {
     return cache[path] ?: run {
       try {
         Typeface.createFromAsset(assets, path)?.let { font ->
-          cache.put(path, font)
+          cache[path] = font
           font
         }
       } catch (e: Exception) {

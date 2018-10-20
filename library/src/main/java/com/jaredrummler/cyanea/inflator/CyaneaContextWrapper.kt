@@ -2,13 +2,13 @@ package com.jaredrummler.cyanea.inflator
 
 import android.content.Context
 import android.content.ContextWrapper
-import com.jaredrummler.cyanea.inflator.decor.Decorator
+import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 
 /**
  * A [ContextWrapper] that provides a [CyaneaLayoutInflater].
  */
 class CyaneaContextWrapper(context: Context,
-    private val decorators: Array<Decorator>? = null,
+    private val decorators: Array<CyaneaDecorator>? = null,
     private val viewFactory: CyaneaViewFactory? = null)
   : ContextWrapper(context) {
 

@@ -14,8 +14,7 @@ import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
 import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
-import com.jaredrummler.cyanea.inflator.decor.DecorProvider
-import com.jaredrummler.cyanea.inflator.decor.Decorator
+import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 import com.jaredrummler.cyanea.tinting.EdgeEffectTint
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.tinting.SystemBarTint
@@ -98,16 +97,16 @@ internal open class CyaneaDelegateImplBase(
     return processors.toTypedArray()
   }
 
-  override fun getDecorators(): Array<Decorator> {
-    val decorators = mutableListOf<Decorator>()
+  override fun getDecorators(): Array<CyaneaDecorator> {
+    val decorators = mutableListOf<CyaneaDecorator>()
 
     // Add decorators from activity
-    if (activity is DecorProvider) {
+    if (activity is CyaneaDecorator.Provider) {
       activity.getDecorators().forEach { decorators.add(it) }
     }
 
     // Add decorators from application
-    ((activity.application ?: Cyanea.app) as? DecorProvider)?.apply {
+    ((activity.application ?: Cyanea.app) as? CyaneaDecorator.Provider)?.apply {
       this.getDecorators().forEach { decorators.add(it) }
     }
 

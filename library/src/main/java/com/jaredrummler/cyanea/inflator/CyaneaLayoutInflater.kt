@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jaredrummler.cyanea.inflator.decor.Decorator
+import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 import com.jaredrummler.cyanea.utils.Reflection
 
 class CyaneaLayoutInflater : LayoutInflater {
@@ -25,7 +25,7 @@ class CyaneaLayoutInflater : LayoutInflater {
 
   private var setPrivateFactory: Boolean = false
   var viewFactory: CyaneaViewFactory? = null
-  var decorators: Array<Decorator>? = null
+  var decorators: Array<CyaneaDecorator>? = null
 
   override fun cloneInContext(newContext: Context): LayoutInflater {
     val inflator = CyaneaLayoutInflater(this, newContext, true)

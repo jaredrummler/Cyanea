@@ -15,7 +15,7 @@ import android.view.View
  * @param <T>
  *     The type or parent type of View that this decorator applies to.
  */
-abstract class AttrsDecorator<T : View> : Decorator {
+abstract class AttrsDecorator<T : View> : CyaneaDecorator {
 
   override fun apply(view: View, attrs: AttributeSet) {
     if (getType().isAssignableFrom(view.javaClass)) {
@@ -66,9 +66,7 @@ abstract class AttrsDecorator<T : View> : Decorator {
    * @return An attribute in the current theme that contains a reference to a style resource that supplies defaults
    * values for the TypedArray. Can be `0` to not look for defaults.
    */
-  protected fun defStyleAttr(): Int {
-    return 0
-  }
+  protected fun defStyleAttr(): Int = 0
 
   /**
    * The style resource specified in the AttributeSet (named "style").
@@ -76,9 +74,7 @@ abstract class AttrsDecorator<T : View> : Decorator {
    * @return A resource identifier of a style resource that supplies default values for the TypedArray, used only if
    * defStyleAttr is `0` or can not be found in the theme.  Can be `0` to not look for defaults.
    */
-  protected fun defStyleRes(): Int {
-    return 0
-  }
+  protected fun defStyleRes(): Int = 0
 
   /**
    * Get the attributes

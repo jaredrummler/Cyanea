@@ -11,7 +11,7 @@ import android.view.View
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
-import com.jaredrummler.cyanea.inflator.decor.Decorator
+import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 
 /**
  * This class represents a delegate which you can use to extend [Cyanea]'s support to any [Activity].
@@ -85,7 +85,7 @@ abstract class CyaneaDelegate {
 
   protected abstract fun getViewProcessors(): Array<CyaneaViewProcessor<View>>
 
-  protected abstract fun getDecorators(): Array<Decorator>
+  protected abstract fun getDecorators(): Array<CyaneaDecorator>
 
   companion object {
 
