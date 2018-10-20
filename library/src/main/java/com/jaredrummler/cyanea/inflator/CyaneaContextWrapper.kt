@@ -12,18 +12,16 @@ class CyaneaContextWrapper(context: Context,
     private val viewFactory: CyaneaViewFactory? = null)
   : ContextWrapper(context) {
 
-  private var inflator: CyaneaLayoutInflater? = null
-
-  override fun getSystemService(name: String): Any {
-    if (LAYOUT_INFLATER_SERVICE == name) {
-      if (inflator == null) {
-        inflator = CyaneaLayoutInflater(this)
-        inflator?.decorators = decorators
-        inflator?.viewFactory = viewFactory
-      }
-      inflator?.let { return it }
+  private val inflater: CyaneaLayoutInflater by lazy {
+    CyaneaLayoutInflater(this).apply {
+      this.decorators = this@CyaneaContextWrapper.decorators
+      this.viewFactory = this@CyaneaContextWrapper.viewFactory
     }
-    return super.getSystemService(name)
+  }
+
+  override fun getSystemService(name: String): Any = when (name) {
+    LAYOUT_INFLATER_SERVICE -> inflater
+    else -> super.getSystemService(name)
   }
 
 }
