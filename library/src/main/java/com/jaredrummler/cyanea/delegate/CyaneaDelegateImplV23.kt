@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
+import com.jaredrummler.cyanea.inflator.BottomAppBarProcessor
 import com.jaredrummler.cyanea.inflator.CompoundButtonProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
 import com.jaredrummler.cyanea.inflator.ImageButtonProcessor
@@ -52,6 +53,7 @@ internal open class CyaneaDelegateImplV23(
     processors.add(CompoundButtonProcessor())
     processors.add(ImageButtonProcessor())
     processors.add(ViewGroupProcessor())
+    processors.add(BottomAppBarProcessor())
     return processors
   }
 

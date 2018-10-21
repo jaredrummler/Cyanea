@@ -21,6 +21,7 @@ import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.appcompat.widget.AlertDialogLayout
 import androidx.appcompat.widget.SearchView.SearchAutoComplete
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
@@ -222,5 +223,15 @@ internal class ViewGroupProcessor : CyaneaViewProcessor<ViewGroup>() {
   }
 
   override fun getType(): Class<ViewGroup> = ViewGroup::class.java
+
+}
+
+internal class BottomAppBarProcessor : CyaneaViewProcessor<BottomAppBar>() {
+
+  override fun process(view: BottomAppBar, attrs: AttributeSet?, cyanea: Cyanea) {
+    view.backgroundTint?.let { view.backgroundTint = cyanea.tinter.tint(it) }
+  }
+
+  override fun getType(): Class<BottomAppBar> = BottomAppBar::class.java
 
 }
