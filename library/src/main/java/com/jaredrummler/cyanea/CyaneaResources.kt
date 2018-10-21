@@ -76,17 +76,17 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   override fun getColor(id: Int, theme: Theme?): Int {
 
     when (id) {
-    // ------ PRIMARY COLORS ------
+      // ------ PRIMARY COLORS ------
       R.color.color_primary_reference, R.color.color_primary -> return cyanea.primary
       R.color.color_primary_dark_reference, R.color.color_primary_dark -> return cyanea.primaryDark
       R.color.color_primary_light_reference, R.color.color_primary_light -> return cyanea.primaryLight
 
-    // ------ ACCENT COLORS ------
+      // ------ ACCENT COLORS ------
       R.color.color_accent_reference, R.color.color_accent -> return cyanea.accent
       R.color.color_accent_light_reference, R.color.color_accent_light -> return cyanea.accentLight
       R.color.color_accent_dark_reference, R.color.color_accent_dark -> return cyanea.accentDark
 
-    // ------ BACKGROUND COLORS ------
+      // ------ BACKGROUND COLORS ------
       R.color.color_background_dark, R.color.background_material_dark -> return cyanea.backgroundDark
       R.color.background_material_dark_lighter -> return cyanea.backgroundDarkLighter
       R.color.background_material_dark_darker -> return cyanea.backgroundDarkDarker

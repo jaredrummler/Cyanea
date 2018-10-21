@@ -106,12 +106,10 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   val isThemeModified: Boolean get() = timestamp != NONE_TIMESTAMP
 
   val isActionBarDark: Boolean get() = ColorUtils.isDarkColor(primary, 0.75)
-
   val isActionBarLight: Boolean get() = !isActionBarDark
 
-  internal val tinter = CyaneaTinter.instance
-
-  val themes = CyaneaThemes(this)
+  val tinter by lazy { CyaneaTinter() }
+  val themes by lazy { CyaneaThemes(this) }
 
   init {
     baseTheme = getBaseTheme(prefs, res)

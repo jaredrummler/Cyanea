@@ -21,7 +21,7 @@ import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
 /**
  * Apply color scheme to [drawables][Drawable] and [colors][ColorStateList]
  */
-class CyaneaTinter private constructor() {
+class CyaneaTinter {
 
   private val colors = HashMap<Int, Int>()
 
@@ -83,7 +83,7 @@ class CyaneaTinter private constructor() {
    * @param original The original resources. i.e. not the [CyaneaResources]
    * @param resources The [CyaneaResources] used to tint [drawables][Drawable] and [colors][ColorStateList]
    */
-  fun setup(original: Resources, resources: CyaneaResources) {
+  internal fun setup(original: Resources, resources: CyaneaResources) {
     COLOR_IDS.forEachIndexed { _, id ->
       @Suppress("DEPRECATION", "ReplacePutWithAssignment")
       colors.put(original.getColor(id), resources.getColor(id))
@@ -182,7 +182,7 @@ class CyaneaTinter private constructor() {
 
   companion object {
 
-    private val TAG = "CyaneaTinter"
+    private const val TAG = "CyaneaTinter"
 
     private val COLOR_IDS = intArrayOf(
         R.color.background_material_dark,
@@ -205,12 +205,6 @@ class CyaneaTinter private constructor() {
         R.color.color_primary_light_reference,
         R.color.color_primary_reference,
         R.color.color_background_dark)
-
-    private object Holder {
-      internal val INSTANCE = CyaneaTinter()
-    }
-
-    val instance: CyaneaTinter by lazy { Holder.INSTANCE }
 
   }
 
