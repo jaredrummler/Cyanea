@@ -21,6 +21,8 @@
   <attr format="reference|color" name="backgroundColor"/>
   <attr format="reference|color" name="backgroundColorLight"/>
   <attr format="reference|color" name="backgroundColorDark"/>
+  <attr format="reference|color" name="menuIconColor"/>
+  <attr format="reference|color" name="subMenuIconColor"/>
 
   <declare-styleable name="FontDecorator">
     <attr format="string" name="cyaneaFont"/>

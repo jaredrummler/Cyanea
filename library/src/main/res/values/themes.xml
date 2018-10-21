@@ -46,6 +46,8 @@
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
     <item name="popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="windowActionModeOverlay">true</item>
+    <item name="menuIconColor">@color/menu_icon_color_light</item>
+    <item name="subMenuIconColor">@color/sub_menu_icon_color_light</item>
   </style>
 
   <style name="Theme.Cyanea.Dark.LightActionBar" parent="@style/Theme.MaterialComponents">
@@ -75,6 +77,8 @@
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
     <item name="popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="windowActionModeOverlay">true</item>
+    <item name="menuIconColor">@color/menu_icon_color_dark</item>
+    <item name="subMenuIconColor">@color/sub_menu_icon_color_dark</item>
   </style>
 
   <style name="Theme.Cyanea.Light" parent="@style/Theme.MaterialComponents.Light">
@@ -104,6 +108,8 @@
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     <item name="popupWindowStyle">@style/PopupMenu.Light</item>
     <item name="windowActionModeOverlay">true</item>
+    <item name="menuIconColor">@color/menu_icon_color_dark</item>
+    <item name="subMenuIconColor">@color/sub_menu_icon_color_dark</item>
   </style>
 
   <style name="Theme.Cyanea.Light.DarkActionBar" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
@@ -133,6 +139,8 @@
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     <item name="popupWindowStyle">@style/PopupMenu.Light</item>
     <item name="windowActionModeOverlay">true</item>
+    <item name="menuIconColor">@color/menu_icon_color_light</item>
+    <item name="subMenuIconColor">@color/sub_menu_icon_color_light</item>
   </style>
 
   <style name="Theme.Cyanea.Dark.NoActionBar">
