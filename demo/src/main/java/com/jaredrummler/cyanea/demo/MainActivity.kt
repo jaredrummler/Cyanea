@@ -7,22 +7,29 @@ import android.view.Menu
 import android.view.MenuItem
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
 import com.jaredrummler.cyanea.demo.R.string
+import com.jaredrummler.cyanea.demo.fragments.MainFragment
 import com.jaredrummler.cyanea.demo.themes.ThemePickerActivity
-
 
 class MainActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+//    setContentView(R.layout.activity_main)
+
+    if (savedInstanceState == null) {
+      supportFragmentManager.beginTransaction()
+          .add(android.R.id.content, MainFragment())
+          .commit()
+    }
+
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menu.add(0, MENU_GITHUB, 0, getString(string.github))
+    menu.add(0, MENU_GITHUB, 0, getString(R.string.github))
         .setIcon(R.drawable.ic_github_white_24dp)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
 
-    menu.add(0, MENU_THEMES, 0, getString(string.theme_picker))
+    menu.add(0, MENU_THEMES, 0, getString(R.string.theme_picker))
         .setIcon(R.drawable.ic_brush_white_24dp)
         .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
 

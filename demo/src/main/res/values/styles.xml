@@ -1,6 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="NewApi">
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Cyanea.Light.DarkActionBar" />
+  <style name="AppTheme" parent="Theme.Cyanea.Light.DarkActionBar"/>
 
 </resources>

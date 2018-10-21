@@ -25,7 +25,8 @@ android {
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-  api "androidx.appcompat:appcompat:$androidX"
+  implementation "androidx.appcompat:appcompat:$androidX"
+  implementation 'com.google.android.material:material:1.0.0'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'

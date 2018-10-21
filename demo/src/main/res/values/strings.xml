@@ -3,4 +3,15 @@
   <string name="share">Share</string>
   <string name="theme_picker">Theme Picker</string>
   <string name="github">GitHub</string>
+
+  <string-array name="cyanea_topics">
+    <item>Android</item>
+    <item>Theme Engine</item>
+    <item>Dynamic</item>
+    <item>Customizable</item>
+    <item>Colorful</item>
+    <item>Powerful</item>
+    <item>Open Source</item>
+  </string-array>
+
 </resources>
