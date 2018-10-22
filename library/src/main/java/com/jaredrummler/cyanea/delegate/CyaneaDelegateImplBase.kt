@@ -71,8 +71,7 @@ internal open class CyaneaDelegateImplBase(
   }
 
   override fun onCreateOptionsMenu(menu: Menu) {
-    MenuTint(menu, menuIconColor = cyanea.menuIconColor, subIconColor = cyanea.subMenuIconColor, forceIcons = true)
-        .apply(activity)
+    cyanea.tint(menu, activity)
   }
 
   override fun getViewFactory(): CyaneaViewFactory {

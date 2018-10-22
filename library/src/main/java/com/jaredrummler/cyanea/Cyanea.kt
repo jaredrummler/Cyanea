@@ -3,12 +3,14 @@
 package com.jaredrummler.cyanea
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
 import android.util.Log
+import android.view.Menu
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.Keep
@@ -39,6 +41,7 @@ import com.jaredrummler.cyanea.PrefKeys.PREF_SHOULD_TINT_STATUS_BAR
 import com.jaredrummler.cyanea.PrefKeys.PREF_SUB_MENU_ICON_COLOR
 import com.jaredrummler.cyanea.PrefKeys.PREF_TIMESTAMP
 import com.jaredrummler.cyanea.tinting.CyaneaTinter
+import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 
 class Cyanea private constructor(private val prefs: SharedPreferences) {
@@ -156,6 +159,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         res.getBoolean(R.bool.should_tint_nav_bar))
 
     timestamp = prefs.getLong(PREF_TIMESTAMP, NONE_TIMESTAMP)
+  }
+
+  fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) {
+    MenuTint(menu, menuIconColor = menuIconColor, subIconColor = subMenuIconColor, forceIcons = forceIcons)
+        .apply(activity)
   }
 
   fun edit(): Editor = Editor(this)
