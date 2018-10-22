@@ -42,15 +42,12 @@ class EdgeEffectTint(private val view: ViewGroup) {
   }
 
   private fun setEdgeTint(viewGroup: ViewGroup, @ColorInt color: Int) {
-    setEdgeTint(viewGroup, color)
-    var i = 0
-    val count = viewGroup.childCount
-    while (i < count) {
-      val child = viewGroup.getChildAt(i)
-      if (!setEdgeGlowColor(child, color) && child is ViewGroup) {
-        setEdgeTint(child, color)
+    for (i in 0 until viewGroup.childCount) {
+      viewGroup.getChildAt(i)?.let { child ->
+        if (!setEdgeGlowColor(child, color) && child is ViewGroup) {
+          setEdgeTint(child, color)
+        }
       }
-      i++
     }
   }
 
@@ -119,9 +116,15 @@ class EdgeEffectTint(private val view: ViewGroup) {
       try {
         Reflection.invoke<Any?>(scrollView, "ensureGlows")
         for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
-          val edgeEffectCompat = Reflection.getFieldValue<EdgeEffectCompat?>(scrollView, name)
-          val edgeEffect = Reflection.getFieldValue<EdgeEffect>(edgeEffectCompat, "mEdgeEffect")
-          edgeEffect?.let { setEdgeEffectColor(it, color) }
+          Reflection.getFieldValue<Any?>(scrollView, name)?.let { value ->
+            if (value is EdgeEffect) {
+              setEdgeEffectColor(value, color)
+            } else if (value is EdgeEffectCompat) {
+              Reflection.getFieldValue<EdgeEffect?>(value, "mEdgeEffect")?.let { edgeEffect ->
+                setEdgeEffectColor(edgeEffect, color)
+              }
+            }
+          }
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge glow color on NestedScrollView", e)
@@ -188,9 +191,15 @@ class EdgeEffectTint(private val view: ViewGroup) {
     private fun setEdgeGlowColor(viewPager: ViewPager, color: Int) {
       try {
         for (name in arrayOf("mLeftEdge", "mRightEdge")) {
-          val edgeEffectCompat = Reflection.getFieldValue<EdgeEffectCompat?>(viewPager, name)
-          val edgeEffect = Reflection.getFieldValue<EdgeEffect?>(edgeEffectCompat, "mEdgeEffect")
-          edgeEffect?.let { setEdgeEffectColor(it, color) }
+          Reflection.getFieldValue<Any?>(viewPager, name)?.let { value ->
+           if (value is EdgeEffect) {
+             setEdgeEffectColor(value, color)
+           } else if (value is EdgeEffectCompat) {
+             Reflection.getFieldValue<EdgeEffect?>(value, "mEdgeEffect")?.let { edgeEffect ->
+               setEdgeEffectColor(edgeEffect, color)
+             }
+           }
+          }
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge glow color on ViewPager", e)
