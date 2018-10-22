@@ -1,8 +1,12 @@
 <resources>
   <string name="app_name">Cyanea</string>
+
   <string name="share">Share</string>
   <string name="theme_picker">Theme Picker</string>
   <string name="github">GitHub</string>
+
+  <string name="cyanea_headline">A theme engine for Android</string>
+  <string name="cyanea_about">Named after Octopus Cyanea which is adept at camouflage and not only can change color frequently, but also can change the patterns on and texture of its skin.</string>
 
   <string-array name="cyanea_topics">
     <item>Android</item>
@@ -10,7 +14,6 @@
     <item>Dynamic</item>
     <item>Customizable</item>
     <item>Colorful</item>
-    <item>Powerful</item>
     <item>Open Source</item>
   </string-array>
 

@@ -1,5 +1,7 @@
 package com.jaredrummler.cyanea.demo.fragments
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +9,12 @@ import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import com.jaredrummler.cyanea.app.CyaneaFragment
 import com.jaredrummler.cyanea.demo.R
-import kotlinx.android.synthetic.main.fragment_main.cyaneaTopics
+import kotlinx.android.synthetic.main.fragment_about.cyaneaTopics
 
-class MainFragment : CyaneaFragment() {
+class AboutFragment : CyaneaFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    return inflater.inflate(R.layout.fragment_main, container, false)
+    return inflater.inflate(R.layout.fragment_about, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,16 +24,16 @@ class MainFragment : CyaneaFragment() {
 
   private fun initCyaneaTopics() {
     cyaneaTopics.removeAllViews()
-    val textArray = resources.getStringArray(R.array.cyanea_topics)
-
-    for (text in textArray) {
+    resources.getStringArray(R.array.cyanea_topics).forEach { text ->
       val chip = layoutInflater.inflate(R.layout.cat_chip_topic, cyaneaTopics, false) as Chip
-      @Suppress("DEPRECATION")
-      chip.chipText = text
-//      chip.text = text
+      chip.chipBackgroundColor = ColorStateList(
+          arrayOf(intArrayOf()),
+          intArrayOf(if (cyanea.isDark) cyanea.backgroundColorLight else cyanea.backgroundColorDark)
+      );
+      chip.setTextColor(if (cyanea.isDark) Color.WHITE else Color.BLACK)
+      chip.text = text
       cyaneaTopics.addView(chip)
     }
-
   }
 
 }

@@ -3,60 +3,45 @@ package com.jaredrummler.cyanea.demo
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.widget.Toast
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
-import com.jaredrummler.cyanea.demo.R.string
-import com.jaredrummler.cyanea.demo.fragments.MainFragment
+import com.jaredrummler.cyanea.demo.fragments.AboutFragment
 import com.jaredrummler.cyanea.demo.themes.ThemePickerActivity
+import kotlinx.android.synthetic.main.activity_main.bar
+import kotlinx.android.synthetic.main.activity_main.fab
 
 class MainActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-//    setContentView(R.layout.activity_main)
+    setContentView(R.layout.activity_main)
 
     if (savedInstanceState == null) {
       supportFragmentManager.beginTransaction()
-          .add(android.R.id.content, MainFragment())
+          .add(R.id.container, AboutFragment())
           .commit()
     }
 
-  }
+    fab.setOnClickListener {
+      startActivity(Intent(this, ThemePickerActivity::class.java))
+    }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menu.add(0, MENU_GITHUB, 0, getString(R.string.github))
-        .setIcon(R.drawable.ic_github_white_24dp)
-        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-
-    menu.add(0, MENU_THEMES, 0, getString(R.string.theme_picker))
-        .setIcon(R.drawable.ic_brush_white_24dp)
-        .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER)
-
-    return super.onCreateOptionsMenu(menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return when (item.itemId) {
-      MENU_GITHUB -> {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/Cyanea")))
-        true
+    bar.replaceMenu(R.menu.bottom_bar_menu)
+    cyanea.tint(bar.menu, this)
+    bar.setOnMenuItemClickListener { item ->
+      when (item.itemId) {
+        R.id.action_share -> {
+          Toast.makeText(applicationContext, "TODO: implement", Toast.LENGTH_LONG).show()
+        }
+        R.id.action_github -> {
+          startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/Cyanea")))
+        }
+        else -> return@setOnMenuItemClickListener false
       }
-      MENU_THEMES -> {
-        startActivity(Intent(this, ThemePickerActivity::class.java))
-        true
-      }
-      else -> {
-        super.onOptionsItemSelected(item)
-      }
+      return@setOnMenuItemClickListener true
     }
   }
 
   override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
-
-  companion object {
-    private const val MENU_GITHUB = Menu.FIRST
-    private const val MENU_THEMES = Menu.FIRST + 1
-  }
 
 }
