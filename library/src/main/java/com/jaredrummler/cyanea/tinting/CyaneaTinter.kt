@@ -3,6 +3,7 @@ package com.jaredrummler.cyanea.tinting
 import android.annotation.TargetApi
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.DrawableContainer
@@ -23,7 +24,7 @@ import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
  */
 class CyaneaTinter {
 
-  private val colors = HashMap<Int, Int>()
+  val colors = HashMap<Int, Int>()
 
   /**
    * Tints the [Drawable.ConstantState] to match the colors from the [resources][CyaneaResources]
@@ -61,6 +62,13 @@ class CyaneaTinter {
           for (i in colors.indices) {
             this.colors[colors[i]]?.let { color ->
               if (color != colors[i]) {
+                colors[i] = color
+                changed = true
+              }
+            } ?: run {
+              val stripAlpha = Color.rgb(Color.red(colors[i]), Color.green(colors[i]), Color.blue(colors[i]))
+              this.colors[stripAlpha]?.run {
+                val color = Color.argb(Color.alpha(colors[i]), Color.red(this), Color.green(this), Color.blue(this))
                 colors[i] = color
                 changed = true
               }
