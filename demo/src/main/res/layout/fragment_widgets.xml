@@ -11,6 +11,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginBottom="32dp"
       android:orientation="vertical"
       >
 
@@ -279,53 +280,170 @@
           />
     </RadioGroup>
 
-    <!--<TextView-->
-        <!--android:id="@+id/switchHeadline"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_marginTop="24dp"-->
-        <!--android:text="Switch"-->
-        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/radioGroupEnabled"-->
-        <!--/>-->
+    <TextView
+        android:id="@+id/switchHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Switch"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupEnabled"
+        />
 
-    <!--<View-->
-        <!--android:id="@+id/switchDivider"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:background="?android:attr/dividerVertical"-->
-        <!--app:layout_constraintBottom_toBottomOf="@id/switchHeadline"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toEndOf="@id/switchHeadline"-->
-        <!--app:layout_constraintTop_toTopOf="@id/switchHeadline"-->
-        <!--/>-->
+    <View
+        android:id="@+id/switchDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="?android:attr/dividerVertical"
+        app:layout_constraintBottom_toBottomOf="@id/switchHeadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/switchHeadline"
+        app:layout_constraintTop_toTopOf="@id/switchHeadline"
+        />
 
-    <!--<androidx.appcompat.widget.SwitchCompat-->
-        <!--android:id="@+id/enabledSwitch"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:checked="true"-->
-        <!--android:enabled="true"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/switchHeadline"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="@id/midGuideline"-->
-        <!--android:text="Enabled"/>-->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/enabledCheckedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:enabled="true"
+        android:text="Enabled"
+        app:layout_constraintEnd_toEndOf="@id/midGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switchHeadline"
+        />
 
-    <!--<androidx.appcompat.widget.SwitchCompat-->
-        <!--android:id="@+id/disabledSwitch"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:checked="true"-->
-        <!--android:enabled="false"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/switchHeadline"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="@id/midGuideline"-->
-        <!--android:text="Enabled"/>-->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/enabledUnCheckedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="false"
+        android:enabled="true"
+        android:text="Enabled"
+        app:layout_constraintEnd_toEndOf="@id/midGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enabledCheckedSwitch"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/disabledCheckedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:enabled="false"
+        android:text="Disabled"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/midGuideline"
+        app:layout_constraintTop_toBottomOf="@id/switchHeadline"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/disabledUnCheckedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="false"
+        android:enabled="false"
+        android:text="Disabled"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/midGuideline"
+        app:layout_constraintTop_toBottomOf="@id/disabledCheckedSwitch"
+        />
+
+    <TextView
+        android:id="@+id/textFieldHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Text Fields"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enabledUnCheckedSwitch"
+        />
+
+    <View
+        android:id="@+id/textFieldDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="?android:attr/dividerVertical"
+        app:layout_constraintBottom_toBottomOf="@id/textFieldHeadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textFieldHeadline"
+        app:layout_constraintTop_toTopOf="@id/textFieldHeadline"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textFieldHeadline"
+        >
+
+      <com.google.android.material.textfield.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="4dp"
+          android:hint="Label"
+          app:boxStrokeColor="@color/color_accent"
+          app:helperText="Outline text field"
+          app:helperTextEnabled="true"
+          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+          >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="4dp"
+          android:hint="Label"
+          app:helperText="Filled text field"
+          app:helperTextEnabled="true"
+          style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+          >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="4dp"
+          android:hint="Label"
+          app:counterEnabled="true"
+          app:counterMaxLength="10"
+          app:errorEnabled="true"
+          app:helperText="Filled text field"
+          app:helperTextEnabled="true"
+          style="@style/Widget.Design.TextInputLayout"
+          >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+      </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
