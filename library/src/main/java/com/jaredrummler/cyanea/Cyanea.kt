@@ -226,13 +226,20 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       }
     }
 
+    @JvmStatic
     var loggingEnabled: Boolean = false
 
+    @JvmStatic
     fun log(tag: String, msg: String, ex: Throwable? = null) {
       if (loggingEnabled) {
         Log.d(tag, msg, ex)
       }
     }
+
+    @JvmStatic
+    @ColorInt
+    @Suppress("DEPRECATION")
+    fun getOriginalColor(@ColorRes resid: Int): Int = res.getColor(resid)
 
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {
       val themeName = prefs.getString(PREF_BASE_THEME, null)
