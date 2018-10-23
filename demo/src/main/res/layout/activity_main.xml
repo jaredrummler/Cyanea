@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinator_layout"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -11,6 +11,34 @@
       android:id="@+id/container"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      />
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:elevation="0dp"
+      >
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor"
+        app:layout_scrollFlags="snap"
+        app:tabIndicatorColor="@color/color_accent"
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        />
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.viewpager.widget.ViewPager
+      android:id="@+id/viewPager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginBottom="?android:attr/actionBarSize"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
       />
 
   <com.google.android.material.bottomappbar.BottomAppBar
@@ -26,7 +54,6 @@
   <com.google.android.material.floatingactionbutton.FloatingActionButton
       android:id="@+id/fab"
       android:layout_width="wrap_content"
-      app:elevation="16dp"
       android:layout_height="wrap_content"
       app:layout_anchor="@id/bar"
       app:srcCompat="@drawable/ic_theme_swithcer_24dp"

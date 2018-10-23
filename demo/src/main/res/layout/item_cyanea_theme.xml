@@ -79,7 +79,6 @@
         android:layout_margin="8dp"
         android:clickable="false"
         android:focusable="false"
-        android:src="@drawable/ic_add_white_24dp"
         android:tint="@android:color/white"
         app:srcCompat="@drawable/ic_add_white_24dp"
         tools:ignore="RtlHardcoded,VectorDrawableCompat"

@@ -5,8 +5,29 @@
   <string name="theme_picker">Theme Picker</string>
   <string name="github">GitHub</string>
 
+  <string name="tab_about">About</string>
+  <string name="tab_widgets">Widgets</string>
+  <string name="tab_dialogs">Dialogs</string>
+
   <string name="cyanea_headline">A theme engine for Android</string>
   <string name="cyanea_about">Named after Octopus Cyanea which is adept at camouflage and not only can change color frequently, but also can change the patterns on and texture of its skin.</string>
+
+  <string name="cat_btn_text">Material button</string>
+  <string name="cat_unelevated_btn_text">Unelevated button</string>
+  <string name="cat_text_btn_text">Text button</string>
+  <string name="cat_stroked_btn_text">Stroked button</string>
+  <string name="cat_icon_btn_text">Icon button</string>
+  <string name="cat_icon_text_btn_text">Icon text button</string>
+  <string name="cat_filled_buttons_section_title">Filled buttons</string>
+  <string name="cat_outlined_btn_text">Outlined buttons</string>
+  <string name="cat_outlined_icon_btn_text">Icon only buttons</string>
+  <string name="cat_button_clicked">Button clicked</string>
+
+  <string-array name="tabs">
+    <item>@string/tab_about</item>
+    <item>@string/tab_widgets</item>
+    <item>@string/tab_dialogs</item>
+  </string-array>
 
   <string-array name="cyanea_topics">
     <item>Android</item>

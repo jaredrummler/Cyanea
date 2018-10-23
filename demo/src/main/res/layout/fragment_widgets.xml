@@ -15,7 +15,7 @@
       >
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/midGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:text="Buttons"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         android:layout_height="1dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="@android:color/white"
+        android:background="?android:attr/dividerVertical"
         app:layout_constraintBottom_toBottomOf="@id/buttonsHeadline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonsHeadline"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/midGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonsHeadline"
         />
@@ -67,7 +67,7 @@
         android:text="Share"
         app:icon="@drawable/ic_share_white_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/midGuideline"
         app:layout_constraintTop_toBottomOf="@+id/buttonsHeadline"
         style="@style/Widget.MaterialComponents.Button.Icon"
         />
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Text Button"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/midGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/material_button"
         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -92,7 +92,7 @@
         android:text="Share"
         app:icon="@drawable/ic_share_white_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/midGuideline"
         app:layout_constraintTop_toBottomOf="@+id/material_icon_button"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         />
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Checkbox"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,7 @@
         android:layout_height="1dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="@android:color/white"
+        android:background="?android:attr/dividerVertical"
         app:layout_constraintBottom_toBottomOf="@id/checkBoxHeadline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/checkBoxHeadline"
@@ -134,7 +134,7 @@
         android:layout_marginTop="16dp"
         android:checked="true"
         android:text="Enabled"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/midGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxHeadline"
         />
@@ -150,7 +150,7 @@
         android:layout_marginTop="8dp"
         android:enabled="true"
         android:text="Enabled"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/midGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enabledCheckBox1"
         />
@@ -168,7 +168,7 @@
         android:enabled="false"
         android:text="Disabled"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/midGuideline"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxHeadline"
         />
 
@@ -185,9 +185,147 @@
         android:text="Disabled"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/midGuideline"
         app:layout_constraintTop_toBottomOf="@+id/disabledCheckBox1"
         />
+
+    <TextView
+        android:id="@+id/radioButtonHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Radio Buttons"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enabledCheckBox2"
+        />
+
+    <View
+        android:id="@+id/radioButtonDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="?android:attr/dividerVertical"
+        app:layout_constraintBottom_toBottomOf="@id/radioButtonHeadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/radioButtonHeadline"
+        app:layout_constraintTop_toTopOf="@id/radioButtonHeadline"
+        />
+
+    <RadioGroup
+        android:id="@+id/radioGroupEnabled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@+id/selectedRadioButton"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/midGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radioButtonHeadline"
+        >
+      <RadioButton
+          android:id="@+id/selectedRadioButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:enabled="true"
+          android:text="RadioButton 1"
+          />
+      <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checked="false"
+          android:enabled="true"
+          android:text="RadioButton 2"
+          />
+      <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checked="false"
+          android:enabled="true"
+          android:text="RadioButton 3"
+          />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupDisabled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@+id/selectedRadioButton2"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/midGuideline"
+        app:layout_constraintTop_toBottomOf="@id/radioButtonHeadline"
+        >
+      <RadioButton
+          android:id="@+id/selectedRadioButton2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:enabled="false"
+          android:text="Disabled 1"
+          />
+      <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checked="false"
+          android:enabled="false"
+          android:text="Disabled 2"
+          />
+    </RadioGroup>
+
+    <!--<TextView-->
+        <!--android:id="@+id/switchHeadline"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="24dp"-->
+        <!--android:text="Switch"-->
+        <!--android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/radioGroupEnabled"-->
+        <!--/>-->
+
+    <!--<View-->
+        <!--android:id="@+id/switchDivider"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:background="?android:attr/dividerVertical"-->
+        <!--app:layout_constraintBottom_toBottomOf="@id/switchHeadline"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@id/switchHeadline"-->
+        <!--app:layout_constraintTop_toTopOf="@id/switchHeadline"-->
+        <!--/>-->
+
+    <!--<androidx.appcompat.widget.SwitchCompat-->
+        <!--android:id="@+id/enabledSwitch"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:checked="true"-->
+        <!--android:enabled="true"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/switchHeadline"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="@id/midGuideline"-->
+        <!--android:text="Enabled"/>-->
+
+    <!--<androidx.appcompat.widget.SwitchCompat-->
+        <!--android:id="@+id/disabledSwitch"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:checked="true"-->
+        <!--android:enabled="false"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/switchHeadline"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="@id/midGuideline"-->
+        <!--android:text="Enabled"/>-->
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

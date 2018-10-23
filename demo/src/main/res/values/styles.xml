@@ -1,6 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="NewApi">
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.Cyanea.Light.DarkActionBar"/>
+  <style name="AppTheme" parent="Theme.Cyanea.Dark"/>
+
+  <style name="TabTextAppearance" parent="@style/TextAppearance.MaterialComponents.Tab">
+    <item name="android:fontFamily">@font/font_raleway_medium</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="textAllCaps">false</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
 
 </resources>
