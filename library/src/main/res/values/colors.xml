@@ -62,4 +62,11 @@
   <eat-comment/>
   <color name="translucent_background_color">#99323232</color>
 
+  <!-- Checkable ColorStateList -->
+  <eat-comment/>
+  <color name="cyanea_switch_track_disabled_dark">#1AFFFFFF</color>
+  <color name="cyanea_switch_track_disabled_light">#1F000000</color>
+  <color name="cyanea_switch_track_normal_dark">#4DFFFFFF</color>
+  <color name="cyanea_switch_track_normal_light">#43000000</color>
+
 </resources>

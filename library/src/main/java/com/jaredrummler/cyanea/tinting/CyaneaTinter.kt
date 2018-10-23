@@ -16,6 +16,7 @@ import android.os.Build
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.R
+import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
 
@@ -66,7 +67,7 @@ class CyaneaTinter {
                 changed = true
               }
             } ?: run {
-              val stripAlpha = Color.rgb(Color.red(colors[i]), Color.green(colors[i]), Color.blue(colors[i]))
+              val stripAlpha = ColorUtils.stripAlpha(colors[i])
               this.colors[stripAlpha]?.run {
                 val color = Color.argb(Color.alpha(colors[i]), Color.red(this), Color.green(this), Color.blue(this))
                 colors[i] = color

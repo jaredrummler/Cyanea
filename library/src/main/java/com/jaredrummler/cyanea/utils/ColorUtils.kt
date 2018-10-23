@@ -106,6 +106,16 @@ class ColorUtils private constructor() {
       return (factor * 255.0f).toInt() shl 24 or (color and 0x00ffffff)
     }
 
+    /**
+     * Remove alpha from a color
+     *
+     * @param color The color to modify
+     * @return The color without any transparency
+     */
+    @JvmStatic
+    @ColorInt
+    fun stripAlpha(@ColorInt color: Int): Int = Color.rgb(Color.red(color), Color.green(color), Color.blue(color))
+
     @JvmStatic
     @JvmOverloads
     fun toHex(@ColorInt color: Int, alpha: Boolean = true): String {
