@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
 import com.jaredrummler.cyanea.demo.fragments.AboutFragment
+import com.jaredrummler.cyanea.demo.fragments.DialogsFragment
 import com.jaredrummler.cyanea.demo.fragments.WidgetsFragment
 import com.jaredrummler.cyanea.demo.themes.ThemePickerActivity
 import kotlinx.android.synthetic.main.activity_main.bar
@@ -70,7 +71,7 @@ class MyPagerAdapter(private val activity: FragmentActivity)
     return when (items[position]) {
       activity.getString(R.string.tab_about) -> AboutFragment()
       activity.getString(R.string.tab_widgets) -> WidgetsFragment()
-      activity.getString(R.string.tab_dialogs) -> DummyFragment()
+      activity.getString(R.string.tab_dialogs) -> DialogsFragment()
       else -> throw IllegalArgumentException("No fragment associated with tab '${items[position]}'")
     }
   }
