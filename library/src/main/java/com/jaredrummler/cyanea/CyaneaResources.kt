@@ -19,10 +19,8 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
     cyanea.tinter.setup(original, this)
   }
 
-  /* Track resource ids so we don't attempt to modify the Drawable or ColorStateList more than once */
-  private val resids: MutableSet<Int> by lazy {
-    Collections.newSetFromMap(ConcurrentHashMap<Int, Boolean>())
-  }
+  /* Track resources so we don't attempt to modify the Drawable or ColorStateList more than once */
+  private val tintTracker = TintTracker()
 
   @Throws(Resources.NotFoundException::class)
   override fun getDrawable(id: Int): Drawable {
@@ -35,13 +33,13 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       super.getDrawable(id, theme).let {
-        if (!resids.contains(id)) {
+        if (!tintTracker.contains(id, theme)) {
           try {
             cyanea.tinter.tint(it)
           } catch (e: CyaneaTintException) {
             Cyanea.log(TAG, "Error tinting drawable", e)
           }
-          resids.add(id)
+          tintTracker.add(id, theme)
         }
         return it
       }
@@ -110,16 +108,31 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   override fun getColorStateList(id: Int, theme: Resources.Theme?): ColorStateList? {
     val colorStateList = super.getColorStateList(id, theme)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      if (!resids.contains(id)) {
+      if (!tintTracker.contains(id, theme)) {
         cyanea.tinter.tint(colorStateList)
-        resids.add(id)
+        tintTracker.add(id, theme)
       }
     }
     return colorStateList
   }
 
+  private inner class TintTracker {
+
+    private val cache: MutableSet<Int> by lazy {
+      Collections.newSetFromMap(ConcurrentHashMap<Int, Boolean>())
+    }
+
+    internal fun contains(id: Int, theme: Resources.Theme?): Boolean = cache.contains(key(id, theme))
+
+    internal fun add(id: Int, theme: Resources.Theme?): Boolean = cache.add(key(id, theme))
+
+    private fun key(id: Int, theme: Resources.Theme?): Int = id + (theme?.hashCode() ?: 0)
+
+  }
+
   companion object {
     private const val TAG = "CyaneaResources"
+
   }
 
 }
