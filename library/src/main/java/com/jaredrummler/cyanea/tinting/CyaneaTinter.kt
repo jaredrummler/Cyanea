@@ -25,7 +25,7 @@ import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
  */
 class CyaneaTinter {
 
-  val colors = HashMap<Int, Int>()
+  private val colors = HashMap<Int, Int>()
 
   /**
    * Tints the [Drawable.ConstantState] to match the colors from the [resources][CyaneaResources]
