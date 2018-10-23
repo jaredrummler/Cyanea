@@ -22,6 +22,7 @@ import androidx.appcompat.widget.AlertDialogLayout
 import androidx.appcompat.widget.SearchView.SearchAutoComplete
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.textfield.TextInputLayout
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
@@ -233,5 +234,17 @@ internal class BottomAppBarProcessor : CyaneaViewProcessor<BottomAppBar>() {
   }
 
   override fun getType(): Class<BottomAppBar> = BottomAppBar::class.java
+
+}
+
+internal class TextInputLayoutProcessor : CyaneaViewProcessor<TextInputLayout>() {
+
+  override fun process(view: TextInputLayout, attrs: AttributeSet?, cyanea: Cyanea) {
+    if (view.boxStrokeColor == Cyanea.getOriginalColor(R.color.color_accent_reference)) {
+      view.boxStrokeColor = cyanea.accent
+    }
+  }
+
+  override fun getType(): Class<TextInputLayout> = TextInputLayout::class.java
 
 }
