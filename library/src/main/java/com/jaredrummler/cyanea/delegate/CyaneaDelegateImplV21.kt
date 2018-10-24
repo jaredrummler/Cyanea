@@ -6,11 +6,11 @@ import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.utils.ColorUtils
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -30,12 +30,9 @@ internal open class CyaneaDelegateImplV21(
 
   private fun setTaskDescription() {
     try {
-      val primary = cyanea.primary
-      val color = Color.rgb(Color.red(primary), Color.green(primary), Color.blue(primary)) // Strip out any alpha
-
+      val color = ColorUtils.stripAlpha(cyanea.primary)
       val componentName = ComponentName(activity, activity::class.java)
       val activityInfo = activity.packageManager.getActivityInfo(componentName, 0)
-
       activityInfo?.iconResource.takeIf { it != 0 }?.let { iconRes ->
         val td = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
           ActivityManager.TaskDescription(activity.title.toString(), iconRes, color)
@@ -45,7 +42,6 @@ internal open class CyaneaDelegateImplV21(
           ActivityManager.TaskDescription(activity.title.toString(), icon, color)
         }
         activity.setTaskDescription(td)
-        return
       } ?: run {
         val icon = activity.packageManager.getApplicationIcon(activity.packageName)
         (icon as? BitmapDrawable)?.bitmap?.let { bitmap ->

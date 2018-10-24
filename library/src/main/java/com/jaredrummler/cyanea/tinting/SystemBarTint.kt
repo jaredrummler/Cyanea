@@ -49,6 +49,7 @@ class SystemBarTint(activity: Activity) {
   private var statusBarTintView: View? = null
   private var navBarTintView: View? = null
   private var actionBar: Any? = null
+  @Suppress("MemberVisibilityCanBePrivate")
   val sysBarConfig: SysBarConfig
 
   private val drawableCallback = object : Drawable.Callback {
@@ -99,18 +100,18 @@ class SystemBarTint(activity: Activity) {
       }
     }
 
-    sysBarConfig = SysBarConfig(activity, isStatusBarAvailable, isNavBarAvailable)
+    sysBarConfig = SysBarConfig(activity)
 
     // device might not have virtual navigation keys
     if (!sysBarConfig.hasNavigationBar) {
       isNavBarAvailable = false
     }
 
-    actionBar = activity.actionBar ?: if (activity is AppCompatActivity) {
-      activity.supportActionBar
-    } else if (activity is BaseAppCompatDelegate) {
-      activity.getDelegate().supportActionBar
-    } else null
+    actionBar = activity.actionBar ?: when (activity) {
+      is AppCompatActivity -> activity.supportActionBar
+      is BaseAppCompatDelegate -> activity.getDelegate().supportActionBar
+      else -> null
+    }
 
     if (isStatusBarAvailable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
       setupStatusBarView(activity, decorViewGroup)
@@ -168,7 +169,7 @@ class SystemBarTint(activity: Activity) {
       val colorDrawable = ColorDrawable(color)
 
       oldActionBarBackground?.let { oldBackground ->
-        val td = TransitionDrawable(arrayOf<Drawable>(oldBackground, colorDrawable))
+        val td = TransitionDrawable(arrayOf(oldBackground, colorDrawable))
         // workaround for broken ActionBarContainer drawable handling on pre-API 17 builds
         // https://github.com/android/platform_frameworks_base/commit/a7cc06d82e45918c37429a59b14545c6a57db4e4
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -218,9 +219,9 @@ class SystemBarTint(activity: Activity) {
       params.rightMargin = sysBarConfig.navigationBarWidth
     }
     statusBarTintView?.let {
-      it.setLayoutParams(params)
+      it.layoutParams = params
       it.setBackgroundColor(DEFAULT_TINT_COLOR)
-      it.setVisibility(View.GONE)
+      it.visibility = View.GONE
       decorViewGroup.addView(it)
     }
   }
@@ -236,24 +237,22 @@ class SystemBarTint(activity: Activity) {
       params.gravity = Gravity.START
     }
     navBarTintView?.let {
-      it.setLayoutParams(params)
+      it.layoutParams = params
       it.setBackgroundColor(DEFAULT_TINT_COLOR)
-      it.setVisibility(View.GONE)
+      it.visibility = View.GONE
       decorViewGroup.addView(it)
     }
   }
 
   companion object {
     /** The default system bar tint color value. 60% opacity, black  */
-    private val DEFAULT_TINT_COLOR = 0x99000000.toInt()
+    private const val DEFAULT_TINT_COLOR = 0x99000000.toInt()
   }
 
   /**
    * Describes system bar sizing and other characteristics for the current device configuration.
    */
-  class SysBarConfig(activity: Activity,
-      private val translucentStatusBar: Boolean,
-      private val translucentNavBar: Boolean) {
+  class SysBarConfig(activity: Activity) {
 
     private val smallestWidthDp: Float
     private val inPortrait: Boolean
@@ -261,6 +260,7 @@ class SystemBarTint(activity: Activity) {
     /** The height of the status bar (in pixels). */
     val statusBarHeight: Int
     /** The height of the action bar (in pixels). */
+    @Suppress("MemberVisibilityCanBePrivate")
     val actionBarHeight: Int
     /** The height of the system navigation bar. */
     val navigationBarHeight: Int
@@ -318,19 +318,17 @@ class SystemBarTint(activity: Activity) {
 
     private fun getNavigationBarHeight(context: Context): Int {
       val res = context.resources
-      val result = 0
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
         if (hasNavBar(context)) {
-          val key: String
-          if (inPortrait) {
-            key = NAV_BAR_HEIGHT_RES_NAME
+          val key = if (inPortrait) {
+            NAV_BAR_HEIGHT_RES_NAME
           } else {
-            key = NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME
+            NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME
           }
           return getInternalDimensionSize(res, key)
         }
       }
-      return result
+      return 0
     }
 
     private fun getNavigationBarWidth(context: Context): Int {
@@ -360,23 +358,19 @@ class SystemBarTint(activity: Activity) {
 
     @SuppressLint("PrivateApi")
     companion object {
-      private val STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height"
-      private val NAV_BAR_HEIGHT_RES_NAME = "navigation_bar_height"
-      private val NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME = "navigation_bar_height_landscape"
-      private val NAV_BAR_WIDTH_RES_NAME = "navigation_bar_width"
-      private val SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar"
+      private const val STATUS_BAR_HEIGHT_RES_NAME = "status_bar_height"
+      private const val NAV_BAR_HEIGHT_RES_NAME = "navigation_bar_height"
+      private const val NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME = "navigation_bar_height_landscape"
+      private const val NAV_BAR_WIDTH_RES_NAME = "navigation_bar_width"
+      private const val SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar"
 
-      private val NAV_BAR_OVERRIDE: String
-
-      init {
-        var value: String? = null
-        try {
-          val SystemProperties = Class.forName("android.os.SystemProperties")
-          value = Reflection.invoke<String?>(SystemProperties, "get",
-              arrayOf(String::class.java, String::class.java), "qemu.hw.mainkeys", "")
-        } catch (ignored: Exception) {
-        }
-        NAV_BAR_OVERRIDE = value ?: ""
+      @SuppressLint("PrivateApi")
+      private val NAV_BAR_OVERRIDE = try {
+        val systemPropertiesClass = Class.forName("android.os.SystemProperties")
+        Reflection.invoke<String>(systemPropertiesClass, "get",
+            arrayOf(String::class.java, String::class.java), "qemu.hw.mainkeys", "") ?: ""
+      } catch (ignored: Exception) {
+        ""
       }
     }
 

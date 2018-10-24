@@ -6,7 +6,7 @@ import androidx.appcompat.widget.Toolbar
 
 /**
  * An interface to be used on an [activity][android.app.Activity] that doesn't inherit from
- * [AppCompatActivity][android.support.v7.app.AppCompatActivity] but implements and proxies the necessary calls to be
+ * [AppCompatActivity][androidx.appcompat.app.AppCompatActivity] but implements and proxies the necessary calls to be
  * used with AppCompat.
  */
 interface BaseAppCompatDelegate {
@@ -21,10 +21,10 @@ interface BaseAppCompatDelegate {
   fun getSupportActionBar(): ActionBar?
 
   /**
-   * Set a [Toolbar][android.widget.Toolbar] to act as the [android.support.v7.app.ActionBar] for this Activity window.
+   * Set a [Toolbar][android.widget.Toolbar] to act as the [androidx.appcompat.app.ActionBar] for this Activity window.
    *
    * When set to a non-null value the [android.app.Activity.getActionBar] method will return an
-   * [ActionBar][android.support.v7.app.ActionBar] object that can be used to control the given toolbar as if it were a
+   * [ActionBar][androidx.appcompat.app.ActionBar] object that can be used to control the given toolbar as if it were a
    * traditional window decor action bar. The toolbar's menu will be populated with the Activity's options menu and
    * the navigation button will be wired through the standard [home][android.R.id.home] menu select action.
    *

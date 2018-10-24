@@ -3,6 +3,7 @@ package com.jaredrummler.cyanea.inflator
 import android.R.attr
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
@@ -53,7 +54,7 @@ abstract class CyaneaViewProcessor<T : View> {
    *
    * @param view
    * The view to check
-   * @return [true] if this view should be processed.
+   * @return True if this view should be processed.
    */
   open fun shouldProcessView(view: View): Boolean {
     return getType().isInstance(view)

@@ -90,7 +90,7 @@ class CyaneaLayoutInflater : LayoutInflater {
    *     view if it has been inflated by this point, if this is not null this method just returns this value.
    * @param name
    *     name of the thing to inflate.
-   * @param viewContext
+   * @param context
    *     Context to inflate by if parent is null
    * @param attrs
    *     Attr for this view which we can steal fontPath from too.

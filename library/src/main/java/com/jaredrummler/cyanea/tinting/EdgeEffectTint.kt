@@ -53,7 +53,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
 
   companion object {
 
-    private val TAG = "EdgeEffectTint"
+    private const val TAG = "EdgeEffectTint"
 
     /**
      * Set the color of an [EdgeEffect]. This uses reflection on pre-L.
@@ -61,6 +61,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
      * @param edgeEffect The EdgeEffect to apply the color on.
      * @param color The color value
      */
+    @JvmStatic
     fun setEdgeEffectColor(edgeEffect: EdgeEffect, @ColorInt color: Int) {
       try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

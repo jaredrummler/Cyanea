@@ -1,6 +1,5 @@
 package com.jaredrummler.cyanea.utils
 
-import java.lang.AssertionError
 import java.lang.reflect.AccessibleObject
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -111,7 +110,7 @@ class Reflection private constructor() {
      *     the object or class.
      * @param name
      *     the requested method's name
-     * @param parameterTypes
+     * @param types
      *     the parameter types of the requested method.
      * @return a [Method] object which represents the method matching the specified name and parameter types
      */
@@ -120,7 +119,7 @@ class Reflection private constructor() {
       if (obj == null) return null
 
       val key = cacheKey(obj, name, *types)
-      var method: Method? = CACHE.get(key) as? Method
+      var method: Method? = CACHE[key] as? Method
       if (method != null) return method
 
       var klass: Class<*>? = obj as? Class<*> ?: obj.javaClass

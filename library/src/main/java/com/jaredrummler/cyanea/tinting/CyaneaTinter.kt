@@ -106,7 +106,7 @@ class CyaneaTinter {
         getFieldValue<ColorStateList?>(state, "mSolidColors")?.let { solidColors ->
           tint(solidColors)
           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawable.setColor(solidColors)
+            drawable.color = solidColors
           }
         }
       }

@@ -66,6 +66,7 @@ abstract class AttrsDecorator<T : View> : CyaneaDecorator {
    * @return An attribute in the current theme that contains a reference to a style resource that supplies defaults
    * values for the TypedArray. Can be `0` to not look for defaults.
    */
+  @Suppress("MemberVisibilityCanBePrivate")
   protected fun defStyleAttr(): Int = 0
 
   /**
@@ -74,6 +75,7 @@ abstract class AttrsDecorator<T : View> : CyaneaDecorator {
    * @return A resource identifier of a style resource that supplies default values for the TypedArray, used only if
    * defStyleAttr is `0` or can not be found in the theme.  Can be `0` to not look for defaults.
    */
+  @Suppress("MemberVisibilityCanBePrivate")
   protected fun defStyleRes(): Int = 0
 
   /**
@@ -83,6 +85,7 @@ abstract class AttrsDecorator<T : View> : CyaneaDecorator {
    * @param attributeSet A read-only set of tag attributes.
    * @return a TypedArray holding an array of the attribute values.
    */
+  @Suppress("MemberVisibilityCanBePrivate")
   protected fun obtainAttributes(context: Context, attributeSet: AttributeSet): TypedArray? {
     return context.theme.obtainStyledAttributes(attributeSet, styleable(), defStyleAttr(), defStyleRes())
   }

@@ -4,7 +4,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 import com.jaredrummler.cyanea.Cyanea
-import com.jaredrummler.cyanea.tinting.MenuTint
 
 /**
  * Base class for fragments[Fragment] that use [Cyanea] for dynamic themes.
@@ -22,11 +21,7 @@ open class CyaneaFragment : Fragment() {
   }
 
   protected open fun applyMenuTint(menu: Menu) {
-    MenuTint(menu,
-        menuIconColor = cyanea.menuIconColor,
-        subIconColor = cyanea.subMenuIconColor,
-        forceIcons = true)
-        .apply(activity!!)
+    cyanea.tint(menu, requireActivity())
   }
 
 }

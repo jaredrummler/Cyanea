@@ -11,7 +11,7 @@ import com.jaredrummler.cyanea.tinting.CyaneaTinter.CyaneaTintException
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "OverridingDeprecatedMember")
 class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance)
   : Resources(original.assets, original.displayMetrics, original.configuration) {
 
@@ -30,38 +30,37 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   @SuppressLint("PrivateResource")
   @Throws(Resources.NotFoundException::class)
   override fun getDrawable(id: Int, theme: Theme?): Drawable {
-
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      super.getDrawable(id, theme).let {
+      super.getDrawable(id, theme).let { drawable ->
         if (!tintTracker.contains(id, theme)) {
           try {
-            cyanea.tinter.tint(it)
+            cyanea.tinter.tint(drawable)
           } catch (e: CyaneaTintException) {
             Cyanea.log(TAG, "Error tinting drawable", e)
           }
           tintTracker.add(id, theme)
         }
-        return it
+        return drawable
       }
     }
-
-    when (id) {
+    return when (id) {
       R.color.background_material_dark, R.drawable.color_background_dark
-      -> return ColorDrawable(cyanea.backgroundDark)
+      -> ColorDrawable(cyanea.backgroundDark)
       R.color.background_material_dark_darker, R.drawable.color_background_dark_darker
-      -> return ColorDrawable(cyanea.backgroundDarkDarker)
+      -> ColorDrawable(cyanea.backgroundDarkDarker)
       R.color.background_material_dark_lighter, R.drawable.color_background_dark_lighter
-      -> return ColorDrawable(cyanea.backgroundDarkLighter)
+      -> ColorDrawable(cyanea.backgroundDarkLighter)
       R.color.background_material_light, R.drawable.color_background_light
-      -> return ColorDrawable(cyanea.backgroundLight)
+      -> ColorDrawable(cyanea.backgroundLight)
       R.color.background_material_light_darker, R.drawable.color_background_light_darker
-      -> return ColorDrawable(cyanea.backgroundLightDarker)
+      -> ColorDrawable(cyanea.backgroundLightDarker)
       R.color.background_material_light_lighter, R.drawable.color_background_light_lighter
-      -> return ColorDrawable(cyanea.backgroundLightLighter)
+      -> ColorDrawable(cyanea.backgroundLightLighter)
+      else -> {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+          super.getDrawable(id) else super.getDrawable(id, theme)
+      }
     }
-
-    return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-      super.getDrawable(id) else super.getDrawable(id, theme)
   }
 
   @Throws(Resources.NotFoundException::class)
@@ -71,30 +70,26 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
 
   @SuppressLint("PrivateResource")
   @Throws(Resources.NotFoundException::class)
-  override fun getColor(id: Int, theme: Theme?): Int {
-
-    when (id) {
-      // ------ PRIMARY COLORS ------
-      R.color.color_primary_reference, R.color.color_primary -> return cyanea.primary
-      R.color.color_primary_dark_reference, R.color.color_primary_dark -> return cyanea.primaryDark
-      R.color.color_primary_light_reference, R.color.color_primary_light -> return cyanea.primaryLight
-
-      // ------ ACCENT COLORS ------
-      R.color.color_accent_reference, R.color.color_accent -> return cyanea.accent
-      R.color.color_accent_light_reference, R.color.color_accent_light -> return cyanea.accentLight
-      R.color.color_accent_dark_reference, R.color.color_accent_dark -> return cyanea.accentDark
-
-      // ------ BACKGROUND COLORS ------
-      R.color.color_background_dark, R.color.background_material_dark -> return cyanea.backgroundDark
-      R.color.background_material_dark_lighter -> return cyanea.backgroundDarkLighter
-      R.color.background_material_dark_darker -> return cyanea.backgroundDarkDarker
-      R.color.color_background_light, R.color.background_material_light -> return cyanea.backgroundLight
-      R.color.background_material_light_darker -> return cyanea.backgroundLightDarker
-      R.color.background_material_light_lighter -> return cyanea.backgroundLightLighter
+  override fun getColor(id: Int, theme: Theme?): Int = when (id) {
+    // ------ PRIMARY COLORS ------
+    R.color.color_primary_reference, R.color.color_primary -> cyanea.primary
+    R.color.color_primary_dark_reference, R.color.color_primary_dark -> cyanea.primaryDark
+    R.color.color_primary_light_reference, R.color.color_primary_light -> cyanea.primaryLight
+    // ------ ACCENT COLORS ------
+    R.color.color_accent_reference, R.color.color_accent -> cyanea.accent
+    R.color.color_accent_light_reference, R.color.color_accent_light -> cyanea.accentLight
+    R.color.color_accent_dark_reference, R.color.color_accent_dark -> cyanea.accentDark
+    // ------ BACKGROUND COLORS ------
+    R.color.color_background_dark, R.color.background_material_dark -> cyanea.backgroundDark
+    R.color.background_material_dark_lighter -> cyanea.backgroundDarkLighter
+    R.color.background_material_dark_darker -> cyanea.backgroundDarkDarker
+    R.color.color_background_light, R.color.background_material_light -> cyanea.backgroundLight
+    R.color.background_material_light_darker -> cyanea.backgroundLightDarker
+    R.color.background_material_light_lighter -> cyanea.backgroundLightLighter
+    else -> {
+      if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+        super.getColor(id) else super.getColor(id, theme)
     }
-
-    return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-      super.getColor(id) else super.getColor(id, theme)
   }
 
   @RequiresApi(Build.VERSION_CODES.M)

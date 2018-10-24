@@ -162,7 +162,10 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   }
 
   fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) {
-    MenuTint(menu, menuIconColor = menuIconColor, subIconColor = subMenuIconColor, forceIcons = forceIcons)
+    MenuTint(menu,
+        menuIconColor = menuIconColor,
+        subIconColor = subMenuIconColor,
+        forceIcons = forceIcons)
         .apply(activity)
   }
 
@@ -254,6 +257,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   }
 
+  @Suppress("MemberVisibilityCanBePrivate")
   class Editor internal constructor(private val cyanea: Cyanea) {
 
     private val editor = cyanea.prefs.edit()

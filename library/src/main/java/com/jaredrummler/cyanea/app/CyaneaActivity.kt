@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.Menu
+import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 

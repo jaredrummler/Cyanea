@@ -62,7 +62,8 @@ class MenuTint(
   private var actionBar: ViewGroup? = null
 
   /**
-   * Sets a [ColorFilter] and/or alpha on all the [MenuItem]s in the menu, including the OverflowMenuButton.
+   * Sets a [android.graphics.ColorFilter] and/or alpha on all the [MenuItem]s in the menu,
+   * including the OverflowMenuButton.
    *
    * Call this method after inflating/creating your menu in [Activity.onCreateOptionsMenu]
    *
@@ -89,7 +90,7 @@ class MenuTint(
       // Tint the items on the Toolbar after the Toolbar is created
       actionBar = findActionBar(context)
       actionBar?.let { actionBar ->
-        actionBar.post({
+        actionBar.post {
           for (i in 0 until menu.size()) {
             val menuItem = menu.getItem(i)
             if (isInOverflow(menuItem)) {
@@ -107,7 +108,7 @@ class MenuTint(
           if (tintOverflowIcon) {
             tintOverflow()
           }
-        })
+        }
       }
     }
   }
@@ -121,7 +122,7 @@ class MenuTint(
       }
     }
 
-    actionBar?.post({
+    actionBar?.post {
       for (i in 0 until size) {
         val item = menu.getItem(i)
         if (isInOverflow(item)) {
@@ -136,7 +137,7 @@ class MenuTint(
           tintOverflow()
         }
       }
-    })
+    }
   }
 
   private fun tintActionBar(actionBar: ViewGroup) {
@@ -174,7 +175,7 @@ class MenuTint(
 
   companion object {
 
-    private val TAG = "MenuTint"
+    private const val TAG = "MenuTint"
 
     /**
      * Sets the color filter and/or the alpha transparency on a [MenuItem]'s icon.
@@ -195,7 +196,7 @@ class MenuTint(
     /**
      * Sets the color filter and/or the alpha transparency on a [MenuItem]'s sub menus
      *
-     * @param menuItem The [MenuItem] to theme.
+     * @param item The [MenuItem] to theme.
      * @param color The color to set for the color filter or `null` for no changes.
      * @param alpha The alpha value (0...255) to set on the icon or `null` for no changes.
      */
@@ -270,7 +271,7 @@ class MenuTint(
                   || view is ActionMenuView.ActionMenuChildView)) {
             return view
           } else if (view is ViewGroup) {
-            findOverflowMenuButton(view)?.let { return it }
+            findOverflowMenuButton(view)?.let { btn -> return btn }
           }
           i++
         }
@@ -315,14 +316,14 @@ class MenuTint(
 
   inner class ActionExpandListener : MenuItem.OnActionExpandListener {
     override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
-      val color = if (originalMenuIconColor == null) menuIconColor else originalMenuIconColor
+      val color = originalMenuIconColor ?: menuIconColor
       menuIconColor = color
       reapply()
       return true
     }
 
     override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-      val color = if (originalMenuIconColor == null) menuIconColor else originalMenuIconColor
+      val color = originalMenuIconColor ?: menuIconColor
       menuIconColor = color
       reapply()
       return true

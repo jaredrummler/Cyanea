@@ -89,7 +89,7 @@ class ColorUtils private constructor() {
      * @return `true` if the color is light
      */
     @JvmStatic
-    fun isLightColor(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) luminance: Double): Boolean {
+    fun isLightColor(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) luminance: Double = 0.5): Boolean {
       return ColorUtils.calculateLuminance(color) >= luminance
     }
 
