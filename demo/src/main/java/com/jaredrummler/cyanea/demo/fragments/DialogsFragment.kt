@@ -1,16 +1,22 @@
 package com.jaredrummler.cyanea.demo.fragments
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.button.MaterialButton
 import com.jaredrummler.cyanea.app.CyaneaFragment
 import com.jaredrummler.cyanea.demo.R
+import java.text.DateFormat
+import java.util.Calendar
+
 
 class DialogsFragment : CyaneaFragment() {
 
@@ -100,7 +106,7 @@ class DialogsFragment : CyaneaFragment() {
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
             .setNeutralButton(neutralText, null)
-            .setItems(choices, null))
+            .setItems(choices) { dialog, _ -> dialog.dismiss() })
 
     // title, checkboxes, 2 actions dialog
     addDialogLauncher(
@@ -122,7 +128,26 @@ class DialogsFragment : CyaneaFragment() {
             .setNeutralButton(neutralText, null)
             .setSingleChoiceItems(choices, 1, null))
 
+    // Date picker
+    val calendar = Calendar.getInstance()
+    addDialog(
+        dialogLaunchersLayout,
+        R.string.title_date_picker,
+        DatePickerDialog(requireActivity(),
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+              calendar.set(Calendar.YEAR, year)
+              calendar.set(Calendar.MONTH, monthOfYear)
+              calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+              val date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime())
+              Toast.makeText(requireContext(), date, Toast.LENGTH_LONG).show()
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+    )
+
     // title, custom view, actions dialog
+    val customView = SeekBar(requireActivity()).apply {
+      val padding = Math.round(24 * resources.displayMetrics.density)
+      setPadding(padding, padding, padding, padding)
+    }
     addDialogLauncher(
         dialogLaunchersLayout,
         R.string.title_slider_2_actions,
@@ -130,7 +155,7 @@ class DialogsFragment : CyaneaFragment() {
             .setTitle(title)
             .setPositiveButton(positiveText, null)
             .setNeutralButton(neutralText, null)
-            .setView(SeekBar(requireActivity())))
+            .setView(customView))
 
     // title, scrolling long view, actions dialog
     addDialogLauncher(
@@ -149,18 +174,36 @@ class DialogsFragment : CyaneaFragment() {
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
             .setPositiveButton(R.string.short_text_1, null)
-            .setNeutralButton(R.string.short_text_2, null))
+            .setNeutralButton(R.string.short_text_2, null),
+        marginBottom = 24f
+    )
 
     return view
   }
 
   @SuppressLint("RestrictedApi")
-  private fun addDialogLauncher(
-      viewGroup: ViewGroup, @StringRes stringResId: Int, alertDialogBuilder: AlertDialog.Builder) {
+  private fun addDialogLauncher(viewGroup: ViewGroup, @StringRes stringResId: Int, builder: AlertDialog.Builder,
+      marginTop: Float = 8f, marginBottom: Float = 0f) {
     val dialogLauncherButton = MaterialButton(viewGroup.context)
-    dialogLauncherButton.setOnClickListener { alertDialogBuilder.show() }
+    dialogLauncherButton.setOnClickListener { builder.show() }
     dialogLauncherButton.setText(stringResId)
-    viewGroup.addView(dialogLauncherButton)
+    val params = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    params.topMargin = Math.round(marginTop * resources.displayMetrics.density)
+    params.bottomMargin = Math.round(marginBottom * resources.displayMetrics.density)
+    viewGroup.addView(dialogLauncherButton, params)
+  }
+
+  private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, dialog: android.app.AlertDialog,
+      marginTop: Float = 8f, marginBottom: Float = 0f) {
+    val dialogLauncherButton = MaterialButton(viewGroup.context)
+    dialogLauncherButton.setOnClickListener { dialog.show() }
+    dialogLauncherButton.setText(stringResId)
+    val params = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    params.topMargin = Math.round(marginTop * resources.displayMetrics.density)
+    params.bottomMargin = Math.round(marginBottom * resources.displayMetrics.density)
+    viewGroup.addView(dialogLauncherButton, params)
   }
 
 }

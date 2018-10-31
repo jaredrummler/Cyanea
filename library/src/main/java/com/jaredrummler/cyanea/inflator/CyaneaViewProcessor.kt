@@ -10,12 +10,15 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.CheckedTextView
 import android.widget.CompoundButton
+import android.widget.DatePicker
 import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.TextView
@@ -201,6 +204,24 @@ internal class CompoundButtonProcessor : CyaneaViewProcessor<CompoundButton>() {
       background.setColor(csl)
     }
   }
+
+}
+
+internal class DatePickerProcessor : CyaneaViewProcessor<DatePicker>() {
+
+  override fun process(view: DatePicker, attrs: AttributeSet?, cyanea: Cyanea) {
+    val date_picker_header = view.context.resources.getIdentifier("date_picker_header", "id", "android")
+    if (date_picker_header != 0) {
+      view.findViewById<ViewGroup>(date_picker_header)?.let { layout ->
+        cyanea.tinter.tint(layout.background)
+        if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+          cyanea.tinter.tint(layout.backgroundTintList)
+        }
+      }
+    }
+  }
+
+  override fun getType(): Class<DatePicker> = DatePicker::class.java
 
 }
 

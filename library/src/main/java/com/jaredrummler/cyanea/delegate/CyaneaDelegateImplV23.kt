@@ -13,6 +13,7 @@ import com.jaredrummler.cyanea.inflator.BottomAppBarProcessor
 import com.jaredrummler.cyanea.inflator.CheckedTextViewProcessor
 import com.jaredrummler.cyanea.inflator.CompoundButtonProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
+import com.jaredrummler.cyanea.inflator.DatePickerProcessor
 import com.jaredrummler.cyanea.inflator.ImageButtonProcessor
 import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
 import com.jaredrummler.cyanea.inflator.SearchAutoCompleteProcessor
@@ -54,6 +55,7 @@ internal open class CyaneaDelegateImplV23(
     processors.add(SearchAutoCompleteProcessor())
     processors.add(SwitchProcessor())
     processors.add(CompoundButtonProcessor())
+    processors.add(DatePickerProcessor())
     processors.add(ImageButtonProcessor())
     processors.add(ViewGroupProcessor())
     processors.add(BottomAppBarProcessor())

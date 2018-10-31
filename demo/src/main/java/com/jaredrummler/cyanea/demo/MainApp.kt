@@ -14,8 +14,12 @@ class MainApp : CyaneaApp(), CyaneaDecorator.Provider, CyaneaViewProcessor.Provi
     Cyanea.loggingEnabled = true
   }
 
-  override fun getViewProcessors(): Array<CyaneaViewProcessor<out View>> = arrayOf()
+  override fun getViewProcessors(): Array<CyaneaViewProcessor<out View>> = arrayOf(
 
-  override fun getDecorators(): Array<CyaneaDecorator> = arrayOf(FontDecorator())
+  )
+
+  override fun getDecorators(): Array<CyaneaDecorator> = arrayOf(
+      FontDecorator()
+  )
 
 }

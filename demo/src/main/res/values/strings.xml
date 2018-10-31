@@ -35,6 +35,7 @@
   <string name="title_slider_2_actions">Custom View</string>
   <string name="title_scrolling_2_actions">Scrolling Content</string>
   <string name="title_2_short_actions">Short Buttons</string>
+  <string name="title_date_picker">Date Picker</string>
 
   <string name="positive">Accept</string>
   <string name="negative">Decline</string>
