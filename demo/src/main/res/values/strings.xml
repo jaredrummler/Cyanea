@@ -36,6 +36,7 @@
   <string name="title_scrolling_2_actions">Scrolling Content</string>
   <string name="title_2_short_actions">Short Buttons</string>
   <string name="title_date_picker">Date Picker</string>
+  <string name="title_time_picker">Time Picker</string>
 
   <string name="positive">Accept</string>
   <string name="negative">Decline</string>

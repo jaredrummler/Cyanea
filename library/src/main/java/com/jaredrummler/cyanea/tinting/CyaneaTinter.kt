@@ -13,12 +13,16 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.NinePatchDrawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
+import android.view.View
+import android.view.ViewGroup
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.CyaneaResources
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
+import java.lang.reflect.Field
+import java.lang.reflect.Modifier
 
 /**
  * Apply color scheme to [drawables][Drawable] and [colors][ColorStateList]
@@ -86,6 +90,37 @@ class CyaneaTinter {
     }
   }
 
+  @JvmOverloads
+  fun tint(view: View, recursive: Boolean = true) {
+    try {
+      var klass: Class<*>? = view.javaClass
+      do {
+        klass?.declaredFields?.forEach { field ->
+          if (Modifier.isStatic(field.modifiers)) return@forEach
+          if (field.type == ColorStateList::class.java) {
+            get<ColorStateList>(field, view)?.let { csl ->
+              tint(csl)
+            }
+          } else if (field.type == Drawable::class.java) {
+            get<Drawable>(field, view)?.let { drawable ->
+              tint(drawable)
+            }
+          }
+        }
+        klass = klass?.superclass
+      } while (klass != null)
+    } catch (e: Exception) {
+      Cyanea.log(TAG, "Error tinting view: $view", e)
+    }
+    if (recursive && view is ViewGroup) {
+      for (i in 0 until view.childCount) {
+        view.getChildAt(i)?.let { v ->
+          tint(v)
+        }
+      }
+    }
+  }
+
   /**
    * Setup the colors for tinting drawables and color state lists on API 23+
    *
@@ -97,6 +132,18 @@ class CyaneaTinter {
       @Suppress("DEPRECATION", "ReplacePutWithAssignment")
       colors.put(original.getColor(id), resources.getColor(id))
     }
+  }
+
+  private inline fun <reified T> get(field: Field, obj: Any): T? {
+    if (!field.isAccessible) {
+      field.isAccessible = true
+    }
+    if (Modifier.isFinal(field.modifiers)) {
+      val modifiersField = Field::class.java.getDeclaredField("modifiers")
+      modifiersField.isAccessible = true
+      modifiersField.setInt(field, field.modifiers and Modifier.FINAL.inv())
+    }
+    return field.get(obj) as? T
   }
 
   @Throws(CyaneaTintException::class)

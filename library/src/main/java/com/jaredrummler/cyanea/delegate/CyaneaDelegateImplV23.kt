@@ -20,6 +20,7 @@ import com.jaredrummler.cyanea.inflator.SearchAutoCompleteProcessor
 import com.jaredrummler.cyanea.inflator.SwitchProcessor
 import com.jaredrummler.cyanea.inflator.TextInputLayoutProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
+import com.jaredrummler.cyanea.inflator.TimePickerProcessor
 import com.jaredrummler.cyanea.inflator.ViewGroupProcessor
 
 @RequiresApi(Build.VERSION_CODES.M)
@@ -56,6 +57,7 @@ internal open class CyaneaDelegateImplV23(
     processors.add(SwitchProcessor())
     processors.add(CompoundButtonProcessor())
     processors.add(DatePickerProcessor())
+    processors.add(TimePickerProcessor())
     processors.add(ImageButtonProcessor())
     processors.add(ViewGroupProcessor())
     processors.add(BottomAppBarProcessor())

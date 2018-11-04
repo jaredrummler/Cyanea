@@ -2,6 +2,7 @@ package com.jaredrummler.cyanea.demo.fragments
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -133,14 +134,38 @@ class DialogsFragment : CyaneaFragment() {
     addDialog(
         dialogLaunchersLayout,
         R.string.title_date_picker,
-        DatePickerDialog(requireActivity(),
-            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-              calendar.set(Calendar.YEAR, year)
-              calendar.set(Calendar.MONTH, monthOfYear)
-              calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-              val date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime())
-              Toast.makeText(requireContext(), date, Toast.LENGTH_LONG).show()
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        {
+          DatePickerDialog(requireActivity(),
+              DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                val date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime())
+                Toast.makeText(requireContext(), date, Toast.LENGTH_LONG).show()
+              },
+              calendar.get(Calendar.YEAR),
+              calendar.get(Calendar.MONTH),
+              calendar.get(Calendar.DAY_OF_MONTH))
+              .show()
+        }
+    )
+
+    // Time picker
+    addDialog(
+        dialogLaunchersLayout,
+        R.string.title_time_picker,
+        {
+          TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendar.set(Calendar.MINUTE, minute);
+            val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar.time)
+            Toast.makeText(requireContext(), time, Toast.LENGTH_LONG).show()
+          },
+              calendar.get(Calendar.HOUR_OF_DAY),
+              calendar.get(Calendar.MINUTE),
+              true)
+              .show()
+        }
     )
 
     // title, custom view, actions dialog
@@ -196,8 +221,13 @@ class DialogsFragment : CyaneaFragment() {
 
   private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, dialog: android.app.AlertDialog,
       marginTop: Float = 8f, marginBottom: Float = 0f) {
+    addDialog(viewGroup, stringResId, { dialog.show() }, marginTop, marginBottom)
+  }
+
+  private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, showDialog: () -> Unit,
+      marginTop: Float = 8f, marginBottom: Float = 0f) {
     val dialogLauncherButton = MaterialButton(viewGroup.context)
-    dialogLauncherButton.setOnClickListener { dialog.show() }
+    dialogLauncherButton.setOnClickListener { showDialog() }
     dialogLauncherButton.setText(stringResId)
     val params = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)

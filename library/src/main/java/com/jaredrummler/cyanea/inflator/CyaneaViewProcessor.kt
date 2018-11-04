@@ -22,6 +22,7 @@ import android.widget.DatePicker
 import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.TimePicker
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.view.menu.ListMenuItemView
@@ -310,6 +311,16 @@ internal class TextViewProcessor : CyaneaViewProcessor<TextView>() {
   }
 
   override fun getType(): Class<TextView> = TextView::class.java
+
+}
+
+internal class TimePickerProcessor : CyaneaViewProcessor<TimePicker>() {
+
+  override fun process(view: TimePicker, attrs: AttributeSet?, cyanea: Cyanea) {
+    cyanea.tinter.tint(view)
+  }
+
+  override fun getType(): Class<TimePicker> = TimePicker::class.java
 
 }
 
