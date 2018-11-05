@@ -174,9 +174,9 @@ class DialogsFragment : CyaneaFragment() {
         dialogLaunchersLayout,
         R.string.title_popup_menu,
         { v ->
-          val popupMenu = PopupMenu(requireActivity(), v)
-          popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu())
-          popupMenu.show()
+          PopupMenu(requireActivity(), v).apply {
+            menuInflater.inflate(R.menu.popup_menu, menu)
+          }.show()
         }
     )
 
