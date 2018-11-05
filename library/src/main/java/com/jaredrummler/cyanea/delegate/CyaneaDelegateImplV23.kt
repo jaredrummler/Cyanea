@@ -17,6 +17,7 @@ import com.jaredrummler.cyanea.inflator.DatePickerProcessor
 import com.jaredrummler.cyanea.inflator.ImageButtonProcessor
 import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
 import com.jaredrummler.cyanea.inflator.SearchAutoCompleteProcessor
+import com.jaredrummler.cyanea.inflator.SwitchCompatProcessor
 import com.jaredrummler.cyanea.inflator.SwitchProcessor
 import com.jaredrummler.cyanea.inflator.TextInputLayoutProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
@@ -49,19 +50,24 @@ internal open class CyaneaDelegateImplV23(
   override fun getProcessorsForTheming(): List<CyaneaViewProcessor<*>> {
     val processors = mutableListOf<CyaneaViewProcessor<*>>()
     processors.addAll(super.getProcessorsForTheming())
-    processors.add(ListMenuItemViewProcessor())
-    processors.add(AlertDialogProcessor())
-    processors.add(TextViewProcessor())
-    processors.add(CheckedTextViewProcessor())
-    processors.add(SearchAutoCompleteProcessor())
-    processors.add(SwitchProcessor())
-    processors.add(CompoundButtonProcessor())
-    processors.add(DatePickerProcessor())
-    processors.add(TimePickerProcessor())
-    processors.add(ImageButtonProcessor())
-    processors.add(ViewGroupProcessor())
-    processors.add(BottomAppBarProcessor())
-    processors.add(TextInputLayoutProcessor())
+    processors.addAll(
+        arrayOf(
+            AlertDialogProcessor(),
+            BottomAppBarProcessor(),
+            CheckedTextViewProcessor(),
+            CompoundButtonProcessor(),
+            DatePickerProcessor(),
+            ImageButtonProcessor(),
+            ListMenuItemViewProcessor(),
+            SearchAutoCompleteProcessor(),
+            SwitchProcessor(),
+            SwitchCompatProcessor(),
+            TextInputLayoutProcessor(),
+            TimePickerProcessor(),
+            TextViewProcessor(),
+            ViewGroupProcessor()
+        )
+    )
     return processors
   }
 

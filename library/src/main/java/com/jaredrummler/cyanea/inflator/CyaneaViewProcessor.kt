@@ -25,7 +25,9 @@ import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.appcompat.widget.AlertDialogLayout
+import androidx.appcompat.widget.AppCompatDrawableManager
 import androidx.appcompat.widget.SearchView.SearchAutoComplete
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.textfield.TextInputLayout
@@ -35,6 +37,7 @@ import com.jaredrummler.cyanea.delegate.CyaneaDelegate
 import com.jaredrummler.cyanea.tinting.EdgeEffectTint
 import com.jaredrummler.cyanea.tinting.WidgetTint
 import com.jaredrummler.cyanea.utils.ColorUtils
+import com.jaredrummler.cyanea.utils.Reflection
 
 abstract class CyaneaViewProcessor<T : View> {
 
@@ -273,6 +276,25 @@ internal class SwitchProcessor : CyaneaViewProcessor<Switch>() {
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       view.trackTintList = ContextCompat.getColorStateList(view.context, R.color.abc_tint_switch_track)
+    }
+  }
+
+}
+
+internal class SwitchCompatProcessor : CyaneaViewProcessor<SwitchCompat>() {
+
+  override fun getType(): Class<SwitchCompat> = SwitchCompat::class.java
+
+  @SuppressLint("RestrictedApi", "PrivateResource")
+  override fun process(view: SwitchCompat, attrs: AttributeSet?, cyanea: Cyanea) {
+    // SwitchCompat sets a ColorStateList on the drawable. Here, we get and modify the tint.
+    val manager = AppCompatDrawableManager.get()
+    Reflection.invoke<ColorStateList>(manager, "getTintList",
+        arrayOf(Context::class.java, Int::class.java),
+        view.context,
+        androidx.appcompat.R.drawable.abc_switch_thumb_material
+    )?.let { csl ->
+      cyanea.tinter.tint(csl)
     }
   }
 
