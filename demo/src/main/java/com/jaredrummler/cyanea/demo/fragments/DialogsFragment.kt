@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -168,6 +169,17 @@ class DialogsFragment : CyaneaFragment() {
         }
     )
 
+    // Popup menu
+    addDialog(
+        dialogLaunchersLayout,
+        R.string.title_popup_menu,
+        { v ->
+          val popupMenu = PopupMenu(requireActivity(), v)
+          popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu())
+          popupMenu.show()
+        }
+    )
+
     // title, custom view, actions dialog
     val customView = SeekBar(requireActivity()).apply {
       val padding = Math.round(24 * resources.displayMetrics.density)
@@ -203,6 +215,8 @@ class DialogsFragment : CyaneaFragment() {
         marginBottom = 24f
     )
 
+
+
     return view
   }
 
@@ -224,10 +238,10 @@ class DialogsFragment : CyaneaFragment() {
     addDialog(viewGroup, stringResId, { dialog.show() }, marginTop, marginBottom)
   }
 
-  private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, showDialog: () -> Unit,
+  private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, showDialog: (v: View) -> Unit,
       marginTop: Float = 8f, marginBottom: Float = 0f) {
     val dialogLauncherButton = MaterialButton(viewGroup.context)
-    dialogLauncherButton.setOnClickListener { showDialog() }
+    dialogLauncherButton.setOnClickListener { v -> showDialog(v) }
     dialogLauncherButton.setText(stringResId)
     val params = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
