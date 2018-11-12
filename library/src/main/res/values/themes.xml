@@ -37,7 +37,7 @@
     <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
     <item name="buttonStyle">@style/ColoredButton</item>
     <item name="colorAccent">@color/color_accent</item>
-    <item name="colorControlActivated">@color/color_accent_reference</item>
+    <item name="colorControlActivated">?attr/colorAccent</item>
     <item name="colorBackgroundFloating">?backgroundColorLight</item>
     <item name="colorButtonNormal">@color/color_accent</item>
     <item name="colorPrimary">@color/color_primary</item>
@@ -69,7 +69,7 @@
     <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
     <item name="buttonStyle">@style/ColoredButton</item>
     <item name="colorAccent">@color/color_accent</item>
-    <item name="colorControlActivated">@color/color_accent_reference</item>
+    <item name="colorControlActivated">?attr/colorAccent</item>
     <item name="colorBackgroundFloating">?backgroundColorLight</item>
     <item name="colorButtonNormal">@color/color_accent</item>
     <item name="colorPrimary">@color/color_primary</item>
@@ -101,7 +101,7 @@
     <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
     <item name="buttonStyle">@style/ColoredButton</item>
     <item name="colorAccent">@color/color_accent</item>
-    <item name="colorControlActivated">@color/color_accent_reference</item>
+    <item name="colorControlActivated">?attr/colorAccent</item>
     <item name="colorBackgroundFloating">?backgroundColorLight</item>
     <item name="colorButtonNormal">@color/color_accent</item>
     <item name="colorPrimary">@color/color_primary</item>
@@ -133,7 +133,7 @@
     <item name="buttonBarButtonStyle">@style/AlertDialogButtonStyle</item>
     <item name="buttonStyle">@style/ColoredButton</item>
     <item name="colorAccent">@color/color_accent</item>
-    <item name="colorControlActivated">@color/color_accent_reference</item>
+    <item name="colorControlActivated">?attr/colorAccent</item>
     <item name="colorBackgroundFloating">?backgroundColorLight</item>
     <item name="colorButtonNormal">@color/color_accent</item>
     <item name="colorPrimary">@color/color_primary</item>
