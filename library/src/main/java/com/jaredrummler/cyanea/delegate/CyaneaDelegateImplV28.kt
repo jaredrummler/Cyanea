@@ -13,7 +13,7 @@ internal open class CyaneaDelegateImplV28(
     private val activity: Activity,
     cyanea: Cyanea,
     themeResId: Int)
-  : CyaneaDelegateImplV23(activity, cyanea, themeResId) {
+  : CyaneaDelegateImplV24(activity, cyanea, themeResId) {
 
   override fun recreateActivity() {
     tintBars()

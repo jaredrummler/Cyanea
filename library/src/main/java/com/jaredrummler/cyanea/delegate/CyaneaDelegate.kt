@@ -109,6 +109,8 @@ abstract class CyaneaDelegate {
         CyaneaDelegateImplV21(activity, cyanea, themeResId)
       } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
         CyaneaDelegateImplV19(activity, cyanea, themeResId)
+      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        CyaneaDelegateImplV24(activity, cyanea, themeResId)
       } else {
         CyaneaDelegateImplBase(activity, cyanea, themeResId)
       }
