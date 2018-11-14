@@ -127,10 +127,10 @@ class CyaneaTinter {
    * @param original The original resources. i.e. not the [CyaneaResources]
    * @param resources The [CyaneaResources] used to tint [drawables][Drawable] and [colors][ColorStateList]
    */
+  @Suppress("DEPRECATION")
   internal fun setup(original: Resources, resources: CyaneaResources) {
-    COLOR_IDS.forEachIndexed { _, id ->
-      @Suppress("DEPRECATION", "ReplacePutWithAssignment")
-      colors.put(original.getColor(id), resources.getColor(id))
+    COLOR_IDS.forEach { id ->
+      colors[original.getColor(id)] = resources.getColor(id)
     }
   }
 
