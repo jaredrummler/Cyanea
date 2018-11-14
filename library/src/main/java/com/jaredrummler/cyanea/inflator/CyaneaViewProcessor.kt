@@ -319,6 +319,11 @@ internal class TextInputLayoutProcessor : CyaneaViewProcessor<TextInputLayout>()
     if (view.boxStrokeColor == Cyanea.getOriginalColor(R.color.color_accent_reference)) {
       view.boxStrokeColor = cyanea.accent
     }
+    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+      Reflection.getFieldValue<ColorStateList?>(view, "focusedTextColor")?.let { csl ->
+        cyanea.tinter.tint(csl)
+      }
+    }
   }
 
 }
