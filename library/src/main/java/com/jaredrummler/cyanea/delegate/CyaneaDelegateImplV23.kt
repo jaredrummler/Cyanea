@@ -3,8 +3,10 @@ package com.jaredrummler.cyanea.delegate
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
@@ -19,10 +21,10 @@ import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
 import com.jaredrummler.cyanea.inflator.SearchAutoCompleteProcessor
 import com.jaredrummler.cyanea.inflator.SwitchCompatProcessor
 import com.jaredrummler.cyanea.inflator.SwitchProcessor
-import com.jaredrummler.cyanea.inflator.TextInputLayoutProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
 import com.jaredrummler.cyanea.inflator.TimePickerProcessor
 import com.jaredrummler.cyanea.inflator.ViewGroupProcessor
+import com.jaredrummler.cyanea.utils.Reflection
 
 @RequiresApi(Build.VERSION_CODES.M)
 @TargetApi(Build.VERSION_CODES.M)
@@ -35,6 +37,45 @@ internal open class CyaneaDelegateImplV23(
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     if (cyanea.isThemeModified) {
+      preloadColors()
+
+
+    }
+  }
+
+  @SuppressLint("PrivateApi")
+  private fun preloadColors() {
+    for ((id, color) in hashMapOf<Int, Int>().apply {
+      put(R.color.color_accent, cyanea.accent)
+      put(R.color.color_primary, cyanea.primary)
+    }) {
+      if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+        try {
+          val field = Reflection.getField(activity.resources, "sPreloadedColorStateLists") ?: return
+
+          val value = TypedValue()
+          val getValueMethod = Reflection.getMethod(activity.resources, "getValue",
+              Int::class.java, TypedValue::class.java, Boolean::class.java) ?: return
+          getValueMethod.invoke(activity.resources, id, value, true)
+          val key = value.assetCookie.toLong() shl 32 or value.data.toLong()
+
+          val csl = ColorStateList.valueOf(color)
+
+          Class.forName("android.content.res.ColorStateList\$ColorStateListFactory").let { klass ->
+            val constructor = klass.getConstructor(ColorStateList::class.java) ?: return
+            if (!constructor.isAccessible) constructor.isAccessible = true
+            constructor.newInstance(csl)?.let { factory ->
+              field.get(null)?.let { factories ->
+                Reflection.getMethod(factories, "put", Long::class.java, Object::class.java)
+                    ?.invoke(factories, key, factory)
+              }
+            }
+          }
+        } catch (ex: Throwable) {
+          Cyanea.log(TAG, "Error preloading colors", ex)
+        }
+      }
+
       PRELOADED_COLORS.forEach {
         // Load and update the colors before views are inflated
         activity.resources.getColorStateList(it, activity.theme)
@@ -62,7 +103,6 @@ internal open class CyaneaDelegateImplV23(
             SearchAutoCompleteProcessor(),
             SwitchProcessor(),
             SwitchCompatProcessor(),
-            TextInputLayoutProcessor(),
             TimePickerProcessor(),
             TextViewProcessor(),
             ViewGroupProcessor()
@@ -72,6 +112,8 @@ internal open class CyaneaDelegateImplV23(
   }
 
   companion object {
+
+    private const val TAG = "CyaneaDelegateImplV23"
 
     @SuppressLint("PrivateResource")
     private val PRELOADED_COLORS = intArrayOf(
