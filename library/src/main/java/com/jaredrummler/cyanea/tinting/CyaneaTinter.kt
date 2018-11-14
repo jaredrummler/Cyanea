@@ -61,27 +61,39 @@ class CyaneaTinter {
    */
   fun tint(colorStateList: ColorStateList?): ColorStateList? {
     return colorStateList?.let { csl ->
-      try {
-        Reflection.invoke<IntArray?>(csl, "getColors")?.let { colors ->
-          var changed = false
-          for (i in colors.indices) {
-            this.colors[colors[i]]?.let { color ->
-              if (color != colors[i]) {
-                colors[i] = color
-                changed = true
-              }
-            } ?: run {
-              val stripAlpha = ColorUtils.stripAlpha(colors[i])
-              this.colors[stripAlpha]?.run {
-                val color = Color.argb(Color.alpha(colors[i]), Color.red(this), Color.green(this), Color.blue(this))
-                colors[i] = color
-                changed = true
-              }
+      fun updateColors(colors: IntArray): Boolean {
+        var changed = false
+        for (i in colors.indices) {
+          this.colors[colors[i]]?.let { color ->
+            if (color != colors[i]) {
+              colors[i] = color
+              changed = true
+            }
+          } ?: run {
+            val stripAlpha = ColorUtils.stripAlpha(colors[i])
+            this.colors[stripAlpha]?.run {
+              val color = Color.argb(Color.alpha(colors[i]), Color.red(this), Color.green(this), Color.blue(this))
+              colors[i] = color
+              changed = true
             }
           }
-          if (changed && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Reflection.invoke<Any?>(csl, "onColorsChanged")
+        }
+        return changed
+      }
+
+      try {
+        var changed = false
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+          Reflection.getFieldValue<IntArray?>(csl, "mColors")?.let { colors ->
+            changed = updateColors(colors)
           }
+        } else {
+          Reflection.invoke<IntArray?>(csl, "getColors")?.let { colors ->
+            changed = updateColors(colors)
+          }
+        }
+        if (changed && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          Reflection.invoke<Any?>(csl, "onColorsChanged")
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error tinting ColorStateList", e)
