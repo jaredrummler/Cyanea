@@ -9,10 +9,13 @@ import android.view.View
 import androidx.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
+import com.jaredrummler.cyanea.inflator.BottomAppBarProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaContextWrapper
 import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
+import com.jaredrummler.cyanea.inflator.FloatingActionButtonProcessor
 import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
+import com.jaredrummler.cyanea.inflator.TextInputLayoutProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
 import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 import com.jaredrummler.cyanea.tinting.EdgeEffectTint
@@ -131,7 +134,10 @@ internal open class CyaneaDelegateImplBase(
     return arrayListOf(
         ListMenuItemViewProcessor(),
         AlertDialogProcessor(),
-        TextViewProcessor()
+        TextViewProcessor(),
+        BottomAppBarProcessor(),
+        FloatingActionButtonProcessor(),
+        TextInputLayoutProcessor()
     )
   }
 

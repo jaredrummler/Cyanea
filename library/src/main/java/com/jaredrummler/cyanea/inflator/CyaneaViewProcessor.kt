@@ -30,6 +30,7 @@ import androidx.appcompat.widget.SearchView.SearchAutoComplete
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
@@ -219,6 +220,16 @@ internal class DatePickerProcessor : CyaneaViewProcessor<DatePicker>() {
         }
       }
     }
+  }
+
+}
+
+internal class FloatingActionButtonProcessor : CyaneaViewProcessor<FloatingActionButton>() {
+
+  override fun getType(): Class<FloatingActionButton> = FloatingActionButton::class.java
+
+  override fun process(view: FloatingActionButton, attrs: AttributeSet?, cyanea: Cyanea) {
+    cyanea.tinter.tint(view.backgroundTintList)
   }
 
 }
