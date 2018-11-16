@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.jaredrummler.cyanea.demo.DrawerActivity
 import com.jaredrummler.cyanea.demo.R
+import com.jaredrummler.cyanea.demo.RecyclerViewActivity
 
 class OtherFragment : Fragment() {
 
@@ -22,9 +23,11 @@ class OtherFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     container = view.findViewById(R.id.container)
-
     addButton(R.string.drawer_layout, {
       startActivity(Intent(requireActivity(), DrawerActivity::class.java))
+    })
+    addButton(R.string.recycler_view, {
+      startActivity(Intent(requireActivity(), RecyclerViewActivity::class.java))
     })
   }
 

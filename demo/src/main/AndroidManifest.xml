@@ -25,6 +25,9 @@
     <activity
         android:name=".DrawerActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
+    <activity
+        android:name=".RecyclerViewActivity"
+        android:theme="@style/AppTheme"/>
   </application>
 
 </manifest>

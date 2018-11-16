@@ -60,7 +60,7 @@
   <string name="open_drawer">Open Drawer</string>
   <string name="close_drawer">Close Drawer</string>
   <string name="hello_world">Hello, World!</string>
-
+  <string name="recycler_view">RecyclerView</string>
 
   <string-array name="tabs">
     <item>@string/tab_about</item>
