@@ -4,11 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
+import com.jaredrummler.cyanea.demo.R.string
 import com.jaredrummler.cyanea.demo.fragments.AboutFragment
 import com.jaredrummler.cyanea.demo.fragments.DialogsFragment
 import com.jaredrummler.cyanea.demo.fragments.OtherFragment
@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.bar
 import kotlinx.android.synthetic.main.activity_main.fab
 import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.activity_main.viewPager
+
+
 
 class MainActivity : CyaneaAppCompatActivity() {
 
@@ -44,15 +46,23 @@ class MainActivity : CyaneaAppCompatActivity() {
     bar.setOnMenuItemClickListener { item ->
       when (item.itemId) {
         R.id.action_share -> {
-          Toast.makeText(applicationContext, "TODO: implement", Toast.LENGTH_LONG).show()
+          launchShareIntent()
         }
         R.id.action_github -> {
-          startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/Cyanea")))
+          startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(string.github_project_url))))
         }
         else -> return@setOnMenuItemClickListener false
       }
       return@setOnMenuItemClickListener true
     }
+  }
+
+  private fun launchShareIntent() {
+    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+      putExtra(Intent.EXTRA_TEXT, getString(string.share_cyanea_message))
+      type = "text/plain"
+    }
+    startActivity(Intent.createChooser(sendIntent, resources.getText(R.string.share)))
   }
 
   override fun getThemeResId(): Int = cyanea.themes.actionBarTheme

@@ -61,6 +61,10 @@
   <string name="close_drawer">Close Drawer</string>
   <string name="hello_world">Hello, World!</string>
   <string name="recycler_view">RecyclerView</string>
+  <string name="share_cyanea_message">Checkout Cyanea on GitHub, an open source theme engine for Android.
+    https://github.com/jaredrummler/Cyanea #AndroidDev</string>
+
+  <string name="github_project_url" translatable="false">https://github.com/jaredrummler/Cyanea</string>
 
   <string-array name="tabs">
     <item>@string/tab_about</item>
