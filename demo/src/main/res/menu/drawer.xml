@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:id="@+id/group1">
+
+    <item
+        android:id="@+id/item_twitter"
+        android:checkable="true"
+        android:icon="@drawable/ic_twitter_24dp"
+        android:title="Twitter"/>
+
+    <item
+        android:id="@+id/item_facebook"
+        android:checkable="true"
+        android:icon="@drawable/ic_facebook_24dp"
+        android:title="Facebook"/>
+
+    <item
+        android:id="@+id/item_instagram"
+        android:checkable="true"
+        android:icon="@drawable/ic_instagram_24dp"
+        android:title="Instagram"/>
+
+  </group>
+
+  <group android:id="@+id/group2">
+
+    <item
+        android:id="@+id/item_google"
+        android:checkable="true"
+        android:icon="@drawable/ic_google_24dp"
+        android:title="Google"/>
+
+    <item
+        android:id="@+id/item_apple"
+        android:checkable="true"
+        android:icon="@drawable/ic_apple_24dp"
+        android:title="Apple"/>
+
+  </group>
+
+</menu>

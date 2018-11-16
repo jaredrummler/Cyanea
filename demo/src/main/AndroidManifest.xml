@@ -22,6 +22,9 @@
     <activity
         android:name=".themes.ThemePickerActivity"
         android:label="@string/theme_picker"/>
+    <activity
+        android:name=".DrawerActivity"
+        android:theme="@style/AppTheme.NoActionBar"/>
   </application>
 
 </manifest>

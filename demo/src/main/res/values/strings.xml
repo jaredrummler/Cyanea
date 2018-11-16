@@ -8,6 +8,7 @@
   <string name="tab_about">About</string>
   <string name="tab_widgets">Widgets</string>
   <string name="tab_dialogs">Dialogs</string>
+  <string name="tab_other">Other</string>
 
   <string name="cyanea_headline">A theme engine for Android</string>
   <string name="cyanea_about">Named after Octopus Cyanea which is adept at camouflage and not only can change color frequently, but also can change the patterns on and texture of its skin.</string>
@@ -55,10 +56,17 @@
   <string name="too_long_negative">This is a long Decline message. It is so long that it spans multiple lines on normal screens.</string>
   <string name="line">"Line "</string>
 
+  <string name="drawer_layout">Drawer Layout</string>
+  <string name="open_drawer">Open Drawer</string>
+  <string name="close_drawer">Close Drawer</string>
+  <string name="hello_world">Hello, World!</string>
+
+
   <string-array name="tabs">
     <item>@string/tab_about</item>
     <item>@string/tab_widgets</item>
     <item>@string/tab_dialogs</item>
+    <item>@string/tab_other</item>
   </string-array>
 
   <string-array name="cyanea_topics">

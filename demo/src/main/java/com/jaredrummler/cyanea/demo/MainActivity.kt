@@ -3,18 +3,15 @@ package com.jaredrummler.cyanea.demo
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
 import com.jaredrummler.cyanea.demo.fragments.AboutFragment
 import com.jaredrummler.cyanea.demo.fragments.DialogsFragment
+import com.jaredrummler.cyanea.demo.fragments.OtherFragment
 import com.jaredrummler.cyanea.demo.fragments.WidgetsFragment
 import com.jaredrummler.cyanea.demo.themes.ThemePickerActivity
 import kotlinx.android.synthetic.main.activity_main.bar
@@ -72,6 +69,7 @@ class MyPagerAdapter(private val activity: FragmentActivity)
       activity.getString(R.string.tab_about) -> AboutFragment()
       activity.getString(R.string.tab_widgets) -> WidgetsFragment()
       activity.getString(R.string.tab_dialogs) -> DialogsFragment()
+      activity.getString(R.string.tab_other) -> OtherFragment()
       else -> throw IllegalArgumentException("No fragment associated with tab '${items[position]}'")
     }
   }
@@ -79,19 +77,5 @@ class MyPagerAdapter(private val activity: FragmentActivity)
   override fun getPageTitle(position: Int): CharSequence? = items[position]
 
   override fun getCount(): Int = items.size
-
-}
-
-class DummyFragment : Fragment() {
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return FrameLayout(requireActivity())
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    view.setBackgroundColor(Cyanea.instance.backgroundColor)
-  }
-
 
 }

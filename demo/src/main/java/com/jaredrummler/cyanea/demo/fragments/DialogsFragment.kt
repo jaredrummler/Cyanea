@@ -1,6 +1,5 @@
 package com.jaredrummler.cyanea.demo.fragments
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -22,10 +21,18 @@ import java.util.Calendar
 
 class DialogsFragment : CyaneaFragment() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-    val view = inflater.inflate(R.layout.fragment_dialogs, container, false)
+  private lateinit var dialogLaunchersLayout: ViewGroup
 
-    val dialogLaunchersLayout = view.findViewById<ViewGroup>(R.id.dialog_launcher_buttons_layout)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    return inflater.inflate(R.layout.fragment_dialogs, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    dialogLaunchersLayout = view.findViewById(R.id.dialog_launcher_buttons_layout)
+    addDialogs()
+  }
+
+  private fun addDialogs() {
     val choices = arrayOf<CharSequence>("Choice1", "Choice2", "Choice3")
     val choicesInitial = booleanArrayOf(false, true, false)
     val multiLineMessage = StringBuilder()
@@ -41,7 +48,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // message, 2 actions
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.message_2_actions,
         AlertDialog.Builder(requireActivity())
             .setMessage(message)
@@ -50,7 +56,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, 2 actions
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_2_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -59,7 +64,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, message, 3 actions (short)
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_message_3_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -70,7 +74,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, message, 3 actions (long)
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_message_3_long_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -81,7 +84,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // long title, message, 1 action (too long)
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.long_title_message_too_long_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(resources.getString(R.string.long_title))
@@ -92,7 +94,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // icon, title, message, 2 actions
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.icon_title_message_2_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -103,7 +104,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, auto-action choice dialog
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_choices_as_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -112,7 +112,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, checkboxes, 2 actions dialog
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_checkboxes_2_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -122,7 +121,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, radiobutton, 2 actions dialog
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_radiobuttons_2_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -133,7 +131,6 @@ class DialogsFragment : CyaneaFragment() {
     // Date picker
     val calendar = Calendar.getInstance()
     addDialog(
-        dialogLaunchersLayout,
         R.string.title_date_picker,
         {
           DatePickerDialog(requireActivity(),
@@ -153,7 +150,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // Time picker
     addDialog(
-        dialogLaunchersLayout,
         R.string.title_time_picker,
         {
           TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
@@ -171,7 +167,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // Popup menu
     addDialog(
-        dialogLaunchersLayout,
         R.string.title_popup_menu,
         { v ->
           PopupMenu(requireActivity(), v).apply {
@@ -186,7 +181,6 @@ class DialogsFragment : CyaneaFragment() {
       setPadding(padding, padding, padding, padding)
     }
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_slider_2_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -196,7 +190,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, scrolling long view, actions dialog
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_scrolling_2_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -206,7 +199,6 @@ class DialogsFragment : CyaneaFragment() {
 
     // title, short buttons
     addDialogLauncher(
-        dialogLaunchersLayout,
         R.string.title_2_short_actions,
         AlertDialog.Builder(requireActivity())
             .setTitle(title)
@@ -214,40 +206,35 @@ class DialogsFragment : CyaneaFragment() {
             .setNeutralButton(R.string.short_text_2, null),
         marginBottom = 24f
     )
-
-
-
-    return view
   }
 
-  @SuppressLint("RestrictedApi")
-  private fun addDialogLauncher(viewGroup: ViewGroup, @StringRes stringResId: Int, builder: AlertDialog.Builder,
+  private fun addDialogLauncher(@StringRes stringResId: Int, builder: AlertDialog.Builder,
       marginTop: Float = 8f, marginBottom: Float = 0f) {
-    val dialogLauncherButton = MaterialButton(viewGroup.context)
+    val dialogLauncherButton = MaterialButton(requireActivity())
     dialogLauncherButton.setOnClickListener { builder.show() }
     dialogLauncherButton.setText(stringResId)
     val params = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     params.topMargin = Math.round(marginTop * resources.displayMetrics.density)
     params.bottomMargin = Math.round(marginBottom * resources.displayMetrics.density)
-    viewGroup.addView(dialogLauncherButton, params)
+    dialogLaunchersLayout.addView(dialogLauncherButton, params)
   }
 
-  private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, dialog: android.app.AlertDialog,
-      marginTop: Float = 8f, marginBottom: Float = 0f) {
-    addDialog(viewGroup, stringResId, { dialog.show() }, marginTop, marginBottom)
+  private fun addDialog(@StringRes stringResId: Int, dialog: android.app.AlertDialog, marginTop: Float = 8f,
+      marginBottom: Float = 0f) {
+    addDialog(stringResId, { dialog.show() }, marginTop, marginBottom)
   }
 
-  private fun addDialog(viewGroup: ViewGroup, @StringRes stringResId: Int, showDialog: (v: View) -> Unit,
+  private fun addDialog(@StringRes stringResId: Int, showDialog: (v: View) -> Unit,
       marginTop: Float = 8f, marginBottom: Float = 0f) {
-    val dialogLauncherButton = MaterialButton(viewGroup.context)
+    val dialogLauncherButton = MaterialButton(requireActivity())
     dialogLauncherButton.setOnClickListener { v -> showDialog(v) }
     dialogLauncherButton.setText(stringResId)
     val params = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
     params.topMargin = Math.round(marginTop * resources.displayMetrics.density)
     params.bottomMargin = Math.round(marginBottom * resources.displayMetrics.density)
-    viewGroup.addView(dialogLauncherButton, params)
+    dialogLaunchersLayout.addView(dialogLauncherButton, params)
   }
 
 }

@@ -2,6 +2,7 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.Cyanea.Dark"/>
+  <style name="AppTheme.NoActionBar" parent="Theme.Cyanea.Dark.NoActionBar"/>
 
   <style name="TabTextAppearance" parent="@style/TextAppearance.MaterialComponents.Tab">
     <item name="android:fontFamily">@font/font_raleway_medium</item>
