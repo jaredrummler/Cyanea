@@ -19,15 +19,15 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="NewApi">
 
   <style name="Theme.Cyanea.Dark" parent="@style/Theme.MaterialComponents">
-    <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="actionBarPopupTheme">@style/ThemeOverlay.MaterialComponents.Dark</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
     <item name="actionModeBackground">@color/color_primary</item>
     <item name="actionOverflowMenuStyle">@style/PopupMenu.Dark</item>
     <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
     <item name="android:itemBackground">@drawable/bg_button_primary</item>
     <item name="android:listPopupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="android:popupMenuStyle">@style/PopupMenu.Dark</item>
-    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.MaterialComponents.Dark</item>
     <item name="android:popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="android:windowBackground">@drawable/color_background_dark</item>
     <item name="android:windowContentOverlay">@null</item>
@@ -44,7 +44,7 @@
     <item name="colorPrimaryDark">@color/color_primary_dark</item>
     <item name="listPopupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="popupMenuStyle">@style/PopupMenu.Dark</item>
-    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="popupTheme">@style/ThemeOverlay.MaterialComponents.Dark</item>
     <item name="popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="menuIconColor">@color/menu_icon_color_light</item>
@@ -52,14 +52,14 @@
   </style>
 
   <style name="Theme.Cyanea.Dark.LightActionBar" parent="@style/Theme.MaterialComponents">
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
     <item name="actionModeBackground">@color/color_primary</item>
     <item name="actionOverflowMenuStyle">@style/PopupMenu.Dark</item>
     <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
     <item name="android:itemBackground">@drawable/bg_button_primary</item>
     <item name="android:listPopupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="android:popupMenuStyle">@style/PopupMenu.Dark</item>
-    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.MaterialComponents.Dark</item>
     <item name="android:popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="android:windowBackground">@drawable/color_background_dark</item>
     <item name="android:windowContentOverlay">@null</item>
@@ -76,7 +76,7 @@
     <item name="colorPrimaryDark">@color/color_primary_dark</item>
     <item name="listPopupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="popupMenuStyle">@style/PopupMenu.Dark</item>
-    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <item name="popupTheme">@style/ThemeOverlay.MaterialComponents.Dark</item>
     <item name="popupWindowStyle">@style/PopupMenu.Dark</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="menuIconColor">@color/menu_icon_color_dark</item>
@@ -84,14 +84,14 @@
   </style>
 
   <style name="Theme.Cyanea.Light" parent="@style/Theme.MaterialComponents.Light">
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.ActionBar</item>
     <item name="actionModeBackground">@color/color_primary</item>
     <item name="actionOverflowMenuStyle">@style/PopupMenu.Light</item>
     <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
     <item name="android:itemBackground">@drawable/bg_button_primary</item>
     <item name="android:listPopupWindowStyle">@style/PopupMenu.Light</item>
     <item name="android:popupMenuStyle">@style/PopupMenu.Light</item>
-    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
     <item name="android:popupWindowStyle">@style/PopupMenu.Light</item>
     <item name="android:windowBackground">@drawable/color_background_light</item>
     <item name="android:windowContentOverlay">@null</item>
@@ -108,7 +108,7 @@
     <item name="colorPrimaryDark">@color/color_primary_dark</item>
     <item name="listPopupWindowStyle">@style/PopupMenu.Light</item>
     <item name="popupMenuStyle">@style/PopupMenu.Light</item>
-    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
     <item name="popupWindowStyle">@style/PopupMenu.Light</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="menuIconColor">@color/menu_icon_color_dark</item>
@@ -116,14 +116,14 @@
   </style>
 
   <style name="Theme.Cyanea.Light.DarkActionBar" parent="@style/Theme.MaterialComponents.Light.DarkActionBar">
-    <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
     <item name="actionModeBackground">@color/color_primary</item>
     <item name="actionOverflowMenuStyle">@style/PopupMenu.Light</item>
     <item name="android:colorBackgroundFloating">?backgroundColorLight</item>
     <item name="android:itemBackground">@drawable/bg_button_primary</item>
     <item name="android:listPopupWindowStyle">@style/PopupMenu.Light</item>
     <item name="android:popupMenuStyle">@style/PopupMenu.Light</item>
-    <item name="android:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="android:popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
     <item name="android:popupWindowStyle">@style/PopupMenu.Light</item>
     <item name="android:windowBackground">@drawable/color_background_light</item>
     <item name="android:windowContentOverlay">@null</item>
@@ -140,7 +140,7 @@
     <item name="colorPrimaryDark">@color/color_primary_dark</item>
     <item name="listPopupWindowStyle">@style/PopupMenu.Light</item>
     <item name="popupMenuStyle">@style/PopupMenu.Light</item>
-    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
     <item name="popupWindowStyle">@style/PopupMenu.Light</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="menuIconColor">@color/menu_icon_color_light</item>
