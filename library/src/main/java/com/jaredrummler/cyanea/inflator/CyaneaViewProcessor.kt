@@ -213,9 +213,9 @@ internal class DatePickerProcessor : CyaneaViewProcessor<DatePicker>() {
   override fun getType(): Class<DatePicker> = DatePicker::class.java
 
   override fun process(view: DatePicker, attrs: AttributeSet?, cyanea: Cyanea) {
-    val date_picker_header = view.context.resources.getIdentifier("date_picker_header", "id", "android")
-    if (date_picker_header != 0) {
-      view.findViewById<ViewGroup>(date_picker_header)?.let { layout ->
+    val datePickerId = view.context.resources.getIdentifier("date_picker_header", "id", "android")
+    if (datePickerId != 0) {
+      view.findViewById<ViewGroup>(datePickerId)?.let { layout ->
         cyanea.tinter.tint(layout.background)
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
           cyanea.tinter.tint(layout.backgroundTintList)
