@@ -15,6 +15,7 @@ import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
 import com.jaredrummler.cyanea.inflator.FloatingActionButtonProcessor
 import com.jaredrummler.cyanea.inflator.ListMenuItemViewProcessor
+import com.jaredrummler.cyanea.inflator.NavigationViewProcessor
 import com.jaredrummler.cyanea.inflator.TextInputLayoutProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
 import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
@@ -137,7 +138,8 @@ internal open class CyaneaDelegateImplBase(
         TextViewProcessor(),
         BottomAppBarProcessor(),
         FloatingActionButtonProcessor(),
-        TextInputLayoutProcessor()
+        TextInputLayoutProcessor(),
+        NavigationViewProcessor()
     )
   }
 

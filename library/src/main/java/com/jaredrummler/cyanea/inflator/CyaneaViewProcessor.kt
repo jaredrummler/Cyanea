@@ -6,6 +6,7 @@ import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.os.Build.VERSION
@@ -31,6 +32,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputLayout
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
@@ -260,6 +262,36 @@ internal class ListMenuItemViewProcessor : CyaneaViewProcessor<View>() {
 
   companion object {
     private const val CLASS_NAME = "com.android.internal.view.menu.ListMenuItemView"
+  }
+
+}
+
+internal class NavigationViewProcessor : CyaneaViewProcessor<NavigationView>() {
+
+  override fun getType(): Class<NavigationView> = NavigationView::class.java
+
+  override fun process(view: NavigationView, attrs: AttributeSet?, cyanea: Cyanea) {
+    val baseColor = if (cyanea.isDark) Color.WHITE else Color.BLACK
+    val unselectedTextColor = ColorUtils.adjustAlpha(baseColor, 0.87f)
+    val unselectedIconColor = ColorUtils.adjustAlpha(baseColor, 0.54f)
+    val checkedColor = cyanea.accent
+
+    view.apply {
+      itemTextColor = ColorStateList(
+          arrayOf(
+              intArrayOf(-android.R.attr.state_checked),
+              intArrayOf(android.R.attr.state_checked)
+          ),
+          intArrayOf(unselectedTextColor, checkedColor)
+      )
+      itemIconTintList = ColorStateList(
+          arrayOf(
+              intArrayOf(-android.R.attr.state_checked),
+              intArrayOf(android.R.attr.state_checked)
+          ),
+          intArrayOf(unselectedIconColor, checkedColor)
+      )
+    }
   }
 
 }
