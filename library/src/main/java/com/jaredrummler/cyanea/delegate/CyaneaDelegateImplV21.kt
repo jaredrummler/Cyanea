@@ -10,10 +10,10 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
+import com.jaredrummler.cyanea.getKey
 import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 
@@ -31,7 +31,7 @@ internal open class CyaneaDelegateImplV21(
       when (Build.VERSION.SDK_INT) {
         Build.VERSION_CODES.LOLLIPOP,
         Build.VERSION_CODES.LOLLIPOP_MR1 -> {
-          preloadAccentColor()
+          preloadColors()
         }
       }
     }
@@ -71,27 +71,19 @@ internal open class CyaneaDelegateImplV21(
     }
   }
 
-  private fun preloadAccentColor() {
-    for (id in arrayOf(
-        R.color.color_accent
-    )) {
-      try {
-        val field = Reflection.getField(activity.resources, "sPreloadedColorStateLists") ?: return
-
-        val value = TypedValue()
-        val getValueMethod = Reflection.getMethod(activity.resources, "getValue",
-            Int::class.java, TypedValue::class.java, Boolean::class.java) ?: return
-        getValueMethod.invoke(activity.resources, id, value, true)
-        val key = value.assetCookie.toLong() shl 32 or value.data.toLong()
-
-        val csl = ColorStateList.valueOf(cyanea.accent)
-
-        field.get(null)?.let { cache ->
-          Reflection.getMethod(cache, "put", Long::class.java, Object::class.java)?.invoke(cache, key, csl)
-        }
-      } catch (ex: Throwable) {
-        Cyanea.log(TAG, "Error preloading colors", ex)
+  private fun preloadColors() {
+    try {
+      val cache = Reflection.getFieldValue<Any?>(activity.resources, "sPreloadedColorStateLists") ?: return
+      val method = Reflection.getMethod(cache, "put", Long::class.java, Object::class.java) ?: return
+      for ((id, color) in hashMapOf<Int, Int>().apply {
+        put(R.color.color_accent, cyanea.accent)
+      }) {
+        val csl = ColorStateList.valueOf(color)
+        val key = activity.resources.getKey(id)
+        method.invoke(cache, key, csl)
       }
+    } catch (ex: Throwable) {
+      Cyanea.log(TAG, "Error preloading colors", ex)
     }
   }
 

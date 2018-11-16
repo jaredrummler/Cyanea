@@ -6,10 +6,10 @@ import android.app.Activity
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
+import com.jaredrummler.cyanea.getKey
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
 import com.jaredrummler.cyanea.inflator.BottomAppBarProcessor
 import com.jaredrummler.cyanea.inflator.CheckedTextViewProcessor
@@ -38,53 +38,47 @@ internal open class CyaneaDelegateImplV23(
     super.onCreate(savedInstanceState)
     if (cyanea.isThemeModified) {
       preloadColors()
-
-
     }
   }
 
   @SuppressLint("PrivateApi")
   private fun preloadColors() {
-    for ((id, color) in hashMapOf<Int, Int>().apply {
-      put(R.color.color_accent, cyanea.accent)
-      put(R.color.color_primary, cyanea.primary)
-    }) {
-      if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
-        try {
-          val field = Reflection.getField(activity.resources, "sPreloadedColorStateLists") ?: return
+    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+      try {
+        val klass = Class.forName("android.content.res.ColorStateList\$ColorStateListFactory")
+        val constructor = klass.getConstructor(ColorStateList::class.java).apply {
+          if (!isAccessible) isAccessible = true
+        } ?: return
 
-          val value = TypedValue()
-          val getValueMethod = Reflection.getMethod(activity.resources, "getValue",
-              Int::class.java, TypedValue::class.java, Boolean::class.java) ?: return
-          getValueMethod.invoke(activity.resources, id, value, true)
-          val key = value.assetCookie.toLong() shl 32 or value.data.toLong()
+        val cache = Reflection.getFieldValue<Any?>(activity.resources, "sPreloadedColorStateLists") ?: return
+        val method = Reflection.getMethod(cache, "put", Long::class.java, Object::class.java) ?: return
 
-          val csl = ColorStateList.valueOf(color)
-
-          Class.forName("android.content.res.ColorStateList\$ColorStateListFactory").let { klass ->
-            val constructor = klass.getConstructor(ColorStateList::class.java) ?: return
-            if (!constructor.isAccessible) constructor.isAccessible = true
-            constructor.newInstance(csl)?.let { factory ->
-              field.get(null)?.let { factories ->
-                Reflection.getMethod(factories, "put", Long::class.java, Object::class.java)
-                    ?.invoke(factories, key, factory)
-              }
+        for ((id, color) in hashMapOf<Int, Int>().apply {
+          put(R.color.color_accent, cyanea.accent)
+          put(R.color.color_primary, cyanea.primary)
+        }) {
+          try {
+            constructor.newInstance(ColorStateList.valueOf(color))?.let { factory ->
+              val key = activity.resources.getKey(id)
+              method.invoke(cache, key, factory)
             }
+          } catch (ex: Throwable) {
+            Cyanea.log(TAG, "Error preloading colors", ex)
           }
-        } catch (ex: Throwable) {
-          Cyanea.log(TAG, "Error preloading colors", ex)
         }
+      } catch (ex: Throwable) {
+        Cyanea.log(TAG, "Error preloading colors", ex)
       }
+    }
 
-      PRELOADED_COLORS.forEach {
-        // Load and update the colors before views are inflated
-        activity.resources.getColorStateList(it, activity.theme)
-      }
+    PRELOADED_COLORS.forEach {
+      // Load and update the colors before views are inflated
+      activity.resources.getColorStateList(it, activity.theme)
+    }
 
-      PRELOADED_DRAWABLES.forEach {
-        // Update the drawable's ConstantState before views are inflated.
-        activity.resources.getDrawable(it, activity.theme)
-      }
+    PRELOADED_DRAWABLES.forEach {
+      // Update the drawable's ConstantState before views are inflated.
+      activity.resources.getDrawable(it, activity.theme)
     }
   }
 
