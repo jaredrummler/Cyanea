@@ -103,7 +103,11 @@ class ColorUtils private constructor() {
     @JvmStatic
     @ColorInt
     fun adjustAlpha(@ColorInt color: Int, @FloatRange(from = 0.0, to = 1.0) factor: Float): Int {
-      return (factor * 255.0f).toInt() shl 24 or (color and 0x00ffffff)
+      val alpha = Math.round(Color.alpha(color) * factor)
+      val red = Color.red(color)
+      val green = Color.green(color)
+      val blue = Color.blue(color)
+      return Color.argb(alpha, red, green, blue)
     }
 
     /**
