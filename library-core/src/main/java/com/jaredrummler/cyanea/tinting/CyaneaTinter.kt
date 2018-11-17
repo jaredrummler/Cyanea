@@ -127,7 +127,7 @@ class CyaneaTinter {
     if (recursive && view is ViewGroup) {
       for (i in 0 until view.childCount) {
         view.getChildAt(i)?.let { v ->
-          tint(v)
+          tint(v, recursive)
         }
       }
     }

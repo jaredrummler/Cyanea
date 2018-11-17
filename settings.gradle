@@ -1,2 +1,1 @@
-include ':demo'
-include ':library'
+include ':demo', ':library-core', ':library-prefs'
