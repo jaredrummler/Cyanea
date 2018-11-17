@@ -1,0 +1,17 @@
+<resources>
+  <string name="pref_theme_title">Theme</string>
+  <string name="pref_theme_summary">Select a pre-installed theme</string>
+
+  <string name="pref_primary_color_title">Primary color</string>
+  <string name="pref_primary_color_summary">Displayed most frequently across your app.</string>
+
+  <string name="pref_accent_color_title">Accent color</string>
+  <string name="pref_accent_color_summary">Accents select parts of the UI.</string>
+
+  <string name="pref_background_color_title">Background color</string>
+  <string name="pref_background_color_summary">The underlying color of the app’s content.</string>
+  <string name="pref_category_appearance">Appearance</string>
+
+  <string name="pref_colored_navigation_bar_title">Color navigation bar</string>
+  <string name="pref_colored_navigation_bar_summary">Apply the primary color to the navigation bar</string>
+</resources>

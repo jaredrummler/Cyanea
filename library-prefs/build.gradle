@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+android {
+  compileSdkVersion 28
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0"
+  }
+}
+
+dependencies {
+  implementation project(':library-core')
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+  implementation 'com.jaredrummler:colorpicker-compat:1.0.5'
+  implementation 'androidx.preference:preference:1.0.0'
+}
