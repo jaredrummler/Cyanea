@@ -99,7 +99,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   @ColorInt var navigationBar: Int
     private set
 
-  internal var baseTheme: BaseTheme
+  var baseTheme: BaseTheme
+    internal set
+
   val isDark: Boolean get() = baseTheme == DARK
   val isLight: Boolean get() = baseTheme == LIGHT
 
