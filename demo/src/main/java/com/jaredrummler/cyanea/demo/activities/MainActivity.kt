@@ -1,60 +1,81 @@
-package com.jaredrummler.cyanea.demo
+package com.jaredrummler.cyanea.demo.activities
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
+import com.jaredrummler.cyanea.demo.R
+import com.jaredrummler.cyanea.demo.R.array
+import com.jaredrummler.cyanea.demo.R.dimen
+import com.jaredrummler.cyanea.demo.R.id
+import com.jaredrummler.cyanea.demo.R.layout
+import com.jaredrummler.cyanea.demo.R.menu
 import com.jaredrummler.cyanea.demo.R.string
 import com.jaredrummler.cyanea.demo.fragments.AboutFragment
 import com.jaredrummler.cyanea.demo.fragments.DialogsFragment
 import com.jaredrummler.cyanea.demo.fragments.OtherFragment
 import com.jaredrummler.cyanea.demo.fragments.WidgetsFragment
-import com.jaredrummler.cyanea.demo.themes.ThemePickerActivity
+import com.jaredrummler.cyanea.prefs.CyaneaSettingsActivity
+import com.jaredrummler.cyanea.prefs.CyaneaThemePickerActivity
 import kotlinx.android.synthetic.main.activity_main.bar
 import kotlinx.android.synthetic.main.activity_main.fab
 import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.activity_main.viewPager
 
 
-
 class MainActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    setContentView(layout.activity_main)
 
     fab.setOnClickListener {
-      startActivity(Intent(this, ThemePickerActivity::class.java))
+      startActivity(Intent(this, CyaneaThemePickerActivity::class.java))
     }
 
-    viewPager.adapter = MyPagerAdapter(this)
+    viewPager.adapter = DemoPagerAdapter(this)
     tabLayout.setupWithViewPager(viewPager)
 
     if (tabLayout.tabCount > 0) {
       val tab = (tabLayout.getChildAt(0) as ViewGroup).getChildAt(0)
       val p = tab.layoutParams as ViewGroup.MarginLayoutParams
-      p.setMargins(resources.getDimension(R.dimen.default_margin).toInt(), 0, 0, 0)
+      p.setMargins(resources.getDimension(dimen.default_margin).toInt(), 0, 0, 0)
       tab.requestLayout()
     }
 
-    bar.replaceMenu(R.menu.bottom_bar_menu)
+    bar.replaceMenu(menu.bottom_bar_menu)
     cyanea.tint(bar.menu, this)
     bar.setOnMenuItemClickListener { item ->
       when (item.itemId) {
-        R.id.action_share -> {
+        id.action_share -> {
           launchShareIntent()
         }
-        R.id.action_github -> {
+        id.action_github -> {
           startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(string.github_project_url))))
         }
         else -> return@setOnMenuItemClickListener false
       }
       return@setOnMenuItemClickListener true
     }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    menuInflater.inflate(R.menu.main, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+    id.action_settings -> {
+      startActivity(Intent(this, CyaneaSettingsActivity::class.java))
+      true
+    }
+    else -> super.onOptionsItemSelected(item)
   }
 
   private fun launchShareIntent() {
@@ -69,10 +90,10 @@ class MainActivity : CyaneaAppCompatActivity() {
 
 }
 
-class MyPagerAdapter(private val activity: FragmentActivity)
+class DemoPagerAdapter(private val activity: FragmentActivity)
   : FragmentStatePagerAdapter(activity.supportFragmentManager) {
 
-  private val items = activity.resources.getStringArray(R.array.tabs)
+  private val items = activity.resources.getStringArray(array.tabs)
 
   override fun getItem(position: Int): Fragment {
     return when (items[position]) {

@@ -1,4 +1,4 @@
-package com.jaredrummler.cyanea.demo
+package com.jaredrummler.cyanea.demo.activities
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
+import com.jaredrummler.cyanea.demo.R.layout
 import kotlinx.android.synthetic.main.activity_recycler_view.recyclerView
 import kotlinx.android.synthetic.main.item_rv.view.subtitleText
 import kotlinx.android.synthetic.main.item_rv.view.titleText
@@ -19,7 +20,7 @@ class RecyclerViewActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_recycler_view)
+    setContentView(layout.activity_recycler_view)
     recyclerView.layoutManager = LinearLayoutManager(this)
     recyclerView.adapter = DemoAdapter()
     recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
@@ -41,7 +42,8 @@ class DemoAdapter : RecyclerView.Adapter<ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     LayoutInflater.from(parent.context).run {
-      return DemoViewHolder(inflate(R.layout.item_rv, parent, false))
+      return DemoViewHolder(
+          inflate(layout.item_rv, parent, false))
     }
   }
 

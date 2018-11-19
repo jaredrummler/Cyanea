@@ -80,7 +80,7 @@
         android:clickable="false"
         android:focusable="false"
         android:tint="@android:color/white"
-        app:srcCompat="@drawable/ic_add_white_24dp"
+        app:srcCompat="@drawable/cyanea_fab_add"
         tools:ignore="RtlHardcoded,VectorDrawableCompat"
         />
   </FrameLayout>

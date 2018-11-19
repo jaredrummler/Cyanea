@@ -12,7 +12,7 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme"
       tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name=".MainActivity">
+    <activity android:name=".activities.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -20,13 +20,10 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".themes.ThemePickerActivity"
-        android:label="@string/theme_picker"/>
-    <activity
-        android:name=".DrawerActivity"
+        android:name=".activities.DrawerActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
     <activity
-        android:name=".RecyclerViewActivity"
+        android:name=".activities.RecyclerViewActivity"
         android:theme="@style/AppTheme"/>
   </application>
 

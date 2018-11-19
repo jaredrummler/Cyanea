@@ -1,10 +1,14 @@
-package com.jaredrummler.cyanea.demo
+package com.jaredrummler.cyanea.demo.activities
 
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
+import com.jaredrummler.cyanea.demo.R.id
+import com.jaredrummler.cyanea.demo.R.layout
+import com.jaredrummler.cyanea.demo.R.string
+import com.jaredrummler.cyanea.demo.R.style
 import kotlinx.android.synthetic.main.activity_drawer.drawerLayout
 import kotlinx.android.synthetic.main.activity_drawer.navigationView
 import kotlinx.android.synthetic.main.activity_drawer.toolbar
@@ -15,12 +19,13 @@ class DrawerActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
 
-    setTheme(R.style.Theme_MaterialComponents_Light_NoActionBar)
+    setTheme(style.Theme_MaterialComponents_Light_NoActionBar)
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_drawer)
+    setContentView(layout.activity_drawer)
     setSupportActionBar(toolbar)
 
-    drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
+    drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, string.open_drawer,
+        string.close_drawer)
     drawerLayout.addDrawerListener(drawerToggle)
 
 
@@ -30,7 +35,7 @@ class DrawerActivity : CyaneaAppCompatActivity() {
       setHomeButtonEnabled(true)
     }
 
-    navigationView.post { navigationView.setCheckedItem(R.id.item_twitter) }
+    navigationView.post { navigationView.setCheckedItem(id.item_twitter) }
 
     navigationView.setNavigationItemSelectedListener {
       navigationView.setCheckedItem(it.itemId)

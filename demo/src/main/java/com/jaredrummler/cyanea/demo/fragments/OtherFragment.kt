@@ -9,9 +9,9 @@ import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
-import com.jaredrummler.cyanea.demo.DrawerActivity
+import com.jaredrummler.cyanea.demo.activities.DrawerActivity
 import com.jaredrummler.cyanea.demo.R
-import com.jaredrummler.cyanea.demo.RecyclerViewActivity
+import com.jaredrummler.cyanea.demo.activities.RecyclerViewActivity
 
 class OtherFragment : Fragment() {
 
