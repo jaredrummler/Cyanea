@@ -1,12 +1,15 @@
 package com.jaredrummler.cyanea.prefs
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.XmlRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.Preference.OnPreferenceClickListener
@@ -52,9 +55,10 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
   /**
    * Sets whether to reserve the space of all Preference views. If set to false, all padding will be removed.
    *
-   * See: https://stackoverflow.com/q/18509369/1048340
+   * By default, if the action bar is displaying home as up then padding will be added to the preference.
    */
-  open val iconSpaceReserved: Boolean get() = false
+  open val iconSpaceReserved: Boolean
+    get() = (activity as? AppCompatActivity)?.supportActionBar?.displayOptions?.and(ActionBar.DISPLAY_HOME_AS_UP) != 0
 
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     setPreferencesFromResource(getPreferenceXmlResId(), rootKey)
@@ -81,7 +85,13 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
   override fun onPreferenceClick(preference: Preference?): Boolean {
     return when (preference) {
       prefThemePicker -> {
-        // TODO: create a theme picker
+        activity?.run {
+          if (this is CyaneaThemePickerLauncher) {
+            launchThemePicker()
+          } else {
+            startActivity(Intent(this, CyaneaThemePickerActivity::class.java))
+          }
+        }
         true
       }
       else -> false
@@ -144,6 +154,7 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     ColorUtils.isDarkColor(cyanea.primary, 0.75).let { isDarkEnough ->
       prefColorNavBar.isEnabled = isDarkEnough
     }
+    prefColorNavBar.isChecked = cyanea.shouldTintNavBar
     val sysBarConfig = SystemBarTint(requireActivity()).sysBarConfig
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || !sysBarConfig.hasNavigationBar) {
       findPreference<PreferenceCategory>(PREF_CATEGORY).run {
@@ -174,4 +185,15 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     private const val RECREATE_DELAY = 200L
   }
 
+}
+
+/**
+ * Let the hosting activity implement this to launch a custom theme picker from preferences
+ */
+interface CyaneaThemePickerLauncher {
+
+  /**
+   * Launch a theme picker for Cyanea
+   */
+  fun launchThemePicker()
 }

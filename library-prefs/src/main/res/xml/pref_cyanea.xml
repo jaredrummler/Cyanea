@@ -33,9 +33,9 @@
         android:key="pref_color_background"
         android:summary="@string/pref_background_color_summary"
         android:title="@string/pref_background_color_title"
+        app:cpv_colorPresets="@array/cyanea_background_color_presets"
         app:cpv_dialogTitle="@string/pref_background_color_title"
         app:cpv_showColorShades="false"
-        app:cpv_colorPresets="@array/cyanea_background_color_presets"
         tools:ignore="PrivateResource"/>
 
     <androidx.preference.SwitchPreferenceCompat

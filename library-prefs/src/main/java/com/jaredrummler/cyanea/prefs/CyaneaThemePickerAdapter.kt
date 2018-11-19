@@ -1,4 +1,4 @@
-package com.jaredrummler.cyanea.demo.themes
+package com.jaredrummler.cyanea.prefs
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -14,19 +14,19 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
+import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.jaredrummler.cyanea.CyaneaTheme
-import com.jaredrummler.cyanea.demo.R
+import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.utils.ColorUtils
 
-class ThemePickerAdapter(private val themes: List<CyaneaTheme>) : BaseAdapter() {
+class CyaneaThemePickerAdapter(private val themes: List<CyaneaTheme>, private val cyanea: Cyanea) : BaseAdapter() {
 
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
     val holder: ViewHolder
 
     holder = if (convertView == null) {
       val inflater = LayoutInflater.from(parent.context)
-      val view = inflater.inflate(R.layout.item_cyanea_theme, parent, false)
+      val view = inflater.inflate(R.layout.cyanea_item_theme, parent, false)
       ViewHolder(view)
     } else {
       convertView.tag as ViewHolder
@@ -43,6 +43,14 @@ class ThemePickerAdapter(private val themes: List<CyaneaTheme>) : BaseAdapter() 
 
     val title = holder.find<TextView>(R.id.title)
     title.text = theme.themeName
+
+    if (theme.isMatchingColorScheme(cyanea)) {
+      title.setBackgroundColor(ContextCompat.getColor(parent.context, R.color.cyanea_theme_selected_color))
+      title.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.cyanea_check, 0)
+    } else {
+      title.setBackgroundColor(ContextCompat.getColor(parent.context, R.color.cyanea_theme_title_bg_color))
+      title.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+    }
 
     val isDark = ColorUtils.isDarkColor(theme.primary, 0.75)
     val menuIconColor = if (isDark) Color.WHITE else Color.BLACK
@@ -65,11 +73,11 @@ class ThemePickerAdapter(private val themes: List<CyaneaTheme>) : BaseAdapter() 
 
   private class ViewHolder(val itemView: View) {
 
+    private val views = SparseArray<View>()
+
     init {
       itemView.tag = this
     }
-
-    private val views = SparseArray<View>()
 
     fun <T : View> find(@IdRes id: Int): T {
       views[id]?.let {

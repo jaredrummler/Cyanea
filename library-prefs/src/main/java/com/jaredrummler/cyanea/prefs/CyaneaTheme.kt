@@ -1,8 +1,10 @@
-package com.jaredrummler.cyanea
+package com.jaredrummler.cyanea.prefs
 
 import android.content.res.AssetManager
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.Cyanea.BaseTheme
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
 import com.jaredrummler.cyanea.utils.ColorUtils
@@ -12,7 +14,7 @@ import java.io.File
 
 data class CyaneaTheme internal constructor(
     val themeName: String,
-    val baseTheme: Cyanea.BaseTheme,
+    val baseTheme: BaseTheme,
     @ColorInt val primary: Int,
     @ColorInt val primaryDark: Int,
     @ColorInt val primaryLight: Int,
@@ -29,25 +31,68 @@ data class CyaneaTheme internal constructor(
     val shouldTintNavBar: Boolean
 ) {
 
-  fun apply(cyanea: Cyanea) {
-    cyanea.edit()
-        .baseTheme(baseTheme)
-        .primary(primary)
-        .primaryDark(primaryDark)
-        .primaryLight(primaryLight)
-        .accent(accent)
-        .accentDark(accentDark)
-        .accentLight(accentLight)
-        .background(background)
-        .backgroundDark(backgroundDark)
-        .backgroundLight(backgroundLight)
-        .menuIconColor(menuIconColor)
-        .subMenuIconColor(subMenuIconColor)
-        .navigationBar(navigationBarColor)
-        .shouldTintStatusBar(shouldTintStatusBar)
-        .shouldTintNavBar(shouldTintNavBar)
-        .apply()
+  constructor(themeName: String, cyanea: Cyanea) : this(
+      themeName,
+      cyanea.baseTheme,
+      cyanea.primary,
+      cyanea.primaryDark,
+      cyanea.primaryLight,
+      cyanea.accent,
+      cyanea.accentDark,
+      cyanea.accentLight,
+      cyanea.backgroundColor,
+      cyanea.backgroundColorDark,
+      cyanea.backgroundColorLight,
+      cyanea.menuIconColor,
+      cyanea.subMenuIconColor,
+      cyanea.primary,
+      cyanea.shouldTintStatusBar,
+      cyanea.shouldTintNavBar
+  )
+
+  fun apply(cyanea: Cyanea) = cyanea.edit {
+    baseTheme(baseTheme)
+    primary(primary)
+    primaryDark(primaryDark)
+    primaryLight(primaryLight)
+    accent(accent)
+    accentDark(accentDark)
+    accentLight(accentLight)
+    background(background)
+    when (baseTheme) {
+      LIGHT -> {
+        backgroundLightDarker(backgroundDark)
+        backgroundLightLighter(backgroundLight)
+      }
+      DARK -> {
+        backgroundDarkDarker(backgroundDark)
+        backgroundDarkLighter(backgroundLight)
+      }
+    }
+    menuIconColor(menuIconColor)
+    subMenuIconColor(subMenuIconColor)
+    navigationBar(navigationBarColor)
+    shouldTintStatusBar(shouldTintStatusBar)
+    shouldTintNavBar(shouldTintNavBar)
   }
+
+  fun toJson(): JSONObject = JSONObject().apply {
+    put(THEME_NAME, themeName)
+    put(BASE_THEME, baseTheme.name)
+    put(PRIMARY_COLOR, ColorUtils.toHex(primary))
+    put(PRIMARY_DARK_COLOR, ColorUtils.toHex(primaryDark))
+    put(PRIMARY_LIGHT_COLOR, ColorUtils.toHex(primaryLight))
+    put(ACCENT_COLOR, ColorUtils.toHex(accent))
+    put(ACCENT_DARK_COLOR, ColorUtils.toHex(accentDark))
+    put(ACCENT_LIGHT_COLOR, ColorUtils.toHex(accentLight))
+    put(BACKGROUND_COLOR, ColorUtils.toHex(background))
+    put(BACKGROUND_DARK_COLOR, ColorUtils.toHex(backgroundDark))
+    put(BACKGROUND_LIGHT_COLOR, ColorUtils.toHex(backgroundLight))
+  }
+
+  fun isMatchingColorScheme(cyanea: Cyanea): Boolean = primary == cyanea.primary &&
+      accent == cyanea.accent &&
+      background == cyanea.backgroundColor
 
   companion object {
 

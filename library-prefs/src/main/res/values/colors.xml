@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="cyanea_theme_title_bg_color">#CC37474F</color>
+  <color name="cyanea_theme_selected_color">#FF689F38</color>
+</resources>
