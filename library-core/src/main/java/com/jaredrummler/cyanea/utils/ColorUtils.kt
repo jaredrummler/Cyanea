@@ -122,12 +122,10 @@ class ColorUtils private constructor() {
 
     @JvmStatic
     @JvmOverloads
-    fun toHex(@ColorInt color: Int, alpha: Boolean = true): String {
-      return if (alpha) {
-        String.format("%08X", (color))
-      } else {
-        String.format("%06X", 0xFFFFFF and color)
-      }
+    fun toHex(@ColorInt color: Int, alpha: Boolean = true): String = "#" + if (alpha) {
+      String.format("%08X", (color))
+    } else {
+      String.format("%06X", 0xFFFFFF and color)
     }
 
     /**
