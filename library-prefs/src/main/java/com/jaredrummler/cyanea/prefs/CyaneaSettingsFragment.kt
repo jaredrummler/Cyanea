@@ -3,6 +3,8 @@ package com.jaredrummler.cyanea.prefs
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -154,7 +156,10 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     ColorUtils.isDarkColor(cyanea.primary, 0.75).let { isDarkEnough ->
       prefColorNavBar.isEnabled = isDarkEnough
     }
-    prefColorNavBar.isChecked = cyanea.shouldTintNavBar
+    val isColored = if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+      activity?.window?.navigationBarColor == cyanea.primary
+    } else false
+    prefColorNavBar.isChecked = cyanea.shouldTintNavBar || isColored
     val sysBarConfig = SystemBarTint(requireActivity()).sysBarConfig
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || !sysBarConfig.hasNavigationBar) {
       findPreference<PreferenceCategory>(PREF_CATEGORY).run {
