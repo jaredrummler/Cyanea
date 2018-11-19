@@ -101,16 +101,14 @@ abstract class CyaneaDelegate {
     @SuppressLint("NewApi") // Needed for Android Pie (API 28) for whatever reason ¯\_(ツ)_/¯
     @JvmStatic
     fun create(activity: Activity, cyanea: Cyanea, @StyleRes themeResId: Int): CyaneaDelegate {
-      return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-        CyaneaDelegateImplV28(activity, cyanea, themeResId)
+      return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        CyaneaDelegateImplV24(activity, cyanea, themeResId)
       } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         CyaneaDelegateImplV23(activity, cyanea, themeResId)
       } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         CyaneaDelegateImplV21(activity, cyanea, themeResId)
       } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
         CyaneaDelegateImplV19(activity, cyanea, themeResId)
-      } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        CyaneaDelegateImplV24(activity, cyanea, themeResId)
       } else {
         CyaneaDelegateImplBase(activity, cyanea, themeResId)
       }
