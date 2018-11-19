@@ -20,8 +20,6 @@ open class CyaneaFragment : Fragment() {
     super.onCreateOptionsMenu(menu, inflater)
   }
 
-  protected open fun applyMenuTint(menu: Menu) {
-    cyanea.tint(menu, requireActivity())
-  }
+  protected open fun applyMenuTint(menu: Menu) = cyanea.tint(menu, requireActivity())
 
 }

@@ -159,15 +159,15 @@ class MenuTint(
   }
 
   private fun tintOverflow() {
-    findOverflowMenuButton(actionBar)?.let {
-      overflowDrawableRes?.let { resId -> it.setImageResource(resId) }
-      menuIconColor?.let { color -> it.setColorFilter(color) }
+    findOverflowMenuButton(actionBar)?.let { overflowView ->
+      overflowDrawableRes?.let { resId -> overflowView.setImageResource(resId) }
+      menuIconColor?.let { color -> overflowView.setColorFilter(color) }
       menuIconAlpha?.let { alpha ->
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-          it.imageAlpha = alpha
+          overflowView.imageAlpha = alpha
         } else {
           @Suppress("DEPRECATION")
-          it.setAlpha(alpha)
+          overflowView.setAlpha(alpha)
         }
       }
     }
@@ -202,10 +202,10 @@ class MenuTint(
      */
     fun colorSubMenus(item: MenuItem, color: Int?, alpha: Int? = null) {
       if (item.hasSubMenu()) {
-        item.subMenu?.let {
-          val size = it.size()
+        item.subMenu?.let { menu ->
+          val size = menu.size()
           for (i in 0 until size) {
-            val menuItem = it.getItem(i)
+            val menuItem = menu.getItem(i)
             colorMenuItem(menuItem, color, alpha)
             colorSubMenus(menuItem, color, alpha)
           }
@@ -234,9 +234,7 @@ class MenuTint(
      * @return `true` if the MenuItem is in the overflow menu.
      * @see [MenuTint.isActionButton]
      */
-    fun isInOverflow(item: MenuItem): Boolean {
-      return !isActionButton(item)
-    }
+    fun isInOverflow(item: MenuItem) = !isActionButton(item)
 
     /**
      * Set the menu to show MenuItem icons in the overflow window.
@@ -261,20 +259,19 @@ class MenuTint(
     }
 
     private fun findOverflowMenuButton(viewGroup: ViewGroup?): ImageView? {
-      viewGroup?.let {
-        var i = 0
-        val count = it.childCount
-        while (i < count) {
-          val view = it.getChildAt(i)
-          if (view is ImageView &&
-              (view.javaClass.simpleName == "OverflowMenuButton"
-                  || view is ActionMenuView.ActionMenuChildView)) {
-            return view
-          } else if (view is ViewGroup) {
-            findOverflowMenuButton(view)?.let { btn -> return btn }
-          }
-          i++
+      if (viewGroup == null) return null
+      var i = 0
+      val count = viewGroup.childCount
+      while (i < count) {
+        val view = viewGroup.getChildAt(i)
+        if (view is ImageView &&
+            (view.javaClass.simpleName == "OverflowMenuButton"
+                || view is ActionMenuView.ActionMenuChildView)) {
+          return view
+        } else if (view is ViewGroup) {
+          findOverflowMenuButton(view)?.let { btn -> return btn }
         }
+        i++
       }
       return null
     }

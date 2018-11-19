@@ -86,8 +86,7 @@ abstract class AttrsDecorator<T : View> : CyaneaDecorator {
    * @return a TypedArray holding an array of the attribute values.
    */
   @Suppress("MemberVisibilityCanBePrivate")
-  protected fun obtainAttributes(context: Context, attributeSet: AttributeSet): TypedArray? {
-    return context.theme.obtainStyledAttributes(attributeSet, styleable(), defStyleAttr(), defStyleRes())
-  }
+  protected fun obtainAttributes(context: Context, attributeSet: AttributeSet): TypedArray? =
+      context.theme.obtainStyledAttributes(attributeSet, styleable(), defStyleAttr(), defStyleRes())
 
 }

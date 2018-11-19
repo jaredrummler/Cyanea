@@ -102,16 +102,16 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   var baseTheme: BaseTheme
     internal set
 
-  val isDark: Boolean get() = baseTheme == DARK
-  val isLight: Boolean get() = baseTheme == LIGHT
+  val isDark get() = baseTheme == DARK
+  val isLight get() = baseTheme == LIGHT
 
   internal var timestamp: Long
     private set
 
-  val isThemeModified: Boolean get() = timestamp != NONE_TIMESTAMP
+  val isThemeModified get() = timestamp != NONE_TIMESTAMP
 
-  val isActionBarDark: Boolean get() = ColorUtils.isDarkColor(primary, 0.75)
-  val isActionBarLight: Boolean get() = !isActionBarDark
+  val isActionBarDark get() = ColorUtils.isDarkColor(primary, 0.75)
+  val isActionBarLight get() = !isActionBarDark
 
   val tinter by lazy { CyaneaTinter() }
   val themes by lazy { CyaneaThemes(this) }
@@ -163,15 +163,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     timestamp = prefs.getLong(PREF_TIMESTAMP, NONE_TIMESTAMP)
   }
 
-  fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) {
+  fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) =
     MenuTint(menu,
         menuIconColor = menuIconColor,
         subIconColor = subMenuIconColor,
-        forceIcons = forceIcons)
-        .apply(activity)
-  }
+        forceIcons = forceIcons
+    ).apply(activity)
 
-  fun edit(): Editor = Editor(this)
+  fun edit() = Editor(this)
 
   inline fun edit(action: Cyanea.Editor.() -> Unit) {
     val editor = edit()
@@ -232,7 +231,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     }
 
     @JvmStatic
-    var loggingEnabled: Boolean = false
+    var loggingEnabled = false
 
     @JvmStatic
     fun log(tag: String, msg: String, ex: Throwable? = null) {
@@ -265,20 +264,35 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private val editor = cyanea.prefs.edit()
 
     fun primaryResource(@ColorRes resid: Int) = primary(res.getColor(resid))
+
     fun primaryDarkResource(@ColorRes resid: Int) = primaryDark(res.getColor(resid))
+
     fun primaryLightResource(@ColorRes resid: Int) = primaryLight(res.getColor(resid))
+
     fun accentResource(@ColorRes resid: Int): Editor = accent(res.getColor(resid))
+
     fun accentDarkResource(@ColorRes resid: Int) = accentDark(res.getColor(resid))
+
     fun accentLightResource(@ColorRes resid: Int) = accentLight(res.getColor(resid))
+
     fun backgroundResource(@ColorRes resid: Int) = background(res.getColor(resid))
+
     fun backgroundLightResource(@ColorRes resid: Int) = backgroundLight(res.getColor(resid))
+
     fun backgroundLightDarkerResource(@ColorRes resid: Int) = backgroundLightDarker(res.getColor(resid))
+
     fun backgroundLightLighterResource(@ColorRes resid: Int) = backgroundLightLighter(res.getColor(resid))
+
     fun backgroundDarkResource(@ColorRes resid: Int) = backgroundDark(res.getColor(resid))
+
     fun backgroundDarkDarkerResource(@ColorRes resid: Int) = backgroundDarkDarker(res.getColor(resid))
+
     fun backgroundDarkLighterResource(@ColorRes resid: Int) = backgroundDarkLighter(res.getColor(resid))
+
     fun menuIconColorResource(@ColorRes resid: Int) = menuIconColor(res.getColor(resid))
+
     fun subMenuIconColorResource(@ColorRes resid: Int) = subMenuIconColor(res.getColor(resid))
+
     fun navigationBarResource(@ColorRes resid: Int) = navigationBar(res.getColor(resid))
 
     fun primary(@ColorInt color: Int): Editor {

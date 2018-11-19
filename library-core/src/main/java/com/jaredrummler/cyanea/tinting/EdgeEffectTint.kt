@@ -37,9 +37,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
    *
    * @param color The color to be applied on the [EdgeEffect]
    */
-  fun tint(@ColorInt color: Int) {
-    setEdgeTint(view, color)
-  }
+  fun tint(@ColorInt color: Int) = setEdgeTint(view, color)
 
   private fun setEdgeTint(viewGroup: ViewGroup, @ColorInt color: Int) {
     for (i in 0 until viewGroup.childCount) {
@@ -228,7 +226,6 @@ class EdgeEffectTint(private val view: ViewGroup) {
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge glow color on WebView", e)
       }
-
     }
 
   }

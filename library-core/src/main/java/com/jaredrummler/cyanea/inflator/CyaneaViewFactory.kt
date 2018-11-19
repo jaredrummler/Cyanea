@@ -20,10 +20,14 @@ class CyaneaViewFactory(val cyanea: Cyanea, vararg processors: CyaneaViewProcess
           processor.process(view, attrs, cyanea)
         }
       } catch (e: Exception) {
-        e.printStackTrace()
+        Cyanea.log(TAG, "Error processing view", e)
       }
     }
     return view
+  }
+
+  companion object {
+    private const val TAG = "CyaneaViewFactory"
   }
 
 

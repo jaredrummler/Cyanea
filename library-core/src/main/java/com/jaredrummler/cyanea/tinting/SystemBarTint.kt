@@ -49,27 +49,26 @@ class SystemBarTint(activity: Activity) {
   private var statusBarTintView: View? = null
   private var navBarTintView: View? = null
   private var actionBar: Any? = null
-  @Suppress("MemberVisibilityCanBePrivate")
   val sysBarConfig: SysBarConfig
 
   private val drawableCallback = object : Drawable.Callback {
 
     override fun invalidateDrawable(who: Drawable) {
-      actionBar?.let {
-        if (it is android.app.ActionBar) {
-          it.setBackgroundDrawable(who)
-        } else if (it is ActionBar) {
-          it.setBackgroundDrawable(who)
+      actionBar?.run {
+        if (this is android.app.ActionBar) {
+          setBackgroundDrawable(who)
+        } else if (this is ActionBar) {
+          setBackgroundDrawable(who)
         }
       }
     }
 
-    override fun scheduleDrawable(who: Drawable, what: Runnable, `when`: Long) {
-      Handler().postAtTime(what, `when`)
+    override fun scheduleDrawable(drawable: Drawable, action: Runnable, time: Long) {
+      Handler().postAtTime(action, time)
     }
 
-    override fun unscheduleDrawable(who: Drawable, what: Runnable) {
-      Handler().removeCallbacks(what)
+    override fun unscheduleDrawable(drawable: Drawable, action: Runnable) {
+      Handler().removeCallbacks(action)
     }
 
   }
@@ -133,9 +132,9 @@ class SystemBarTint(activity: Activity) {
       return
     }
     if (isStatusBarAvailable && statusBarTintView != null) {
-      statusBarTintView?.let {
-        if (it.visibility == View.GONE) it.visibility = View.VISIBLE
-        it.setBackgroundColor(color)
+      statusBarTintView?.run {
+        if (visibility == View.GONE) visibility = View.VISIBLE
+        setBackgroundColor(color)
       }
     }
   }
@@ -143,8 +142,7 @@ class SystemBarTint(activity: Activity) {
   /**
    * Set the given color on the navigation bar.
    *
-   * @param color
-   * the color to be applied.
+   * @param color the color to be applied.
    */
   fun setNavigationBarColor(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -153,8 +151,8 @@ class SystemBarTint(activity: Activity) {
       return
     }
     if (isNavBarAvailable && navBarTintView != null) {
-      navBarTintView?.let {
-        if (it.visibility == View.GONE) it.visibility = View.VISIBLE
+      navBarTintView?.run {
+        if (visibility == View.GONE) visibility = View.VISIBLE
       }
     }
   }
@@ -165,48 +163,42 @@ class SystemBarTint(activity: Activity) {
    * @param color The color value to be applied.
    */
   fun setActionBarColor(@ColorInt color: Int) {
-    actionBar?.let {
+    actionBar?.let { ab ->
       val colorDrawable = ColorDrawable(color)
 
       oldActionBarBackground?.let { oldBackground ->
         val td = TransitionDrawable(arrayOf(oldBackground, colorDrawable))
         // workaround for broken ActionBarContainer drawable handling on pre-API 17 builds
         // https://github.com/android/platform_frameworks_base/commit/a7cc06d82e45918c37429a59b14545c6a57db4e4
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-          td.callback = drawableCallback
-        } else {
-          if (it is android.app.ActionBar) {
-            it.setBackgroundDrawable(td)
-          } else if (it is ActionBar) {
-            it.setBackgroundDrawable(td)
-          }
+        when {
+          Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 -> td.callback = drawableCallback
+          ab is android.app.ActionBar -> ab.setBackgroundDrawable(td)
+          ab is ActionBar -> ab.setBackgroundDrawable(td)
         }
         td.startTransition(200)
       } ?: run {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-          val td = TransitionDrawable(arrayOf<Drawable>(colorDrawable, colorDrawable))
-          td.callback = drawableCallback
-          td.startTransition(200)
-        } else {
-          if (it is android.app.ActionBar) {
-            it.setBackgroundDrawable(colorDrawable)
-          } else if (it is ActionBar) {
-            it.setBackgroundDrawable(colorDrawable)
+        when {
+          Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 -> {
+            val td = TransitionDrawable(arrayOf<Drawable>(colorDrawable, colorDrawable))
+            td.callback = drawableCallback
+            td.startTransition(200)
           }
+          ab is android.app.ActionBar -> ab.setBackgroundDrawable(colorDrawable)
+          ab is ActionBar -> ab.setBackgroundDrawable(colorDrawable)
         }
       }
 
       oldActionBarBackground = colorDrawable
 
       // http://stackoverflow.com/questions/11002691/actionbar-setbackgrounddrawable-nulling-background-from-thread-handler
-      if (it is android.app.ActionBar) {
-        val isDisplayingTitle = it.displayOptions and android.app.ActionBar.DISPLAY_SHOW_TITLE != 0
-        it.setDisplayShowTitleEnabled(!isDisplayingTitle)
-        it.setDisplayShowTitleEnabled(isDisplayingTitle)
-      } else if (it is ActionBar) {
-        val isDisplayingTitle = it.displayOptions and ActionBar.DISPLAY_SHOW_TITLE != 0
-        it.setDisplayShowTitleEnabled(!isDisplayingTitle)
-        it.setDisplayShowTitleEnabled(isDisplayingTitle)
+      if (ab is android.app.ActionBar) {
+        val isDisplayingTitle = ab.displayOptions and android.app.ActionBar.DISPLAY_SHOW_TITLE != 0
+        ab.setDisplayShowTitleEnabled(!isDisplayingTitle)
+        ab.setDisplayShowTitleEnabled(isDisplayingTitle)
+      } else if (ab is ActionBar) {
+        val isDisplayingTitle = ab.displayOptions and ActionBar.DISPLAY_SHOW_TITLE != 0
+        ab.setDisplayShowTitleEnabled(!isDisplayingTitle)
+        ab.setDisplayShowTitleEnabled(isDisplayingTitle)
       }
     }
   }
@@ -218,11 +210,11 @@ class SystemBarTint(activity: Activity) {
     if (isNavBarAvailable && !sysBarConfig.isNavigationAtBottom) {
       params.rightMargin = sysBarConfig.navigationBarWidth
     }
-    statusBarTintView?.let {
-      it.layoutParams = params
-      it.setBackgroundColor(DEFAULT_TINT_COLOR)
-      it.visibility = View.GONE
-      decorViewGroup.addView(it)
+    statusBarTintView?.run {
+      layoutParams = params
+      setBackgroundColor(DEFAULT_TINT_COLOR)
+      visibility = View.GONE
+      decorViewGroup.addView(this)
     }
   }
 
@@ -236,11 +228,11 @@ class SystemBarTint(activity: Activity) {
       params = LayoutParams(sysBarConfig.navigationBarWidth, FrameLayout.LayoutParams.MATCH_PARENT)
       params.gravity = Gravity.START
     }
-    navBarTintView?.let {
-      it.layoutParams = params
-      it.setBackgroundColor(DEFAULT_TINT_COLOR)
-      it.visibility = View.GONE
-      decorViewGroup.addView(it)
+    navBarTintView?.run {
+      layoutParams = params
+      setBackgroundColor(DEFAULT_TINT_COLOR)
+      visibility = View.GONE
+      decorViewGroup.addView(this)
     }
   }
 

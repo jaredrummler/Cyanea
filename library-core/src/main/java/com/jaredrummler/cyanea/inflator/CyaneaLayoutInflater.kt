@@ -28,10 +28,10 @@ class CyaneaLayoutInflater : LayoutInflater {
   var decorators: Array<CyaneaDecorator>? = null
 
   override fun cloneInContext(newContext: Context): LayoutInflater {
-    val inflator = CyaneaLayoutInflater(this, newContext, true)
-    inflator.viewFactory = viewFactory
-    inflator.decorators = decorators
-    return inflator
+    val inflater = CyaneaLayoutInflater(this, newContext, true)
+    inflater.viewFactory = viewFactory
+    inflater.decorators = decorators
+    return inflater
   }
 
   override fun inflate(resource: Int, root: ViewGroup?, attachToRoot: Boolean): View {
