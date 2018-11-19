@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <androidx.preference.PreferenceCategory
+      android:key="cyanea_preference_category"
+      android:title="@string/pref_category_appearance">
+
+    <androidx.preference.Preference
+        android:key="pref_theme_picker"
+        android:summary="@string/pref_theme_summary"
+        android:title="@string/pref_theme_title"/>
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="@color/color_primary_reference"
+        android:key="pref_color_primary"
+        android:summary="@string/pref_primary_color_summary"
+        android:title="@string/pref_primary_color_title"
+        app:cpv_dialogTitle="@string/pref_primary_color_title"
+        />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="@color/color_accent_reference"
+        android:key="pref_color_accent"
+        android:summary="@string/pref_accent_color_summary"
+        android:title="@string/pref_accent_color_title"
+        app:cpv_dialogTitle="@string/pref_accent_color_title"
+        />
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+        android:defaultValue="@color/background_material_light"
+        android:key="pref_color_background"
+        android:summary="@string/pref_background_color_summary"
+        android:title="@string/pref_background_color_title"
+        app:cpv_colorPresets="@array/cyanea_background_color_presets"
+        app:cpv_dialogTitle="@string/pref_background_color_title"
+        app:cpv_showColorShades="false"
+        tools:ignore="PrivateResource"/>
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:defaultValue="@bool/pref_default_color_navigation_bar"
+        android:key="pref_color_navigation_bar"
+        android:summary="@string/pref_colored_navigation_bar_summary"
+        android:title="@string/pref_colored_navigation_bar_title"
+        />
+
+  </androidx.preference.PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

@@ -23,7 +23,10 @@ android {
 }
 
 dependencies {
-  implementation project(':library')
+  implementation project(':library-core')
+  implementation project(':library-prefs')
+  implementation 'com.jaredrummler:colorpicker-compat:1.0.5'
+  implementation 'androidx.preference:preference:1.0.0'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
   implementation "com.google.android.material:material:$androidX"
   implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

@@ -65,6 +65,7 @@
     https://github.com/jaredrummler/Cyanea #AndroidDev</string>
 
   <string name="github_project_url" translatable="false">https://github.com/jaredrummler/Cyanea</string>
+  <string name="settings">Settings</string>
 
   <string-array name="tabs">
     <item>@string/tab_about</item>
