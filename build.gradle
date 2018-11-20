@@ -1,6 +1,5 @@
 buildscript {
-  ext.kotlinVersion = '1.2.71'
-  ext.androidX = '1.0.0'
+  apply from: rootProject.file('gradle/dependencies.gradle')
 
   repositories {
     google()
@@ -8,12 +7,14 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.1'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    classpath 'com.android.tools.build:gradle:' + buildConfig.gradlePlugin
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin
   }
 }
 
 allprojects {
+  apply from: rootProject.file('gradle/dependencies.gradle')
+
   repositories {
     google()
     jcenter()
@@ -21,8 +22,8 @@ allprojects {
 
   configurations.all {
     resolutionStrategy {
-      force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-      force "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+      force 'org.jetbrains.kotlin:kotlin-reflect:' + versions.kotlin
     }
   }
 

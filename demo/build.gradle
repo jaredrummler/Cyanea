@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
+apply from: rootProject.file('gradle/dependencies.gradle')
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
     applicationId "com.jaredrummler.cyanea.demo"
-    minSdkVersion 14
-    targetSdkVersion 28
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
     versionCode 1
     versionName "1.0"
     vectorDrawables.useSupportLibrary true
@@ -25,9 +26,9 @@ android {
 dependencies {
   implementation project(':library-core')
   implementation project(':library-prefs')
-  implementation 'com.jaredrummler:colorpicker-compat:1.0.5'
-  implementation 'androidx.preference:preference:1.0.0'
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-  implementation "com.google.android.material:material:$androidX"
-  implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+  implementation 'com.google.android.material:material:' + versions.androidx
+  implementation 'com.jaredrummler:colorpicker-compat:' + versions.colorpicker
+  implementation 'androidx.preference:preference:' + versions.androidx
+  implementation 'androidx.constraintlayout:constraintlayout:' + versions.constraintlayout
 }

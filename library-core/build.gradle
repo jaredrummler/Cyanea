@@ -1,21 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
+apply from: rootProject.file('gradle/dependencies.gradle')
 
 android {
-  compileSdkVersion 28
+  compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
-    versionCode 1
-    versionName "1.0"
-  }
-
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-    }
+    minSdkVersion buildConfig.minSdk
+    targetSdkVersion buildConfig.targetSdk
   }
 
   testOptions {
@@ -24,11 +16,11 @@ android {
 }
 
 dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-  implementation "androidx.appcompat:appcompat:$androidX"
-  implementation 'com.google.android.material:material:1.0.0'
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+  implementation 'androidx.appcompat:appcompat:' + versions.androidx
+  implementation 'com.google.android.material:material:' + versions.androidx
 
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'com.nhaarman:mockito-kotlin:1.6.0'
-  testImplementation 'org.mockito:mockito-core:2.22.0'
+  testImplementation 'junit:junit:' + versions.junit
+  testImplementation 'com.nhaarman:mockito-kotlin:' + versions.mockito_kotlin
+  testImplementation 'org.mockito:mockito-core:' + versions.mockito_core
 }
