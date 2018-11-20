@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
-  <color name="colorAccent">#FF4081</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Accent colors -->
+  <eat-comment/>
+  <color name="color_accent_reference">#14B09B</color>
+  <color name="color_accent_light_reference">#37BBA9</color>
+  <color name="color_accent_dark_reference">#119583</color>
+
+  <!-- Primary colors -->
+  <eat-comment/>
+  <color name="color_primary_reference">#0359AE</color>
+  <color name="color_primary_light_reference">#2871BA</color>
+  <color name="color_primary_dark_reference">#024B93</color>
+
+  <!-- Background colors -->
+  <eat-comment/>
+  <color name="background_material_light" tools:override="true">#EBE5D9</color>
+  <color name="background_material_light_darker">#D4D4D4</color>
+  <color name="background_material_light_lighter">#EEE8DE</color>
+
 </resources>

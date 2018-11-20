@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-  <color name="cyanea_background_material_light">@color/background_material_light</color>
-  <color name="cyanea_background_material_dark">@color/background_material_dark</color>
+  <color name="cyanea_background_material_light">#FFFAFAFA</color>
+  <color name="cyanea_background_material_dark">#FF303030</color>
   <color name="cyanea_background_black">#FF000000</color>
   <color name="cyanea_background_dark_green">#FF182628</color>
-  <color name="cyanea_background_dark_blue">#FF0C0032</color>
+  <color name="cyanea_background_dark_blue">#FF21263A</color>
 
   <integer-array name="cyanea_background_color_presets" tools:ignore="PrivateResource">
     <item>@color/cyanea_background_material_light</item>
