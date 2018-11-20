@@ -1,6 +1,43 @@
 buildscript {
-  ext.kotlinVersion = '1.2.71'
-  ext.androidX = '1.0.0'
+  // ---- DEPENDENCIES ----
+  // @formatter:off
+  ext.buildConfig = [
+      compileSdk              : 28,
+      targetSdk               : 28,
+      minSdk                  : 14,
+      gradlePlugin            : '3.2.1'
+  ]
+
+  ext.versions = [
+      kotlin                  : '1.3.10',
+      androidx                : '1.0.0',
+      constraintlayout        : '1.1.3',
+      colorpicker             : '1.0.5',
+      junit                   : '4.12',
+      mockito_kotlin          : '1.6.0',
+      mockito_core            : '2.22.0'
+  ]
+
+  ext.deps = [
+      'androidx': [
+          'appCompat'         : "androidx.appcompat:appcompat:${versions.androidx}",
+          'constraintLayout'  : "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}",
+          'preferences'       : "androidx.preference:preference:${versions.androidx}"
+      ],
+      'kotlin': [
+          'stdlib': [
+              'jdk'           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+          ]
+      ],
+      'material'              : "com.google.android.material:material:${versions.androidx}",
+      'colorpicker'           : "com.jaredrummler:colorpicker-compat:${versions.colorpicker}",
+      'junit'                 : "junit:junit:${versions.junit}",
+      'mockito': [
+          'core'              : "org.mockito:mockito-core:${versions.mockito_core}",
+          'kotlin'            : "com.nhaarman:mockito-kotlin:${versions.mockito_kotlin}"
+      ]
+  ]
+  // @formatter:on
 
   repositories {
     google()
@@ -8,8 +45,8 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.1'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
   }
 }
 
@@ -21,8 +58,8 @@ allprojects {
 
   configurations.all {
     resolutionStrategy {
-      force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-      force "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+      force 'org.jetbrains.kotlin:kotlin-reflect:' + versions.kotlin
     }
   }
 
