@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import androidx.annotation.ColorInt
@@ -164,18 +165,18 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   }
 
   fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) =
-    MenuTint(menu,
-        menuIconColor = menuIconColor,
-        subIconColor = subMenuIconColor,
-        forceIcons = forceIcons
-    ).apply(activity)
+      MenuTint(menu,
+          menuIconColor = menuIconColor,
+          subIconColor = subMenuIconColor,
+          forceIcons = forceIcons
+      ).apply(activity)
 
   fun edit() = Editor(this)
 
-  inline fun edit(action: Cyanea.Editor.() -> Unit) {
+  inline fun edit(action: Cyanea.Editor.() -> Unit): Recreator {
     val editor = edit()
     action(editor)
-    editor.apply()
+    return editor.apply()
   }
 
   companion object {
@@ -431,10 +432,45 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
-    fun apply() {
+    fun apply(): Recreator {
       cyanea.timestamp = System.currentTimeMillis()
       editor.putLong(PREF_TIMESTAMP, cyanea.timestamp)
       editor.apply()
+      return Recreator()
+    }
+
+  }
+
+  /**
+   * Helper to recreate a modified themed activity
+   */
+  class Recreator {
+
+    /**
+     * Recreate the current activity
+     *
+     * @param activity The current activity
+     * @param delay The delay in milliseconds until the activity is recreated
+     * @param smooth True to use a fade-in/fade-out animation when re-creating.
+     * Use with caution, this will create a new instance of the activity.
+     */
+    @JvmOverloads
+    fun recreate(activity: Activity, delay: Long = DEFAULT_DELAY, smooth: Boolean = false) {
+      Handler().postDelayed({
+        activity.run {
+          if (smooth) {
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+          } else {
+            recreate()
+          }
+        }
+      }, delay)
+    }
+
+    companion object {
+      private const val DEFAULT_DELAY = 200L
     }
 
   }

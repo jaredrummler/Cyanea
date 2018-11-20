@@ -1,7 +1,6 @@
 package com.jaredrummler.cyanea.prefs
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,18 +33,7 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
     val theme = (gridView.adapter as CyaneaThemePickerAdapter).getItem(position)
     val themeName = theme.themeName
     Log.d(TAG, "Clicked $themeName")
-    theme.apply(cyanea)
-    recreateActivity()
-  }
-
-  open fun recreateActivity(delay: Long = RECREATE_DELAY) {
-    Handler().postDelayed({
-      activity?.run {
-        startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        finish()
-      }
-    }, delay)
+    theme.apply(cyanea).recreate(requireActivity(), smooth = true)
   }
 
   private fun scrollToCurrentTheme(themes: List<CyaneaTheme>) {
@@ -69,7 +57,6 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
 
   companion object {
     private const val TAG = "ThemePickerFragment"
-    private const val RECREATE_DELAY = 200L
   }
 
 }

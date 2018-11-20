@@ -6,7 +6,6 @@ import android.os.Build
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.XmlRes
@@ -102,9 +101,7 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     fun editTheme(action: (editor: Cyanea.Editor) -> Unit) {
       cyanea.edit {
         action(this)
-      }.also {
-        recreateActivity()
-      }
+      }.recreate(requireActivity(), smooth = true)
     }
 
     when (preference) {
@@ -166,16 +163,6 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     }
   }
 
-  private fun recreateActivity(delay: Long = RECREATE_DELAY) {
-    Handler().postDelayed({
-      activity?.run {
-        startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        finish()
-      }
-    }, delay)
-  }
-
   private inline fun <reified T : Preference> findPreference(key: String): T = super.findPreference(key) as T
 
   companion object {
@@ -185,7 +172,6 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     private const val PREF_COLOR_ACCENT = "pref_color_accent"
     private const val PREF_COLOR_BACKGROUND = "pref_color_background"
     private const val PREF_COLOR_NAV_BAR = "pref_color_navigation_bar"
-    private const val RECREATE_DELAY = 200L
   }
 
 }
