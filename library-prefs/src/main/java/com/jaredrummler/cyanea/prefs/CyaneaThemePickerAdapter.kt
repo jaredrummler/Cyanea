@@ -38,7 +38,11 @@ class CyaneaThemePickerAdapter(private val themes: List<CyaneaTheme>, private va
     holder.find<LinearLayout>(R.id.action_bar_panel).setBackgroundColor(theme.primary)
 
     val fab = holder.find<FloatingActionButton>(R.id.fab_add)
-    fab.backgroundTintList = ColorStateList.valueOf(theme.accent)
+    // Bug: when using the accent color, the last selected item's FAB is the same color as the newly selected FAB.
+    // For now, slightly adjust the color.
+    val fabMainColor = ColorUtils.lighter(theme.accent, 0.01f)
+    fab.backgroundTintList = ColorStateList.valueOf(fabMainColor)
+    fab.supportBackgroundTintList = ColorStateList.valueOf(fabMainColor)
     fab.rippleColor = theme.accentDark
 
     val title = holder.find<TextView>(R.id.title)

@@ -30,5 +30,4 @@ class CyaneaViewFactory(val cyanea: Cyanea, vararg processors: CyaneaViewProcess
     private const val TAG = "CyaneaViewFactory"
   }
 
-
 }
