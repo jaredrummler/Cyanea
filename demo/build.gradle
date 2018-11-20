@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
-apply from: rootProject.file('gradle/dependencies.gradle')
 
 android {
   compileSdkVersion buildConfig.compileSdk
@@ -26,9 +25,9 @@ android {
 dependencies {
   implementation project(':library-core')
   implementation project(':library-prefs')
-  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
-  implementation 'com.google.android.material:material:' + versions.androidx
-  implementation 'com.jaredrummler:colorpicker-compat:' + versions.colorpicker
-  implementation 'androidx.preference:preference:' + versions.androidx
-  implementation 'androidx.constraintlayout:constraintlayout:' + versions.constraintlayout
+  implementation deps.kotlin.stdlib.jdk
+  implementation deps.material
+  implementation deps.colorpicker
+  implementation deps.androidx.preferences
+  implementation deps.androidx.constraintLayout
 }

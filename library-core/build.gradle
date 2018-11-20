@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
-apply from: rootProject.file('gradle/dependencies.gradle')
 
 android {
   compileSdkVersion buildConfig.compileSdk
@@ -16,11 +15,10 @@ android {
 }
 
 dependencies {
-  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
-  implementation 'androidx.appcompat:appcompat:' + versions.androidx
-  implementation 'com.google.android.material:material:' + versions.androidx
-
-  testImplementation 'junit:junit:' + versions.junit
-  testImplementation 'com.nhaarman:mockito-kotlin:' + versions.mockito_kotlin
-  testImplementation 'org.mockito:mockito-core:' + versions.mockito_core
+  implementation deps.kotlin.stdlib.jdk
+  implementation deps.androidx.appCompat
+  implementation deps.material
+  testImplementation deps.junit
+  testImplementation deps.mockito.core
+  testImplementation deps.mockito.kotlin
 }
