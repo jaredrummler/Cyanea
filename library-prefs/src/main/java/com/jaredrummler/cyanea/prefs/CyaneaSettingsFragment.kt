@@ -10,8 +10,6 @@ import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.XmlRes
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.Preference.OnPreferenceClickListener
@@ -59,8 +57,8 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
    *
    * By default, if the action bar is displaying home as up then padding will be added to the preference.
    */
-  open val iconSpaceReserved: Boolean
-    get() = (activity as? AppCompatActivity)?.supportActionBar?.displayOptions?.and(ActionBar.DISPLAY_HOME_AS_UP) != 0
+  open val iconSpaceReserved = false
+//    get() = (activity as? AppCompatActivity)?.supportActionBar?.displayOptions?.and(ActionBar.DISPLAY_HOME_AS_UP) != 0
 
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     setPreferencesFromResource(getPreferenceXmlResId(), rootKey)
