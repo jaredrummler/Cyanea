@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
 
+/**
+ * Activity to show Cyanea preferences allowing the user to modify the primary, accent and background color of the app.
+ */
 open class CyaneaSettingsActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +14,7 @@ open class CyaneaSettingsActivity : CyaneaAppCompatActivity() {
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
     if (savedInstanceState == null) {
       supportFragmentManager.beginTransaction()
-          .add(android.R.id.content, CyaneaPreferenceFragment())
+          .add(android.R.id.content, CyaneaSettingsFragment.newInstance())
           .commit()
     }
   }

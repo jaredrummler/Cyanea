@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 import com.jaredrummler.cyanea.utils.Reflection
 
+/**
+ * A [LayoutInflater] that intercepts views on creation.
+ */
 class CyaneaLayoutInflater : LayoutInflater {
   constructor(context: ContextWrapper) : this(from(context.baseContext), context)
   constructor(inflater: LayoutInflater, context: Context) : this(inflater, context, false)

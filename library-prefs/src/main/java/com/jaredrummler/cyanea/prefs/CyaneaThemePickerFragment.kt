@@ -10,6 +10,9 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
 import com.jaredrummler.cyanea.app.CyaneaFragment
 
+/**
+ * Fragment containing the theme picker
+ */
 open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
 
   open val themesJsonAssetPath get() = "themes/cyanea_themes.json"
@@ -57,6 +60,8 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
 
   companion object {
     private const val TAG = "ThemePickerFragment"
+
+    fun newInstance() = CyaneaThemePickerFragment()
   }
 
 }

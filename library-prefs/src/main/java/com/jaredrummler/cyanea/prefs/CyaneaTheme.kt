@@ -12,6 +12,9 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
+/**
+ * A Cyanea theme. Load a list of themes using [CyaneaTheme.from].
+ */
 data class CyaneaTheme internal constructor(
     val themeName: String,
     val baseTheme: BaseTheme,
@@ -50,6 +53,9 @@ data class CyaneaTheme internal constructor(
       cyanea.shouldTintNavBar
   )
 
+  /**
+   * Set the theme. The activity will need to be recreated for changes to be applied.
+   */
   fun apply(cyanea: Cyanea) = cyanea.edit {
     baseTheme(baseTheme)
     primary(primary)
@@ -76,6 +82,9 @@ data class CyaneaTheme internal constructor(
     shouldTintNavBar(shouldTintNavBar)
   }
 
+  /**
+   * Convert this theme to a JSON object.
+   */
   fun toJson(): JSONObject = JSONObject().apply {
     put(THEME_NAME, themeName)
     put(BASE_THEME, baseTheme.name)
@@ -90,6 +99,9 @@ data class CyaneaTheme internal constructor(
     put(BACKGROUND_LIGHT_COLOR, ColorUtils.toHex(backgroundLight))
   }
 
+  /**
+   * Check if this theme matches the current color scheme
+   */
   fun isMatchingColorScheme(cyanea: Cyanea): Boolean = primary == cyanea.primary &&
       accent == cyanea.accent &&
       background == cyanea.backgroundColor
@@ -146,6 +158,9 @@ data class CyaneaTheme internal constructor(
       return themes
     }
 
+    /**
+     * Deserialize JSON to a [CyaneaTheme]
+     */
     fun newInstance(json: JSONObject): CyaneaTheme {
       // Get the theme name
       val themeName = json.optString(THEME_NAME)

@@ -102,6 +102,9 @@ class CyaneaTinter {
     }
   }
 
+  /**
+   * Tint all drawables and color state lists in a view.
+   */
   @JvmOverloads
   fun tint(view: View, recursive: Boolean = true) {
     try {
@@ -246,6 +249,9 @@ class CyaneaTinter {
     drawable.color = this.colors[drawable.color] ?: drawable.color
   }
 
+  /**
+   * Exception thrown when tinting a view fails.
+   */
   class CyaneaTintException(msg: String, e: Exception) : Exception(msg, e)
 
   companion object {

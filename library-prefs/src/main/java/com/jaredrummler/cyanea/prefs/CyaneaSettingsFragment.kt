@@ -25,8 +25,10 @@ import com.jaredrummler.cyanea.app.BaseCyaneaActivity
 import com.jaredrummler.cyanea.tinting.SystemBarTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 
-
-open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceChangeListener, OnPreferenceClickListener {
+/**
+ * Fragment to display preferences to modify the primary, accent, and background color of the app.
+ */
+open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChangeListener, OnPreferenceClickListener {
 
   private lateinit var prefThemePicker: Preference
   private lateinit var prefColorPrimary: ColorPreferenceCompat
@@ -172,6 +174,8 @@ open class CyaneaPreferenceFragment : PreferenceFragmentCompat(), OnPreferenceCh
     private const val PREF_COLOR_ACCENT = "pref_color_accent"
     private const val PREF_COLOR_BACKGROUND = "pref_color_background"
     private const val PREF_COLOR_NAV_BAR = "pref_color_navigation_bar"
+
+    fun newInstance() = CyaneaSettingsFragment()
   }
 
 }

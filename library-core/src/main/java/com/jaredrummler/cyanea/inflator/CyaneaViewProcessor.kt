@@ -43,6 +43,11 @@ import com.jaredrummler.cyanea.tinting.WidgetTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 
+/**
+ * Class to process views in connection with the [CyaneaLayoutInflater]. To add a [CyaneaViewProcessor] you must
+ * let your application or activity implement [CyaneaViewProcessor.Provider]. When a view is created it will
+ * call [CyaneaViewProcessor.process] if [CyaneaViewProcessor.shouldProcessView] returns true.
+ */
 abstract class CyaneaViewProcessor<T : View> {
 
   /**

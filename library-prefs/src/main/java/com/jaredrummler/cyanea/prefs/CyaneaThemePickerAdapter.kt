@@ -19,6 +19,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.utils.ColorUtils
 
+/**
+ * Adapter for items in the theme picker
+ */
 class CyaneaThemePickerAdapter(private val themes: List<CyaneaTheme>, private val cyanea: Cyanea) : BaseAdapter() {
 
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

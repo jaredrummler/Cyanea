@@ -7,11 +7,14 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.Keep
@@ -45,77 +48,117 @@ import com.jaredrummler.cyanea.tinting.CyaneaTinter
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 
+/**
+ * Contains colors for an application theme.
+ *
+ * Before using Cyanea you must initialize it in your application class or have the application class be [CyaneaApp].
+ *
+ * To retrieve a color from a Cyanea based activity, simply call:
+ *
+ * ```kotlin
+ * val primaryColor = cyanea.primary // application's primary color
+ * val accentColor = cyanea.accent // application's accent color
+ * ```
+ *
+ * To dynamically edit a theme you can use [Cyanea.Editor].
+ *
+ * Example:
+ *
+ * ```kotlin
+ * Cyanea.instance.edit {
+ *   primary(Color.RED)
+ *   accent(Color.YELLOW)
+ *   background(Color.BLACK)
+ * }
+ * ```
+ *
+ * After editing a theme you must recreate the activity for changes to apply.
+ */
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
+  /** The primary color displayed most frequently across your app */
   @ColorInt var primary: Int
     private set
+  /** A lighter version of the [primary] color */
   @ColorInt var primaryLight: Int
     private set
+  /** A darker version of the [primary] color */
   @ColorInt var primaryDark: Int
     private set
 
+  /** The accent color that accents select parts of the UI */
   @ColorInt var accent: Int
     private set
+  /** A lighter version of the [accent] color */
   @ColorInt var accentLight: Int
     private set
+  /** A darker version of the [accent] color */
   @ColorInt var accentDark: Int
     private set
 
+  /** The background color used as the underlying color of the app's content */
   val backgroundColor: Int
     get() = when (baseTheme) {
       LIGHT -> backgroundLight
       DARK -> backgroundDark
     }
-
+  /* A lighter version of the [background] color */
   val backgroundColorLight: Int
     get() = when (baseTheme) {
       LIGHT -> backgroundLightLighter
       DARK -> backgroundDarkLighter
     }
-
+  /* A darker version of the [background] color */
   val backgroundColorDark: Int
     get() = when (baseTheme) {
       LIGHT -> backgroundLightDarker
       DARK -> backgroundDarkDarker
     }
 
-  @ColorInt internal var backgroundDark: Int
-  @ColorInt internal var backgroundDarkDarker: Int
-  @ColorInt internal var backgroundDarkLighter: Int
+  /** The color of icons in a [Menu] */
+  @ColorInt var menuIconColor: Int
+    private set
+  /** The color of icons in a [menu's][Menu] sub-menu */
+  @ColorInt var subMenuIconColor: Int
+    private set
 
+  /** The color of the navigation bar, usually is black or the [primary] color */
+  @ColorInt var navigationBar: Int
+    private set
+  /** True to set the [primaryDark] color on the system status bar */
+  var shouldTintStatusBar: Boolean
+    private set
+  /** True to set the [navigationBar] color on the system navigation bar */
+  var shouldTintNavBar: Boolean
+    private set
+
+  /** The base theme. Either [LIGHT] or [DARK] */
+  var baseTheme: BaseTheme
+    internal set
+  /** True if the [baseTheme] is [DARK] */
+  val isDark get() = baseTheme == DARK
+  /** True if the [baseTheme] is [LIGHT] */
+  val isLight get() = baseTheme == LIGHT
+  /** True if the [primary] color is a dark color */
+  val isActionBarDark get() = ColorUtils.isDarkColor(primary, 0.75)
+  /** True if the [primary] color is a light color */
+  val isActionBarLight get() = !isActionBarDark
+  /** True if the theme has been modified at least once */
+  val isThemeModified get() = timestamp != NONE_TIMESTAMP
+
+  /** Helper to tint a [Drawable], [ColorStateList] or a [View] */
+  val tinter by lazy { CyaneaTinter() }
+  val themes by lazy { CyaneaThemes(this) }
+
+  @ColorInt internal var backgroundDark: Int
+  @ColorInt internal var backgroundDarkLighter: Int
+  @ColorInt internal var backgroundDarkDarker: Int
   @ColorInt internal var backgroundLight: Int
   @ColorInt internal var backgroundLightLighter: Int
   @ColorInt internal var backgroundLightDarker: Int
 
-  @ColorInt var menuIconColor: Int
-    private set
-  @ColorInt var subMenuIconColor: Int
-    private set
-
-  var shouldTintStatusBar: Boolean
-    private set
-  var shouldTintNavBar: Boolean
-    private set
-
-  @ColorInt var navigationBar: Int
-    private set
-
-  var baseTheme: BaseTheme
-    internal set
-
-  val isDark get() = baseTheme == DARK
-  val isLight get() = baseTheme == LIGHT
-
   internal var timestamp: Long
     private set
-
-  val isThemeModified get() = timestamp != NONE_TIMESTAMP
-
-  val isActionBarDark get() = ColorUtils.isDarkColor(primary, 0.75)
-  val isActionBarLight get() = !isActionBarDark
-
-  val tinter by lazy { CyaneaTinter() }
-  val themes by lazy { CyaneaThemes(this) }
 
   init {
     baseTheme = getBaseTheme(prefs, res)
@@ -164,6 +207,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     timestamp = prefs.getLong(PREF_TIMESTAMP, NONE_TIMESTAMP)
   }
 
+  /**
+   * Tint all items and sub-menu items in a [menu][Menu]
+   *
+   * @param menu the Menu to tint
+   * @param activity the current Activity
+   * @param forceIcons False to hide sub-menu icons from showing. True by default.
+   */
+  @JvmOverloads
   fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) =
       MenuTint(menu,
           menuIconColor = menuIconColor,
@@ -171,8 +222,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
           forceIcons = forceIcons
       ).apply(activity)
 
+  /**
+   * Create a new [Editor] to edit this instance
+   */
   fun edit() = Editor(this)
 
+  /**
+   * Creates a new editor and applys any edits in the action parameter
+   */
   inline fun edit(action: Cyanea.Editor.() -> Unit): Recreator {
     val editor = edit()
     action(editor)
@@ -182,15 +239,23 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   companion object {
 
     @SuppressLint("StaticFieldLeak") // application context is safe
-    lateinit var app: Application
+    internal lateinit var app: Application
     lateinit var res: Resources
 
+    /**
+     * Initialize Cyanea. This should be done in the [application][Application] class.
+     */
     @JvmStatic
     fun init(app: Application, res: Resources) {
       this.app = app
       this.res = res
     }
 
+    /**
+     * Check if Cyanea has been initialized.
+     *
+     * @see [init]
+     */
     @JvmStatic
     fun isInitialized(): Boolean {
       return try {
@@ -216,9 +281,17 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     private val instances by lazy { mutableMapOf<String, Cyanea>() }
 
+    /**
+     * The singleton [Cyanea] instance that you can use throughout the application.
+     */
     @JvmStatic
     val instance: Cyanea by lazy { Holder.INSTANCE }
 
+    /**
+     * Get a instance of [Cyanea] by name. This will create a new instance if none exist.
+     *
+     * This allows you to have more than one color scheme in an app. You must override Activity#getCyanea().
+     */
     @JvmStatic
     fun getInstance(name: String): Cyanea {
       instances[name]?.let { cyanea ->
@@ -231,6 +304,9 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       }
     }
 
+    /**
+     * Turns on logging for the [Cyanea] library
+     */
     @JvmStatic
     var loggingEnabled = false
 
@@ -241,6 +317,11 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       }
     }
 
+    /**
+     * Get the original color of a color resource.
+     *
+     * @param resid The color resource to retrieve
+     */
     @JvmStatic
     @ColorInt
     @Suppress("DEPRECATION")
@@ -259,43 +340,79 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   }
 
+  /**
+   * An editor for Cyanea to change colors and other values
+   */
   @Suppress("MemberVisibilityCanBePrivate")
   class Editor internal constructor(private val cyanea: Cyanea) {
 
     private val editor = cyanea.prefs.edit()
 
+    /**
+     * Set the [primary] color using a color resource.
+     *
+     * The [primaryDark], [primaryLight], [navigationBar], and [menuIconColor] will also be updated to match the theme.
+     */
     fun primaryResource(@ColorRes resid: Int) = primary(res.getColor(resid))
 
+    /** Set the [primary] dark color using a color resource. */
     fun primaryDarkResource(@ColorRes resid: Int) = primaryDark(res.getColor(resid))
 
+    /** Set the [primary] light color using a color resource. */
     fun primaryLightResource(@ColorRes resid: Int) = primaryLight(res.getColor(resid))
 
+    /**
+     * Set the [accent] dark color using a color resource.
+     *
+     * The [accentDark] and [accentLight] colors will also be updated.
+     */
     fun accentResource(@ColorRes resid: Int): Editor = accent(res.getColor(resid))
 
+    /** Set the [accent] dark color using a color resource. */
     fun accentDarkResource(@ColorRes resid: Int) = accentDark(res.getColor(resid))
 
+    /** Set the [accent] light color using a color resource. */
     fun accentLightResource(@ColorRes resid: Int) = accentLight(res.getColor(resid))
 
+    /**
+     * Set the background color using a color resource.
+     *
+     * The [baseTheme], [backgroundLight], [backgroundDark] and [subMenuIconColor] will also be updated.
+     */
     fun backgroundResource(@ColorRes resid: Int) = background(res.getColor(resid))
 
+    /** Set the background color for a [LIGHT] theme using a color resource. */
     fun backgroundLightResource(@ColorRes resid: Int) = backgroundLight(res.getColor(resid))
 
+    /** Set the background dark color for a [LIGHT] theme using a color resource. */
     fun backgroundLightDarkerResource(@ColorRes resid: Int) = backgroundLightDarker(res.getColor(resid))
 
+    /** Set the background light color for a [LIGHT] theme using a color resource. */
     fun backgroundLightLighterResource(@ColorRes resid: Int) = backgroundLightLighter(res.getColor(resid))
 
+    /** Set the background color for a [DARK] theme using a color resource. */
     fun backgroundDarkResource(@ColorRes resid: Int) = backgroundDark(res.getColor(resid))
 
+    /** Set the background dark color for a [DARK] theme using a color resource. */
     fun backgroundDarkDarkerResource(@ColorRes resid: Int) = backgroundDarkDarker(res.getColor(resid))
 
+    /** Set the background light color for a [DARK] theme using a color resource. */
     fun backgroundDarkLighterResource(@ColorRes resid: Int) = backgroundDarkLighter(res.getColor(resid))
 
+    /** Set the [menuIconColor] using a color resource */
     fun menuIconColorResource(@ColorRes resid: Int) = menuIconColor(res.getColor(resid))
 
+    /** Set the [subMenuIconColor] using a color resource */
     fun subMenuIconColorResource(@ColorRes resid: Int) = subMenuIconColor(res.getColor(resid))
 
+    /** Set the [navigationBar] color using a color resource */
     fun navigationBarResource(@ColorRes resid: Int) = navigationBar(res.getColor(resid))
 
+    /**
+     * Set the [primary] color using a color resource.
+     *
+     * The [primaryDark], [primaryLight], [navigationBar], and [menuIconColor] will also be updated to match the theme.
+     */
     fun primary(@ColorInt color: Int): Editor {
       cyanea.primary = color
       editor.putInt(PREF_PRIMARY, color)
@@ -308,18 +425,25 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
+    /** Set the [primary] dark color using a color resource. */
     fun primaryDark(@ColorInt color: Int): Editor {
       cyanea.primaryDark = color
       editor.putInt(PREF_PRIMARY_DARK, color)
       return this
     }
 
+    /** Set the [primary] light color using a color resource. */
     fun primaryLight(@ColorInt color: Int): Editor {
       cyanea.primaryLight = color
       editor.putInt(PREF_PRIMARY_LIGHT, color)
       return this
     }
 
+    /**
+     * Set the [accent] dark color using a color resource.
+     *
+     * The [accentDark] and [accentLight] colors will also be updated.
+     */
     fun accent(@ColorInt color: Int): Editor {
       cyanea.accent = color
       editor.putInt(PREF_ACCENT, color)
@@ -328,18 +452,25 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
+    /** Set the [accent] dark color using a color resource. */
     fun accentDark(@ColorInt color: Int): Editor {
       cyanea.accentDark = color
       editor.putInt(PREF_ACCENT_DARK, color)
       return this
     }
 
+    /** Set the [accent] light color using a color resource. */
     fun accentLight(@ColorInt color: Int): Editor {
       cyanea.accentLight = color
       editor.putInt(PREF_ACCENT_LIGHT, color)
       return this
     }
 
+    /**
+     * Set the background color using a color resource.
+     *
+     * The [baseTheme], [backgroundLight], [backgroundDark] and [subMenuIconColor] will also be updated.
+     */
     fun background(@ColorInt color: Int): Editor {
       val lighter = ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR)
       val darker = ColorUtils.darker(color, DEFAULT_DARKER_FACTOR)
@@ -360,78 +491,93 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       return this
     }
 
+    /** Set the background color for a [LIGHT] theme using a literal (hardcoded) color integer. */
     fun backgroundLight(@ColorInt color: Int): Editor {
       cyanea.backgroundLight = color
       editor.putInt(PREF_BACKGROUND_LIGHT, color)
       return this
     }
 
+    /** Set the background dark color for a [LIGHT] theme using a literal (hardcoded) color integer. */
     fun backgroundLightDarker(@ColorInt color: Int): Editor {
       cyanea.backgroundDarkDarker = color
       editor.putInt(PREF_BACKGROUND_LIGHT_DARKER, color)
       return this
     }
 
+    /** Set the background light color for a [LIGHT] theme using a literal (hardcoded) color integer. */
     fun backgroundLightLighter(@ColorInt color: Int): Editor {
       cyanea.backgroundLightLighter = color
       editor.putInt(PREF_BACKGROUND_LIGHT_LIGHTER, color)
       return this
     }
 
+    /** Set the background color for a [DARK] theme using a literal (hardcoded) color integer. */
     fun backgroundDark(@ColorInt color: Int): Editor {
       cyanea.backgroundDark = color
       editor.putInt(PREF_BACKGROUND_DARK, color)
       return this
     }
 
+    /** Set the background dark color for a [DARK] theme using a literal (hardcoded) color integer. */
     fun backgroundDarkDarker(@ColorInt color: Int): Editor {
       cyanea.backgroundDarkDarker = color
       editor.putInt(PREF_BACKGROUND_DARK_DARKER, color)
       return this
     }
 
+    /** Set the background light color for a [DARK] theme using a literal (hardcoded) color integer. */
     fun backgroundDarkLighter(@ColorInt color: Int): Editor {
       cyanea.backgroundDarkLighter = color
       editor.putInt(PREF_BACKGROUND_DARK_LIGHTER, color)
       return this
     }
 
+    /** Set the [menuIconColor] using a literal (hardcoded) color integer */
     fun menuIconColor(@ColorInt color: Int): Editor {
       cyanea.menuIconColor = color
       editor.putInt(PREF_MENU_ICON_COLOR, color)
       return this
     }
 
+    /** Set the [subMenuIconColor] using a literal (hardcoded) color integer */
     fun subMenuIconColor(@ColorInt color: Int): Editor {
       cyanea.subMenuIconColor = color
       editor.putInt(PREF_SUB_MENU_ICON_COLOR, color)
       return this
     }
 
+    /** Set the [navigationBar] color using a literal (hardcoded) color integer */
     fun navigationBar(@ColorInt color: Int): Editor {
       cyanea.navigationBar = color
       editor.putInt(PREF_NAVIGATION_BAR, color)
       return this
     }
 
+    /** Set whether or not to tint the system status bar */
     fun shouldTintStatusBar(choice: Boolean): Editor {
       cyanea.shouldTintStatusBar = choice
       editor.putBoolean(PREF_SHOULD_TINT_STATUS_BAR, choice)
       return this
     }
 
+    /** Set whether or not to tint the system navigation bar */
     fun shouldTintNavBar(choice: Boolean): Editor {
       cyanea.shouldTintNavBar = choice
       editor.putBoolean(PREF_SHOULD_TINT_NAV_BAR, choice)
       return this
     }
 
+    /** Set the base theme. Either [LIGHT] or [DARK]. This should correlate with the [backgroundColor] */
     fun baseTheme(theme: BaseTheme): Editor {
       cyanea.baseTheme = theme
       editor.putString(PREF_BASE_THEME, theme.name)
       return this
     }
 
+    /**
+     * Apply preferences to the editor. For theme changes to be applied you must recreate the activity.
+     */
     fun apply(): Recreator {
       cyanea.timestamp = System.currentTimeMillis()
       editor.putLong(PREF_TIMESTAMP, cyanea.timestamp)
@@ -475,8 +621,14 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   }
 
+  /**
+   * Callback when a theme has been modified and the [Activity] has been recreated.
+   */
   interface ThemeModifiedListener {
 
+    /**
+     * Called in [onResume][Activity.onResume] of an [Activity] when the theme has been modified.
+     */
     fun onThemeModified()
   }
 

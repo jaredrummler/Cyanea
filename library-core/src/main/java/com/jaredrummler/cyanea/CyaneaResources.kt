@@ -11,6 +11,9 @@ import com.jaredrummler.cyanea.tinting.CyaneaTinter.CyaneaTintException
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 
+/**
+ * Resources to get custom colors from [Cyanea]
+ */
 @Suppress("DEPRECATION", "OverridingDeprecatedMember")
 class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance)
   : Resources(original.assets, original.displayMetrics, original.configuration) {
