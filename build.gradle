@@ -58,8 +58,11 @@ allprojects {
 
   configurations.all {
     resolutionStrategy {
-      force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
-      force 'org.jetbrains.kotlin:kotlin-reflect:' + versions.kotlin
+      eachDependency { details ->
+        if (details.requested.group == 'org.jetbrains.kotlin') {
+          details.useVersion versions.kotlin
+        }
+      }
     }
   }
 

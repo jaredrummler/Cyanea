@@ -6,11 +6,11 @@ android {
   compileSdkVersion buildConfig.compileSdk
 
   defaultConfig {
-    applicationId "com.jaredrummler.cyanea.demo"
+    applicationId 'com.jaredrummler.cyanea.demo'
     minSdkVersion buildConfig.minSdk
     targetSdkVersion buildConfig.targetSdk
     versionCode 1
-    versionName "1.0"
+    versionName '1.0'
     vectorDrawables.useSupportLibrary true
   }
 
