@@ -47,17 +47,17 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
       }
     }
     return when (id) {
-      R.color.background_material_dark, R.drawable.color_background_dark
+      R.color.cyanea_background_dark, R.drawable.cyanea_bg_dark
       -> ColorDrawable(cyanea.backgroundDark)
-      R.color.background_material_dark_darker, R.drawable.color_background_dark_darker
+      R.color.cyanea_background_dark_darker, R.drawable.cyanea_bg_dark_darker
       -> ColorDrawable(cyanea.backgroundDarkDarker)
-      R.color.background_material_dark_lighter, R.drawable.color_background_dark_lighter
+      R.color.cyanea_background_dark_lighter, R.drawable.cyanea_bg_dark_lighter
       -> ColorDrawable(cyanea.backgroundDarkLighter)
-      R.color.background_material_light, R.drawable.color_background_light
+      R.color.cyanea_background_light, R.drawable.cyanea_bg_light
       -> ColorDrawable(cyanea.backgroundLight)
-      R.color.background_material_light_darker, R.drawable.color_background_light_darker
+      R.color.cyanea_background_light_darker, R.drawable.cyanea_bg_light_darker
       -> ColorDrawable(cyanea.backgroundLightDarker)
-      R.color.background_material_light_lighter, R.drawable.color_background_light_lighter
+      R.color.cyanea_background_light_lighter, R.drawable.cyanea_bg_light_lighter
       -> ColorDrawable(cyanea.backgroundLightLighter)
       else -> {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
@@ -75,20 +75,20 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   @Throws(Resources.NotFoundException::class)
   override fun getColor(id: Int, theme: Theme?): Int = when (id) {
     // ------ PRIMARY COLORS ------
-    R.color.color_primary_reference, R.color.color_primary -> cyanea.primary
-    R.color.color_primary_dark_reference, R.color.color_primary_dark -> cyanea.primaryDark
-    R.color.color_primary_light_reference, R.color.color_primary_light -> cyanea.primaryLight
+    R.color.cyanea_primary_reference, R.color.cyanea_primary -> cyanea.primary
+    R.color.cyanea_primary_dark_reference, R.color.cyanea_primary_dark -> cyanea.primaryDark
+    R.color.cyanea_primary_light_reference, R.color.cyanea_primary_light -> cyanea.primaryLight
     // ------ ACCENT COLORS ------
-    R.color.color_accent_reference, R.color.color_accent -> cyanea.accent
-    R.color.color_accent_light_reference, R.color.color_accent_light -> cyanea.accentLight
-    R.color.color_accent_dark_reference, R.color.color_accent_dark -> cyanea.accentDark
+    R.color.cyanea_accent_reference, R.color.cyanea_accent -> cyanea.accent
+    R.color.cyanea_accent_light_reference, R.color.cyanea_accent_light -> cyanea.accentLight
+    R.color.cyanea_accent_dark_reference, R.color.cyanea_accent_dark -> cyanea.accentDark
     // ------ BACKGROUND COLORS ------
-    R.color.color_background_dark, R.color.background_material_dark -> cyanea.backgroundDark
-    R.color.background_material_dark_lighter -> cyanea.backgroundDarkLighter
-    R.color.background_material_dark_darker -> cyanea.backgroundDarkDarker
-    R.color.color_background_light, R.color.background_material_light -> cyanea.backgroundLight
-    R.color.background_material_light_darker -> cyanea.backgroundLightDarker
-    R.color.background_material_light_lighter -> cyanea.backgroundLightLighter
+    R.color.cyanea_bg_dark, R.color.cyanea_background_dark -> cyanea.backgroundDark
+    R.color.cyanea_background_dark_lighter -> cyanea.backgroundDarkLighter
+    R.color.cyanea_background_dark_darker -> cyanea.backgroundDarkDarker
+    R.color.cyanea_bg_light, R.color.cyanea_background_light -> cyanea.backgroundLight
+    R.color.cyanea_background_light_darker -> cyanea.backgroundLightDarker
+    R.color.cyanea_background_light_lighter -> cyanea.backgroundLightLighter
     else -> {
       if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
         super.getColor(id) else super.getColor(id, theme)

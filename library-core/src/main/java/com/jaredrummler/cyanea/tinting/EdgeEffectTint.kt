@@ -25,7 +25,7 @@ import com.jaredrummler.cyanea.utils.Reflection
  *
  * ```kotlin
  * if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
- *     EdgeEffectTint(activity).tint(ContextCompat.getColor(activity, R.color.color_primary))
+ *     EdgeEffectTint(activity).tint(ContextCompat.getColor(activity, R.color.cyanea_primary))
  * }
  * ```
  */

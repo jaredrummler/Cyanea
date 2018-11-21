@@ -164,40 +164,40 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     baseTheme = getBaseTheme(prefs, res)
 
     primary = prefs.getInt(PREF_PRIMARY,
-        res.getColor(R.color.color_primary_reference))
+        res.getColor(R.color.cyanea_primary_reference))
     primaryDark = prefs.getInt(PREF_PRIMARY_DARK,
-        res.getColor(R.color.color_primary_dark_reference))
+        res.getColor(R.color.cyanea_primary_dark_reference))
     primaryLight = prefs.getInt(PREF_PRIMARY_LIGHT,
-        res.getColor(R.color.color_primary_light_reference))
+        res.getColor(R.color.cyanea_primary_light_reference))
 
     accent = prefs.getInt(PREF_ACCENT,
-        res.getColor(R.color.color_accent_reference))
+        res.getColor(R.color.cyanea_accent_reference))
     accentDark = prefs.getInt(PREF_ACCENT_DARK,
-        res.getColor(R.color.color_accent_dark_reference))
+        res.getColor(R.color.cyanea_accent_dark_reference))
     accentLight = prefs.getInt(PREF_ACCENT_LIGHT,
-        res.getColor(R.color.color_accent_light_reference))
+        res.getColor(R.color.cyanea_accent_light_reference))
 
     backgroundLight = prefs.getInt(PREF_BACKGROUND_LIGHT,
-        res.getColor(R.color.color_background_light))
+        res.getColor(R.color.cyanea_bg_light))
     backgroundLightDarker = prefs.getInt(PREF_BACKGROUND_LIGHT_DARKER,
-        res.getColor(R.color.color_background_light_darker))
+        res.getColor(R.color.cyanea_bg_light_darker))
     backgroundLightLighter = prefs.getInt(PREF_BACKGROUND_LIGHT_LIGHTER,
-        res.getColor(R.color.color_background_light_lighter))
+        res.getColor(R.color.cyanea_bg_light_lighter))
 
     backgroundDark = prefs.getInt(PREF_BACKGROUND_DARK,
-        res.getColor(R.color.color_background_dark))
+        res.getColor(R.color.cyanea_bg_dark))
     backgroundDarkDarker = prefs.getInt(PREF_BACKGROUND_DARK_DARKER,
-        res.getColor(R.color.color_background_dark_darker))
+        res.getColor(R.color.cyanea_bg_dark_darker))
     backgroundDarkLighter = prefs.getInt(PREF_BACKGROUND_DARK_LIGHTER,
-        res.getColor(R.color.color_background_dark_lighter))
+        res.getColor(R.color.cyanea_bg_dark_lighter))
 
     menuIconColor = prefs.getInt(PREF_MENU_ICON_COLOR,
-        res.getColor(if (isActionBarLight) R.color.menu_icon_color_dark else R.color.menu_icon_color_light))
+        res.getColor(if (isActionBarLight) R.color.cyanea_menu_icon_dark else R.color.cyanea_menu_icon_light))
     subMenuIconColor = prefs.getInt(PREF_SUB_MENU_ICON_COLOR,
-        res.getColor(if (baseTheme == LIGHT) R.color.sub_menu_icon_color_dark else R.color.sub_menu_icon_color_light))
+        res.getColor(if (baseTheme == LIGHT) R.color.cyanea_sub_menu_icon_dark else R.color.cyanea_sub_menu_icon_light))
 
     navigationBar = prefs.getInt(PREF_NAVIGATION_BAR,
-        res.getColor(R.color.color_navigation_bar_reference))
+        res.getColor(R.color.cyanea_navigation_bar_reference))
 
     shouldTintStatusBar = prefs.getBoolean(PREF_SHOULD_TINT_STATUS_BAR,
         res.getBoolean(R.bool.should_tint_status_bar))
@@ -417,7 +417,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       cyanea.primary = color
       editor.putInt(PREF_PRIMARY, color)
       val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
-      val menuIconColorRes = if (isDarkColor) R.color.menu_icon_color_light else R.color.menu_icon_color_dark
+      val menuIconColorRes = if (isDarkColor) R.color.cyanea_menu_icon_light else R.color.cyanea_menu_icon_dark
       primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
       primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
       menuIconColor(res.getColor(menuIconColorRes))
@@ -480,13 +480,13 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         backgroundDark(color)
         backgroundDarkDarker(darker)
         backgroundDarkLighter(lighter)
-        subMenuIconColor(res.getColor(R.color.sub_menu_icon_color_light))
+        subMenuIconColor(res.getColor(R.color.cyanea_sub_menu_icon_light))
       } else {
         baseTheme(LIGHT)
         backgroundLight(color)
         backgroundLightDarker(darker)
         backgroundLightLighter(lighter)
-        subMenuIconColor(res.getColor(R.color.sub_menu_icon_color_dark))
+        subMenuIconColor(res.getColor(R.color.cyanea_sub_menu_icon_dark))
       }
       return this
     }

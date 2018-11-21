@@ -16,9 +16,8 @@
   ~
   -->
 
-<selector
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item android:color="@color/background_material_dark_lighter" android:drawable="@color/background_material_dark_lighter"/>
+  <item android:color="@color/cyanea_primary_light_reference" android:drawable="@color/cyanea_primary_light_reference"/>
 
 </selector>

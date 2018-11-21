@@ -40,7 +40,7 @@ internal open class CyaneaDelegateImplV24(
       val method = Reflection.getMethod(cache, "put", Long::class.java, Object::class.java) ?: return
 
       for ((id, color) in hashMapOf<Int, Int>().apply {
-        put(R.color.color_accent, cyanea.accent)
+        put(R.color.cyanea_accent, cyanea.accent)
       }) {
         constructor.newInstance(ColorStateList.valueOf(color))?.let { factory ->
           val key = activity.resources.getKey(id)

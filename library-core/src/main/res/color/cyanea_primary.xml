@@ -18,6 +18,6 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item android:color="@color/color_accent_light_reference" android:drawable="@color/color_accent_light_reference"/>
+  <item android:color="@color/cyanea_primary_reference" android:drawable="@color/cyanea_primary_reference"/>
 
 </selector>

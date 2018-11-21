@@ -217,9 +217,9 @@ data class CyaneaTheme internal constructor(
       } else {
         @Suppress("DEPRECATION")
         Cyanea.res.getColor(if (ColorUtils.isDarkColor(primary, 0.75))
-          R.color.menu_icon_color_light
+          R.color.cyanea_menu_icon_light
         else
-          R.color.menu_icon_color_dark
+          R.color.cyanea_menu_icon_dark
         )
       }
       val subMenuIconColor = if (json.has(SUB_MENU_ICON_COLOR)) {
@@ -227,7 +227,7 @@ data class CyaneaTheme internal constructor(
       } else {
         @Suppress("DEPRECATION")
         Cyanea.res.getColor(
-            if (baseTheme == LIGHT) R.color.sub_menu_icon_color_dark else R.color.sub_menu_icon_color_light)
+            if (baseTheme == LIGHT) R.color.cyanea_sub_menu_icon_dark else R.color.cyanea_sub_menu_icon_light)
       }
 
       // Get the navigation bar colors

@@ -259,26 +259,26 @@ class CyaneaTinter {
     private const val TAG = "CyaneaTinter"
 
     private val COLOR_IDS = intArrayOf(
-        R.color.background_material_dark,
-        R.color.background_material_dark_darker,
-        R.color.background_material_dark_lighter,
-        R.color.background_material_light,
-        R.color.background_material_light_darker,
-        R.color.background_material_light_lighter,
-        R.color.color_accent,
-        R.color.color_accent_dark,
-        R.color.color_accent_dark_reference,
-        R.color.color_accent_light,
-        R.color.color_accent_light_reference,
-        R.color.color_accent_reference,
-        R.color.color_background_light,
-        R.color.color_primary,
-        R.color.color_primary_dark,
-        R.color.color_primary_dark_reference,
-        R.color.color_primary_light,
-        R.color.color_primary_light_reference,
-        R.color.color_primary_reference,
-        R.color.color_background_dark)
+        R.color.cyanea_background_dark,
+        R.color.cyanea_background_dark_darker,
+        R.color.cyanea_background_dark_lighter,
+        R.color.cyanea_background_light,
+        R.color.cyanea_background_light_darker,
+        R.color.cyanea_background_light_lighter,
+        R.color.cyanea_accent,
+        R.color.cyanea_accent_dark,
+        R.color.cyanea_accent_dark_reference,
+        R.color.cyanea_accent_light,
+        R.color.cyanea_accent_light_reference,
+        R.color.cyanea_accent_reference,
+        R.color.cyanea_bg_light,
+        R.color.cyanea_primary,
+        R.color.cyanea_primary_dark,
+        R.color.cyanea_primary_dark_reference,
+        R.color.cyanea_primary_light,
+        R.color.cyanea_primary_light_reference,
+        R.color.cyanea_primary_reference,
+        R.color.cyanea_bg_dark)
 
   }
 

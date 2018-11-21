@@ -37,12 +37,12 @@ class CyaneaResourcesTest {
     val resources = CyaneaResources(res)
 
     val drawableIds = arrayOf(
-        R.drawable.color_background_dark,
-        R.drawable.color_background_dark_lighter,
-        R.drawable.color_background_dark_darker,
-        R.drawable.color_background_light,
-        R.drawable.color_background_light_lighter,
-        R.drawable.color_background_light_darker
+        R.drawable.cyanea_bg_dark,
+        R.drawable.cyanea_bg_dark_lighter,
+        R.drawable.cyanea_bg_dark_darker,
+        R.drawable.cyanea_bg_light,
+        R.drawable.cyanea_bg_light_lighter,
+        R.drawable.cyanea_bg_light_darker
     )
 
     drawableIds.forEach { resid ->
@@ -57,7 +57,7 @@ class CyaneaResourcesTest {
 
     setCyaneaColor(0xFF0099CC.toInt(), "primary")
     @Suppress("DEPRECATION")
-    val color = resources.getColor(R.color.color_primary)
+    val color = resources.getColor(R.color.cyanea_primary)
 
     assertEquals(cyanea.primary, color)
   }
@@ -67,7 +67,7 @@ class CyaneaResourcesTest {
 
     setCyaneaColor(0xFF0099CC.toInt(), "accent")
     @Suppress("DEPRECATION")
-    val color = resources.getColor(R.color.color_accent)
+    val color = resources.getColor(R.color.cyanea_accent)
 
     assertEquals(cyanea.accent, color)
   }

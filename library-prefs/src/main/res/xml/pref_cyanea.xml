@@ -13,7 +13,7 @@
         android:title="@string/pref_theme_title"/>
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="@color/color_primary_reference"
+        android:defaultValue="@color/cyanea_primary_reference"
         android:key="pref_color_primary"
         android:summary="@string/pref_primary_color_summary"
         android:title="@string/pref_primary_color_title"
@@ -21,7 +21,7 @@
         />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="@color/color_accent_reference"
+        android:defaultValue="@color/cyanea_accent_reference"
         android:key="pref_color_accent"
         android:summary="@string/pref_accent_color_summary"
         android:title="@string/pref_accent_color_title"
@@ -29,7 +29,7 @@
         />
 
     <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
-        android:defaultValue="@color/background_material_light"
+        android:defaultValue="@color/cyanea_background_light"
         android:key="pref_color_background"
         android:summary="@string/pref_background_color_summary"
         android:title="@string/pref_background_color_title"
@@ -39,7 +39,7 @@
         tools:ignore="PrivateResource"/>
 
     <androidx.preference.SwitchPreferenceCompat
-        android:defaultValue="@bool/pref_default_color_navigation_bar"
+        android:defaultValue="@bool/should_tint_nav_bar"
         android:key="pref_color_navigation_bar"
         android:summary="@string/pref_colored_navigation_bar_summary"
         android:title="@string/pref_colored_navigation_bar_title"

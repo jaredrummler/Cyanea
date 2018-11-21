@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2015 Jared Rummler
+  ~ Copyright (C) 2018 Jared Rummler
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -20,47 +20,49 @@
 
   <!-- Accent colors -->
   <eat-comment/>
-  <color name="color_accent_reference">#FFF29135</color>
-  <color name="color_accent_light_reference">#FFFDA34D</color>
-  <color name="color_accent_dark_reference">#FFE68529</color>
+  <color name="cyanea_accent_reference">#FFF29135</color>
+  <color name="cyanea_accent_light_reference">#FFFDA34D</color>
+  <color name="cyanea_accent_dark_reference">#FFE68529</color>
 
   <!-- Primary colors -->
   <eat-comment/>
-  <color name="color_primary_reference">#FF65185A</color>
-  <color name="color_primary_light_reference">#FF8c2D7F</color>
-  <color name="color_primary_dark_reference">#FF57114D</color>
+  <color name="cyanea_primary_reference">#FF65185A</color>
+  <color name="cyanea_primary_light_reference">#FF8c2D7F</color>
+  <color name="cyanea_primary_dark_reference">#FF57114D</color>
 
   <!-- Background colors -->
   <eat-comment/>
-  <color name="background_material_dark" tools:override="true">#FF303030</color>
-  <color name="background_material_dark_darker">#FF1E1E1E</color>
-  <color name="background_material_dark_lighter">#FF2D2D2D</color>
-  <color name="background_material_light" tools:override="true">#FFFAFAFA</color>
-  <color name="background_material_light_darker">#FFC0C0C0</color>
-  <color name="background_material_light_lighter">#FFF8F8F8</color>
+  <color name="cyanea_background_dark">#FF303030</color>
+  <color name="cyanea_background_dark_darker">#FF1E1E1E</color>
+  <color name="cyanea_background_dark_lighter">#FF2D2D2D</color>
+  <color name="cyanea_background_light">#FFFAFAFA</color>
+  <color name="cyanea_background_light_darker">#FFC0C0C0</color>
+  <color name="cyanea_background_light_lighter">#FFF8F8F8</color>
+  <color name="background_material_dark" tools:override="true">@color/cyanea_background_dark</color>
+  <color name="background_material_light" tools:override="true">@color/cyanea_background_light</color>
 
   <!-- Navigation bar color -->
   <eat-comment/>
-  <color name="color_navigation_bar_reference">@color/color_primary_reference</color>
+  <color name="cyanea_navigation_bar_reference">@color/cyanea_primary_reference</color>
 
   <!-- Menu colors -->
   <eat-comment/>
-  <color name="menu_icon_color_light">#FFFFFFFF</color>
-  <color name="menu_icon_color_dark">#DE000000</color>
-  <color name="sub_menu_icon_color_light">#B3FFFFFF</color>
-  <color name="sub_menu_icon_color_dark">#8A000000</color>
+  <color name="cyanea_menu_icon_light">#FFFFFFFF</color>
+  <color name="cyanea_menu_icon_dark">#DE000000</color>
+  <color name="cyanea_sub_menu_icon_light">#B3FFFFFF</color>
+  <color name="cyanea_sub_menu_icon_dark">#8A000000</color>
 
   <!-- Material colors -->
   <eat-comment/>
-  <color name="grey_500">#FF9E9E9E</color>
+  <color name="cyanea_selector_default">#FF9E9E9E</color>
 
   <!-- Background selector colors -->
   <eat-comment/>
-  <color name="color_disabled_selected_reference">#FF757575</color>
+  <color name="cyanea_disabled_selected_reference">#FF757575</color>
 
   <!-- Translucent window background theme color -->
   <eat-comment/>
-  <color name="translucent_background_color">#99323232</color>
+  <color name="cyanea_translucent_background">#99323232</color>
 
   <!-- Checkable ColorStateList -->
   <eat-comment/>

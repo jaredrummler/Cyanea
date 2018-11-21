@@ -395,7 +395,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/margin_tiny"
           android:hint="@string/label"
-          app:boxStrokeColor="@color/color_accent"
+          app:boxStrokeColor="?colorAccent"
           app:helperText="Outline text field"
           app:helperTextEnabled="true"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

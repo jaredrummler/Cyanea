@@ -16,9 +16,12 @@
   ~
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="rectangle">
-
-  <solid android:color="@color/color_background_light_lighter"/>
-
-</shape>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/cyanea_primary_dark">
+  <item android:id="@android:id/mask">
+    <shape android:shape="rectangle">
+      <solid android:color="@color/cyanea_primary_light"/>
+    </shape>
+  </item>
+</ripple>

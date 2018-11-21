@@ -361,7 +361,7 @@ internal class TextInputLayoutProcessor : CyaneaViewProcessor<TextInputLayout>()
   override fun getType(): Class<TextInputLayout> = TextInputLayout::class.java
 
   override fun process(view: TextInputLayout, attrs: AttributeSet?, cyanea: Cyanea) {
-    if (view.boxStrokeColor == Cyanea.getOriginalColor(R.color.color_accent_reference)) {
+    if (view.boxStrokeColor == Cyanea.getOriginalColor(R.color.cyanea_accent_reference)) {
       view.boxStrokeColor = cyanea.accent
     }
     if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {

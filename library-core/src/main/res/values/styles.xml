@@ -23,14 +23,14 @@
   <!-- ============ -->
   <eat-comment />
 
-  <style name="PopupMenu.Dark" parent="@style/Widget.AppCompat.PopupMenu">
-    <item name="android:popupBackground">@drawable/bg_popup_dark</item>
+  <style name="Cyanea.PopupMenu.Dark" parent="@style/Widget.AppCompat.PopupMenu">
+    <item name="android:popupBackground">@drawable/cyanea_bg_popup_dark</item>
     <item name="android:overlapAnchor" tools:ignore="NewApi">true</item>
     <item name="overlapAnchor">true</item>
   </style>
 
-  <style name="PopupMenu.Light" parent="@style/Widget.AppCompat.Light.PopupMenu">
-    <item name="android:popupBackground">@drawable/bg_popup_light</item>
+  <style name="Cyanea.PopupMenu.Light" parent="@style/Widget.AppCompat.Light.PopupMenu">
+    <item name="android:popupBackground">@drawable/cyanea_bg_popup_light</item>
     <item name="android:overlapAnchor" tools:ignore="NewApi">true</item>
     <item name="overlapAnchor">true</item>
   </style>
@@ -40,7 +40,7 @@
   <!-- ============= -->
   <eat-comment />
 
-  <style name="ColoredButton" parent="@style/Widget.AppCompat.Button">
+  <style name="Cyanea.ColoredButton" parent="@style/Widget.AppCompat.Button">
     <item name="android:textColor">@android:color/white</item>
   </style>
 
@@ -49,20 +49,20 @@
   <!-- ============= -->
   <eat-comment />
 
-  <style name="AlertDialog.Theme.Dark" parent="Theme.AppCompat.Dialog.Alert">
-    <item name="colorAccent">@color/color_accent</item>
-    <item name="colorPrimary">@color/color_primary</item>
+  <style name="Cyanea.AlertDialog.Theme.Dark" parent="Theme.AppCompat.Dialog.Alert">
+    <item name="colorAccent">@color/cyanea_accent</item>
+    <item name="colorPrimary">@color/cyanea_primary</item>
   </style>
 
-  <style name="AlertDialog.Theme.Light" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="colorAccent">@color/color_accent</item>
-    <item name="colorPrimary">@color/color_primary</item>
+  <style name="Cyanea.AlertDialog.Theme.Light" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="colorAccent">@color/cyanea_accent</item>
+    <item name="colorPrimary">@color/cyanea_primary</item>
   </style>
 
   <!-- https://code.google.com/p/android/issues/detail?id=220699 -->
   <eat-comment />
-  <style name="AlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
-    <item name="android:textColor">@color/color_accent</item>
+  <style name="Cyanea.AlertDialogButtonStyle" parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <item name="android:textColor">@color/cyanea_accent</item>
   </style>
 
 </resources>

@@ -19,6 +19,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
 
-  <solid android:color="@color/color_background_dark_darker"/>
+  <solid android:color="@color/cyanea_bg_light_lighter"/>
 
 </shape>

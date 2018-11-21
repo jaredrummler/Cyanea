@@ -76,7 +76,7 @@ internal open class CyaneaDelegateImplV21(
       val cache = Reflection.getFieldValue<Any?>(activity.resources, "sPreloadedColorStateLists") ?: return
       val method = Reflection.getMethod(cache, "put", Long::class.java, Object::class.java) ?: return
       for ((id, color) in hashMapOf<Int, Int>().apply {
-        put(R.color.color_accent, cyanea.accent)
+        put(R.color.cyanea_accent, cyanea.accent)
       }) {
         val csl = ColorStateList.valueOf(color)
         val key = activity.resources.getKey(id)

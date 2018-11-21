@@ -16,23 +16,9 @@
   ~
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-  <item android:state_pressed="true">
-    <shape android:shape="rectangle">
-      <solid android:color="@color/color_primary_light_reference"/>
-    </shape>
-  </item>
-  <item android:state_focused="true">
-    <shape android:shape="rectangle">
-      <solid android:color="@color/color_primary_dark_reference"/>
-    </shape>
-  </item>
-  <item android:state_enabled="false">
-    <shape android:shape="rectangle">
-      <solid android:color="@color/color_disabled_selected_reference"/>
-    </shape>
-  </item>
-  <item android:drawable="@android:color/transparent"/>
+  <solid android:color="@color/cyanea_primary_dark"/>
 
-</selector>
+</shape>

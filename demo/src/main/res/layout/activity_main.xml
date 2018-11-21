@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/backgroundColor"
         app:layout_scrollFlags="snap"
-        app:tabIndicatorColor="@color/color_accent"
+        app:tabIndicatorColor="?colorAccent"
         app:tabMode="scrollable"
         app:tabTextAppearance="@style/TabTextAppearance"
         />

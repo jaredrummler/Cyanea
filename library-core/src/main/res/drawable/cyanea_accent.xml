@@ -16,8 +16,9 @@
   ~
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-  <item android:color="@color/color_primary_reference" android:drawable="@color/color_primary_reference"/>
+  <solid android:color="@color/cyanea_accent"/>
 
-</selector>
+</shape>
