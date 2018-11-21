@@ -15,10 +15,11 @@ class MainApp : CyaneaApp(), CyaneaDecorator.Provider, CyaneaViewProcessor.Provi
   }
 
   override fun getViewProcessors(): Array<CyaneaViewProcessor<out View>> = arrayOf(
-
+    // Add a view processor to manipulate a view when inflated.
   )
 
   override fun getDecorators(): Array<CyaneaDecorator> = arrayOf(
+      // Add a decorator to apply custom attributes to any view
       FontDecorator()
   )
 

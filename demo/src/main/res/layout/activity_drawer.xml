@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="?colorPrimary"
-        android:elevation="6dp"
+        android:elevation="@dimen/drawer_toolbar_elevation"
         android:theme="?actionBarTheme"
         app:popupTheme="?popupTheme"
         app:title="@string/drawer_layout"
@@ -36,7 +36,7 @@
         android:gravity="center"
         android:text="@string/hello_world"
         android:textColor="?colorAccent"
-        android:textSize="36sp"
+        android:textSize="@dimen/large_text_size"
         />
 
   </LinearLayout>

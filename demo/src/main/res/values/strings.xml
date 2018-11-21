@@ -1,29 +1,54 @@
 <resources>
+
   <string name="app_name">Cyanea</string>
 
-  <string name="share">Share</string>
-  <string name="theme_picker">Theme Picker</string>
-  <string name="github">GitHub</string>
-
+  <!-- Tabs -->
+  <eat-comment/>
   <string name="tab_about">About</string>
   <string name="tab_widgets">Widgets</string>
   <string name="tab_dialogs">Dialogs</string>
   <string name="tab_other">Other</string>
+  <string-array name="tabs">
+    <item>@string/tab_about</item>
+    <item>@string/tab_widgets</item>
+    <item>@string/tab_dialogs</item>
+    <item>@string/tab_other</item>
+  </string-array>
 
+  <!-- About -->
+  <eat-comment/>
   <string name="cyanea_headline">A theme engine for Android</string>
   <string name="cyanea_about">Named after Octopus Cyanea which is adept at camouflage and not only can change color frequently, but also can change the patterns on and texture of its skin.</string>
+  <string-array name="cyanea_topics">
+    <item>Android</item>
+    <item>Theme Engine</item>
+    <item>Dynamic</item>
+    <item>Customizable</item>
+    <item>Colorful</item>
+    <item>Open Source</item>
+  </string-array>
 
-  <string name="cat_btn_text">Material button</string>
-  <string name="cat_unelevated_btn_text">Unelevated button</string>
-  <string name="cat_text_btn_text">Text button</string>
-  <string name="cat_stroked_btn_text">Stroked button</string>
-  <string name="cat_icon_btn_text">Icon button</string>
-  <string name="cat_icon_text_btn_text">Icon text button</string>
-  <string name="cat_filled_buttons_section_title">Filled buttons</string>
-  <string name="cat_outlined_btn_text">Outlined buttons</string>
-  <string name="cat_outlined_icon_btn_text">Icon only buttons</string>
-  <string name="cat_button_clicked">Button clicked</string>
+  <!-- Widgets -->
+  <eat-comment/>
+  <string name="buttons">Buttons</string>
+  <string name="button">Button</string>
+  <string name="share">Share</string>
+  <string name="text_button">Text Button</string>
+  <string name="checkbox">Checkbox</string>
+  <string name="enabled">Enabled</string>
+  <string name="disabled">Disabled</string>
+  <string name="radio_buttons">Radio Buttons</string>
+  <string name="radiobutton_1">RadioButton 1</string>
+  <string name="radiobutton_2">RadioButton 2</string>
+  <string name="radiobutton_3">RadioButton 3</string>
+  <string name="disabled_1">Disabled 1</string>
+  <string name="disabled_2">Disabled 2</string>
+  <string name="switch_headline">Switch</string>
+  <string name="text_fields">Text Fields</string>
+  <string name="label">Label</string>
 
+  <!-- Dialogs -->
+  <eat-comment/>
   <string name="message_2_actions">Message, 2 Actions</string>
   <string name="title_2_actions">Title, 2 Actions</string>
   <string name="title_message_3_actions">Title, Message, 3 Actions</string>
@@ -39,7 +64,6 @@
   <string name="title_date_picker">Date Picker</string>
   <string name="title_time_picker">Time Picker</string>
   <string name="title_popup_menu">Popup Menu</string>
-
   <string name="positive">Accept</string>
   <string name="negative">Decline</string>
   <string name="neutral">Cancel</string>
@@ -56,31 +80,40 @@
   <string name="too_long_negative">This is a long Decline message. It is so long that it spans multiple lines on normal screens.</string>
   <string name="line">"Line "</string>
 
+  <!-- RecyclerView -->
+  <eat-comment/>
+  <string name="hello_world">Hello, World!</string>
+  <string name="recycler_view">RecyclerView</string>
+
+  <!-- Menu -->
+  <eat-comment/>
+  <string name="settings">Settings</string>
+
+  <!-- Drawer -->
+  <eat-comment/>
   <string name="drawer_layout">Drawer Layout</string>
   <string name="open_drawer">Open Drawer</string>
   <string name="close_drawer">Close Drawer</string>
-  <string name="hello_world">Hello, World!</string>
-  <string name="recycler_view">RecyclerView</string>
+  <string name="github">GitHub</string>
+  <string name="twitter">Twitter</string>
+  <string name="facebook">Facebook</string>
+  <string name="instagram">Instagram</string>
+  <string name="google">Google</string>
+  <string name="apple">Apple</string>
+
+  <!-- PopupMenu Items -->
+  <eat-comment/>
+  <string name="action_1">Action 1</string>
+  <string name="action_2">Action 2</string>
+  <string name="action_3">Action 3</string>
+  <string name="item_1">Item 1</string>
+  <string name="item_2">Item 2</string>
+  <string name="item_3">Item 3</string>
+
+  <!-- Share -->
+  <eat-comment/>
   <string name="share_cyanea_message">Checkout Cyanea on GitHub, an open source theme engine for Android.
     https://github.com/jaredrummler/Cyanea #AndroidDev</string>
-
   <string name="github_project_url" translatable="false">https://github.com/jaredrummler/Cyanea</string>
-  <string name="settings">Settings</string>
-
-  <string-array name="tabs">
-    <item>@string/tab_about</item>
-    <item>@string/tab_widgets</item>
-    <item>@string/tab_dialogs</item>
-    <item>@string/tab_other</item>
-  </string-array>
-
-  <string-array name="cyanea_topics">
-    <item>Android</item>
-    <item>Theme Engine</item>
-    <item>Dynamic</item>
-    <item>Customizable</item>
-    <item>Colorful</item>
-    <item>Open Source</item>
-  </string-array>
 
 </resources>

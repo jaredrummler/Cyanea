@@ -17,5 +17,4 @@
   <color name="background_material_light" tools:override="true">#EBE5D9</color>
   <color name="background_material_light_darker">#D4D4D4</color>
   <color name="background_material_light_lighter">#EEE8DE</color>
-
 </resources>

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="cyanea_theme_item_width">140dp</dimen>
-  <dimen name="default_margin">16dp</dimen>
+  <dimen name="margin_default">16dp</dimen>
+  <dimen name="margin_small">8dp</dimen>
+  <dimen name="margin_tiny">4dp</dimen>
+  <dimen name="drawer_toolbar_elevation">6dp</dimen>
+  <dimen name="large_text_size">36sp</dimen>
+  <dimen name="drawer_header_height">196dp</dimen>
+  <dimen name="chip_spacing">8dp</dimen>
+  <dimen name="about_margin_top">8dp</dimen>
+  <dimen name="about_line_spacing">2dp</dimen>
+  <dimen name="margin_medium">32dp</dimen>
+  <dimen name="widget_headline_margin_top">24dp</dimen>
+  <dimen name="recycler_view_side_padding">12dp</dimen>
 </resources>

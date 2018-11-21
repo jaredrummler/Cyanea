@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical"
-    android:paddingBottom="12dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp"
-    android:paddingTop="12dp"
+    android:paddingBottom="@dimen/recycler_view_side_padding"
+    android:paddingEnd="@dimen/margin_default"
+    android:paddingStart="@dimen/margin_default"
+    android:paddingTop="@dimen/recycler_view_side_padding"
     >
 
   <TextView
@@ -16,7 +16,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-      android:textColor="@color/color_accent"
+      android:textColor="?colorAccent"
       tools:text="Item #1"
       />
 
@@ -24,7 +24,7 @@
       android:id="@+id/subtitleText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
+      android:layout_marginTop="@dimen/margin_tiny"
       android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
       tools:text="Subtitle text"
       />

@@ -46,7 +46,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom"
-      app:backgroundTint="@color/color_primary"
+      app:backgroundTint="?colorPrimary"
       app:fabAlignmentMode="end"
       app:navigationIcon="@drawable/ic_drawer_menu_24px"
       />

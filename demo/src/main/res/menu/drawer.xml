@@ -7,19 +7,19 @@
         android:id="@+id/item_twitter"
         android:checkable="true"
         android:icon="@drawable/ic_twitter_24dp"
-        android:title="Twitter"/>
+        android:title="@string/twitter"/>
 
     <item
         android:id="@+id/item_facebook"
         android:checkable="true"
         android:icon="@drawable/ic_facebook_24dp"
-        android:title="Facebook"/>
+        android:title="@string/facebook"/>
 
     <item
         android:id="@+id/item_instagram"
         android:checkable="true"
         android:icon="@drawable/ic_instagram_24dp"
-        android:title="Instagram"/>
+        android:title="@string/instagram"/>
 
   </group>
 
@@ -29,13 +29,13 @@
         android:id="@+id/item_google"
         android:checkable="true"
         android:icon="@drawable/ic_google_24dp"
-        android:title="Google"/>
+        android:title="@string/google"/>
 
     <item
         android:id="@+id/item_apple"
         android:checkable="true"
         android:icon="@drawable/ic_apple_24dp"
-        android:title="Apple"/>
+        android:title="@string/apple"/>
 
   </group>
 

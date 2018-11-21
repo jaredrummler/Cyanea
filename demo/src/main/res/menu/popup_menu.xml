@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="HardcodedText">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
       android:id="@+id/popup_menu_action_1"
       android:orderInCategory="100"
-      android:title="Action 1"
+      android:title="@string/action_1"
       app:showAsAction="never"/>
 
   <item
       android:id="@+id/popup_menu_action_2"
       android:orderInCategory="100"
-      android:title="Action 2"
+      android:title="@string/action_2"
       app:showAsAction="never"/>
 
   <item
       android:id="@+id/popup_menu_action_3"
       android:orderInCategory="100"
-      android:title="Action 3"
+      android:title="@string/action_3"
       app:showAsAction="never">
     <menu>
       <item
           android:id="@+id/popup_menu_action_4"
           android:orderInCategory="100"
-          android:title="Item 1"
+          android:title="@string/item_1"
           app:showAsAction="never"/>
       <item
           android:id="@+id/popup_menu_action_5"
           android:orderInCategory="100"
-          android:title="Item 2"
+          android:title="@string/item_2"
           app:showAsAction="never"/>
       <item
           android:id="@+id/popup_menu_action_6"
           android:orderInCategory="100"
-          android:title="Item 3"
+          android:title="@string/item_3"
           app:showAsAction="never"/>
     </menu>
   </item>
