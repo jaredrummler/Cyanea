@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.RippleDrawable
@@ -63,7 +64,7 @@ abstract class CyaneaViewProcessor<T : View> {
    * The view to check
    * @return True if this view should be processed.
    */
-  open fun shouldProcessView(view: View)= getType().isInstance(view)
+  open fun shouldProcessView(view: View) = getType().isInstance(view)
 
   /**
    * The class for the given view
@@ -114,6 +115,15 @@ internal class BottomAppBarProcessor : CyaneaViewProcessor<BottomAppBar>() {
 
   override fun process(view: BottomAppBar, attrs: AttributeSet?, cyanea: Cyanea) {
     view.backgroundTint?.let { view.backgroundTint = cyanea.tinter.tint(it) }
+    view.post {
+      view.context?.let { context ->
+        (context as? Activity)?.run {
+          cyanea.tint(view.menu, this)
+        } ?: ((context as? ContextWrapper)?.baseContext as? Activity)?.run {
+          cyanea.tint(view.menu, this)
+        }
+      }
+    }
   }
 
 }
