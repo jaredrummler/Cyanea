@@ -1,4 +1,5 @@
 rootProject.name = 'Cyanea'
 
-include ':demo'
+include ':demo-main'
+include ':demo-simple-java'
 include ':library'
