@@ -19,11 +19,13 @@ interface BaseCyaneaActivity {
    * Get the theme resource id. You can use a pre-defined theme in [CyaneaThemes] or use your own theme that inherits
    * from a Cyanea based theme.
    *
+   * If 0 is returned then Cyanea will determine whether to use a NoActionBar theme based on the current theme.
+   *
    * @return A cyanea theme
    *
    * @see [CyaneaThemes.actionBarTheme]
    * @see [CyaneaThemes.noActionBarTheme]
    */
-  @StyleRes fun getThemeResId(): Int
+  @StyleRes fun getThemeResId(): Int = 0
 
 }

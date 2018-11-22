@@ -36,8 +36,6 @@ To integrate Cyanea, you must declare your activity to extend any of the activit
 ```kotlin
 class MyActivity : CyaneaAppCompatActivity() {
 
-  override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
-
 }
 ```
 

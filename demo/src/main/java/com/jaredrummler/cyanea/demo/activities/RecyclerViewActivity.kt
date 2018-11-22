@@ -26,8 +26,6 @@ class RecyclerViewActivity : CyaneaAppCompatActivity() {
     recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
   }
 
-  override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
-
   class DemoAdapter : RecyclerView.Adapter<DemoViewHolder>() {
 
     override fun getItemCount(): Int = 100

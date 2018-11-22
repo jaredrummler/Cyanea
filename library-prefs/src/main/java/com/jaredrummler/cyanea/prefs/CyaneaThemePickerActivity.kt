@@ -29,6 +29,4 @@ class CyaneaThemePickerActivity : CyaneaAppCompatActivity() {
     else -> super.onOptionsItemSelected(item)
   }
 
-  override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
-
 }

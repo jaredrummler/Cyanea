@@ -27,7 +27,7 @@ import com.jaredrummler.cyanea.tinting.SystemBarTint
 internal open class CyaneaDelegateImplBase(
     private val activity: Activity,
     private val cyanea: Cyanea,
-    @StyleRes private val themeResId: Int
+    @StyleRes private var themeResId: Int
 ) : CyaneaDelegate() {
 
   private val timestamp = cyanea.timestamp
@@ -37,7 +37,7 @@ internal open class CyaneaDelegateImplBase(
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    if (themeResId != 0 && cyanea.isThemeModified) {
+    if (cyanea.isThemeModified && getThemeResId() != 0) {
       activity.setTheme(themeResId)
     }
     if (cyanea.isThemeModified) {
@@ -154,6 +154,26 @@ internal open class CyaneaDelegateImplBase(
         TextInputLayoutProcessor(),
         NavigationViewProcessor()
     )
+  }
+
+  @StyleRes override fun getThemeResId(): Int {
+    if (themeResId == 0) {
+      activity.theme?.obtainStyledAttributes(intArrayOf(R.attr.windowActionBar))?.let { styledAttrs ->
+        val windowActionBar = styledAttrs.getBoolean(0, true)
+        themeResId = if (windowActionBar) {
+          cyanea.themes.actionBarTheme
+        } else {
+          cyanea.themes.noActionBarTheme
+        }
+      } ?: run {
+        Cyanea.log(TAG, "Error getting styled attribute: 'windowActionBar'")
+      }
+    }
+    return themeResId
+  }
+
+  companion object {
+    private const val TAG = "CyaneaDelegateImplBase"
   }
 
 }

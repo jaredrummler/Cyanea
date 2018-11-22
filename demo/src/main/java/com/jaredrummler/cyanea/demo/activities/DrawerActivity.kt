@@ -51,6 +51,4 @@ class DrawerActivity : CyaneaAppCompatActivity() {
     return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
   }
 
-  override fun getThemeResId(): Int = cyanea.themes.noActionBarTheme
-
 }

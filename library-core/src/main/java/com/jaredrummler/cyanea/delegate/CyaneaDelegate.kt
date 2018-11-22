@@ -88,6 +88,8 @@ abstract class CyaneaDelegate {
 
   protected abstract fun getDecorators(): Array<CyaneaDecorator>
 
+  @StyleRes protected abstract fun getThemeResId(): Int
+
   companion object {
 
     /**

@@ -90,8 +90,6 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
     startActivity(Intent.createChooser(sendIntent, resources.getText(R.string.share)))
   }
 
-  override fun getThemeResId(): Int = cyanea.themes.actionBarTheme
-
   class DemoPagerAdapter(
       private val activity: FragmentActivity
   ) : FragmentStatePagerAdapter(activity.supportFragmentManager) {
