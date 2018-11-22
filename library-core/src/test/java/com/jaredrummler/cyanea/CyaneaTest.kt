@@ -1,10 +1,10 @@
 package com.jaredrummler.cyanea
 
 import android.app.Application
-import android.content.SharedPreferences
 import android.content.res.Resources
 import com.jaredrummler.cyanea.Cyanea.BaseTheme
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -13,7 +13,6 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner.Silent::class)
@@ -24,7 +23,7 @@ class CyaneaTest {
 
   @Before fun setUp() {
     whenever(application.getSharedPreferences(anyString(), anyInt()))
-        .thenReturn(mock(SharedPreferences::class.java))
+        .thenReturn(mock())
 
     Cyanea.init(application, resources)
   }

@@ -1,12 +1,12 @@
 package com.jaredrummler.cyanea
 
 import android.app.Application
-import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import androidx.annotation.ColorInt
 import com.jaredrummler.cyanea.utils.Reflection
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThat
@@ -16,7 +16,6 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner.Silent::class)
@@ -28,7 +27,7 @@ class CyaneaResourcesTest {
 
   @Before fun setUp() {
     whenever(app.getSharedPreferences(anyString(), anyInt()))
-        .thenReturn(mock(SharedPreferences::class.java))
+        .thenReturn(mock())
     Cyanea.init(app, res)
     cyanea = Cyanea.instance
   }
