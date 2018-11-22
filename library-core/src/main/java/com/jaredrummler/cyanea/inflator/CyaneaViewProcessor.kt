@@ -16,14 +16,12 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
-import android.widget.CheckedTextView
 import android.widget.CompoundButton
 import android.widget.DatePicker
 import android.widget.ImageButton
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.TimePicker
-import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
 import androidx.appcompat.view.menu.ListMenuItemView
 import androidx.appcompat.widget.AlertDialogLayout
@@ -129,60 +127,6 @@ internal class BottomAppBarProcessor : CyaneaViewProcessor<BottomAppBar>() {
         }
       }
     }
-  }
-
-}
-
-internal class CheckedTextViewProcessor : CyaneaViewProcessor<CheckedTextView>() {
-
-  override fun getType(): Class<CheckedTextView> = CheckedTextView::class.java
-
-  override fun process(view: CheckedTextView, attrs: AttributeSet?, cyanea: Cyanea) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      view.compoundDrawableTintList = checkableColorStateList(
-          view.context,
-          cyanea.accent,
-          cyanea.isDark
-      )
-    } else {
-      view.compoundDrawables.forEach { drawable ->
-        cyanea.tinter.tint(drawable)
-      }
-    }
-  }
-
-  private fun checkableColorStateList(
-      context: Context,
-      @ColorInt tint: Int,
-      isDark: Boolean
-  ): ColorStateList {
-    val disabled = ContextCompat.getColor(context,
-        if (isDark) R.color.cyanea_switch_track_disabled_dark
-        else R.color.cyanea_switch_track_disabled_light
-    )
-    val normal = ContextCompat.getColor(context,
-        if (isDark) R.color.cyanea_switch_track_normal_dark
-        else R.color.cyanea_switch_track_normal_light
-    )
-    return ColorStateList(
-        arrayOf(
-            intArrayOf(-attr.state_enabled),
-            intArrayOf(
-                attr.state_enabled,
-                -attr.state_activated,
-                -attr.state_checked
-            ),
-            intArrayOf(
-                attr.state_enabled,
-                attr.state_activated
-            ),
-            intArrayOf(
-                attr.state_enabled,
-                attr.state_checked
-            )
-        ),
-        intArrayOf(disabled, normal, tint, tint)
-    )
   }
 
 }
