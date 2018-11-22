@@ -50,9 +50,6 @@ import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 
 
-
-
-
 /**
  * Contains colors for an application theme.
  *
@@ -354,16 +351,12 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         LIGHT.name -> LIGHT
         DARK.name -> DARK
         else -> {
-          val a = TypedValue()
-          app.theme?.resolveAttribute(android.R.attr.windowBackground, a, true)
-          return if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
-            val color = a.data
-            val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
-            if (isDarkColor) DARK else LIGHT
-          } else if (res.getBoolean(R.bool.is_default_theme_light)) {
-            LIGHT
-          } else {
-            DARK
+          TypedValue().also {
+            app.theme?.resolveAttribute(android.R.attr.windowBackground, it, true)
+          }.let {
+            return if (it.type >= TypedValue.TYPE_FIRST_COLOR_INT && it.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+              if (ColorUtils.isDarkColor(it.data, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)) DARK else LIGHT
+            } else if (res.getBoolean(R.bool.is_default_theme_light)) LIGHT else DARK
           }
         }
       }
