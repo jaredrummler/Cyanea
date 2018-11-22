@@ -1,13 +1,14 @@
 package com.jaredrummler.cyanea.prefs
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
+import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.app.CyaneaFragment
 
 /**
@@ -35,7 +36,7 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
   override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
     val theme = (gridView.adapter as CyaneaThemePickerAdapter).getItem(position)
     val themeName = theme.themeName
-    Log.d(TAG, "Clicked $themeName")
+    Cyanea.log(TAG, "Clicked $themeName")
     theme.apply(cyanea).recreate(requireActivity(), smooth = true)
   }
 

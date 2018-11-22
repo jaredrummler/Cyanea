@@ -23,11 +23,8 @@ android {
 }
 
 dependencies {
-  implementation project(':library-core')
-  implementation project(':library-prefs')
+  implementation project(':library')
   implementation deps.kotlin.stdlib.jdk
   implementation deps.material
-  implementation deps.colorpicker
-  implementation deps.androidx.preferences
   implementation deps.androidx.constraintLayout
 }

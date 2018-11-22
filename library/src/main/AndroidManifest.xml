@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jaredrummler.cyanea.prefs">
+    package="com.jaredrummler.cyanea">
   <application>
     <activity
-        android:name=".CyaneaThemePickerActivity"
+        android:name=".prefs.CyaneaThemePickerActivity"
         android:label="@string/label_theme_picker"
         android:theme="@style/Theme.Cyanea.Light.DarkActionBar"/>
     <activity
-        android:name=".CyaneaSettingsActivity"
+        android:name=".prefs.CyaneaSettingsActivity"
         android:theme="@style/Theme.Cyanea.Light.DarkActionBar"/>
   </application>
 </manifest>

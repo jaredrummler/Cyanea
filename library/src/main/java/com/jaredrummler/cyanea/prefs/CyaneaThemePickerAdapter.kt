@@ -17,6 +17,7 @@ import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.utils.ColorUtils
 
 /**

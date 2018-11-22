@@ -70,4 +70,8 @@
   <eat-comment/>
   <color name="cyanea_disabled_selected_reference">#FF757575</color>
 
+  <!-- Theme picker -->
+  <color name="cyanea_theme_title_bg_color">#CC37474F</color>
+  <color name="cyanea_theme_selected_color">#FF689F38</color>
+
 </resources>

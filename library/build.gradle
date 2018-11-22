@@ -8,12 +8,19 @@ android {
     minSdkVersion buildConfig.minSdk
     targetSdkVersion buildConfig.targetSdk
   }
+
+  testOptions {
+    unitTests.returnDefaultValues = true
+  }
 }
 
 dependencies {
-  implementation project(':library-core')
   implementation deps.kotlin.stdlib.jdk
+  implementation deps.androidx.appCompat
+  implementation deps.androidx.preferences
   implementation deps.material
   implementation deps.colorpicker
-  implementation deps.androidx.preferences
+  testImplementation deps.junit
+  testImplementation deps.mockito.core
+  testImplementation deps.mockito.kotlin
 }

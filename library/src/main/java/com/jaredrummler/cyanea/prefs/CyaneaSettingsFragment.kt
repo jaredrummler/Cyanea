@@ -21,6 +21,7 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jaredrummler.android.colorpicker.ColorPreferenceCompat
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.app.BaseCyaneaActivity
 import com.jaredrummler.cyanea.tinting.SystemBarTint
 import com.jaredrummler.cyanea.utils.ColorUtils

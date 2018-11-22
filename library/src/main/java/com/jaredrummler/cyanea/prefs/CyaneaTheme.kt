@@ -7,6 +7,7 @@ import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.Cyanea.BaseTheme
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.LIGHT
+import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.utils.ColorUtils
 import org.json.JSONArray
 import org.json.JSONObject
