@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.View
 import androidx.annotation.StyleRes
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
 import com.jaredrummler.cyanea.inflator.BottomAppBarProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaContextWrapper
@@ -26,8 +27,8 @@ import com.jaredrummler.cyanea.tinting.SystemBarTint
 internal open class CyaneaDelegateImplBase(
     private val activity: Activity,
     private val cyanea: Cyanea,
-    @StyleRes private val themeResId: Int)
-  : CyaneaDelegate() {
+    @StyleRes private val themeResId: Int
+) : CyaneaDelegate() {
 
   private val timestamp = cyanea.timestamp
 
@@ -41,6 +42,17 @@ internal open class CyaneaDelegateImplBase(
     }
     if (cyanea.isThemeModified) {
       tintBars()
+    } else {
+      // We use a transparent primary dark color so the library user
+      // is not required to specify a color value for cyanea_default_primary_dark
+      // If the theme is using the transparent (fake) primary dark color, we need
+      // to update the status bar background with the auto-generated primary
+      // dark color.
+      val defaultPrimaryDark = Cyanea.getOriginalColor(R.color.cyanea_default_primary_dark)
+      val realPrimaryDark = Cyanea.getOriginalColor(R.color.cyanea_primary_dark_reference)
+      if (defaultPrimaryDark == realPrimaryDark) {
+        tintStatusBar()
+      }
     }
   }
 
@@ -116,20 +128,21 @@ internal open class CyaneaDelegateImplBase(
     return decorators.toTypedArray()
   }
 
-  protected open fun recreateActivity() {
-    activity.recreate()
-  }
+  protected open fun recreateActivity() = activity.recreate()
 
   protected open fun tintBars() {
-    val tinter = SystemBarTint(activity)
-    tinter.setActionBarColor(cyanea.primary)
-    if (cyanea.shouldTintStatusBar) {
-      tinter.setStatusBarColor(cyanea.primaryDark)
-    }
-    if (cyanea.shouldTintNavBar) {
-      tinter.setNavigationBarColor(cyanea.navigationBar)
+    SystemBarTint(activity).run {
+      setActionBarColor(cyanea.primary)
+      if (cyanea.shouldTintStatusBar) {
+        setStatusBarColor(cyanea.primaryDark)
+      }
+      if (cyanea.shouldTintNavBar) {
+        setNavigationBarColor(cyanea.navigationBar)
+      }
     }
   }
+
+  protected open fun tintStatusBar() = SystemBarTint(activity).setStatusBarColor(cyanea.primaryDark)
 
   protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<out View>> {
     return arrayListOf(

@@ -31,8 +31,8 @@ import com.jaredrummler.cyanea.utils.Reflection
 internal open class CyaneaDelegateImplV23(
     private val activity: Activity,
     private val cyanea: Cyanea,
-    themeResId: Int)
-  : CyaneaDelegateImplV21(activity, cyanea, themeResId) {
+    themeResId: Int
+) : CyaneaDelegateImplV21(activity, cyanea, themeResId) {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
