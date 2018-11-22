@@ -205,6 +205,8 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         res.getBoolean(R.bool.should_tint_nav_bar))
 
     timestamp = prefs.getLong(PREF_TIMESTAMP, NONE_TIMESTAMP)
+
+    setDefaultDarkerAndLighterColors()
   }
 
   /**
@@ -230,10 +232,25 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   /**
    * Creates a new editor and applys any edits in the action parameter
    */
-  inline fun edit(action: Cyanea.Editor.() -> Unit): Recreator {
-    val editor = edit()
-    action(editor)
-    return editor.apply()
+  inline fun edit(action: Cyanea.Editor.() -> Unit) = edit().also { editor -> action(editor) }.apply()
+
+  private fun setDefaultDarkerAndLighterColors() {
+    // We use a transparent primary|accent dark|light colors so the library user
+    // is not required to specify a color value for for accent|primary light|dark
+    // If the theme is using the transparent (fake) primary dark color, we need
+    // to update our color values and create light|dark variants for them.
+    if (primaryDark == getOriginalColor(R.color.cyanea_default_primary_dark)) {
+      primaryDark = ColorUtils.darker(primary, DEFAULT_DARKER_FACTOR)
+    }
+    if (primaryLight == getOriginalColor(R.color.cyanea_default_primary_light)) {
+      primaryLight = ColorUtils.lighter(primary, DEFAULT_LIGHTER_FACTOR)
+    }
+    if (accentDark == getOriginalColor(R.color.cyanea_default_accent_dark)) {
+      accentDark = ColorUtils.darker(accent, DEFAULT_DARKER_FACTOR)
+    }
+    if (accentLight == getOriginalColor(R.color.cyanea_default_accent_light)) {
+      accentLight = ColorUtils.lighter(accent, DEFAULT_LIGHTER_FACTOR)
+    }
   }
 
   companion object {
@@ -324,7 +341,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
      */
     @JvmStatic
     @ColorInt
-    @Suppress("DEPRECATION")
     fun getOriginalColor(@ColorRes resid: Int): Int = res.getColor(resid)
 
     private fun getBaseTheme(prefs: SharedPreferences, res: Resources): BaseTheme {

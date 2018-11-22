@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <!-- Accent colors -->
-  <eat-comment/>
   <color name="cyanea_accent_reference">#14B09B</color>
-  <color name="cyanea_accent_light_reference">#37BBA9</color>
-  <color name="cyanea_accent_dark_reference">#119583</color>
-
   <!-- Primary colors -->
-  <eat-comment/>
   <color name="cyanea_primary_reference">#0359AE</color>
-  <color name="cyanea_primary_light_reference">#2871BA</color>
-  <color name="cyanea_primary_dark_reference">#024B93</color>
-
   <!-- Background colors -->
-  <eat-comment/>
-  <color name="cyanea_background_light" tools:override="true">#EBE5D9</color>
+  <color name="cyanea_background_light">#EBE5D9</color>
   <color name="cyanea_background_light_darker">#D4D4D4</color>
   <color name="cyanea_background_light_lighter">#EEE8DE</color>
 </resources>

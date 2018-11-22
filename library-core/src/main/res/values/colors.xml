@@ -18,17 +18,27 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+  <!--
+  Use the following default colors for light|dark so the library user is not required to provide these.
+  Each default color should be different so the library knows which color to replace.
+  -->
+  <eat-comment/>
+  <color name="cyanea_default_accent_light">#03000000</color>
+  <color name="cyanea_default_accent_dark">#05000000</color>
+  <color name="cyanea_default_primary_light">#08000000</color>
+  <color name="cyanea_default_primary_dark">#09000000</color>
+
   <!-- Accent colors -->
   <eat-comment/>
-  <color name="cyanea_accent_reference">#FFF29135</color>
-  <color name="cyanea_accent_light_reference">#FFFDA34D</color>
-  <color name="cyanea_accent_dark_reference">#FFE68529</color>
+  <color name="cyanea_accent_reference">#FF1976D2</color>
+  <color name="cyanea_accent_light_reference">@color/cyanea_default_accent_light</color>
+  <color name="cyanea_accent_dark_reference">@color/cyanea_default_accent_dark</color>
 
   <!-- Primary colors -->
   <eat-comment/>
-  <color name="cyanea_primary_reference">#FF65185A</color>
-  <color name="cyanea_primary_light_reference">#FF8c2D7F</color>
-  <color name="cyanea_primary_dark_reference">#FF57114D</color>
+  <color name="cyanea_primary_reference">#FFC2185B</color>
+  <color name="cyanea_primary_light_reference">@color/cyanea_default_primary_light</color>
+  <color name="cyanea_primary_dark_reference">@color/cyanea_default_primary_dark</color>
 
   <!-- Background colors -->
   <eat-comment/>
