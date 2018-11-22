@@ -12,7 +12,6 @@ import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.getKey
 import com.jaredrummler.cyanea.inflator.AlertDialogProcessor
 import com.jaredrummler.cyanea.inflator.BottomAppBarProcessor
-import com.jaredrummler.cyanea.inflator.CheckedTextViewProcessor
 import com.jaredrummler.cyanea.inflator.CompoundButtonProcessor
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
 import com.jaredrummler.cyanea.inflator.DatePickerProcessor
@@ -89,7 +88,6 @@ internal open class CyaneaDelegateImplV23(
         arrayOf(
             AlertDialogProcessor(),
             BottomAppBarProcessor(),
-            CheckedTextViewProcessor(),
             CompoundButtonProcessor(),
             DatePickerProcessor(),
             ImageButtonProcessor(),
