@@ -23,22 +23,22 @@
   Each default color should be different so the library knows which color to replace.
   -->
   <eat-comment/>
-  <color name="cyanea_default_accent_light">#03000000</color>
-  <color name="cyanea_default_accent_dark">#05000000</color>
-  <color name="cyanea_default_primary_light">#08000000</color>
   <color name="cyanea_default_primary_dark">#09000000</color>
-
-  <!-- Accent colors -->
-  <eat-comment/>
-  <color name="cyanea_accent_reference">#FF1976D2</color>
-  <color name="cyanea_accent_light_reference">@color/cyanea_default_accent_light</color>
-  <color name="cyanea_accent_dark_reference">@color/cyanea_default_accent_dark</color>
+  <color name="cyanea_default_primary_light">#08000000</color>
+  <color name="cyanea_default_accent_dark">#05000000</color>
+  <color name="cyanea_default_accent_light">#03000000</color>
 
   <!-- Primary colors -->
   <eat-comment/>
   <color name="cyanea_primary_reference">#FFC2185B</color>
   <color name="cyanea_primary_light_reference">@color/cyanea_default_primary_light</color>
   <color name="cyanea_primary_dark_reference">@color/cyanea_default_primary_dark</color>
+
+  <!-- Accent colors -->
+  <eat-comment/>
+  <color name="cyanea_accent_reference">#FF1976D2</color>
+  <color name="cyanea_accent_light_reference">@color/cyanea_default_accent_light</color>
+  <color name="cyanea_accent_dark_reference">@color/cyanea_default_accent_dark</color>
 
   <!-- Background colors -->
   <eat-comment/>
@@ -62,23 +62,12 @@
   <color name="cyanea_sub_menu_icon_light">#B3FFFFFF</color>
   <color name="cyanea_sub_menu_icon_dark">#8A000000</color>
 
-  <!-- Material colors -->
+  <!-- Button selector colors -->
   <eat-comment/>
   <color name="cyanea_selector_default">#FF9E9E9E</color>
 
   <!-- Background selector colors -->
   <eat-comment/>
   <color name="cyanea_disabled_selected_reference">#FF757575</color>
-
-  <!-- Translucent window background theme color -->
-  <eat-comment/>
-  <color name="cyanea_translucent_background">#99323232</color>
-
-  <!-- Checkable ColorStateList -->
-  <eat-comment/>
-  <color name="cyanea_switch_track_disabled_dark">#1AFFFFFF</color>
-  <color name="cyanea_switch_track_disabled_light">#1F000000</color>
-  <color name="cyanea_switch_track_normal_dark">#4DFFFFFF</color>
-  <color name="cyanea_switch_track_normal_light">#43000000</color>
 
 </resources>

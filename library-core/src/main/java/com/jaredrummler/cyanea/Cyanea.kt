@@ -13,6 +13,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import android.view.View
 import androidx.annotation.ColorInt
@@ -47,6 +48,10 @@ import com.jaredrummler.cyanea.PrefKeys.PREF_TIMESTAMP
 import com.jaredrummler.cyanea.tinting.CyaneaTinter
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
+
+
+
+
 
 /**
  * Contains colors for an application theme.
@@ -161,8 +166,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     private set
 
   init {
-    baseTheme = getBaseTheme(prefs, res)
-
     primary = prefs.getInt(PREF_PRIMARY,
         res.getColor(R.color.cyanea_primary_reference))
     primaryDark = prefs.getInt(PREF_PRIMARY_DARK,
@@ -190,6 +193,8 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         res.getColor(R.color.cyanea_bg_dark_darker))
     backgroundDarkLighter = prefs.getInt(PREF_BACKGROUND_DARK_LIGHTER,
         res.getColor(R.color.cyanea_bg_dark_lighter))
+
+    baseTheme = getBaseTheme(prefs, res)
 
     menuIconColor = prefs.getInt(PREF_MENU_ICON_COLOR,
         res.getColor(if (isActionBarLight) R.color.cyanea_menu_icon_dark else R.color.cyanea_menu_icon_light))
@@ -349,7 +354,17 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         LIGHT.name -> LIGHT
         DARK.name -> DARK
         else -> {
-          if (res.getBoolean(R.bool.is_default_theme_light)) LIGHT else DARK
+          val a = TypedValue()
+          app.theme?.resolveAttribute(android.R.attr.windowBackground, a, true)
+          return if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+            val color = a.data
+            val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
+            if (isDarkColor) DARK else LIGHT
+          } else if (res.getBoolean(R.bool.is_default_theme_light)) {
+            LIGHT
+          } else {
+            DARK
+          }
         }
       }
     }
