@@ -1,1 +1,5 @@
-include ':demo', ':library-core', ':library-prefs'
+rootProject.name = 'Cyanea'
+
+include ':demo'
+include ':library-core'
+include ':library-prefs'

@@ -3,6 +3,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
   compileSdkVersion buildConfig.compileSdk
+
   defaultConfig {
     minSdkVersion buildConfig.minSdk
     targetSdkVersion buildConfig.targetSdk
