@@ -9,6 +9,10 @@ android {
     targetSdkVersion buildConfig.targetSdk
   }
 
+  sourceSets {
+    main.res.srcDirs 'res', 'res-public'
+  }
+
   testOptions {
     unitTests.returnDefaultValues = true
   }

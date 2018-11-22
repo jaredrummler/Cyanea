@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <public name="cyanea_primary_reference" type="color"/>
+  <public name="cyanea_primary_light_reference" type="color"/>
+  <public name="cyanea_primary_dark_reference" type="color"/>
+  <public name="cyanea_accent_reference" type="color"/>
+  <public name="cyanea_accent_light_reference" type="color"/>
+  <public name="cyanea_accent_dark_reference" type="color"/>
+  <public name="cyanea_background_dark" type="color"/>
+  <public name="cyanea_background_dark_darker" type="color"/>
+  <public name="cyanea_background_dark_lighter" type="color"/>
+  <public name="cyanea_background_light" type="color"/>
+  <public name="cyanea_background_light_darker" type="color"/>
+  <public name="cyanea_background_light_lighter" type="color"/>
+  <public name="cyanea_navigation_bar_reference" type="color"/>
+
+  <public name="cyanea_accent" type="drawable"/>
+  <public name="cyanea_primary" type="drawable"/>
+  <public name="cyanea_primary_dark" type="drawable"/>
+
+  <public name="is_default_theme_light" type="bool"/>
+  <public name="should_tint_status_bar" type="bool"/>
+  <public name="should_tint_nav_bar" type="bool"/>
+
+  <public name="backgroundColor" type="attr" />
+  <public name="backgroundColorLight" type="attr" />
+  <public name="backgroundColorDark" type="attr" />
+  <public name="menuIconColor" type="attr" />
+  <public name="subMenuIconColor" type="attr" />
+  <public name="cyaneaFont" type="attr" />
+
+  <public name="Cyanea.PopupMenu.Dark" type="style"/>
+  <public name="Cyanea.PopupMenu.Light" type="style"/>
+  <public name="Cyanea.AlertDialog.Theme.Dark" type="style"/>
+  <public name="Cyanea.AlertDialog.Theme.Light" type="style"/>
+
+  <public name="Theme.Cyanea.Dark" type="style"/>
+  <public name="Theme.Cyanea.Dark.LightActionBar" type="style"/>
+  <public name="Theme.Cyanea.Light" type="style"/>
+  <public name="Theme.Cyanea.Light.DarkActionBar" type="style"/>
+  <public name="Theme.Cyanea.Dark.NoActionBar" type="style"/>
+  <public name="Theme.Cyanea.Light.NoActionBar" type="style"/>
+</resources>
