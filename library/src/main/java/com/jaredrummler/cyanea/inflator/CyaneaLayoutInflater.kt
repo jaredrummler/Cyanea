@@ -150,45 +150,52 @@ class CyaneaLayoutInflater : LayoutInflater {
     setPrivateFactory = true
   }
 
+  private fun createViewFromDelegate(parent: View?, name: String, context: Context, attrs: AttributeSet): View? =
+      inflationDelegate?.createView(parent, name, context, attrs)
+
   private class WrapperFactory internal constructor(
       private val inflater: CyaneaLayoutInflater,
-      private val factory: LayoutInflater.Factory)
-    : LayoutInflater.Factory {
+      private val factory: LayoutInflater.Factory
+  ) : LayoutInflater.Factory {
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-      return inflater.processView(factory.onCreateView(name, context, attrs), attrs)
-    }
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? =
+        processView(inflater.createViewFromDelegate(null, name, context, attrs)
+            ?: factory.onCreateView(name, context, attrs), attrs)
+
+    protected fun processView(view: View?, attrs: AttributeSet): View? = inflater.processView(view, attrs)
 
   }
 
   private open class WrapperFactory2 internal constructor(
       internal val inflater: CyaneaLayoutInflater,
-      internal val factory: LayoutInflater.Factory2)
-    : LayoutInflater.Factory2 {
+      internal val factory: LayoutInflater.Factory2
+  ) : LayoutInflater.Factory2 {
 
-    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
-      return inflater.processView(factory.onCreateView(parent, name, context, attrs), attrs)
-    }
+    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? =
+        processView(inflater.createViewFromDelegate(parent, name, context, attrs)
+            ?: factory.onCreateView(parent, name, context, attrs), attrs)
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-      return inflater.processView(factory.onCreateView(name, context, attrs), attrs)
-    }
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? =
+        processView(inflater.createViewFromDelegate(null, name, context, attrs)
+            ?: factory.onCreateView(name, context, attrs), attrs)
+
+    protected fun processView(view: View?, attrs: AttributeSet): View? = inflater.processView(view, attrs)
 
   }
 
   private class PrivateWrapperFactory2 internal constructor(
-      inflater: CyaneaLayoutInflater, factory: LayoutInflater.Factory2)
-    : WrapperFactory2(inflater, factory) {
+      inflater: CyaneaLayoutInflater, factory: LayoutInflater.Factory2
+  ) : WrapperFactory2(inflater, factory) {
 
-    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
-      val view = factory.onCreateView(parent, name, context, attrs)
-      return inflater.processView(inflater.createCustomView(view, name, context, attrs), attrs)
-    }
+    override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? =
+        processView(inflater.createViewFromDelegate(null, name, context, attrs)
+            ?: factory.onCreateView(parent, name, context, attrs), attrs)
 
   }
 
   companion object {
     private val CLASS_PREFIX_LIST = arrayOf("android.widget.", "android.webkit.", "android.app.")
+    internal var inflationDelegate: CyaneaInflationDelegate? = null
   }
 
 }

@@ -19,6 +19,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.Keep
+import androidx.annotation.MainThread
 import com.jaredrummler.cyanea.Constants.LIGHT_ACTIONBAR_LUMINANCE_FACTOR
 import com.jaredrummler.cyanea.Constants.NONE_TIMESTAMP
 import com.jaredrummler.cyanea.Cyanea.BaseTheme.DARK
@@ -45,6 +46,8 @@ import com.jaredrummler.cyanea.PrefKeys.PREF_SHOULD_TINT_NAV_BAR
 import com.jaredrummler.cyanea.PrefKeys.PREF_SHOULD_TINT_STATUS_BAR
 import com.jaredrummler.cyanea.PrefKeys.PREF_SUB_MENU_ICON_COLOR
 import com.jaredrummler.cyanea.PrefKeys.PREF_TIMESTAMP
+import com.jaredrummler.cyanea.inflator.CyaneaInflationDelegate
+import com.jaredrummler.cyanea.inflator.CyaneaLayoutInflater
 import com.jaredrummler.cyanea.tinting.CyaneaTinter
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
@@ -287,6 +290,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     }
 
     private object Holder {
+
       val INSTANCE: Cyanea
         get() {
           try {
@@ -297,7 +301,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
           }
         }
     }
-
     private val instances by lazy { mutableMapOf<String, Cyanea>() }
 
     /**
@@ -321,6 +324,17 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         instances[name] = cyanea
         return cyanea
       }
+    }
+
+    /**
+     * Intercept and create views at inflation time
+     *
+     * @delegate The delegate used to intercept and create views
+     */
+    @JvmStatic
+    @MainThread
+    fun setInflationDelegate(delegate: CyaneaInflationDelegate) {
+      CyaneaLayoutInflater.inflationDelegate = delegate
     }
 
     /**
