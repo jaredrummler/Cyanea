@@ -107,7 +107,7 @@ Note: Do *not* set `colorPrimary`, `colorPrimaryDark`, `colorAccent`, etc. in th
 
 <img src="https://i.imgur.com/pjDEjWl.gif" align="left" hspace="10" vspace="10"></a>
 
-Cyanea also adds preferences for choosing the primary, accent and background colors of the app. A theme-picker with 50+ pre-defined themes is also included in the library.
+Cyanea adds preferences for choosing the primary, accent and background colors of the app. A theme-picker with 50+ pre-defined themes is also included in the library.
 
 #### Activities
 
@@ -129,6 +129,8 @@ Minimal JSON required for a pre-defined theme:
 }
 ```
 
+<br>
+
 # Dynamic Theming
 
 Use the following code to change the primary, accent or background colors of the app:
@@ -142,9 +144,96 @@ cyanea.edit {
 }.recreate(activity)
 ```
 
-The methods which end with Resource take a color resource. Remove Resource to pass a literal (hardcoded) color integer. 
+The methods which end with Resource take a color resource. Remove Resource to pass a literal (hardcoded) color integer. Unlike several other open source libraries, Cyanea can use *any* color you specify for primary, accent and background; you don't need pre-defined styles.
 
 You can get the current colors using `cyanea.primary` or using the default instance `Cyanea.instance.primary`.
+
+# Using Colors
+
+Most views will automatically be themed using the library. To use the primary, accent, background, etc. colors use attributes in your layouts:
+
+Attributes:
+
+- `?colorPrimary`
+- `?colorPrimaryDark`
+- `?colorAccent`
+- `?backgroundColor`
+- `?backgroundColorDark`
+- `?backgroundColorLight`
+- `?menuIconColor`
+- `?subMenuIconColor`
+
+Example: 
+
+```xml
+<com.example.MyCustomView
+  android:background="?backgroundColor"
+  android:textColor="?colorAccent"
+  app:someOtherColor="?colorPrimary" />
+```
+
+You can also use the primary, accent, background colors using `@color/cyanea_primary_reference`.
+
+# Advanced Usage
+
+### Processing Views
+
+You can modify a view before it is laid out using a `CyaneaViewProcessor`. Simple let your `Activity` or `Application` implement `CyaneaViewProcessor.Provider` and add your processors to the array.
+
+Example:
+
+```kotlin
+class MyActivity : Activity(), CyaneaViewProcessor.Provider {
+
+  override fun getViewProcessors(): Array<CyaneaViewProcessor<out View>> = arrayOf(
+      // Add a view processors to manipulate a view when inflated.
+      object : CyaneaViewProcessor<TextView>() {
+        override fun getType(): Class<TextView> = TextView::class.java
+        override fun process(view: TextView, attrs: AttributeSet?, cyanea: Cyanea) {
+          view.text = "Hijacked!"
+        }
+      }
+  )
+
+}
+```
+
+### Decorators
+
+You can inject custom attributes into layout files using `CyaneaDecorator`. The library ships with a `FontDecorator` which allows you to use `app:cyaneaFont="path/to/Font.ttf"` in any view. The font will automatically be set on the view. To implement your own decorator, let your `Activity` or `Application` implement `CyaneaDecorator.Provider` and return an array of your custom decorators.
+
+Example:
+
+```kotlin
+class MyActivity : Activity(), CyaneaDecorator.Provider {
+
+  override fun getDecorators(): Array<CyaneaDecorator> = arrayOf(
+      // Add a decorator to apply custom attributes to any view
+      FontDecorator()
+  )
+
+}
+```
+
+Please reference the [FontDecorator](https://github.com/jaredrummler/Cyanea/blob/master/library/src/main/java/com/jaredrummler/cyanea/inflator/decor) as an example.
+
+### Inflation Delegate
+
+You can add an inflation delegate to hook into when views are created and create the views yourself. 
+
+Example:
+
+```kotlin
+Cyanea.setInflationDelegate(object : CyaneaInflationDelegate {
+  override fun createView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
+    var view: View? = null
+    if (name == "androidx.appcompat.widget.Toolbar") {
+      view = MyCustomToolbar(context, attrs)
+    }
+    return view
+  }
+})
+```
 
 # License
 
