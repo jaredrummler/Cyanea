@@ -23,7 +23,7 @@ implementation 'com.jaredrummler:cyanea:1.0.0'
 
 ## Demo
 
-You can download an [APK of the demo project](https://raw.githubusercontent.com/jaredrummler/Cyanea/master/demo.apk)
+You can download an [APK of the demo project](https://github.com/jaredrummler/Cyanea/blob/master/demo.apk?raw=true)
 
 <br>
 
