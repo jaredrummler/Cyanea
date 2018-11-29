@@ -2,7 +2,9 @@
 
 <img src="https://i.imgur.com/eC6d5WO.gif" align="left" hspace="10" vspace="10"></a>
 
-## A theme engine for Android
+**A theme engine for Android.**
+<br>
+<sub>Themes are immutable, possibilities are beautiful.</sub>
 
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
 <a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/cyanea"><img src="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/cyanea/badge.svg" alt="Maven Central" /></a>
