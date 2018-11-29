@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +25,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/backgroundColor"
+        android:background="?backgroundColor"
         app:layout_scrollFlags="snap"
         app:tabIndicatorColor="?colorAccent"
         app:tabMode="scrollable"
@@ -58,6 +59,26 @@
       app:layout_anchor="@id/bar"
       app:srcCompat="@drawable/ic_theme_swithcer_24dp"
       />
+
+  <FrameLayout
+      android:id="@+id/bottomDrawer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?backgroundColorDark"
+      android:elevation="32dp"
+      app:behavior_hideable="true"
+      app:layout_behavior="@string/bottom_sheet_behavior"
+      tools:targetApi="lollipop"
+      >
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_bar_menu"
+        android:background="?backgroundColorLight"
+        />
+  </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -5,17 +5,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar.OnMenuItemClickListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaredrummler.cyanea.app.CyaneaAppCompatActivity
 import com.jaredrummler.cyanea.demo.R
 import com.jaredrummler.cyanea.demo.R.array
 import com.jaredrummler.cyanea.demo.R.dimen
 import com.jaredrummler.cyanea.demo.R.id
-import com.jaredrummler.cyanea.demo.R.layout
 import com.jaredrummler.cyanea.demo.R.menu
 import com.jaredrummler.cyanea.demo.R.string
 import com.jaredrummler.cyanea.demo.fragments.AboutFragment
@@ -25,27 +26,39 @@ import com.jaredrummler.cyanea.demo.fragments.WidgetsFragment
 import com.jaredrummler.cyanea.prefs.CyaneaSettingsActivity
 import com.jaredrummler.cyanea.prefs.CyaneaThemePickerActivity
 import kotlinx.android.synthetic.main.activity_main.bar
+import kotlinx.android.synthetic.main.activity_main.bottomDrawer
 import kotlinx.android.synthetic.main.activity_main.fab
+import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.activity_main.viewPager
 
 
 class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
 
+  private lateinit var bottomDrawerBehavior: BottomSheetBehavior<View>
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(layout.activity_main)
+    setContentView(R.layout.activity_main)
 
     viewPager.adapter = DemoPagerAdapter(this)
     tabLayout.setupWithViewPager(viewPager)
+    cyanea.tinter.tint(tabLayout)
     addTabLeftMargin()
 
-    bar.replaceMenu(menu.bottom_bar_menu)
-    bar.setOnMenuItemClickListener(this)
+    setUpBottomDrawer()
 
     fab.setOnClickListener {
       startActivity(Intent(this, CyaneaThemePickerActivity::class.java))
     }
+  }
+
+  override fun onBackPressed() {
+    if (bottomDrawerBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+      bottomDrawerBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+      return
+    }
+    super.onBackPressed()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,6 +84,21 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
       true
     }
     else -> false
+  }
+
+  private fun setUpBottomDrawer() {
+    bottomDrawerBehavior = BottomSheetBehavior.from(bottomDrawer)
+    bottomDrawerBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+    bar.setNavigationOnClickListener { bottomDrawerBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED) }
+    bar.setNavigationIcon(R.drawable.ic_drawer_menu_24px)
+    bar.replaceMenu(menu.bottom_bar_menu)
+    bar.setOnMenuItemClickListener(this)
+
+    navigationView.setNavigationItemSelectedListener { item ->
+      bottomDrawerBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+      onMenuItemClick(item)
+    }
   }
 
   private fun addTabLeftMargin() {
