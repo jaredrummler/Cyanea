@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+      android:id="@+id/action_github"
+      android:icon="@drawable/ic_github_white_24dp"
+      android:title="@string/github"
+      app:showAsAction="always"/>
+
+  <item
+      android:id="@+id/action_share"
+      android:icon="@drawable/ic_share_white_24dp"
+      android:title="@string/share"
+      app:showAsAction="ifRoom"/>
+
+  <item
+      android:id="@+id/action_settings"
+      android:icon="@drawable/ic_settings_white_24dp"
+      android:title="@string/settings"
+      app:showAsAction="never"/>
+
+</menu>

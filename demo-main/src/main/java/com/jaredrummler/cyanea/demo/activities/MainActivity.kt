@@ -62,7 +62,7 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.main, menu)
+    menuInflater.inflate(R.menu.main_menu, menu)
     return super.onCreateOptionsMenu(menu)
   }
 
@@ -76,12 +76,13 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
 
   override fun onMenuItemClick(item: MenuItem) = when (item.itemId) {
     id.action_share -> {
-      launchShareIntent()
-      true
+      launchShareIntent();true
     }
     id.action_github -> {
-      startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(string.github_project_url))))
-      true
+      startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(string.github_project_url))));true
+    }
+    id.action_settings -> {
+      startActivity(Intent(this, CyaneaSettingsActivity::class.java));true
     }
     else -> false
   }

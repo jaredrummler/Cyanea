@@ -75,7 +75,7 @@
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottom_bar_menu"
+        app:menu="@menu/bottom_sheet_menu"
         android:background="?backgroundColorLight"
         />
   </FrameLayout>
