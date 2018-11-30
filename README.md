@@ -75,7 +75,7 @@ If you can't extend your activity class, create a `CyaneaDelegate` and add the a
 
 #### Step 3
 
-Eacy activity must use a `Theme.Cyanea` theme (or decendant). You should declare the theme in the `AndroidManifest`:
+Each activity must use a `Theme.Cyanea` theme (or decendant). You should declare the theme in the `AndroidManifest`:
 
 ```xml
 <activity
