@@ -7,6 +7,7 @@
 <sub>Themes are immutable, possibilities are beautiful.</sub>
 
 <a target="_blank" href="LICENSE"><img src="http://img.shields.io/:license-apache-blue.svg" alt="License" /></a>
+<a target="_blank" href="https://travis-ci.org/jaredrummler/Cyanea"><img src="https://travis-ci.org/jaredrummler/Cyanea.svg?branch=master" alt="Build Status" /></a>
 <a target="_blank" href="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/cyanea"><img src="https://maven-badges.herokuapp.com/maven-central/com.jaredrummler/cyanea/badge.svg" alt="Maven Central" /></a>
 <a target="_blank" href="https://developer.android.com/reference/android/os/Build.VERSION_CODES.html#ICE_CREAM_SANDWICH"><img src="https://img.shields.io/badge/API-14%2B-blue.svg?style=flat" alt="API" /></a>
 <a target="_blank" href="https://twitter.com/jaredrummler"><img src="https://img.shields.io/twitter/follow/jaredrummler.svg?style=social" /></a>
