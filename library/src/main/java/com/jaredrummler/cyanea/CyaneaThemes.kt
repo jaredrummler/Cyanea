@@ -67,13 +67,23 @@ class CyaneaThemes internal constructor(private val cyanea: Cyanea) {
    *
    * @return One of the following themes:
    * [R.style.Theme_Cyanea_Dark_NoActionBar],
-   * [R.style.Theme_Cyanea_Light_NoActionBar]
+   * [R.style.Theme_Cyanea_Light_NoActionBar],
+   * [R.style.Theme_Cyanea_Light_DarkActionBar_NoActionBar],
+   * [R.style.Theme_Cyanea_Dark_LightActionBar_NoActionBar]
    */
   @get:StyleRes
   val noActionBarTheme: Int
     get() = when (cyanea.baseTheme) {
-      DARK -> R.style.Theme_Cyanea_Dark_NoActionBar
-      LIGHT -> R.style.Theme_Cyanea_Light_NoActionBar
+      DARK ->
+        if (cyanea.isActionBarLight) // Check primary color for correct actionBarTheme
+          R.style.Theme_Cyanea_Dark_LightActionBar_NoActionBar
+        else
+          R.style.Theme_Cyanea_Dark_NoActionBar
+      LIGHT ->
+        if (cyanea.isActionBarDark) // Check primary color for correct actionBarTheme
+          R.style.Theme_Cyanea_Light_DarkActionBar_NoActionBar
+        else
+          R.style.Theme_Cyanea_Light_NoActionBar
     }
 
 }

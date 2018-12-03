@@ -157,4 +157,17 @@
     <item name="windowNoTitle">true</item>
   </style>
 
+  <!-- ActionBar.NoActionBar is needed for the actionBarTheme attribute -->
+  <eat-comment/>
+
+  <style name="Theme.Cyanea.Dark.LightActionBar.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="Theme.Cyanea.Light.DarkActionBar.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
 </resources>
