@@ -1,0 +1,19 @@
+<resources>
+  <string name="label_theme_picker">Seletor de temas</string>
+
+  <string name="pref_theme_title">Temas</string>
+  <string name="pref_theme_summary">Selecione um tema pré-instalado</string>
+
+  <string name="pref_primary_color_title">Cor primária</string>
+  <string name="pref_primary_color_summary">Exibida com mais frequência no seu aplicativo.</string>
+
+  <string name="pref_accent_color_title">Cor de destaque</string>
+  <string name="pref_accent_color_summary">Destaca certas partes da interface.</string>
+
+  <string name="pref_background_color_title">Cor de fundo</string>
+  <string name="pref_background_color_summary">A cor de fundo do conteúdo do aplicativo.</string>
+  <string name="pref_category_appearance">Aparência</string>
+
+  <string name="pref_colored_navigation_bar_title">Cor da barra de navegação</string>
+  <string name="pref_colored_navigation_bar_summary">Aplique a cor primária à barra de navegação</string>
+</resources>
