@@ -168,7 +168,7 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
 
   private fun setupNavBarPref() {
     ColorUtils.isDarkColor(cyanea.primary, 0.75).let { isDarkEnough ->
-      prefColorNavBar.isEnabled = isDarkEnough
+      prefColorNavBar.isEnabled = isDarkEnough || VERSION.SDK_INT >= VERSION_CODES.O
     }
     val isColored = if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
       activity?.window?.navigationBarColor == cyanea.primary
