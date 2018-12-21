@@ -39,7 +39,6 @@ import android.widget.FrameLayout.LayoutParams
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.delegate.BaseAppCompatDelegate
 import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
@@ -147,8 +146,7 @@ class SystemBarTint(activity: Activity) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       val activity = activityRef.get() ?: return
       activity.window.statusBarColor = color
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !ColorUtils.isDarkColor(
-          Cyanea.instance.primaryDark)) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !ColorUtils.isDarkColor(color)) {
         activity.window.decorView.run {
           systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
@@ -172,7 +170,7 @@ class SystemBarTint(activity: Activity) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       val activity = activityRef.get() ?: return
       activity.window.navigationBarColor = color
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && Cyanea.instance.isActionBarLight) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !ColorUtils.isDarkColor(color)) {
         activity.window.decorView.run {
           systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         }
