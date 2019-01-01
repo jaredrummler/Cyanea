@@ -100,8 +100,8 @@ internal open class CyaneaDelegateImplV23(
     }
   }
 
-  override fun tintStatusBar(tinter: SystemBarTint, color: Int) {
-    super.tintStatusBar(tinter, color)
+  override fun tintStatusBar(color: Int, tinter: SystemBarTint) {
+    super.tintStatusBar(color, tinter)
     if (!ColorUtils.isDarkColor(color)) {
       activity.window.decorView.run {
         systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

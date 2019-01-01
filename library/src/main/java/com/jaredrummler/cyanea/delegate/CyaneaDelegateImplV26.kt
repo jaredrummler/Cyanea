@@ -17,8 +17,8 @@ internal open class CyaneaDelegateImplV26(
   themeResId: Int
 ) : CyaneaDelegateImplV24(activity, cyanea, themeResId) {
 
-  override fun tintNavigationBar(tinter: SystemBarTint, color: Int) {
-    super.tintNavigationBar(tinter, color)
+  override fun tintNavigationBar(color: Int, tinter: SystemBarTint) {
+    super.tintNavigationBar(color, tinter)
     if (!ColorUtils.isDarkColor(color)) {
       activity.window.decorView.run {
         systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
