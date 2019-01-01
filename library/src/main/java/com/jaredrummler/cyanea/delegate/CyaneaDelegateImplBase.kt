@@ -150,15 +150,23 @@ internal open class CyaneaDelegateImplBase(
     SystemBarTint(activity).run {
       setActionBarColor(cyanea.primary)
       if (cyanea.shouldTintStatusBar) {
-        setStatusBarColor(cyanea.primaryDark)
+        tintStatusBar(this, cyanea.primaryDark)
       }
       if (cyanea.shouldTintNavBar) {
-        setNavigationBarColor(cyanea.navigationBar)
+        tintNavigationBar(this, cyanea.navigationBar)
       }
     }
   }
 
-  protected open fun tintStatusBar() = SystemBarTint(activity).setStatusBarColor(cyanea.primaryDark)
+  protected open fun tintStatusBar() = tintStatusBar(SystemBarTint(activity), cyanea.primaryDark)
+
+  protected open fun tintStatusBar(tinter: SystemBarTint, color: Int) {
+    tinter.setStatusBarColor(color)
+  }
+
+  protected open fun tintNavigationBar(tinter: SystemBarTint, color: Int) {
+    tinter.setNavigationBarColor(color)
+  }
 
   protected open fun getProcessorsForTheming(): List<CyaneaViewProcessor<out View>> {
     return arrayListOf(

@@ -22,6 +22,7 @@ import android.app.Activity
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
@@ -39,6 +40,8 @@ import com.jaredrummler.cyanea.inflator.SwitchProcessor
 import com.jaredrummler.cyanea.inflator.TextViewProcessor
 import com.jaredrummler.cyanea.inflator.TimePickerProcessor
 import com.jaredrummler.cyanea.inflator.ViewGroupProcessor
+import com.jaredrummler.cyanea.tinting.SystemBarTint
+import com.jaredrummler.cyanea.utils.ColorUtils
 import com.jaredrummler.cyanea.utils.Reflection
 
 @RequiresApi(Build.VERSION_CODES.M)
@@ -94,6 +97,15 @@ internal open class CyaneaDelegateImplV23(
     PRELOADED_DRAWABLES.forEach {
       // Update the drawable's ConstantState before views are inflated.
       activity.resources.getDrawable(it, activity.theme)
+    }
+  }
+
+  override fun tintStatusBar(tinter: SystemBarTint, color: Int) {
+    super.tintStatusBar(tinter, color)
+    if (!ColorUtils.isDarkColor(color)) {
+      activity.window.decorView.run {
+        systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+      }
     }
   }
 
