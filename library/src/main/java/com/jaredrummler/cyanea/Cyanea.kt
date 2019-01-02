@@ -27,6 +27,7 @@ import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
@@ -475,7 +476,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       primaryDark(ColorUtils.darker(color, DEFAULT_DARKER_FACTOR))
       primaryLight(ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR))
       menuIconColor(res.getColor(menuIconColorRes))
-      navigationBar(if (isDarkColor) color else Color.BLACK)
+      navigationBar(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || isDarkColor) color else Color.BLACK)
       return this
     }
 

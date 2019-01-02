@@ -18,6 +18,7 @@ package com.jaredrummler.cyanea.prefs
 
 import android.content.res.AssetManager
 import android.graphics.Color
+import android.os.Build
 import androidx.annotation.ColorInt
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.Cyanea.BaseTheme
@@ -251,7 +252,11 @@ data class CyaneaTheme internal constructor(
       val navigationBarColor = if (json.has(NAVIGATION_BAR_COLOR)) {
         ColorUtils.parseColor(json.getString(NAVIGATION_BAR_COLOR))
       } else {
-        if (ColorUtils.isDarkColor(primary, 0.75)) primary else Color.BLACK
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O || ColorUtils.isDarkColor(primary, 0.75)) {
+          primary
+        } else {
+          Color.BLACK
+        }
       }
 
       // Get the tinting flags

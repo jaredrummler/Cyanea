@@ -120,6 +120,7 @@ abstract class CyaneaDelegate {
     @JvmStatic
     fun create(activity: Activity, cyanea: Cyanea, @StyleRes themeResId: Int): CyaneaDelegate {
       return when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> CyaneaDelegateImplV26(activity, cyanea, themeResId)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> CyaneaDelegateImplV24(activity, cyanea, themeResId)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> CyaneaDelegateImplV23(activity, cyanea, themeResId)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> CyaneaDelegateImplV21(activity, cyanea, themeResId)
