@@ -68,6 +68,7 @@ import com.jaredrummler.cyanea.inflator.CyaneaLayoutInflater
 import com.jaredrummler.cyanea.tinting.CyaneaTinter
 import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
+import kotlin.properties.Delegates
 
 
 /**
@@ -99,23 +100,23 @@ import com.jaredrummler.cyanea.utils.ColorUtils
 class Cyanea private constructor(private val prefs: SharedPreferences) {
 
   /** The primary color displayed most frequently across your app */
-  @ColorInt var primary: Int
+  @delegate:ColorInt var primary by Delegates.notNull<Int>()
     private set
   /** A lighter version of the [primary] color */
-  @ColorInt var primaryLight: Int
+  @delegate:ColorInt var primaryLight by Delegates.notNull<Int>()
     private set
   /** A darker version of the [primary] color */
-  @ColorInt var primaryDark: Int
+  @delegate:ColorInt var primaryDark by Delegates.notNull<Int>()
     private set
 
   /** The accent color that accents select parts of the UI */
-  @ColorInt var accent: Int
+  @delegate:ColorInt var accent by Delegates.notNull<Int>()
     private set
   /** A lighter version of the [accent] color */
-  @ColorInt var accentLight: Int
+  @delegate:ColorInt var accentLight by Delegates.notNull<Int>()
     private set
   /** A darker version of the [accent] color */
-  @ColorInt var accentDark: Int
+  @delegate:ColorInt var accentDark by Delegates.notNull<Int>()
     private set
 
   /** The background color used as the underlying color of the app's content */
@@ -138,24 +139,24 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     }
 
   /** The color of icons in a [Menu] */
-  @ColorInt var menuIconColor: Int
+  @delegate:ColorInt var menuIconColor by Delegates.notNull<Int>()
     private set
   /** The color of icons in a [menu's][Menu] sub-menu */
-  @ColorInt var subMenuIconColor: Int
+  @delegate:ColorInt var subMenuIconColor by Delegates.notNull<Int>()
     private set
 
   /** The color of the navigation bar, usually is black or the [primary] color */
-  @ColorInt var navigationBar: Int
+  @delegate:ColorInt var navigationBar by Delegates.notNull<Int>()
     private set
   /** True to set the [primaryDark] color on the system status bar */
-  var shouldTintStatusBar: Boolean
+  var shouldTintStatusBar by Delegates.notNull<Boolean>()
     private set
   /** True to set the [navigationBar] color on the system navigation bar */
-  var shouldTintNavBar: Boolean
+  var shouldTintNavBar by Delegates.notNull<Boolean>()
     private set
 
   /** The base theme. Either [LIGHT] or [DARK] */
-  var baseTheme: BaseTheme
+  var baseTheme by Delegates.notNull<BaseTheme>()
     internal set
   /** True if the [baseTheme] is [DARK] */
   val isDark get() = baseTheme == DARK
@@ -172,17 +173,51 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   val tinter by lazy { CyaneaTinter() }
   val themes by lazy { CyaneaThemes(this) }
 
-  @ColorInt internal var backgroundDark: Int
-  @ColorInt internal var backgroundDarkLighter: Int
-  @ColorInt internal var backgroundDarkDarker: Int
-  @ColorInt internal var backgroundLight: Int
-  @ColorInt internal var backgroundLightLighter: Int
-  @ColorInt internal var backgroundLightDarker: Int
+  @delegate:ColorInt internal var backgroundDark by Delegates.notNull<Int>()
+  @delegate:ColorInt internal var backgroundDarkLighter by Delegates.notNull<Int>()
+  @delegate:ColorInt internal var backgroundDarkDarker by Delegates.notNull<Int>()
+  @delegate:ColorInt internal var backgroundLight by Delegates.notNull<Int>()
+  @delegate:ColorInt internal var backgroundLightLighter by Delegates.notNull<Int>()
+  @delegate:ColorInt internal var backgroundLightDarker by Delegates.notNull<Int>()
 
-  internal var timestamp: Long
+  internal var timestamp: Long = 0L
     private set
 
   init {
+    loadDefaults()
+  }
+
+  /**
+   * Tint all items and sub-menu items in a [menu][Menu]
+   *
+   * @param menu the Menu to tint
+   * @param activity the current Activity
+   * @param forceIcons False to hide sub-menu icons from showing. True by default.
+   */
+  @JvmOverloads
+  fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) =
+      MenuTint(menu,
+          menuIconColor = menuIconColor,
+          subIconColor = subMenuIconColor,
+          forceIcons = forceIcons
+      ).apply(activity)
+
+  /**
+   * Create a new [Editor] to edit this instance
+   */
+  fun edit() = Editor(this)
+
+  /**
+   * Reset all theme values. The activity must be recreated after resetting.
+   */
+  fun reset() = prefs.edit().clear().apply().also { loadDefaults() }.run { Recreator() }
+
+  /**
+   * Creates a new editor and applys any edits in the action parameter
+   */
+  inline fun edit(action: Cyanea.Editor.() -> Unit) = edit().also { editor -> action(editor) }.apply()
+
+  private fun loadDefaults() {
     primary = prefs.getInt(PREF_PRIMARY,
         res.getColor(R.color.cyanea_primary_reference))
     primaryDark = prefs.getInt(PREF_PRIMARY_DARK,
@@ -230,31 +265,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
 
     setDefaultDarkerAndLighterColors()
   }
-
-  /**
-   * Tint all items and sub-menu items in a [menu][Menu]
-   *
-   * @param menu the Menu to tint
-   * @param activity the current Activity
-   * @param forceIcons False to hide sub-menu icons from showing. True by default.
-   */
-  @JvmOverloads
-  fun tint(menu: Menu, activity: Activity, forceIcons: Boolean = true) =
-      MenuTint(menu,
-          menuIconColor = menuIconColor,
-          subIconColor = subMenuIconColor,
-          forceIcons = forceIcons
-      ).apply(activity)
-
-  /**
-   * Create a new [Editor] to edit this instance
-   */
-  fun edit() = Editor(this)
-
-  /**
-   * Creates a new editor and applys any edits in the action parameter
-   */
-  inline fun edit(action: Cyanea.Editor.() -> Unit) = edit().also { editor -> action(editor) }.apply()
 
   private fun setDefaultDarkerAndLighterColors() {
     // We use a transparent primary|accent dark|light colors so the library user
@@ -318,6 +328,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
           }
         }
     }
+
     private val instances by lazy { mutableMapOf<String, Cyanea>() }
 
     /**
