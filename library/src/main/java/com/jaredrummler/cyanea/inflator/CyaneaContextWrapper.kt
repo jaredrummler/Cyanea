@@ -35,7 +35,7 @@ class CyaneaContextWrapper(context: Context,
     }
   }
 
-  override fun getSystemService(name: String): Any = when (name) {
+  override fun getSystemService(name: String): Any? = when (name) {
     LAYOUT_INFLATER_SERVICE -> inflater
     else -> super.getSystemService(name)
   }
