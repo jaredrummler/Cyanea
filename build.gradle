@@ -5,7 +5,7 @@ buildscript {
       compileSdk              : 28,
       targetSdk               : 28,
       minSdk                  : 14,
-      gradlePlugin            : '3.2.1'
+      gradlePlugin            : '3.3.1'
   ]
 
   ext.versions = [
