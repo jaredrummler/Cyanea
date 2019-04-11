@@ -36,6 +36,8 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
 
   private lateinit var gridView: GridView
 
+  private var disableClick = false
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     return inflater.inflate(R.layout.cyanea_theme_picker, container, false)
   }
@@ -50,10 +52,15 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
   }
 
   override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    if(disableClick) return
     val theme = (gridView.adapter as CyaneaThemePickerAdapter).getItem(position)
     val themeName = theme.themeName
     Cyanea.log(TAG, "Clicked $themeName")
     theme.apply(cyanea).recreate(requireActivity(), smooth = true)
+    disableClick = true
+    view?.postDelayed({
+      disableClick = false
+    }, DELAY_CLICK_TIME)
   }
 
   private fun scrollToCurrentTheme(themes: List<CyaneaTheme>) {
@@ -77,7 +84,7 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
 
   companion object {
     private const val TAG = "ThemePickerFragment"
-
+    private const val DELAY_CLICK_TIME = 2000L
     fun newInstance() = CyaneaThemePickerFragment()
   }
 
