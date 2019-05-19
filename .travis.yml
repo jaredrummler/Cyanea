@@ -9,7 +9,7 @@ install:
   - yes | sdkmanager --update &>/dev/null
   - yes | sdkmanager --licenses &>/dev/null
 
-script: ./gradlew clean assembleDebug testDebug -Pci -s
+script: ./gradlew clean ktlintCheck assembleDebug testDebug -Pci -s
 
 branches:
   except:
