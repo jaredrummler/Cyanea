@@ -104,9 +104,7 @@ abstract class CyaneaViewProcessor<T : View> {
      * @return An array of decorators for the [CyaneaDelegate].
      */
     fun getViewProcessors(): Array<CyaneaViewProcessor<out View>>
-
   }
-
 }
 
 // ================================================================================================
@@ -125,7 +123,6 @@ internal class AlertDialogProcessor : CyaneaViewProcessor<View>() {
   companion object {
     private const val CLASS_NAME = "com.android.internal.widget.AlertDialogLayout"
   }
-
 }
 
 internal class BottomAppBarProcessor : CyaneaViewProcessor<BottomAppBar>() {
@@ -144,7 +141,6 @@ internal class BottomAppBarProcessor : CyaneaViewProcessor<BottomAppBar>() {
       }
     }
   }
-
 }
 
 /**
@@ -178,7 +174,6 @@ internal class CompoundButtonProcessor : CyaneaViewProcessor<CompoundButton>() {
       background.setColor(csl)
     }
   }
-
 }
 
 internal class DatePickerProcessor : CyaneaViewProcessor<DatePicker>() {
@@ -196,7 +191,6 @@ internal class DatePickerProcessor : CyaneaViewProcessor<DatePicker>() {
       }
     }
   }
-
 }
 
 internal class FloatingActionButtonProcessor : CyaneaViewProcessor<FloatingActionButton>() {
@@ -206,7 +200,6 @@ internal class FloatingActionButtonProcessor : CyaneaViewProcessor<FloatingActio
   override fun process(view: FloatingActionButton, attrs: AttributeSet?, cyanea: Cyanea) {
     cyanea.tinter.tint(view.backgroundTintList)
   }
-
 }
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -217,7 +210,6 @@ internal class ImageButtonProcessor : CyaneaViewProcessor<ImageButton>() {
   override fun process(view: ImageButton, attrs: AttributeSet?, cyanea: Cyanea) {
     cyanea.tinter.tint(view.background)
   }
-
 }
 
 /**
@@ -236,7 +228,6 @@ internal class ListMenuItemViewProcessor : CyaneaViewProcessor<View>() {
   companion object {
     private const val CLASS_NAME = "com.android.internal.view.menu.ListMenuItemView"
   }
-
 }
 
 internal class NavigationViewProcessor : CyaneaViewProcessor<NavigationView>() {
@@ -266,7 +257,6 @@ internal class NavigationViewProcessor : CyaneaViewProcessor<NavigationView>() {
       )
     }
   }
-
 }
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -277,7 +267,6 @@ internal class SearchAutoCompleteProcessor : CyaneaViewProcessor<SearchAutoCompl
   override fun process(view: SearchAutoComplete, attrs: AttributeSet?, cyanea: Cyanea) {
     WidgetTint.setCursorColor(view, cyanea.accent)
   }
-
 }
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -294,7 +283,6 @@ internal class SwitchProcessor : CyaneaViewProcessor<Switch>() {
       view.trackTintList = ContextCompat.getColorStateList(view.context, R.color.abc_tint_switch_track)
     }
   }
-
 }
 
 internal class SwitchCompatProcessor : CyaneaViewProcessor<SwitchCompat>() {
@@ -313,7 +301,6 @@ internal class SwitchCompatProcessor : CyaneaViewProcessor<SwitchCompat>() {
       cyanea.tinter.tint(csl)
     }
   }
-
 }
 
 internal class TextInputLayoutProcessor : CyaneaViewProcessor<TextInputLayout>() {
@@ -330,7 +317,6 @@ internal class TextInputLayoutProcessor : CyaneaViewProcessor<TextInputLayout>()
       }
     }
   }
-
 }
 
 internal class TextViewProcessor : CyaneaViewProcessor<TextView>() {
@@ -346,7 +332,6 @@ internal class TextViewProcessor : CyaneaViewProcessor<TextView>() {
     }
     cyanea.tinter.tint(view.background)
   }
-
 }
 
 internal class TimePickerProcessor : CyaneaViewProcessor<TimePicker>() {
@@ -356,7 +341,6 @@ internal class TimePickerProcessor : CyaneaViewProcessor<TimePicker>() {
   override fun process(view: TimePicker, attrs: AttributeSet?, cyanea: Cyanea) {
     cyanea.tinter.tint(view)
   }
-
 }
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -371,5 +355,4 @@ internal class ViewGroupProcessor : CyaneaViewProcessor<ViewGroup>() {
       WidgetTint.setFastScrollThumbColor(view, cyanea.accent)
     }
   }
-
 }

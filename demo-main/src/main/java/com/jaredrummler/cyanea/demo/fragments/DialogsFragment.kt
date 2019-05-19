@@ -18,7 +18,6 @@ import com.jaredrummler.cyanea.demo.R
 import java.text.DateFormat
 import java.util.Calendar
 
-
 class DialogsFragment : CyaneaFragment() {
 
   private lateinit var dialogLaunchersLayout: ViewGroup
@@ -153,8 +152,8 @@ class DialogsFragment : CyaneaFragment() {
         R.string.title_time_picker,
         {
           TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            calendar.set(Calendar.MINUTE, minute);
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+            calendar.set(Calendar.MINUTE, minute)
             val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar.time)
             Toast.makeText(requireContext(), time, Toast.LENGTH_LONG).show()
           },
@@ -208,8 +207,12 @@ class DialogsFragment : CyaneaFragment() {
     )
   }
 
-  private fun addDialogLauncher(@StringRes stringResId: Int, builder: AlertDialog.Builder,
-      marginTop: Float = 8f, marginBottom: Float = 0f) {
+  private fun addDialogLauncher(
+    @StringRes stringResId: Int,
+    builder: AlertDialog.Builder,
+    marginTop: Float = 8f,
+    marginBottom: Float = 0f
+  ) {
     val dialogLauncherButton = MaterialButton(requireActivity())
     dialogLauncherButton.setOnClickListener { builder.show() }
     dialogLauncherButton.setText(stringResId)
@@ -220,13 +223,21 @@ class DialogsFragment : CyaneaFragment() {
     dialogLaunchersLayout.addView(dialogLauncherButton, params)
   }
 
-  private fun addDialog(@StringRes stringResId: Int, dialog: android.app.AlertDialog, marginTop: Float = 8f,
-      marginBottom: Float = 0f) {
+  private fun addDialog(
+    @StringRes stringResId: Int,
+    dialog: android.app.AlertDialog,
+    marginTop: Float = 8f,
+    marginBottom: Float = 0f
+  ) {
     addDialog(stringResId, { dialog.show() }, marginTop, marginBottom)
   }
 
-  private fun addDialog(@StringRes stringResId: Int, showDialog: (v: View) -> Unit,
-      marginTop: Float = 8f, marginBottom: Float = 0f) {
+  private fun addDialog(
+    @StringRes stringResId: Int,
+    showDialog: (v: View) -> Unit,
+    marginTop: Float = 8f,
+    marginBottom: Float = 0f
+  ) {
     val dialogLauncherButton = MaterialButton(requireActivity())
     dialogLauncherButton.setOnClickListener { v -> showDialog(v) }
     dialogLauncherButton.setText(stringResId)
@@ -236,5 +247,4 @@ class DialogsFragment : CyaneaFragment() {
     params.bottomMargin = Math.round(marginBottom * resources.displayMetrics.density)
     dialogLaunchersLayout.addView(dialogLauncherButton, params)
   }
-
 }

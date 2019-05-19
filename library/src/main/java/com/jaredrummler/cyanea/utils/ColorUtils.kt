@@ -224,7 +224,5 @@ class ColorUtils private constructor() {
         return Color.parseColor(colorString)
       }
     }
-
   }
-
 }

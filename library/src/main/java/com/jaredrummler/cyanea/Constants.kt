@@ -48,4 +48,3 @@ internal object Defaults {
   internal const val DEFAULT_DARKER_FACTOR = 0.85f
   internal const val DEFAULT_LIGHTER_FACTOR = 0.15f
 }
-

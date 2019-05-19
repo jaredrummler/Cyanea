@@ -173,8 +173,8 @@ class CyaneaLayoutInflater : LayoutInflater {
       inflationDelegate?.createView(parent, name, context, attrs)
 
   private class WrapperFactory internal constructor(
-      private val inflater: CyaneaLayoutInflater,
-      private val factory: LayoutInflater.Factory
+    private val inflater: CyaneaLayoutInflater,
+    private val factory: LayoutInflater.Factory
   ) : LayoutInflater.Factory {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? =
@@ -182,12 +182,11 @@ class CyaneaLayoutInflater : LayoutInflater {
             ?: factory.onCreateView(name, context, attrs), attrs)
 
     protected fun processView(view: View?, attrs: AttributeSet): View? = inflater.processView(view, attrs)
-
   }
 
   private open class WrapperFactory2 internal constructor(
-      internal val inflater: CyaneaLayoutInflater,
-      internal val factory: LayoutInflater.Factory2
+    internal val inflater: CyaneaLayoutInflater,
+    internal val factory: LayoutInflater.Factory2
   ) : LayoutInflater.Factory2 {
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? =
@@ -199,11 +198,11 @@ class CyaneaLayoutInflater : LayoutInflater {
             ?: factory.onCreateView(name, context, attrs), attrs)
 
     protected fun processView(view: View?, attrs: AttributeSet): View? = inflater.processView(view, attrs)
-
   }
 
   private class PrivateWrapperFactory2 internal constructor(
-      inflater: CyaneaLayoutInflater, factory: LayoutInflater.Factory2
+    inflater: CyaneaLayoutInflater,
+    factory: LayoutInflater.Factory2
   ) : WrapperFactory2(inflater, factory) {
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? =
@@ -213,12 +212,10 @@ class CyaneaLayoutInflater : LayoutInflater {
                   ?: inflater.createCustomView(view, name, context, attrs), attrs
           )
         }
-
   }
 
   companion object {
     private val CLASS_PREFIX_LIST = arrayOf("android.widget.", "android.webkit.", "android.app.")
     internal var inflationDelegate: CyaneaInflationDelegate? = null
   }
-
 }

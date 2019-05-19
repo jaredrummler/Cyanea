@@ -86,7 +86,6 @@ class SystemBarTint(activity: Activity) {
     override fun unscheduleDrawable(drawable: Drawable, action: Runnable) {
       Handler().removeCallbacks(action)
     }
-
   }
 
   init {
@@ -381,8 +380,5 @@ class SystemBarTint(activity: Activity) {
         ""
       }
     }
-
   }
-
-
 }

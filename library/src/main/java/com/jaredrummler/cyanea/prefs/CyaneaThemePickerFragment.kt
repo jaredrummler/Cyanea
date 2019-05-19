@@ -80,5 +80,4 @@ open class CyaneaThemePickerFragment : CyaneaFragment(), OnItemClickListener {
 
     fun newInstance() = CyaneaThemePickerFragment()
   }
-
 }

@@ -43,5 +43,4 @@ interface BaseCyaneaActivity {
    * @see [CyaneaThemes.noActionBarTheme]
    */
   @StyleRes fun getThemeResId(): Int = 0
-
 }

@@ -31,8 +31,12 @@ class OtherFragment : Fragment() {
     })
   }
 
-  private fun addButton(@StringRes stringResId: Int, action: () -> Unit,
-      marginTop: Float = 8f, marginBottom: Float = 0f) {
+  private fun addButton(
+    @StringRes stringResId: Int,
+    action: () -> Unit,
+    marginTop: Float = 8f,
+    marginBottom: Float = 0f
+  ) {
     val dialogLauncherButton = MaterialButton(requireActivity())
     dialogLauncherButton.setOnClickListener { action() }
     dialogLauncherButton.setText(stringResId)
@@ -42,5 +46,4 @@ class OtherFragment : Fragment() {
     params.bottomMargin = Math.round(marginBottom * resources.displayMetrics.density)
     container.addView(dialogLauncherButton, params)
   }
-
 }

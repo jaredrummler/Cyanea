@@ -88,7 +88,5 @@ class WidgetTint private constructor() {
         Cyanea.log(TAG, "Error setting cursor color", e)
       }
     }
-
   }
-
 }

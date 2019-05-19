@@ -207,13 +207,13 @@ class EdgeEffectTint(private val view: ViewGroup) {
       try {
         for (name in arrayOf("mLeftEdge", "mRightEdge")) {
           Reflection.getFieldValue<Any?>(viewPager, name)?.let { value ->
-           if (value is EdgeEffect) {
-             setEdgeEffectColor(value, color)
-           } else if (value is EdgeEffectCompat) {
-             Reflection.getFieldValue<EdgeEffect?>(value, "mEdgeEffect")?.let { edgeEffect ->
-               setEdgeEffectColor(edgeEffect, color)
-             }
-           }
+            if (value is EdgeEffect) {
+              setEdgeEffectColor(value, color)
+            } else if (value is EdgeEffectCompat) {
+              Reflection.getFieldValue<EdgeEffect?>(value, "mEdgeEffect")?.let { edgeEffect ->
+                setEdgeEffectColor(edgeEffect, color)
+              }
+            }
           }
         }
       } catch (e: Exception) {
@@ -243,7 +243,5 @@ class EdgeEffectTint(private val view: ViewGroup) {
         Cyanea.log(TAG, "Error setting edge glow color on WebView", e)
       }
     }
-
   }
-
 }

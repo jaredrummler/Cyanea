@@ -41,9 +41,9 @@ import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.tinting.SystemBarTint
 
 internal open class CyaneaDelegateImplBase(
-    private val activity: Activity,
-    private val cyanea: Cyanea,
-    @StyleRes private var themeResId: Int
+  private val activity: Activity,
+  private val cyanea: Cyanea,
+  @StyleRes private var themeResId: Int
 ) : CyaneaDelegate() {
 
   private val timestamp = cyanea.timestamp
@@ -203,5 +203,4 @@ internal open class CyaneaDelegateImplBase(
   companion object {
     private const val TAG = "CyaneaDelegateImplBase"
   }
-
 }

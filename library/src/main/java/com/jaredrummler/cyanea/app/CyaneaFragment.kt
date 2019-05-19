@@ -37,5 +37,4 @@ open class CyaneaFragment : Fragment() {
   }
 
   protected open fun applyMenuTint(menu: Menu) = cyanea.tint(menu, requireActivity())
-
 }

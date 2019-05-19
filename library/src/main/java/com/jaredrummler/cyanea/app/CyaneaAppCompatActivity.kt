@@ -70,5 +70,4 @@ abstract class CyaneaAppCompatActivity : AppCompatActivity(), BaseCyaneaActivity
   }
 
   override fun getResources(): Resources = resources
-
 }

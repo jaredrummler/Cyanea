@@ -55,5 +55,4 @@ interface BaseAppCompatDelegate {
    * @return The [AppCompatDelegate] being used by this Activity.
    */
   fun getDelegate(): AppCompatDelegate
-
 }

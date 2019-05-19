@@ -47,9 +47,9 @@ import com.jaredrummler.cyanea.utils.Reflection
 @RequiresApi(Build.VERSION_CODES.M)
 @TargetApi(Build.VERSION_CODES.M)
 internal open class CyaneaDelegateImplV23(
-    private val activity: Activity,
-    private val cyanea: Cyanea,
-    themeResId: Int
+  private val activity: Activity,
+  private val cyanea: Cyanea,
+  themeResId: Int
 ) : CyaneaDelegateImplV21(activity, cyanea, themeResId) {
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -170,7 +170,5 @@ internal open class CyaneaDelegateImplV23(
         R.drawable.cyanea_bg_light_lighter,
         R.drawable.cyanea_bg_light_darker
     )
-
   }
-
 }

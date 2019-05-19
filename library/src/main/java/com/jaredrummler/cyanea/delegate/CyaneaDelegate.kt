@@ -128,7 +128,5 @@ abstract class CyaneaDelegate {
         else -> CyaneaDelegateImplBase(activity, cyanea, themeResId)
       }
     }
-
   }
-
 }

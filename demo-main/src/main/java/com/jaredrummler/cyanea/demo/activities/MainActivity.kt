@@ -27,7 +27,6 @@ import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.tabLayout
 import kotlinx.android.synthetic.main.activity_main.viewPager
 
-
 class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
 
   private lateinit var bottomDrawerBehavior: BottomSheetBehavior<View>
@@ -71,13 +70,13 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
 
   override fun onMenuItemClick(item: MenuItem) = when (item.itemId) {
     R.id.action_share -> {
-      launchShareIntent();true
+      launchShareIntent(); true
     }
     R.id.action_github -> {
-      startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.github_project_url))));true
+      startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.github_project_url)))); true
     }
     R.id.action_settings -> {
-      startActivity(Intent(this, CyaneaSettingsActivity::class.java));true
+      startActivity(Intent(this, CyaneaSettingsActivity::class.java)); true
     }
     else -> false
   }
@@ -115,7 +114,7 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
   }
 
   class DemoPagerAdapter(
-      private val activity: FragmentActivity
+    private val activity: FragmentActivity
   ) : FragmentStatePagerAdapter(activity.supportFragmentManager) {
 
     private val items = activity.resources.getStringArray(R.array.tabs)
@@ -133,8 +132,5 @@ class MainActivity : CyaneaAppCompatActivity(), OnMenuItemClickListener {
     override fun getPageTitle(position: Int): CharSequence? = items[position]
 
     override fun getCount(): Int = items.size
-
   }
-
 }
-

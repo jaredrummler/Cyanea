@@ -194,7 +194,6 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
 
     fun newInstance() = CyaneaSettingsFragment()
   }
-
 }
 
 /**

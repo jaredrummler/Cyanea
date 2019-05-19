@@ -113,7 +113,5 @@ class CyaneaThemePickerAdapter(private val themes: List<CyaneaTheme>, private va
         return view
       }
     }
-
   }
-
 }

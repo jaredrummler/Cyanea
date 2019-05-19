@@ -23,10 +23,12 @@ import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 /**
  * A [ContextWrapper] that provides a [CyaneaLayoutInflater].
  */
-class CyaneaContextWrapper(context: Context,
-    private val decorators: Array<CyaneaDecorator>? = null,
-    private val viewFactory: CyaneaViewFactory? = null)
-  : ContextWrapper(context) {
+class CyaneaContextWrapper(
+  context: Context,
+  private val decorators: Array<CyaneaDecorator>? = null,
+  private val viewFactory: CyaneaViewFactory? = null
+) :
+  ContextWrapper(context) {
 
   private val inflater: CyaneaLayoutInflater by lazy {
     CyaneaLayoutInflater(this).apply {
@@ -39,5 +41,4 @@ class CyaneaContextWrapper(context: Context,
     LAYOUT_INFLATER_SERVICE -> inflater
     else -> super.getSystemService(name)
   }
-
 }

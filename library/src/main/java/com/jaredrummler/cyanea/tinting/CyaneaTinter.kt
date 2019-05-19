@@ -295,7 +295,5 @@ class CyaneaTinter {
         R.color.cyanea_primary_light_reference,
         R.color.cyanea_primary_reference,
         R.color.cyanea_bg_dark)
-
   }
-
 }

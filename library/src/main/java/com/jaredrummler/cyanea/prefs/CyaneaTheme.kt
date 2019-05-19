@@ -34,22 +34,22 @@ import java.io.File
  * A Cyanea theme. Load a list of themes using [CyaneaTheme.from].
  */
 data class CyaneaTheme internal constructor(
-    val themeName: String,
-    val baseTheme: BaseTheme,
-    @ColorInt val primary: Int,
-    @ColorInt val primaryDark: Int,
-    @ColorInt val primaryLight: Int,
-    @ColorInt val accent: Int,
-    @ColorInt val accentDark: Int,
-    @ColorInt val accentLight: Int,
-    @ColorInt val background: Int,
-    @ColorInt val backgroundDark: Int,
-    @ColorInt val backgroundLight: Int,
-    @ColorInt val menuIconColor: Int,
-    @ColorInt val subMenuIconColor: Int,
-    @ColorInt val navigationBarColor: Int,
-    val shouldTintStatusBar: Boolean,
-    val shouldTintNavBar: Boolean
+  val themeName: String,
+  val baseTheme: BaseTheme,
+  @ColorInt val primary: Int,
+  @ColorInt val primaryDark: Int,
+  @ColorInt val primaryLight: Int,
+  @ColorInt val accent: Int,
+  @ColorInt val accentDark: Int,
+  @ColorInt val accentLight: Int,
+  @ColorInt val background: Int,
+  @ColorInt val backgroundDark: Int,
+  @ColorInt val backgroundLight: Int,
+  @ColorInt val menuIconColor: Int,
+  @ColorInt val subMenuIconColor: Int,
+  @ColorInt val navigationBarColor: Int,
+  val shouldTintStatusBar: Boolean,
+  val shouldTintNavBar: Boolean
 ) {
 
   constructor(themeName: String, cyanea: Cyanea) : this(
@@ -290,7 +290,5 @@ data class CyaneaTheme internal constructor(
           shouldTintNavBar
       )
     }
-
   }
-
 }
