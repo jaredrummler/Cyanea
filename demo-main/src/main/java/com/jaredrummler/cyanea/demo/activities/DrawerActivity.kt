@@ -19,7 +19,7 @@ class DrawerActivity : CyaneaAppCompatActivity() {
     setContentView(R.layout.activity_drawer)
     setSupportActionBar(toolbar)
 
-    supportActionBar!!.apply {
+    supportActionBar?.apply {
       setDisplayHomeAsUpEnabled(true)
       setHomeButtonEnabled(true)
     }
