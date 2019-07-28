@@ -10,7 +10,9 @@ buildscript {
 
   ext.versions = [
       kotlin                  : '1.3.41',
-      androidx                : '1.0.0',
+      androidx                : '1.0.2',
+      material                : '1.0.0',
+      preference              : '1.0.0',
       constraintlayout        : '1.1.3',
       colorpicker             : '1.0.5',
       junit                   : '4.12',
@@ -22,14 +24,14 @@ buildscript {
       'androidx': [
           'appCompat'         : "androidx.appcompat:appcompat:${versions.androidx}",
           'constraintLayout'  : "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}",
-          'preferences'       : "androidx.preference:preference:${versions.androidx}"
+          'preferences'       : "androidx.preference:preference:${versions.preference}"
       ],
       'kotlin': [
           'stdlib': [
               'jdk'           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
           ]
       ],
-      'material'              : "com.google.android.material:material:${versions.androidx}",
+      'material'              : "com.google.android.material:material:${versions.material}",
       'colorpicker'           : "com.jaredrummler:colorpicker-compat:${versions.colorpicker}",
       'junit'                 : "junit:junit:${versions.junit}",
       'mockito': [
