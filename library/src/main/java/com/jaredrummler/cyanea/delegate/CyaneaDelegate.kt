@@ -30,6 +30,8 @@ import com.jaredrummler.cyanea.inflator.CyaneaViewFactory
 import com.jaredrummler.cyanea.inflator.CyaneaViewProcessor
 import com.jaredrummler.cyanea.inflator.decor.CyaneaDecorator
 
+internal const val Build_VERSION_CODES_Q = 29
+
 /**
  * This class represents a delegate which you can use to extend [Cyanea]'s support to any [Activity].
  *
@@ -120,6 +122,7 @@ abstract class CyaneaDelegate {
     @JvmStatic
     fun create(activity: Activity, cyanea: Cyanea, @StyleRes themeResId: Int): CyaneaDelegate {
       return when {
+        Build.VERSION.SDK_INT >= Build_VERSION_CODES_Q -> CyaneaDelegateImplV29(activity, cyanea, themeResId)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> CyaneaDelegateImplV26(activity, cyanea, themeResId)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> CyaneaDelegateImplV24(activity, cyanea, themeResId)
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> CyaneaDelegateImplV23(activity, cyanea, themeResId)
