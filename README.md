@@ -17,10 +17,10 @@ A powerful, dynamic, and fun theme engine. Named after Octopus Cyanea which is a
 
 # Downloads
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/cyanea/1.0.1/cyanea-1.0.1.aar) or grab via Gradle:
+Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/cyanea/1.0.2/cyanea-1.0.2.aar) or grab via Gradle:
 
 ```groovy
-implementation 'com.jaredrummler:cyanea:1.0.1'
+implementation 'com.jaredrummler:cyanea:1.0.2'
 ```
 
 ## Demo
