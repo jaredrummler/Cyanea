@@ -66,7 +66,7 @@ internal open class CyaneaDelegateImplV23(
         val klass = Class.forName("android.content.res.ColorStateList\$ColorStateListFactory")
         val constructor = klass.getConstructor(ColorStateList::class.java).apply {
           if (!isAccessible) isAccessible = true
-        } ?: return
+        }
 
         val cache = Reflection.getFieldValue<Any?>(activity.resources, "sPreloadedColorStateLists") ?: return
         val method = Reflection.getMethod(cache, "put", Long::class.java, Object::class.java) ?: return

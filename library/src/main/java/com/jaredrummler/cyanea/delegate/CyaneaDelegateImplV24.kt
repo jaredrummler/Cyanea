@@ -49,7 +49,7 @@ internal open class CyaneaDelegateImplV24(
       val klass = Class.forName("android.content.res.ColorStateList\$ColorStateListFactory")
       val constructor = klass.getConstructor(ColorStateList::class.java).apply {
         if (!isAccessible) isAccessible = true
-      } ?: return
+      }
 
       val mResourcesImpl = Reflection.getFieldValue<Any?>(activity.resources, "mResourcesImpl") ?: return
       val cache = Reflection.getFieldValue<Any?>(mResourcesImpl, "sPreloadedComplexColors") ?: return
