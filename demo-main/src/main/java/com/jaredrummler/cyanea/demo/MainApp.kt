@@ -23,5 +23,4 @@ class MainApp : Application(), CyaneaDecorator.Provider, CyaneaViewProcessor.Pro
       // Add a decorator to apply custom attributes to any view
       FontDecorator()
   )
-
 }

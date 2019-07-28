@@ -29,5 +29,4 @@ internal open class CyaneaDelegateImplV26(
   companion object {
     private const val TAG = "CyaneaDelegateImplV26"
   }
-
 }

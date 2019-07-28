@@ -58,5 +58,4 @@ class FontDecorator : AttrsDecorator<TextView>() {
       }
     }
   }
-
 }

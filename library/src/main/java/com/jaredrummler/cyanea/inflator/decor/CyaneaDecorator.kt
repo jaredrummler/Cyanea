@@ -46,7 +46,5 @@ interface CyaneaDecorator {
      * @return An array of decorators for the [delegate][com.jaredrummler.cyanea.delegate.CyaneaDelegate].
      */
     fun getDecorators(): Array<CyaneaDecorator>
-
   }
-
 }

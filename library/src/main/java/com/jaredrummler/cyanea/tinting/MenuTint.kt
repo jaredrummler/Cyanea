@@ -62,17 +62,17 @@ import com.jaredrummler.cyanea.utils.Reflection
  * @param tintNavigationIcon `true` to tint the navigation icon. True by default.
  */
 class MenuTint(
-    val menu: Menu,
-    @ColorInt private var menuIconColor: Int? = null,
-    private var menuIconAlpha: Int? = null,
-    @ColorInt private val subIconColor: Int? = null,
-    private val subIconAlpha: Int? = null,
-    @DrawableRes private val overflowDrawableRes: Int? = null,
-    @ColorInt private val originalMenuIconColor: Int? = null,
-    private val reApplyOnChange: Boolean = false,
-    private val forceIcons: Boolean = false,
-    private val tintOverflowIcon: Boolean = true,
-    private val tintNavigationIcon: Boolean = true
+  val menu: Menu,
+  @ColorInt private var menuIconColor: Int? = null,
+  private var menuIconAlpha: Int? = null,
+  @ColorInt private val subIconColor: Int? = null,
+  private val subIconAlpha: Int? = null,
+  @DrawableRes private val overflowDrawableRes: Int? = null,
+  @ColorInt private val originalMenuIconColor: Int? = null,
+  private val reApplyOnChange: Boolean = false,
+  private val forceIcons: Boolean = false,
+  private val tintOverflowIcon: Boolean = true,
+  private val tintNavigationIcon: Boolean = true
 ) {
 
   private var actionBar: ViewGroup? = null
@@ -281,8 +281,8 @@ class MenuTint(
       while (i < count) {
         val view = viewGroup.getChildAt(i)
         if (view is ImageView &&
-            (view.javaClass.simpleName == "OverflowMenuButton"
-                || view is ActionMenuView.ActionMenuChildView)) {
+            (view.javaClass.simpleName == "OverflowMenuButton" ||
+                view is ActionMenuView.ActionMenuChildView)) {
           return view
         } else if (view is ViewGroup) {
           findOverflowMenuButton(view)?.let { btn -> return btn }
@@ -311,8 +311,8 @@ class MenuTint(
       val count = viewGroup.childCount
       while (i < count) {
         val view = viewGroup.getChildAt(i)
-        if (view.javaClass == androidx.appcompat.widget.Toolbar::class.java
-            || view.javaClass.name == "android.widget.Toolbar") {
+        if (view.javaClass == androidx.appcompat.widget.Toolbar::class.java ||
+            view.javaClass.name == "android.widget.Toolbar") {
           toolbar = view as ViewGroup
         } else if (view is ViewGroup) {
           toolbar = findToolbar(view)
@@ -324,7 +324,6 @@ class MenuTint(
       }
       return toolbar
     }
-
   }
 
   inner class ActionExpandListener : MenuItem.OnActionExpandListener {
@@ -341,8 +340,5 @@ class MenuTint(
       reapply()
       return true
     }
-
   }
-
-
 }

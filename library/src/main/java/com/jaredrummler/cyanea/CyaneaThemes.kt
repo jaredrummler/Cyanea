@@ -85,5 +85,4 @@ class CyaneaThemes internal constructor(private val cyanea: Cyanea) {
         else
           R.style.Theme_Cyanea_Light_NoActionBar
     }
-
 }

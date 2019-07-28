@@ -70,5 +70,4 @@ abstract class CyaneaFragmentActivity : FragmentActivity(), BaseCyaneaActivity {
   }
 
   override fun getResources(): Resources = resources
-
 }

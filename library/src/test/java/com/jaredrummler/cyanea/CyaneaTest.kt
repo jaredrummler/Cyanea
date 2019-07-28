@@ -71,5 +71,4 @@ class CyaneaTest {
 
     assertEquals(expectedColor, cyanea.backgroundColor)
   }
-
 }

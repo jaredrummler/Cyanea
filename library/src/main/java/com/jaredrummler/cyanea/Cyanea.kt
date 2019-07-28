@@ -70,7 +70,6 @@ import com.jaredrummler.cyanea.tinting.MenuTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 import kotlin.properties.Delegates
 
-
 /**
  * Contains colors for an application theme.
  *
@@ -403,7 +402,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
         }
       }
     }
-
   }
 
   /**
@@ -650,7 +648,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
       editor.apply()
       return Recreator()
     }
-
   }
 
   /**
@@ -684,7 +681,6 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     companion object {
       private const val DEFAULT_DELAY = 200L
     }
-
   }
 
   /**
@@ -703,5 +699,4 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     LIGHT,
     DARK
   }
-
 }

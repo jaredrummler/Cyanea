@@ -137,5 +137,4 @@ abstract class CyaneaPreferenceActivity : PreferenceActivity(),
   override fun getResources(): Resources = resources
 
   override fun getDelegate(): AppCompatDelegate = appCompatDelegate
-
 }

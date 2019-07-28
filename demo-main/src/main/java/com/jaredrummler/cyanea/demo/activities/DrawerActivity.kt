@@ -48,5 +48,4 @@ class DrawerActivity : CyaneaAppCompatActivity() {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item)
   }
-
 }

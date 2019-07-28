@@ -50,5 +50,4 @@ open class CyaneaApp : Application() {
   override fun getResources(): Resources {
     return if (Cyanea.isInitialized()) resources else super.getResources()
   }
-
 }

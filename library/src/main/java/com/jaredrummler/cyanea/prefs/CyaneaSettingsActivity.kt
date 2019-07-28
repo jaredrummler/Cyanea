@@ -42,5 +42,4 @@ open class CyaneaSettingsActivity : CyaneaAppCompatActivity() {
     }
     else -> super.onOptionsItemSelected(item)
   }
-
 }

@@ -38,5 +38,4 @@ interface CyaneaInflationDelegate {
    * @return Newly created view. Return null for the default behavior.
    */
   fun createView(parent: View?, name: String, context: Context, attrs: AttributeSet): View?
-
 }

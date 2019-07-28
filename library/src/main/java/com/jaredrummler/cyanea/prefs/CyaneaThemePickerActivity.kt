@@ -44,5 +44,4 @@ class CyaneaThemePickerActivity : CyaneaAppCompatActivity() {
     }
     else -> super.onOptionsItemSelected(item)
   }
-
 }

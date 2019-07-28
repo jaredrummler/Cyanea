@@ -31,9 +31,9 @@ import com.jaredrummler.cyanea.Cyanea
 @RequiresApi(Build.VERSION_CODES.KITKAT)
 @TargetApi(Build.VERSION_CODES.KITKAT)
 internal open class CyaneaDelegateImplV19(
-    private val activity: Activity,
-    private val cyanea: Cyanea,
-    themeResId: Int
+  private val activity: Activity,
+  private val cyanea: Cyanea,
+  themeResId: Int
 ) : CyaneaDelegateImplBase(activity, cyanea, themeResId) {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -64,5 +64,4 @@ internal open class CyaneaDelegateImplV19(
       }
     }
   }
-
 }

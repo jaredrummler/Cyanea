@@ -92,5 +92,4 @@ class CyaneaResourcesTest {
       Reflection.setFieldValue(field, cyanea, color)
     }
   }
-
 }

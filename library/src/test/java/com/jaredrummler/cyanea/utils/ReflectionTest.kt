@@ -64,5 +64,4 @@ class ReflectionTest {
     val length = Reflection.invoke<Int>(string, "length")
     assertEquals(string.length, length)
   }
-
 }

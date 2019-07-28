@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_recycler_view.recyclerView
 import kotlinx.android.synthetic.main.item_rv.view.subtitleText
 import kotlinx.android.synthetic.main.item_rv.view.titleText
 
-
 class RecyclerViewActivity : CyaneaAppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +46,6 @@ class RecyclerViewActivity : CyaneaAppCompatActivity() {
         else -> number.toString()
       })
     }
-
   }
 
   class DemoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -57,7 +55,4 @@ class RecyclerViewActivity : CyaneaAppCompatActivity() {
       }
     }
   }
-
 }
-
-

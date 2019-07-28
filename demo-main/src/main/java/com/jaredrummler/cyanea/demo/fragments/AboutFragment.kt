@@ -33,5 +33,4 @@ class AboutFragment : CyaneaFragment() {
       cyaneaTopics.addView(chip)
     }
   }
-
 }

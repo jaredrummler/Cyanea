@@ -31,8 +31,8 @@ import java.util.concurrent.ConcurrentHashMap
  * Resources to get custom colors from [Cyanea]
  */
 @Suppress("DEPRECATION", "OverridingDeprecatedMember")
-class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance)
-  : Resources(original.assets, original.displayMetrics, original.configuration) {
+class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.instance) :
+  Resources(original.assets, original.displayMetrics, original.configuration) {
 
   init {
     cyanea.tinter.setup(original, this)
@@ -141,12 +141,9 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
     internal fun add(id: Int, theme: Resources.Theme?): Boolean = cache.add(key(id, theme))
 
     private fun key(id: Int, theme: Resources.Theme?): Int = id + (theme?.hashCode() ?: 0)
-
   }
 
   companion object {
     private const val TAG = "CyaneaResources"
-
   }
-
 }
