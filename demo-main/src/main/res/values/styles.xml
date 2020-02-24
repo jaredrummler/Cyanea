@@ -3,7 +3,7 @@
   <style name="AppTheme" parent="Theme.Cyanea.Light.DarkActionBar"/>
   <style name="AppTheme.NoActionBar" parent="Theme.Cyanea.Light.NoActionBar"/>
 
-  <style name="TabTextAppearance" parent="@style/TextAppearance.MaterialComponents.Tab">
+  <style name="TabTextAppearance" parent="@style/TextAppearance.Design.Tab">
     <item name="android:fontFamily">@font/font_raleway_medium</item>
     <item name="android:textSize">14sp</item>
     <item name="android:textAllCaps">false</item>

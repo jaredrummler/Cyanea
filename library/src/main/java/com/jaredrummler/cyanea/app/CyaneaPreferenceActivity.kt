@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package com.jaredrummler.cyanea.app
 
 import android.content.Context
@@ -38,6 +40,7 @@ import com.jaredrummler.cyanea.delegate.CyaneaDelegate
  *
  * You must implement [BaseCyaneaActivity.getThemeResId] and return a valid cyanea theme.
  */
+@Deprecated("Use the androidx preference library with a Cyanea delegate")
 abstract class CyaneaPreferenceActivity : PreferenceActivity(),
     BaseAppCompatDelegate, BaseCyaneaActivity {
 

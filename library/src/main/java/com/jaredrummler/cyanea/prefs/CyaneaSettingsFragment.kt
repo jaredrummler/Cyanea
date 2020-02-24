@@ -76,7 +76,6 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
    * By default, if the action bar is displaying home as up then padding will be added to the preference.
    */
   open val iconSpaceReserved = false
-//    get() = (activity as? AppCompatActivity)?.supportActionBar?.displayOptions?.and(ActionBar.DISPLAY_HOME_AS_UP) != 0
 
   override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
     setPreferencesFromResource(getPreferenceXmlResId(), rootKey)
@@ -158,7 +157,7 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
     if (view !is ViewGroup) return
     for (i in 0 until view.childCount) {
       setZeroPaddingToLayoutChildren(view.getChildAt(i))
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+      if (VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
         view.setPaddingRelative(0, view.paddingTop, view.paddingEnd, view.paddingBottom)
       } else {
         view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)
@@ -175,14 +174,15 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
     } else false
     prefColorNavBar.isChecked = cyanea.shouldTintNavBar || isColored
     val sysBarConfig = SystemBarTint(requireActivity()).sysBarConfig
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || !sysBarConfig.hasNavigationBar) {
+    if (VERSION.SDK_INT < VERSION_CODES.KITKAT || !sysBarConfig.hasNavigationBar) {
       findPreference<PreferenceCategory>(PREF_CATEGORY).run {
         removePreference(prefColorNavBar)
       }
     }
   }
 
-  private inline fun <reified T : Preference> findPreference(key: String): T = super.findPreference(key) as T
+  private inline fun <reified T : Preference> findPreference(key: String): T =
+    super.findPreference(key) as? T ?: throw NullPointerException()
 
   companion object {
     private const val PREF_CATEGORY = "cyanea_preference_category"

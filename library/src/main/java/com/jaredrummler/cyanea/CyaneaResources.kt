@@ -41,13 +41,13 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   /* Track resources so we don't attempt to modify the Drawable or ColorStateList more than once */
   private val tintTracker = TintTracker()
 
-  @Throws(Resources.NotFoundException::class)
+  @Throws(NotFoundException::class)
   override fun getDrawable(id: Int): Drawable {
     return this.getDrawable(id, null)
   }
 
   @SuppressLint("PrivateResource")
-  @Throws(Resources.NotFoundException::class)
+  @Throws(NotFoundException::class)
   override fun getDrawable(id: Int, theme: Theme?): Drawable {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       super.getDrawable(id, theme).let { drawable ->
@@ -82,13 +82,13 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
     }
   }
 
-  @Throws(Resources.NotFoundException::class)
+  @Throws(NotFoundException::class)
   override fun getColor(id: Int): Int {
     return this.getColor(id, null)
   }
 
   @SuppressLint("PrivateResource")
-  @Throws(Resources.NotFoundException::class)
+  @Throws(NotFoundException::class)
   override fun getColor(id: Int, theme: Theme?): Int = when (id) {
     // ------ PRIMARY COLORS ------
     R.color.cyanea_primary_reference, R.color.cyanea_primary -> cyanea.primary
@@ -112,14 +112,14 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
   }
 
   @RequiresApi(Build.VERSION_CODES.M)
-  @Throws(Resources.NotFoundException::class)
-  override fun getColorStateList(id: Int): ColorStateList? {
+  @Throws(NotFoundException::class)
+  override fun getColorStateList(id: Int): ColorStateList {
     return super.getColorStateList(id)
   }
 
   @RequiresApi(Build.VERSION_CODES.M)
-  @Throws(Resources.NotFoundException::class)
-  override fun getColorStateList(id: Int, theme: Resources.Theme?): ColorStateList? {
+  @Throws(NotFoundException::class)
+  override fun getColorStateList(id: Int, theme: Theme?): ColorStateList {
     val colorStateList = super.getColorStateList(id, theme)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (!tintTracker.contains(id, theme)) {
@@ -136,11 +136,11 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
       Collections.newSetFromMap(ConcurrentHashMap<Int, Boolean>())
     }
 
-    internal fun contains(id: Int, theme: Resources.Theme?): Boolean = cache.contains(key(id, theme))
+    internal fun contains(id: Int, theme: Theme?): Boolean = cache.contains(key(id, theme))
 
-    internal fun add(id: Int, theme: Resources.Theme?): Boolean = cache.add(key(id, theme))
+    internal fun add(id: Int, theme: Theme?): Boolean = cache.add(key(id, theme))
 
-    private fun key(id: Int, theme: Resources.Theme?): Int = id + (theme?.hashCode() ?: 0)
+    private fun key(id: Int, theme: Theme?): Int = id + (theme?.hashCode() ?: 0)
   }
 
   companion object {

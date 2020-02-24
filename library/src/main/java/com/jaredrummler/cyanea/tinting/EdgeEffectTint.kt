@@ -17,6 +17,8 @@
 package com.jaredrummler.cyanea.tinting
 
 import android.app.Activity
+import android.graphics.BlendMode.SRC_IN
+import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -84,7 +86,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
         }
         for (name in arrayOf("mEdge", "mGlow")) {
           val drawable = Reflection.getFieldValue<Drawable?>(edgeEffect, name)
-          drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+          drawable?.colorFilter = BlendModeColorFilter(color, SRC_IN)
           drawable?.callback = null // free up any references
         }
       } catch (e: Exception) {

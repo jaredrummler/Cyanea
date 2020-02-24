@@ -66,7 +66,7 @@ internal open class CyaneaDelegateImplV21(
       val color = ColorUtils.stripAlpha(cyanea.primary)
       val componentName = ComponentName(activity, activity::class.java)
       val activityInfo = activity.packageManager.getActivityInfo(componentName, 0)
-      activityInfo?.iconResource.takeIf { it != 0 }?.let { iconRes ->
+      activityInfo.iconResource.takeIf { it != 0 }?.let { iconRes ->
         val td = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
           ActivityManager.TaskDescription(activity.title.toString(), iconRes, color)
         } else {

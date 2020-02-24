@@ -19,6 +19,9 @@ package com.jaredrummler.cyanea.tinting
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.graphics.BlendMode
+import android.graphics.BlendMode.SRC_IN
+import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.os.Build
 import android.view.Menu
@@ -161,14 +164,14 @@ class MenuTint(
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+          navigationIcon.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
         }
       }
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && actionBar is Toolbar) {
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          navigationIcon.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+          navigationIcon.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
         }
       }
     }
@@ -203,7 +206,7 @@ class MenuTint(
     fun colorMenuItem(menuItem: MenuItem, color: Int?, alpha: Int? = null) {
       menuItem.icon?.let { icon ->
         val drawable = icon.mutate()
-        color?.let { drawable.setColorFilter(it, PorterDuff.Mode.SRC_IN) }
+        color?.let { drawable.colorFilter = BlendModeColorFilter(color, SRC_IN) }
         alpha?.let { drawable.alpha = it }
         menuItem.icon = drawable
       }

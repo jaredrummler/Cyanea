@@ -31,7 +31,7 @@ open class CyaneaFragment : Fragment() {
    */
   open val cyanea: Cyanea get() = (activity as? BaseCyaneaActivity)?.cyanea ?: Cyanea.instance
 
-  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater?) {
+  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     applyMenuTint(menu)
     super.onCreateOptionsMenu(menu, inflater)
   }

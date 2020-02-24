@@ -35,7 +35,7 @@ open class CyaneaSettingsActivity : CyaneaAppCompatActivity() {
     }
   }
 
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+  override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
     android.R.id.home -> {
       finish()
       true
