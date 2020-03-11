@@ -30,6 +30,7 @@ import android.widget.ScrollView
 import androidx.annotation.ColorInt
 import androidx.core.widget.EdgeEffectCompat
 import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.setColorFilterCompat
@@ -104,6 +105,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
      *  * [NestedScrollView]
      *  * [ViewPager]
      *  * [WebView]
+     *  * [RecyclerView]
      *
      * @param view The view to set the edge color
      * @param color The color value
@@ -117,6 +119,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
         is NestedScrollView -> setEdgeGlowColor(view, color)
         is ViewPager -> setEdgeGlowColor(view, color)
         is WebView -> setEdgeGlowColor(view, color)
+        is RecyclerView -> setEdgeGlowColor(view, color)
         else -> return false
       }
       return true
@@ -154,13 +157,18 @@ class EdgeEffectTint(private val view: ViewGroup) {
      * @param color The color value
      */
     private fun setEdgeGlowColor(listView: AbsListView, @ColorInt color: Int) {
-      try {
-        for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
-          Reflection.getFieldValue<EdgeEffect?>(listView, name)?.let { edgeEffect ->
-            setEdgeEffectColor(edgeEffect, color)
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        listView.topEdgeEffectColor = color
+        listView.bottomEdgeEffectColor = color
+      } else {
+        try {
+          for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
+            Reflection.getFieldValue<EdgeEffect?>(listView, name)?.let { edgeEffect ->
+              setEdgeEffectColor(edgeEffect, color)
+            }
           }
+        } catch (ignored: Exception) {
         }
-      } catch (ignored: Exception) {
       }
     }
 
@@ -171,13 +179,18 @@ class EdgeEffectTint(private val view: ViewGroup) {
      * @param color The color value
      */
     private fun setEdgeGlowColor(hsv: HorizontalScrollView, @ColorInt color: Int) {
-      try {
-        for (name in arrayOf("mEdgeGlowLeft", "mEdgeGlowRight")) {
-          val edgeEffect = Reflection.getFieldValue<EdgeEffect?>(hsv, name)
-          edgeEffect?.let { setEdgeEffectColor(it, color) }
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        hsv.leftEdgeEffectColor = color
+        hsv.rightEdgeEffectColor = color
+      } else {
+        try {
+          for (name in arrayOf("mEdgeGlowLeft", "mEdgeGlowRight")) {
+            val edgeEffect = Reflection.getFieldValue<EdgeEffect?>(hsv, name)
+            edgeEffect?.let { setEdgeEffectColor(it, color) }
+          }
+        } catch (e: Exception) {
+          Cyanea.log(TAG, "Error setting edge glow color on HorizontalScrollView", e)
         }
-      } catch (e: Exception) {
-        Cyanea.log(TAG, "Error setting edge glow color on HorizontalScrollView", e)
       }
     }
 
@@ -188,13 +201,18 @@ class EdgeEffectTint(private val view: ViewGroup) {
      * @param color The color value
      */
     private fun setEdgeGlowColor(scrollView: ScrollView, color: Int) {
-      try {
-        for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
-          val edgeEffect = Reflection.getFieldValue<EdgeEffect?>(scrollView, name)
-          edgeEffect?.let { setEdgeEffectColor(it, color) }
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        scrollView.topEdgeEffectColor = color
+        scrollView.bottomEdgeEffectColor = color
+      } else {
+        try {
+          for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom")) {
+            val edgeEffect = Reflection.getFieldValue<EdgeEffect?>(scrollView, name)
+            edgeEffect?.let { setEdgeEffectColor(it, color) }
+          }
+        } catch (e: Exception) {
+          Cyanea.log(TAG, "Error setting edge glow color on ScrollView", e)
         }
-      } catch (e: Exception) {
-        Cyanea.log(TAG, "Error setting edge glow color on ScrollView", e)
       }
     }
 
@@ -242,6 +260,24 @@ class EdgeEffectTint(private val view: ViewGroup) {
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge glow color on WebView", e)
+      }
+    }
+
+    /**
+     * Set the edge-effect color on a [RecyclerView].
+     *
+     * @param recyclerView
+     * the RecyclerView
+     * @param color
+     * the color value
+     */
+    private fun setEdgeGlowColor(recyclerView: RecyclerView, color: Int) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        recyclerView.edgeEffectFactory = object : RecyclerView.EdgeEffectFactory() {
+          override fun createEdgeEffect(view: RecyclerView, direction: Int): EdgeEffect {
+            return EdgeEffect(view.context).apply { this.color = color }
+          }
+        }
       }
     }
   }

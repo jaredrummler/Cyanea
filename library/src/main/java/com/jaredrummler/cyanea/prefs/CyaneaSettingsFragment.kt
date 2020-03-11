@@ -22,6 +22,7 @@ import android.os.Build
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.XmlRes
@@ -39,6 +40,7 @@ import com.jaredrummler.android.colorpicker.ColorPreferenceCompat
 import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.app.BaseCyaneaActivity
+import com.jaredrummler.cyanea.tinting.EdgeEffectTint
 import com.jaredrummler.cyanea.tinting.SystemBarTint
 import com.jaredrummler.cyanea.utils.ColorUtils
 
@@ -162,6 +164,12 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
       } else {
         view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)
       }
+    }
+  }
+
+  override fun onCreateRecyclerView(inflater: LayoutInflater?, parent: ViewGroup?, savedInstanceState: Bundle?): RecyclerView {
+    return super.onCreateRecyclerView(inflater, parent, savedInstanceState).apply {
+      EdgeEffectTint.setEdgeGlowColor(this, cyanea.primary)
     }
   }
 
