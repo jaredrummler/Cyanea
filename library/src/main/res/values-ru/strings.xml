@@ -1,0 +1,19 @@
+<resources>
+  <string name="label_theme_picker">Выбор темы</string>
+
+  <string name="pref_theme_title">Темы</string>
+  <string name="pref_theme_summary">Выбор предустановленной темы</string>
+
+  <string name="pref_primary_color_title">Основной цвет</string>
+  <string name="pref_primary_color_summary">Наиболее используемый в приложении.</string>
+
+  <string name="pref_accent_color_title">Цветовой акцент</string>
+  <string name="pref_accent_color_summary">Акцент, которым выделяются части интерфейса.</string>
+
+  <string name="pref_background_color_title">Цвет фона</string>
+  <string name="pref_background_color_summary">Цвет подложки у содержимого приложения</string>
+  <string name="pref_category_appearance">Внешний вид</string>
+
+  <string name="pref_colored_navigation_bar_title">Цвет панели навигации</string>
+  <string name="pref_colored_navigation_bar_summary">Применить основной цвет к панели навигации</string>
+</resources>
