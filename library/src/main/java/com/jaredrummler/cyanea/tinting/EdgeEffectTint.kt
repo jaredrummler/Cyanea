@@ -17,8 +17,6 @@
 package com.jaredrummler.cyanea.tinting
 
 import android.app.Activity
-import android.graphics.BlendMode.SRC_IN
-import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -34,6 +32,7 @@ import androidx.core.widget.EdgeEffectCompat
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.setColorFilterCompat
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -86,7 +85,7 @@ class EdgeEffectTint(private val view: ViewGroup) {
         }
         for (name in arrayOf("mEdge", "mGlow")) {
           val drawable = Reflection.getFieldValue<Drawable?>(edgeEffect, name)
-          drawable?.colorFilter = BlendModeColorFilter(color, SRC_IN)
+          drawable?.setColorFilterCompat(color, PorterDuff.Mode.SRC_IN)
           drawable?.callback = null // free up any references
         }
       } catch (e: Exception) {
