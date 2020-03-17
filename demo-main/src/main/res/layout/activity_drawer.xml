@@ -26,6 +26,7 @@
         android:theme="?actionBarTheme"
         app:popupTheme="?popupTheme"
         app:title="@string/drawer_layout"
+        app:titleTextColor="?menuIconColor"
         tools:ignore="UnusedAttribute"
         />
 

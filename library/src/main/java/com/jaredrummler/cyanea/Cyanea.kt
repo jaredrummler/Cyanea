@@ -171,7 +171,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
   /** True if the [baseTheme] is [LIGHT] */
   val isLight get() = baseTheme == LIGHT
   /** True if the [primary] color is a dark color */
-  val isActionBarDark get() = ColorUtils.isDarkColor(primary, 0.75)
+  val isActionBarDark get() = ColorUtils.isDarkColor(primary, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
   /** True if the [primary] color is a light color */
   val isActionBarLight get() = !isActionBarDark
   /** True if the theme has been modified at least once */
@@ -553,7 +553,7 @@ class Cyanea private constructor(private val prefs: SharedPreferences) {
     fun background(@ColorInt color: Int): Editor {
       val lighter = ColorUtils.lighter(color, DEFAULT_LIGHTER_FACTOR)
       val darker = ColorUtils.darker(color, DEFAULT_DARKER_FACTOR)
-      val isDarkColor = ColorUtils.isDarkColor(color, LIGHT_ACTIONBAR_LUMINANCE_FACTOR)
+      val isDarkColor = ColorUtils.isDarkColor(color)
       if (isDarkColor) {
         baseTheme(DARK)
         backgroundDark(color)

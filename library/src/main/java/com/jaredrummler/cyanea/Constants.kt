@@ -18,7 +18,7 @@ package com.jaredrummler.cyanea
 
 internal object Constants {
   internal const val NONE_TIMESTAMP = 0L
-  internal const val LIGHT_ACTIONBAR_LUMINANCE_FACTOR = 0.75
+  internal const val LIGHT_ACTIONBAR_LUMINANCE_FACTOR = 0.6
 }
 
 internal object PrefKeys {

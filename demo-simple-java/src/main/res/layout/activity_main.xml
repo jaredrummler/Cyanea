@@ -20,6 +20,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="?popupTheme"
+        app:titleTextColor="?menuIconColor"
         />
 
   </com.google.android.material.appbar.AppBarLayout>
