@@ -17,9 +17,14 @@
 package com.jaredrummler.cyanea
 
 import android.content.res.Resources
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.TypedValue
 import com.jaredrummler.cyanea.utils.Reflection
+
 
 internal fun Resources.getKey(id: Int, resolveRefs: Boolean = true) = getValue(id, resolveRefs).let {
   it.assetCookie.toLong() shl 32 or it.data.toLong()
@@ -32,5 +37,14 @@ internal fun Resources.getValue(id: Int, resolveRefs: Boolean = true) = TypedVal
     Reflection.invoke<Any?>(this, "getValue",
         arrayOf(Int::class.java, TypedValue::class.java, Boolean::class.java),
         id, value, resolveRefs)
+  }
+}
+
+internal fun Drawable.setColorFilterCompat(color: Int, mode: PorterDuff.Mode) {
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    colorFilter = BlendModeColorFilter(color, BlendMode.valueOf(mode.name))
+  } else {
+    @Suppress("DEPRECATION")
+    setColorFilter(color, mode)
   }
 }

@@ -36,6 +36,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.view.menu.MenuItemImpl
 import androidx.appcompat.widget.ActionMenuView
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.setColorFilterCompat
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -164,14 +165,14 @@ class MenuTint(
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          navigationIcon.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+          navigationIcon.setColorFilterCompat(color, PorterDuff.Mode.SRC_IN)
         }
       }
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && actionBar is Toolbar) {
       actionBar.navigationIcon?.let { icon ->
         menuIconColor?.let { color ->
           val navigationIcon = icon.mutate()
-          navigationIcon.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+          navigationIcon.setColorFilterCompat(color, PorterDuff.Mode.SRC_IN)
         }
       }
     }
@@ -206,7 +207,7 @@ class MenuTint(
     fun colorMenuItem(menuItem: MenuItem, color: Int?, alpha: Int? = null) {
       menuItem.icon?.let { icon ->
         val drawable = icon.mutate()
-        color?.let { drawable.colorFilter = BlendModeColorFilter(color, SRC_IN) }
+        color?.let { drawable.setColorFilterCompat(color, PorterDuff.Mode.SRC_IN) }
         alpha?.let { drawable.alpha = it }
         menuItem.icon = drawable
       }
