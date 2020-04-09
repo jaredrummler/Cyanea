@@ -18,22 +18,15 @@ package com.jaredrummler.cyanea.prefs
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.XmlRes
-import androidx.preference.Preference
+import androidx.preference.*
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.Preference.OnPreferenceClickListener
-import androidx.preference.PreferenceCategory
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceGroupAdapter
-import androidx.preference.PreferenceScreen
-import androidx.preference.PreferenceViewHolder
-import androidx.preference.SwitchPreferenceCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jaredrummler.android.colorpicker.ColorPreferenceCompat
 import com.jaredrummler.cyanea.Cyanea
@@ -68,7 +61,8 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
    *
    * @return The XML resource id to inflate
    */
-  @XmlRes open fun getPreferenceXmlResId(): Int = R.xml.pref_cyanea
+  @XmlRes
+  open fun getPreferenceXmlResId(): Int = R.xml.pref_cyanea
 
   /**
    * Sets whether to reserve the space of all Preference views. If set to false, all padding will be removed.
@@ -158,7 +152,7 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
     if (view !is ViewGroup) return
     for (i in 0 until view.childCount) {
       setZeroPaddingToLayoutChildren(view.getChildAt(i))
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+      if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR1) {
         view.setPaddingRelative(0, view.paddingTop, view.paddingEnd, view.paddingBottom)
       } else {
         view.setPadding(0, view.paddingTop, view.paddingRight, view.paddingBottom)
@@ -175,7 +169,7 @@ open class CyaneaSettingsFragment : PreferenceFragmentCompat(), OnPreferenceChan
     } else false
     prefColorNavBar.isChecked = cyanea.shouldTintNavBar || isColored
     val sysBarConfig = SystemBarTint(requireActivity()).sysBarConfig
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || !sysBarConfig.hasNavigationBar) {
+    if (VERSION.SDK_INT < VERSION_CODES.LOLLIPOP || !sysBarConfig.hasNavigationBar) {
       findPreference<PreferenceCategory>(PREF_CATEGORY).run {
         removePreference(prefColorNavBar)
       }

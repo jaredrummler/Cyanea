@@ -28,14 +28,9 @@ import android.os.Build
 import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.View
 import android.view.ViewConfiguration
-import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-import android.widget.FrameLayout
-import android.widget.FrameLayout.LayoutParams
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -62,8 +57,6 @@ class SystemBarTint(activity: Activity) {
   private var isStatusBarAvailable: Boolean = false
   private var isNavBarAvailable: Boolean = false
   private var oldActionBarBackground: Drawable? = null
-  private var statusBarTintView: View? = null
-  private var navBarTintView: View? = null
   private var actionBar: Any? = null
   val sysBarConfig: SysBarConfig
 
@@ -90,10 +83,9 @@ class SystemBarTint(activity: Activity) {
 
   init {
     val win = activity.window
-    val decorViewGroup = win.decorView as ViewGroup
     activityRef = WeakReference(activity)
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
       // check theme attrs
       val attrs = intArrayOf(android.R.attr.windowTranslucentStatus, android.R.attr.windowTranslucentNavigation)
       val a = activity.obtainStyledAttributes(attrs)
@@ -112,6 +104,9 @@ class SystemBarTint(activity: Activity) {
       if (winParams.flags and FLAG_TRANSLUCENT_NAVIGATION != 0) {
         isNavBarAvailable = true
       }
+    } else {
+      isStatusBarAvailable = false
+      isNavBarAvailable = false
     }
 
     sysBarConfig = SysBarConfig(activity)
@@ -126,13 +121,6 @@ class SystemBarTint(activity: Activity) {
       is BaseAppCompatDelegate -> activity.getDelegate().supportActionBar
       else -> null
     }
-
-    if (isStatusBarAvailable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-      setupStatusBarView(activity, decorViewGroup)
-    }
-    if (isNavBarAvailable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-      setupNavBarView(activity, decorViewGroup)
-    }
   }
 
   /**
@@ -146,12 +134,6 @@ class SystemBarTint(activity: Activity) {
       activity.window.statusBarColor = color
       return
     }
-    if (isStatusBarAvailable && statusBarTintView != null) {
-      statusBarTintView?.run {
-        if (visibility == View.GONE) visibility = View.VISIBLE
-        setBackgroundColor(color)
-      }
-    }
   }
 
   /**
@@ -164,11 +146,6 @@ class SystemBarTint(activity: Activity) {
       val activity = activityRef.get() ?: return
       activity.window.navigationBarColor = color
       return
-    }
-    if (isNavBarAvailable && navBarTintView != null) {
-      navBarTintView?.run {
-        if (visibility == View.GONE) visibility = View.VISIBLE
-      }
     }
   }
 
@@ -218,39 +195,6 @@ class SystemBarTint(activity: Activity) {
     }
   }
 
-  private fun setupStatusBarView(context: Context, decorViewGroup: ViewGroup) {
-    statusBarTintView = View(context)
-    val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, sysBarConfig.statusBarHeight)
-    params.gravity = Gravity.TOP
-    if (isNavBarAvailable && !sysBarConfig.isNavigationAtBottom) {
-      params.rightMargin = sysBarConfig.navigationBarWidth
-    }
-    statusBarTintView?.run {
-      layoutParams = params
-      setBackgroundColor(DEFAULT_TINT_COLOR)
-      visibility = View.GONE
-      decorViewGroup.addView(this)
-    }
-  }
-
-  private fun setupNavBarView(context: Context, decorViewGroup: ViewGroup) {
-    navBarTintView = View(context)
-    val params: LayoutParams
-    if (sysBarConfig.isNavigationAtBottom) {
-      params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, sysBarConfig.navigationBarHeight)
-      params.gravity = Gravity.BOTTOM
-    } else {
-      params = LayoutParams(sysBarConfig.navigationBarWidth, FrameLayout.LayoutParams.MATCH_PARENT)
-      params.gravity = Gravity.START
-    }
-    navBarTintView?.run {
-      layoutParams = params
-      setBackgroundColor(DEFAULT_TINT_COLOR)
-      visibility = View.GONE
-      decorViewGroup.addView(this)
-    }
-  }
-
   companion object {
     /** The default system bar tint color value. 60% opacity, black  */
     private const val DEFAULT_TINT_COLOR = 0x99000000.toInt()
@@ -266,15 +210,20 @@ class SystemBarTint(activity: Activity) {
 
     /** The height of the status bar (in pixels). */
     val statusBarHeight: Int
+
     /** The height of the action bar (in pixels). */
     @Suppress("MemberVisibilityCanBePrivate")
     val actionBarHeight: Int
+
     /** The height of the system navigation bar. */
     val navigationBarHeight: Int
+
     /** The width of the system navigation bar when it is placed vertically on the screen. */
     val navigationBarWidth: Int
+
     /** True if this device uses soft key navigation, False otherwise. */
     val hasNavigationBar: Boolean
+
     /** True if navigation should appear at the bottom of the screen, False otherwise. */
     val isNavigationAtBottom: Boolean
       get() = smallestWidthDp >= 600 || inPortrait
@@ -375,7 +324,7 @@ class SystemBarTint(activity: Activity) {
       private val NAV_BAR_OVERRIDE = try {
         val systemPropertiesClass = Class.forName("android.os.SystemProperties")
         Reflection.invoke<String>(systemPropertiesClass, "get",
-            arrayOf(String::class.java, String::class.java), "qemu.hw.mainkeys", "") ?: ""
+          arrayOf(String::class.java, String::class.java), "qemu.hw.mainkeys", "") ?: ""
       } catch (ignored: Exception) {
         ""
       }
