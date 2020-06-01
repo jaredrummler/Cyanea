@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package com.jaredrummler.cyanea.app
 
 import android.content.Context
