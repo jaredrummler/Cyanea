@@ -25,6 +25,7 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.utils.ColorFilterCompat
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -52,10 +53,10 @@ class WidgetTint private constructor() {
         val scroller = Reflection.getFieldValue<Any?>(listView, name)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
           Reflection.getFieldValue<ImageView?>(scroller, "mThumbImage")
-              ?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+            ?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
         } else {
           Reflection.getFieldValue<Drawable?>(scroller, "mThumbDrawable")
-              ?.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+            ?.colorFilter = ColorFilterCompat.SRC_ATOP.get(color)
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error tinting the fast scroll thumb", e)
@@ -76,6 +77,7 @@ class WidgetTint private constructor() {
               Reflection.getField(editor, "mCursorDrawable")?.let { fCursorDrawable ->
                 val cursorDrawableRes = fCursorDrawableRes.getInt(textView)
                 ContextCompat.getDrawable(textView.context, cursorDrawableRes)?.let { drawable ->
+                  @Suppress("DEPRECATION")
                   drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
                   val drawables = arrayOf(drawable, drawable)
                   fCursorDrawable.set(editor, drawables)

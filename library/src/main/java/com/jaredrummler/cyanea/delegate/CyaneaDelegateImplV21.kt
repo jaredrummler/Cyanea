@@ -31,7 +31,8 @@ import com.jaredrummler.cyanea.Cyanea
 import com.jaredrummler.cyanea.R
 import com.jaredrummler.cyanea.getKey
 import com.jaredrummler.cyanea.utils.ColorUtils
-import com.jaredrummler.cyanea.utils.Reflection
+import com.jaredrummler.cyanea.utils.Reflection.Companion.getFieldValue
+import com.jaredrummler.cyanea.utils.Reflection.Companion.getMethod
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -65,17 +66,17 @@ internal open class CyaneaDelegateImplV21(
     try {
       val color = ColorUtils.stripAlpha(cyanea.primary)
       val componentName = ComponentName(activity, activity::class.java)
-      val activityInfo = activity.packageManager.getActivityInfo(componentName, 0)
-      activityInfo?.iconResource.takeIf { it != 0 }?.let { iconRes ->
-        val td = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-          ActivityManager.TaskDescription(activity.title.toString(), iconRes, color)
-        } else {
-          val icon = BitmapFactory.decodeResource(activity.resources, iconRes) ?: return
-          @Suppress("DEPRECATION")
-          ActivityManager.TaskDescription(activity.title.toString(), icon, color)
-        }
-        activity.setTaskDescription(td)
-      } ?: run {
+      activity.packageManager.getActivityInfo(componentName, 0)
+        .iconResource.takeIf { it != 0 }?.let { iconRes ->
+          val td = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ActivityManager.TaskDescription(activity.title.toString(), iconRes, color)
+          } else {
+            val icon = BitmapFactory.decodeResource(activity.resources, iconRes) ?: return
+            @Suppress("DEPRECATION")
+            ActivityManager.TaskDescription(activity.title.toString(), icon, color)
+          }
+          activity.setTaskDescription(td)
+        } ?: run {
         val icon = activity.packageManager.getApplicationIcon(activity.packageName)
         (icon as? BitmapDrawable)?.bitmap?.let { bitmap ->
           @Suppress("DEPRECATION")
@@ -89,8 +90,8 @@ internal open class CyaneaDelegateImplV21(
 
   private fun preloadColors() {
     try {
-      val cache = Reflection.getFieldValue<Any?>(activity.resources, "sPreloadedColorStateLists") ?: return
-      val method = Reflection.getMethod(cache, "put", Long::class.java, Object::class.java) ?: return
+      val cache = getFieldValue<Any?>(activity.resources, "sPreloadedColorStateLists") ?: return
+      val method = getMethod(cache, "put", Long::class.java, Object::class.java) ?: return
       for ((id, color) in hashMapOf<Int, Int>().apply {
         put(R.color.cyanea_accent, cyanea.accent)
       }) {

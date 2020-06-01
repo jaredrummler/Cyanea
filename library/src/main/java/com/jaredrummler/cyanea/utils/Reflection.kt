@@ -50,7 +50,12 @@ class Reflection private constructor() {
      * @return the result of dynamically invoking this method.
      */
     @JvmStatic
-    fun <T> invoke(obj: Any?, name: String, types: Array<Class<*>> = emptyArray(), vararg args: Any): T? {
+    fun <T> invoke(
+      obj: Any?,
+      name: String,
+      types: Array<Class<*>> = emptyArray(),
+      vararg args: Any
+    ): T? {
       try {
         val method = getMethod(obj, name, *types)
         method?.let {
@@ -142,11 +147,8 @@ class Reflection private constructor() {
 
       while (klass != null) {
         try {
-          method = klass.getDeclaredMethod(name, *types)
-          if (method != null) {
-            method.isAccessible = true
-            break
-          }
+          method = klass.getDeclaredMethod(name, *types).also { it.isAccessible = true }
+          break
         } catch (ignored: NoSuchMethodException) {
         }
         klass = klass.superclass

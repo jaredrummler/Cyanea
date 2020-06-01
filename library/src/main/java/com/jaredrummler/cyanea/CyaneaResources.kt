@@ -113,13 +113,13 @@ class CyaneaResources(original: Resources, private val cyanea: Cyanea = Cyanea.i
 
   @RequiresApi(Build.VERSION_CODES.M)
   @Throws(Resources.NotFoundException::class)
-  override fun getColorStateList(id: Int): ColorStateList? {
+  override fun getColorStateList(id: Int): ColorStateList {
     return super.getColorStateList(id)
   }
 
   @RequiresApi(Build.VERSION_CODES.M)
   @Throws(Resources.NotFoundException::class)
-  override fun getColorStateList(id: Int, theme: Resources.Theme?): ColorStateList? {
+  override fun getColorStateList(id: Int, theme: Resources.Theme?): ColorStateList {
     val colorStateList = super.getColorStateList(id, theme)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (!tintTracker.contains(id, theme)) {

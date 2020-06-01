@@ -17,7 +17,6 @@
 package com.jaredrummler.cyanea.tinting
 
 import android.app.Activity
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
@@ -32,6 +31,7 @@ import androidx.core.widget.EdgeEffectCompat
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager.widget.ViewPager
 import com.jaredrummler.cyanea.Cyanea
+import com.jaredrummler.cyanea.utils.ColorFilterCompat
 import com.jaredrummler.cyanea.utils.Reflection
 
 /**
@@ -46,7 +46,10 @@ import com.jaredrummler.cyanea.utils.Reflection
  * ```
  */
 class EdgeEffectTint(private val view: ViewGroup) {
-  constructor(activity: Activity) : this(activity.findViewById<View>(android.R.id.content).rootView as ViewGroup)
+
+  constructor(activity: Activity) : this(
+    activity.findViewById<View>(android.R.id.content).rootView as ViewGroup
+  )
 
   /**
    * Sets the color on all edge effects for the [ViewGroup] *and* its children passed to the constructor.
@@ -83,9 +86,10 @@ class EdgeEffectTint(private val view: ViewGroup) {
           return
         }
         for (name in arrayOf("mEdge", "mGlow")) {
-          val drawable = Reflection.getFieldValue<Drawable?>(edgeEffect, name)
-          drawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-          drawable?.callback = null // free up any references
+          Reflection.getFieldValue<Drawable?>(edgeEffect, name)?.run {
+            colorFilter = ColorFilterCompat.SRC_IN.get(color)
+            callback = null // free up any references
+          }
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge effect color", e)
@@ -235,9 +239,11 @@ class EdgeEffectTint(private val view: ViewGroup) {
         val delegate = Reflection.invoke<Any?>(provider, "getViewDelegate")
         val mAwContents = Reflection.getFieldValue<Any?>(delegate, "mAwContents")
         val mOverScrollGlow = Reflection.getFieldValue<Any?>(mAwContents, "mOverScrollGlow")
-        for (name in arrayOf("mEdgeGlowTop", "mEdgeGlowBottom", "mEdgeGlowLeft", "mEdgeGlowRight")) {
-          val edgeEffect = Reflection.getFieldValue<EdgeEffect?>(mOverScrollGlow, name)
-          edgeEffect?.let { setEdgeEffectColor(it, color) }
+        val names = arrayOf("mEdgeGlowTop", "mEdgeGlowBottom", "mEdgeGlowLeft", "mEdgeGlowRight")
+        for (name in names) {
+          Reflection.getFieldValue<EdgeEffect?>(mOverScrollGlow, name)?.let {
+            setEdgeEffectColor(it, color)
+          }
         }
       } catch (e: Exception) {
         Cyanea.log(TAG, "Error setting edge glow color on WebView", e)
