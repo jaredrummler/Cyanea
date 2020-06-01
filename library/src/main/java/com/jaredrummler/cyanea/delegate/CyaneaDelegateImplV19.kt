@@ -37,11 +37,11 @@ internal open class CyaneaDelegateImplV19(
 ) : CyaneaDelegateImplBase(activity, cyanea, themeResId) {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
-    setupSystemBarTinting()
+    tintSystemBars()
     super.onPostCreate(savedInstanceState)
   }
 
-  private fun setupSystemBarTinting() {
+  private fun tintSystemBars() {
     if (cyanea.isThemeModified && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
       val content = activity.findViewById<View>(android.R.id.content)
       if (content is ViewGroup) {
@@ -49,7 +49,9 @@ internal open class CyaneaDelegateImplV19(
           val child = content.getChildAt(0)
           if (child !is DrawerLayout) {
             child.fitsSystemWindows = true
-            val id = activity.resources.getIdentifier("config_enableTranslucentDecor", "bool", "android")
+            val id = activity.resources.getIdentifier(
+              "config_enableTranslucentDecor", "bool", "android"
+            )
             if (id != 0) {
               val enabled = activity.resources.getBoolean(id)
               if (enabled) {
@@ -57,6 +59,7 @@ internal open class CyaneaDelegateImplV19(
                 if (cyanea.shouldTintNavBar) {
                   activity.window.setFlags(FLAG_TRANSLUCENT_NAVIGATION, FLAG_TRANSLUCENT_NAVIGATION)
                 }
+                tintBars()
               }
             }
           }
