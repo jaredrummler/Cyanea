@@ -1,5 +1,7 @@
 # Cyanea
 
+![](https://raw.githubusercontent.com/jaredrummler/github/main/assets/banners/no-longer-maintained.png)
+
 <img src="https://i.imgur.com/eC6d5WO.gif" align="left" hspace="10" vspace="10"></a>
 
 **A theme engine for Android.**
